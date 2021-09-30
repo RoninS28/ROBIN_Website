@@ -11,7 +11,7 @@ Not only customers, but also the servicemen and factory workers are benefited fr
 1.  Run
 
 - `git clone https://github.com/RoninS28/ROBIN_Website.git`
-- `cd ROBIN_Website`
+- `cd ROBIN_Website\client`
 - `npm install`
 
 2.  Run `npm start`
