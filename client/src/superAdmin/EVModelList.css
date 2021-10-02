@@ -1,0 +1,17 @@
+.List-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Btn {
+    background-color: #007bff;
+    padding: 1rem;
+    color: #ffffff;
+    border-radius: 0.6rem;
+    border: none;
+    cursor: pointer;
+}
+
