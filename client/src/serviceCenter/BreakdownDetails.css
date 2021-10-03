@@ -1,0 +1,47 @@
+table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+    table-layout: fixed;
+    font-size: larger;
+}
+table tr:hover{
+    background-color: #c4c4c4;
+}
+
+table td{
+    padding:10px;
+    /* border: 2px black solid; */
+    font-weight: bold;
+}
+.available{
+    font-size: 36px;
+    font-weight: bold;
+    color: blue;
+}
+.btnAcc{
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    background-color: #29C454;
+    border-radius: 40px;
+    width: 150px;
+    height: 50px;
+    border-color: #29C454;
+    margin-right: 500px;
+}
+.btnRej{
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    background-color: #C42929;
+    border-radius: 40px;
+    width: 150px;
+    height: 50px;
+    border-color: #C42929;
+}
