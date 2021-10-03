@@ -1,19 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-import EVModelList from './superAdmin/EVModelList';
-import EVModelDetail from './superAdmin/EVModelDetail';
+import WorkerList from './FactoryAdmin/Pages/WorkerList';
+import Container from '@material-ui/core/Container';
+import Input from "@material-ui/core/Input";
+import WorkerListDetails from './FactoryAdmin/Pages/WorkerListDetails';
+import OrderList from './FactoryAdmin/Pages/OrderList';
 
 function App() {
   return (
-    <div>
+    <div >
 
-
-
-
-
+    
+    
+      <OrderList/>
+   
+   
       
-      <EVModelList />
-      {/* <EVModelDetail /> */}
     </div>
   );
 }
