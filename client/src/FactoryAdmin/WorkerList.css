@@ -1,0 +1,21 @@
+.worker-list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1366px;
+    /* margin-top: 0 10vh; */
+    min-height: 100vh;
+    padding: 33px 100px;
+    margin-top: 0vh;
+  
+}
+
+
+
+.container-worker{
+    background:white;
+    width: 100%;
+    /* margin: 0 auto; */
+    height: 100%;
+}
