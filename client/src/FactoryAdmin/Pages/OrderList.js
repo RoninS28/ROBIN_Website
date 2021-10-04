@@ -16,6 +16,11 @@ import DownloadIcon from '@material-ui/icons/FontDownload';
 import orders from '../Data/Order';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import Fab from "@material-ui/core/Fab";
+import TextField from '@material-ui/core/TextField';
+import scooter1 from '../../images/scooter1.jpeg';
+
+
 
 
 function OrderList() {
@@ -23,50 +28,35 @@ function OrderList() {
         <div>
             <div>
         
-        <div style={{marginLeft:"10vh"}}>
-            <div style={{display:"flex",flexDirection:"row"}}>
-            <KeyboardArrowLeftIcon />
+        <div style={{marginLeft:"7vh"}}>
+        <div style={{display:"flex",flexDirection:"row"}}>
+                <Fab color="primary" aria-label="add">
+                <KeyboardArrowLeftIcon />
+                </Fab>
             </div>
-            <div style={{display:"flex",justifyContent:"space-evenly"}}>
-                <CardContent style={{display:"flex",flexDirection:"column",background:"blue",justifyContent:"centre",alignItems:"center",height:"20vh",width:"20vh",borderRadius:"90px"}}>
-                    <p>Total Orders</p>
-                    <p>50</p>
-                </CardContent>
-                <CardContent style={{display:"flex",flexDirection:"column",background:"Red",justifyContent:"centre",alignItems:"center",height:"20vh",width:"20vh",borderRadius:"90px"}}>
-                    <p>Pending Orders</p>
-                    <p>30</p>
-                </CardContent>
-                <CardContent style={{display:"flex",flexDirection:"column" ,background:"green",justifyContent:"centre",alignItems:"center",height:"20vh",width:"20vh",borderRadius:"90px"}}>
-                    <p>Completed Orders</p>
-                    <p>30</p>
-                </CardContent>
-                <CardContent style={{display:"flex",flexDirection:"column",background:"yellow",justifyContent:"centre",alignItems:"center",height:"20vh",width:"20vh",borderRadius:"90px"}}>
-                    <p>New Orders</p>
-                    <p>10</p>
-                </CardContent>
-            </div>
-            <h1>Worker's List</h1>
-        </div>
-
-      
-        
-
-        <div style={{marginTop:"3vh",marginLeft:"20vh"}}>
-            <Input placeholder="Search"  />
-            <SearchIcon/>
+             <h1>Order's List</h1>
+            <TextField id="standard-basic" label="Search orders" variant="standard" />
+            <Fab  aria-label="like" style={{marginLeft:"1vh"}}>
+                    <SearchIcon/>
+            </Fab>
            
-            <PrintIcon style={{marginLeft:"120vh"}}/>
-            <DownloadIcon  style={{marginLeft:"5vh"}} />
+            <Fab color="primary" aria-label="add" style={{marginLeft:"100vh"}}>
+                <PrintIcon />
+            </Fab>
             
+            <Fab color="primary" aria-label="add" style={{marginLeft:"5vh"}}>
+                <DownloadIcon/>
+            </Fab> 
         </div>
 
-    <div style={{marginTop:"6vh"}}>
+    <div style={{marginTop:"3vh"}}>
         <Container maxWidth="lg" >
         <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <Table sx={{ minWidth: 600 }} aria-label="simple table">
                             <TableHead>
                             <TableRow>
-                                <TableCell>Order ID</TableCell>
+                                <TableCell aligh="right">Order ID</TableCell>
+                                <TableCell align="right">Image</TableCell>
                                 <TableCell align="right">Model</TableCell>
                                 <TableCell align="right">Customer</TableCell>
                                 <TableCell align="right">Stage</TableCell>
@@ -77,11 +67,10 @@ function OrderList() {
                             {orders.map((order) => (
                                 <TableRow
                                 key={order.id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                <TableCell component="th" scope="row">
-                                    {order.id}
-                                </TableCell>
+                                <TableCell align="left">{order.id}</TableCell>
+                                <TableCell align="right"><img src={scooter1} style={{borderRadius:"35px",border:"2px solid black"}} alt={order.model} height="70px" width="70px"/></TableCell>
                                 <TableCell align="right">{order.model}</TableCell>
                                 <TableCell align="right">{order.Customer}</TableCell>
                                 <TableCell align="right">{order.Stage}</TableCell>

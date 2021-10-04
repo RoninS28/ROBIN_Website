@@ -22,6 +22,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import orders from '../Data/Order';
+import Fab from "@material-ui/core/Fab";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from "@material-ui/icons/Delete";
 
 
   
@@ -35,16 +38,18 @@ function WorkerListDetails() {
 
     return (
         <div>
-            <div style={{marginLeft:"20vh",marginTop:"3vh"}}>
+            <div style={{marginLeft:"10vh",marginTop:"3vh"}}>
                 <div style={{display:"flex",flexDirection:"row"}}>
+                <Fab color="primary" aria-label="add">
                 <KeyboardArrowLeftIcon />
+                </Fab>
                 </div>
                 <h1>Worker Detail</h1>
             </div>
 
             <div style={{display:"flex"}}>
-            <div style={{marginLeft:"20vh",marginTop:"0vh",width:"15vw"}}>
-                <Card >
+            <div style={{marginLeft:"10vh",marginTop:"0vh",width:"25vw"}}>
+                <Card style={{borderRadius:"35px"}}>
                     <CardContent>
                         <div style={{display:"flex",flexDirection:"column",justifyContent:"space-evenly",alignItems:"center" }}>
                             
@@ -91,8 +96,8 @@ function WorkerListDetails() {
                             <p>114,Shiv Shakti Apartment Mohanlal nagar Pune, 440025</p>
 
                             <div style={{display:"flex",flexDirection:"row",marginTop:"2vh"}}>
-                            <Button variant="contained" color="primary">Edit</Button>
-                            <Button variant="contained" color="secondary" style={{marginLeft:"1vw"}}>Delete</Button>
+                            <Fab color="primary" aria-label="add"> <EditIcon/> </Fab>
+                            <Fab color="secondary" style={{marginLeft:"1vw"}} aria-label="add" ><DeleteIcon/></Fab>
                             </div>
 
                         </div>
@@ -101,7 +106,7 @@ function WorkerListDetails() {
             </div>
             <Container maxWidth="lg" >
                     <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table" >
                             <TableHead>
                             <TableRow>
                                 <TableCell>Order ID</TableCell>

@@ -14,31 +14,37 @@ import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import PrintIcon from '@material-ui/icons/Print';
 import DownloadIcon from '@material-ui/icons/FontDownload';
+import Fab from "@material-ui/core/Fab";
+import TextField from '@material-ui/core/TextField';
 
 function WorkerList() {
     return (
         <div>
         
-        <div style={{marginLeft:"20vh",marginTop:"3vh"}}>
+        <div style={{marginLeft:"7vh"}}>
             <div style={{display:"flex",flexDirection:"row"}}>
-            <KeyboardArrowLeftIcon />
+                <Fab color="primary" aria-label="add">
+                <KeyboardArrowLeftIcon />
+                </Fab>
             </div>
-            <h1>Worker's List</h1>
-        </div>
-        
-
-        <div style={{marginTop:"3vh",marginLeft:"20vh"}}>
-            <Input placeholder="Search"  />
-            <SearchIcon/>
+             <h1>Worker's List</h1>
+            <TextField id="standard-basic" label="Search worker" variant="standard" />
+            <Fab  aria-label="like" style={{marginLeft:"1vh"}}>
+                    <SearchIcon/>
+            </Fab>
            
-            <PrintIcon style={{marginLeft:"120vh"}}/>
-            <DownloadIcon  style={{marginLeft:"5vh"}} />
+            <Fab color="primary" aria-label="add" style={{marginLeft:"100vh"}}>
+                <PrintIcon />
+            </Fab>
             
-        </div>
+            <Fab color="primary" aria-label="add" style={{marginLeft:"5vh"}}>
+                <DownloadIcon/>
+            </Fab>
+    
 
-    <div style={{marginTop:"6vh"}}>
-        <Container maxWidth="lg" >
-                <TableContainer component={Paper}>
+            <div style={{marginTop:"3vh",marginLeft:"-3vh"}}>
+                <Container maxWidth="lg" >
+                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                         <TableRow>
@@ -72,10 +78,13 @@ function WorkerList() {
                             </TableRow>
                         ))}
                         </TableBody>
-                    </Table>
-                    </TableContainer>
+                        </Table>
+                </TableContainer>
                 </Container>
             </div>
+
+                    
+        </div>
 
             
             
