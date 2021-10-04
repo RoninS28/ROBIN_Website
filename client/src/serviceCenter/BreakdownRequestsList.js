@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -15,15 +16,15 @@ function createData(no, name, address, contact, details) {
 
 const rows = [
     createData(1, 'Siddhesh R Ramane', 'Kothrud', 9359123910, 
-        <Button variant="contained" color="primary">VIEW</Button>),
+        <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
     createData(2, 'Kartik S Rane', 'Kothrud', 9359123910, 
-    <Button variant="contained" color="primary">VIEW</Button>),
+        <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
     createData(3, 'Amey S Marathe', 'Kothrud', 9359123910, 
-    <Button variant="contained" color="primary">VIEW</Button>),
+        <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
     createData(4, 'Neha M Patil', 'Kothrud', 9359123910, 
-    <Button variant="contained" color="primary">VIEW</Button>),
+        <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
     createData(5, 'Nutan D. Deshmukh', 'Kothrud', 9359123910, 
-    <Button variant="contained" color="primary">VIEW</Button>),
+        <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
 ];
 function BreakdownRequestsList() {
     return (
