@@ -1,30 +1,4 @@
-table {
-    border-spacing: 1;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 5px;
-    overflow: hidden;
-    width: 50%;
-    margin: 0 auto;
-    position: relative;
-    table-layout: fixed;
-    font-size: larger;
-}
-table tr:hover{
-    background-color: #c4c4c4;
-}
-
-table td{
-    padding:10px;
-    /* border: 2px black solid; */
-    font-weight: bold;
-}
-.available{
-    font-size: 36px;
-    font-weight: bold;
-    color: blue;
-}
-.btnAcc{
+/* .btnAcc{
     font-size: 25px;
     color: white;
     font-weight: bold;
@@ -44,4 +18,7 @@ table td{
     width: 150px;
     height: 50px;
     border-color: #C42929;
+} */
+.buttons{
+    padding-top: 20px;
 }

@@ -2,10 +2,12 @@ h1{
     color: black;
     font-size: 40px;
     font-weight: bold;
+    text-align: center;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: #ADFF00;
+    text-shadow: 2px 2px #c4c4c4;
 }
-table {
+/* table {
     border-spacing: 1;
     border-collapse: collapse;
     background: white;
@@ -24,11 +26,12 @@ table tr:hover{
 
 table td{
     padding:10px;
-    /* border: 2px black solid; */
+    border: 2px black solid;
     font-weight: bold;
-    /* display: inline-block; */
+    display: inline-block;
     text-align: left;
-}
-.Status{
-    color: red;
+} */
+.update{
+    padding-top: 20px;
+    
 }
