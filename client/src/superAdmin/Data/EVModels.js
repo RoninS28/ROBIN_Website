@@ -1,5 +1,5 @@
-import scooter1 from '../images/scooter1.jpeg';
-import scooter2 from '../images/scooter2.jpeg';
+import scooter1 from '../../images/scooter1.jpeg';
+import scooter2 from '../../images/scooter2.jpeg';
 const evModelList = [
     
     {
@@ -8,7 +8,7 @@ const evModelList = [
         basePrice: 43000,
         imgUrl: scooter1,
         colors: [ "red", "blue", "green", "pink" ],
-        features: [
+        features:
             {
                 power: "230 Watt (BLDC motor-IP 67)",
                 ledLights: "LED with Defogger Lights",
@@ -22,8 +22,7 @@ const evModelList = [
                 batteryPack: "1.8 KWH Lithium-ion (Removable Battery)",
                 batteryLife: 3,
                 batteryWarrenty: 2
-            }
-        ],
+            },
         design: [
             "Aluminium Alloy Wheel",
             "LED with Defogger Lights",
