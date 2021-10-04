@@ -4,19 +4,11 @@ import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import './Background/StarryNight.css';
 import WorkerList from "../Pages/WorkerList";
+import WorkerListDetails from "../Pages/WorkerListDetails";
 
 function Routing() {
   return (
-    <Router>
-      <Navbar style={{position:"fixed"}}></Navbar>
-      <div className = 'back'>
-        <Switch>
-          <Route path='/' exact component={OrderList} ></Route>
-          <Route path='/workers' exact component={WorkerList} ></Route>
-        </Switch>
-      </div>
-      <Footer/>
-    </Router>
+       <Navbar style={{position:"fixed"}}></Navbar> 
   );
 }
 

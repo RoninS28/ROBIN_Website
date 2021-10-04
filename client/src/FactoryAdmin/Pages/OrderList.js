@@ -17,12 +17,13 @@ import orders from '../Data/Order';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+
 function OrderList() {
     return (
         <div>
             <div>
         
-        <div style={{marginLeft:"20vh",marginTop:"3vh"}}>
+        <div style={{marginLeft:"10vh"}}>
             <div style={{display:"flex",flexDirection:"row"}}>
             <KeyboardArrowLeftIcon />
             </div>
