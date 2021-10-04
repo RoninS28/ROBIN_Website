@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import WorkerList from './FactoryAdmin/Pages/WorkerList';
 import Container from '@material-ui/core/Container';
 import Input from "@material-ui/core/Input";
-import WorkerListDetails from './FactoryAdmin/Pages/WorkerListDetails';
-import OrderList from './FactoryAdmin/Pages/OrderList';
+
+// Factory Admin Routing
+// import Routing from './FactoryAdmin/Shared/Routing';
+
+// SuperAdmin Routing
+import Routing from './superAdmin/Shared/Routing';
 
 function App() {
   return (
@@ -12,7 +15,7 @@ function App() {
 
     
     
-      <OrderList/>
+      <Routing/>
    
    
       

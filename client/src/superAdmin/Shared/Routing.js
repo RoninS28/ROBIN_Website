@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import OrderList from "../Pages/OrderList";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import './Background/StarryNight.css';
-import WorkerList from "../Pages/WorkerList";
+import EVModelList from "../EVModelList";
 
 function Routing() {
   return (
@@ -11,8 +10,8 @@ function Routing() {
       <Navbar style={{position:"fixed"}}></Navbar>
       <div className = 'back'>
         <Switch>
-          <Route path='/' exact component={OrderList} ></Route>
-          <Route path='/workers' exact component={WorkerList} ></Route>
+          <Route path='/' exact component={EVModelList} ></Route>
+          <Route path='/workers' exact component={EVModelList} ></Route>
         </Switch>
       </div>
       <Footer/>
