@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { Typography } from "@material-ui/core";
+
 import "./BreakdownRequestsList.css"
 
 function createData(no, name, address, contact, details) {
@@ -28,9 +30,9 @@ const rows = [
 ];
 function BreakdownRequestsList() {
     return (
-        <div>
-            <h1><b>BREAKDOWN REQUESTS</b></h1>      
-            <TableContainer component={Paper}>
+        <div align="center" style={{padding:"1rem"}}>
+            <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN REQUESTS</b></Typography>  
+            <TableContainer component={Paper} >
                 <Table sx={{ minWidth: 650 }} aria-label="Requests List">
                     <TableHead>
                         <TableRow>

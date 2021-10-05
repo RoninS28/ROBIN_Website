@@ -27,6 +27,7 @@ import BreakdownRequestsList from "../../BreakdownRequestsList";
 import BreakdownDetails from "../../BreakdownDetails";
 import BreakdownStatus from "../../BreakdownStatus";
 import BuyAccessoriesList from "../../BuyAccessoriesList";
+import BreakdownStatusList from "../../BreakdownStatusList";
 
 
 const drawerWidth = 220;
@@ -231,6 +232,15 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
+              <Link to="/breakdown-status-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Status List" />
+                </ListItem>
+              </Link>
+
               <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -290,6 +300,7 @@ class Navbar extends React.Component {
               <Route path='/breakdown-list' exact component={BreakdownRequestsList} ></Route>
               <Route path='/breakdown-detail' exact component={BreakdownDetails} ></Route>
               <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>
+              <Route path='/breakdown-status-list' exact component={BreakdownStatusList}></Route>
               <Route path='/buy-accessories' exact component={BuyAccessoriesList}></Route>
             </Switch>
          </div>

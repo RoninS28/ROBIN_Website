@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@material-ui/core/Button'
+import { Typography } from "@material-ui/core";
+
 import * as React from 'react';
 
 function createData(property, data) {
@@ -32,8 +34,8 @@ function BreakdownStatus() {
     setStatus(event.target.value);
   };
     return(
-        <div>
-          <h1><b>REQUEST STATUS</b></h1>    
+        <div align="center" style={{padding:"1rem"}}>
+            <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>STATUS DETAILS</b></Typography>  
           <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="status table">
           <TableBody>
@@ -53,10 +55,10 @@ function BreakdownStatus() {
        </TableBody>
      </Table>
    </TableContainer>
-   <div align="center" className="update">
-      <label value="Update">UPDATE STATUS: </label>
+   <div align="center" style={{padding:"1rem"}}>
+      <label value="Update"><b>UPDATE STATUS:&nbsp; </b></label>
           <Select
-                style={{ width: "10%", marginLeft:'20px' }}
+                style={{ width: "10%" }}
                 value={status}
                 onChange={handleChange}
                 name="status"
