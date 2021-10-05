@@ -19,6 +19,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { Link } from "react-router-dom";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -132,138 +133,130 @@ class Navbar extends React.Component {
     const open = Boolean(anchorEl);
     return (
       <div className={classes.root}>
-        <CssBaseline />
-        {/* This is the top horizontal bar */}
-        <AppBar
-          position="fixed"
-          className={classes.appBar}
-          fooJon={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.open
-          })}
-        >
-          <Toolbar disableGutters={true}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
-              className={classes.menuButton}
-            >
-              <MenuIcon
-                classes={{
-                  root: this.state.open
-                    ? classes.menuButtonIconOpen
-                    : classes.menuButtonIconClosed
-                }}
-              />
-            </IconButton>
-            <Typography
-              variant="h6"
-              color="inherit"
-              className={classes.grow}
-              noWrap
-            >
-              Mini variant menu++
-            </Typography>
-            <div>
+        <Router>
+          <CssBaseline />
+          {/* This is the top horizontal bar */}
+          <AppBar
+            position="fixed"
+            className={classes.appBar}
+            fooJon={classNames(classes.appBar, {
+              [classes.appBarShift]: this.state.open
+            })}
+          >
+            <Toolbar disableGutters={true}>
               <IconButton
-                aria-owns={open ? "menu-appbar" : undefined}
-                aria-haspopup="true"
-                onClick={this.handleMenu}
                 color="inherit"
+                aria-label="Open drawer"
+                onClick={this.handleDrawerOpen}
+                className={classes.menuButton}
               >
-                <AccountCircle />
+                <MenuIcon
+                  classes={{
+                    root: this.state.open
+                      ? classes.menuButtonIconOpen
+                      : classes.menuButtonIconClosed
+                  }}
+                />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={open}
-                onClose={this.handleClose}
+              <Typography
+                variant="h6"
+                color="inherit"
+                className={classes.grow}
+                noWrap
               >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          </Toolbar>
-        </AppBar>
-        {/* This is for vertical side drawer */}
-        <Drawer
-          variant="permanent"
-          className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open,
-            [classes.drawerClose]: !this.state.open
-          })}
-          classes={{
-            paper: classNames({
+                Mini variant menu++
+              </Typography>
+              <div>
+                <IconButton
+                  aria-owns={open ? "menu-appbar" : undefined}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  open={open}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                </Menu>
+              </div>
+            </Toolbar>
+          </AppBar>
+          {/* This is for vertical side drawer */}
+          <Drawer
+            variant="permanent"
+            className={classNames(classes.drawer, {
               [classes.drawerOpen]: this.state.open,
               [classes.drawerClose]: !this.state.open
-            })
-          }}
-          open={this.state.open}
-        >
-          <div className={classes.toolbar} />
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+            })}
+            classes={{
+              paper: classNames({
+                [classes.drawerOpen]: this.state.open,
+                [classes.drawerClose]: !this.state.open
+              })
+            }}
+            open={this.state.open}
+          >
+            <div className={classes.toolbar} />
+            <List>
+                <Link to="/models" style={{ textDecoration: 'none' }}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="EV Models" />
+                  </ListItem>
+                </Link>
 
-          {/* <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
-          <Typography paragraph>foo</Typography> */}
-
-          {/* <OrderList/> */}
-        
-        <Router>
-          <div className = 'back'>
-            <Switch>
-              <Route path='/models' exact component={EVModelList} ></Route>
-              <Route path='/model' exact component={EVModelDetail} ></Route>
-            </Switch>
-         </div>
-         </Router>
+                <Link to="/model" style={{ textDecoration: 'none' }}>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="EV Model" />
+                  </ListItem>
+                </Link>
+            </List>
+            <Divider />
+            <List>
+              {["All mail", "Trash", "Spam"].map((text, index) => (
+                <ListItem button key={text}>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+          
+          
+            <div className = 'back'>
+              <Switch>
+                <Route path='/models' exact component={EVModelList} ></Route>
+                <Route path='/model' exact component={EVModelDetail} ></Route>
+              </Switch>
+          </div>
+          
 
 
-        </main>
+          </main>
+        </Router>
       </div>
     );
   }
