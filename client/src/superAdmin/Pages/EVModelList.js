@@ -25,12 +25,16 @@ import './EVModelList.css';
 import { evModelList } from '../Data/EVModels'
 import EVModelDetail from './EVModelDetail';
 import EVModelItem from './EVModelItem';
+import { makeStyles } from '@material-ui/styles';
 
+const useStyles = makeStyles((theme) => ({
+}))
 
 
 function TablePaginationActions(props) {
     const theme = useTheme();
     const { count, page, rowsPerPage, onPageChange } = props;
+
 
     const handleFirstPageButtonClick = (event) => {
         onPageChange(event, 0);
@@ -109,6 +113,8 @@ export default function EVModelList() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+    const classes = useStyles();
+
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -130,7 +136,7 @@ export default function EVModelList() {
             <div className="Top-row">
                 {/* Breadcrumb */}
 
-                <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
+                <Button className={classes.button} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
             </div>
 
             <TableContainer component={Paper}>

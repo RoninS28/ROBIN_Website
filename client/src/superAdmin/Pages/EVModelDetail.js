@@ -5,7 +5,9 @@ import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { SketchPicker } from 'react-color';
 
+
 import './EVModelDetail.css';
+
 
 const handleDesignDelete = () => {
     console.info('You clicked the delete icon.');

@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -26,6 +25,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EVModelList from "../../Pages/EVModelList"
 import '../Background/StarryNight.css';
 import EVModelDetail from "../../Pages/EVModelDetail";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 
 const drawerWidth = 220;
@@ -101,170 +101,189 @@ const styles = theme => ({
     flexGrow: 1,
     // padding: theme.spacing.unit * 3
   },
-  grow: {
-    flexGrow: 1
+  logoLg: {
+    display: 'none',
+    flexGrow: 1,
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
+  },
+  logoSm: {
+    display: "block",
+    flexGrow: 1,
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    }
   }
 });
 
-class Navbar extends React.Component {
-  state = {
-    open: true,
-    anchorEl: null
-  };
+const Navbar = (props) => {
+  const { classes, theme } = props;
+  const [open, setOpen] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  handleDrawerOpen = () => {
-    this.setState({ open: !this.state.open });
-  };
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+  console.log("variable ", matches)
+  
+  useEffect(() => {
+    setOpen(matches ? true : false)
+  }, [matches])
 
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
-
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
-
-  render() {
-    const { classes, theme } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-    return (
-      <div className={classes.root}>
-        <Router>
-          <CssBaseline />
-          {/* This is the top horizontal bar */}
-          <AppBar
-            position="fixed"
-            className={classes.appBar}
-            fooJon={classNames(classes.appBar, {
-              [classes.appBarShift]: this.state.open
-            })}
-          >
-            <Toolbar disableGutters={true}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classes.menuButton}
-              >
-                <MenuIcon
-                  classes={{
-                    root: this.state.open
-                      ? classes.menuButtonIconOpen
-                      : classes.menuButtonIconClosed
-                  }}
-                />
-              </IconButton>
-              <Typography
-                variant="h6"
-                color="inherit"
-                className={classes.grow}
-                noWrap
-              >
-                Mini variant menu++
-              </Typography>
-              <div>
-                <IconButton
-                  aria-owns={open ? "menu-appbar" : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleMenu}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right"
-                  }}
-                  open={open}
-                  onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                </Menu>
-              </div>
-            </Toolbar>
-          </AppBar>
-          {/* This is for vertical side drawer */}
-          <Drawer
-            variant="permanent"
-            className={classNames(classes.drawer, {
-              [classes.drawerOpen]: this.state.open,
-              [classes.drawerClose]: !this.state.open
-            })}
-            classes={{
-              paper: classNames({
-                [classes.drawerOpen]: this.state.open,
-                [classes.drawerClose]: !this.state.open
-              })
-            }}
-            open={this.state.open}
-          >
-            <div className={classes.toolbar} />
-            <List>
-                <Link to="/models" style={{ textDecoration: 'none' }}>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="EV Models" />
-                  </ListItem>
-                </Link>
-
-                <Link to="/model" style={{ textDecoration: 'none' }}>
-                  <ListItem button>
-                    <ListItemIcon>
-                      <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="EV Model" />
-                  </ListItem>
-                </Link>
-            </List>
-            <Divider />
-            <List>
-              {["All mail", "Trash", "Spam"].map((text, index) => (
-                <ListItem button key={text}>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-          
-          
-            <div className = 'back'>
-              <Switch>
-                <Route path='/models' exact component={EVModelList} ></Route>
-                <Route path='/model' exact component={EVModelDetail} ></Route>
-              </Switch>
-          </div>
-          
-
-
-          </main>
-        </Router>
-      </div>
-    );
+  const handleDrawerOpen = () => {
+    if(open)
+      setOpen(false);
+    else
+      setOpen(true);
   }
-}
 
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
+  const handleDrawerClose = () => {
+    setOpen(false);
+  }
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  };
+
+  return (
+    <div className={classes.root}>
+      <Router>
+        <CssBaseline />
+        {/* This is the top horizontal bar */}
+        <AppBar
+          position="fixed"
+          className={classes.appBar}
+          fooJon={classNames(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar disableGutters={true}>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={handleDrawerOpen}
+              className={classes.menuButton}
+            >
+              <MenuIcon
+                classes={{
+                  root: open
+                    ? classes.menuButtonIconOpen
+                    : classes.menuButtonIconClosed
+                }}
+              />
+            </IconButton>
+            
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.logoLg}
+              noWrap
+            >
+              RobIN | Robust Intelligent Network
+            </Typography>
+
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.logoSm}
+              noWrap
+            >
+              RobIN
+            </Typography>
+
+            <div>
+              <IconButton
+                aria-owns={anchorEl ? "menu-appbar" : undefined}
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right"
+                }}
+                open={anchorEl}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {/* This is for vertical side drawer */}
+        <Drawer
+          variant="permanent"
+          className={classNames(classes.drawer, {
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
+          })}
+          classes={{
+            paper: classNames({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
+            })
+          }}
+          open={open}
+        >
+          <div className={classes.toolbar} />
+          <List>
+              <Link to="/models" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="EV Models" />
+                </ListItem>
+              </Link>
+
+              <Link to="/model" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="EV Model" />
+                </ListItem>
+              </Link>
+          </List>
+          <Divider />
+          <List>
+            {["All mail", "Trash", "Spam"].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+        
+        
+          <div className = 'back'>
+            <Switch>
+              <Route path='/models' exact component={EVModelList} ></Route>
+              <Route path='/model' exact component={EVModelDetail} ></Route>
+            </Switch>
+        </div>
+        </main>
+      </Router>
+    </div>
+  )
+}
 
 export default withStyles(styles, { withTheme: true })(Navbar);
