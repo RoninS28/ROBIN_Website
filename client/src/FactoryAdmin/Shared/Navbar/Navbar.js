@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -19,14 +18,25 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import { Link } from "react-router-dom";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import OrderList from "../../Pages/OrderList"
-import Footer from "../Footer/Footer";
+
 import '../Background/StarryNight.css';
+
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
+import OrderList from "../../Pages/OrderList";
 import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
+import { Breadcrumbs } from "@material-ui/core";
+
+
+
+
+import { useLocation, useHistory } from 'react-router-dom';
+import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 
 
 const drawerWidth = 220;
@@ -102,75 +112,117 @@ const styles = theme => ({
     flexGrow: 1,
     // padding: theme.spacing.unit * 3
   },
-  grow: {
-    flexGrow: 1
+  logoLg: {
+    display: 'none',
+    flexGrow: 1,
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
+  },
+  logoSm: {
+    display: "block",
+    flexGrow: 1,
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    }
   }
 });
 
-class Navbar extends React.Component {
-  state = {
-    open: true,
-    anchorEl: null
+const Navbar = (props) => {
+  const { classes, theme } = props;
+  const [open, setOpen] = useState(true);
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+  // console.log("variable ", matches);
+
+  
+
+
+ 
+
+
+  
+
+  
+  
+  useEffect(() => {
+    setOpen(matches ? true : false)
+  }, [matches])
+
+  const handleDrawerOpen = () => {
+    if(open)
+      setOpen(false);
+    else
+      setOpen(true);
+  }
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  }
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  handleDrawerOpen = () => {
-    this.setState({ open: !this.state.open });
+  const handleClose = () => {
+    setAnchorEl(null)
   };
 
-  handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
 
-  handleMenu = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  };
-  handleClose = () => {
-    this.setState({ anchorEl: null });
-  };
+  
 
-  render() {
-    const { classes, theme } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-    return (
-      <div className={classes.root}>
+  return (
+    <div className={classes.root}>
+      <Router>
         <CssBaseline />
         {/* This is the top horizontal bar */}
         <AppBar
           position="fixed"
           className={classes.appBar}
           fooJon={classNames(classes.appBar, {
-            [classes.appBarShift]: this.state.open
+            [classes.appBarShift]: open
           })}
         >
           <Toolbar disableGutters={true}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
-              onClick={this.handleDrawerOpen}
+              onClick={handleDrawerOpen}
               className={classes.menuButton}
             >
               <MenuIcon
                 classes={{
-                  root: this.state.open
+                  root: open
                     ? classes.menuButtonIconOpen
                     : classes.menuButtonIconClosed
                 }}
               />
             </IconButton>
+            
             <Typography
               variant="h6"
               color="inherit"
-              className={classes.grow}
+              className={classes.logoLg}
               noWrap
             >
-              ROBIN
+              RobIN | Robust Intelligent Network
             </Typography>
+
+            <Typography
+              variant="h6"
+              color="inherit"
+              className={classes.logoSm}
+              noWrap
+            >
+              RobIN
+            </Typography>
+
             <div>
               <IconButton
-                aria-owns={open ? "menu-appbar" : undefined}
+                aria-owns={anchorEl ? "menu-appbar" : undefined}
                 aria-haspopup="true"
-                onClick={this.handleMenu}
+                onClick={handleMenu}
                 color="inherit"
               >
                 <AccountCircle />
@@ -186,11 +238,11 @@ class Navbar extends React.Component {
                   vertical: "top",
                   horizontal: "right"
                 }}
-                open={open}
-                onClose={this.handleClose}
+                open={anchorEl}
+                onClose={handleClose}
               >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>
           </Toolbar>
@@ -199,27 +251,36 @@ class Navbar extends React.Component {
         <Drawer
           variant="permanent"
           className={classNames(classes.drawer, {
-            [classes.drawerOpen]: this.state.open,
-            [classes.drawerClose]: !this.state.open
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open
           })}
           classes={{
             paper: classNames({
-              [classes.drawerOpen]: this.state.open,
-              [classes.drawerClose]: !this.state.open
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open
             })
           }}
-          open={this.state.open}
+          open={open}
         >
           <div className={classes.toolbar} />
           <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+              <Link to="/orders" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Orders" />
+                </ListItem>
+              </Link>
+
+              <Link to="/workers" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Workers" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -235,26 +296,30 @@ class Navbar extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-        <Router>
+
+          
+          
+                
+                <AppBreadCrumb/>
+
+
+
           <div className = 'back'>
             <Switch>
+              {/* <Route path="/" exact component={OrderList}/> */}
               <Route path='/orders' exact component={OrderList} ></Route>
               <Route path='/workers' exact component={WorkerList} ></Route>
               <Route path='/workerDetail' exact component={WorkerListDetails}/>
             </Switch>
          </div>
-         </Router>
 
+        
+         
 
         </main>
-      </div>
-    );
-  }
+      </Router>
+    </div>
+  )
 }
-
-Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
 
 export default withStyles(styles, { withTheme: true })(Navbar);

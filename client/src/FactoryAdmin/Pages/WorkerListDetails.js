@@ -38,15 +38,7 @@ function WorkerListDetails() {
 
     return (
         <div>
-            <div style={{marginLeft:"10vh",marginTop:"3vh"}}>
-                <div style={{display:"flex",flexDirection:"row"}}>
-                <Fab color="primary" aria-label="add">
-                <KeyboardArrowLeftIcon />
-                </Fab>
-                </div>
-                <h1>Worker Detail</h1>
-            </div>
-
+            
             <div style={{display:"flex"}}>
             <div style={{marginLeft:"10vh",marginTop:"0vh",width:"25vw"}}>
                 <Card style={{borderRadius:"35px"}}>
@@ -110,10 +102,10 @@ function WorkerListDetails() {
                             <TableHead>
                             <TableRow>
                                 <TableCell>Order ID</TableCell>
-                                <TableCell align="right">Model</TableCell>
-                                <TableCell align="right">Customer</TableCell>
-                                <TableCell align="right">Stage</TableCell>
-                                <TableCell align="right">View</TableCell>
+                                <TableCell align="center">Model</TableCell>
+                                <TableCell align="center">Customer</TableCell>
+                                <TableCell align="center">Stage</TableCell>
+                                <TableCell align="center">View</TableCell>
                             </TableRow>
                             </TableHead>
                             <TableBody>
@@ -125,10 +117,10 @@ function WorkerListDetails() {
                                 <TableCell component="th" scope="row">
                                     {order.id}
                                 </TableCell>
-                                <TableCell align="right">{order.model}</TableCell>
-                                <TableCell align="right">{order.Customer}</TableCell>
-                                <TableCell align="right">{order.Stage}</TableCell>
-                                <TableCell align="right">
+                                <TableCell align="center">{order.model}</TableCell>
+                                <TableCell align="center">{order.Customer}</TableCell>
+                                <TableCell align="center">{order.Stage}</TableCell>
+                                <TableCell align="center">
                                 <Button variant="contained" color="primary">View</Button>
                                 </TableCell>
                                 </TableRow>
