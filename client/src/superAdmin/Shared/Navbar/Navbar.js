@@ -26,6 +26,7 @@ import EVModelList from "../../Pages/EVModelList"
 import '../Background/StarryNight.css';
 import EVModelDetail from "../../Pages/EVModelDetail";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import FactoryDetail from "../../Pages/FactoryDetail";
 
 
 const drawerWidth = 220;
@@ -257,6 +258,15 @@ const Navbar = (props) => {
                   <ListItemText primary="EV Model" />
                 </ListItem>
               </Link>
+
+              <Link to="/factory" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Factory Detail" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -278,6 +288,7 @@ const Navbar = (props) => {
             <Switch>
               <Route path='/models' exact component={EVModelList} ></Route>
               <Route path='/model' exact component={EVModelDetail} ></Route>
+              <Route path='/factory' exact component={FactoryDetail}></Route>
             </Switch>
         </div>
         </main>

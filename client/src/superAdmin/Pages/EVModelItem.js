@@ -1,5 +1,4 @@
 import React from 'react'
-import './EVModelItem.css'
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -22,14 +21,24 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 
-import './EVModelList.css';
 import { evModelList } from '../Data/EVModels'
 import EVModelDetail from './EVModelDetail';
+import { withStyles } from "@material-ui/core/styles";
 
+const styles = theme => ({
+    btnContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    btn: {
+        marginLeft: "1rem",
+    }
+});
 
-function EVModelItem(props) {
+const EVModelItem = (props) => {
 
-    const {name, basePrice, imgUrl, colors} = props;
+    const {classes, theme, name, basePrice, imgUrl, colors} = props;
 
     return (
             <TableRow style={{ height: "11em" }}>
@@ -58,13 +67,13 @@ function EVModelItem(props) {
                     </div>
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
-                    <div className="Btn-container">
-                        <Button className="Btn" variant="outlined" color="primary" startIcon={<EditIcon />}>Edit</Button>
-                        <Button className="Btn" variant="outlined" color="secondary" startIcon={<DeleteIcon />}>Delete</Button>
+                    <div className={classes.btnContainer}>
+                        <Button className={classes.btn} variant="outlined" color="primary" startIcon={<EditIcon />}>Edit</Button>
+                        <Button className={classes.btn} variant="outlined" color="secondary" startIcon={<DeleteIcon />}>Delete</Button>
                     </div>
                 </TableCell>
             </TableRow>
     )
 }
 
-export default EVModelItem
+export default withStyles(styles, { withTheme: true })(EVModelItem);

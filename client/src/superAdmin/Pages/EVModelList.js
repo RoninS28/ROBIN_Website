@@ -19,16 +19,33 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Container from '@material-ui/core/Container';
 
 
-import './EVModelList.css';
 import { evModelList } from '../Data/EVModels'
 import EVModelDetail from './EVModelDetail';
 import EVModelItem from './EVModelItem';
-import { makeStyles } from '@material-ui/styles';
+import { withStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-}))
+
+const styles = theme => ({
+
+    listWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "1rem"
+    },
+    topRow: {
+        display: "flex",
+        justifyContent: "flex-end",
+    },
+    rowHeader: {
+        fontWeight: "bold !important",
+    }
+    
+
+})
 
 
 function TablePaginationActions(props) {
@@ -109,11 +126,21 @@ function getAllModels() {
 const rows = getAllModels();
 
 
-export default function EVModelList() {
+// Actual Function
+const EVModelList = (props) => {
+
+    const { classes, theme } = props;
+
+    const xs = useMediaQuery(theme.breakpoints.down('xs'));
+    const sm = useMediaQuery(theme.breakpoints.up('xs') && theme.breakpoints.down('sm'))
+    const md = useMediaQuery(theme.breakpoints.up('sm') && theme.breakpoints.down('md'))
+    const lg = useMediaQuery(theme.breakpoints.up('md') && theme.breakpoints.down('lg'))
+    const xl = useMediaQuery(theme.breakpoints.up('lg'))
+
+
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const classes = useStyles();
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
@@ -131,23 +158,25 @@ export default function EVModelList() {
     console.log(rows);
 
     return (
-        <div className="List-wrapper" style={{ margin: "1rem" }}>
+        <Container 
+            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
+            className={classes.listWrapper}>
 
-            <div className="Top-row">
+            <div className={classes.topRow}>
                 {/* Breadcrumb */}
 
-                <Button className={classes.button} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
+                <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
             </div>
 
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
                 <TableHead>
                         <TableRow>
-                            <TableCell align="center" className="row-header">Image</TableCell>
-                            <TableCell align="center" className="row-header">Model Name</TableCell>
-                            <TableCell align="center" className="row-header">Base Price Rs.</TableCell>
-                            <TableCell align="center" className="row-header">Colors Available</TableCell>
-                            <TableCell align="center" className="row-header">Actions</TableCell>
+                            <TableCell align="center" className={classes.rowHeader}><h3>Image</h3></TableCell>
+                            <TableCell align="center" className={classes.rowHeader}><h3>Model Name</h3></TableCell>
+                            <TableCell align="center" className={classes.rowHeader}><h3>Base Price Rs.</h3></TableCell>
+                            <TableCell align="center" className={classes.rowHeader}><h3>Colors Available</h3></TableCell>
+                            <TableCell align="center" className={classes.rowHeader}><h3>Actions</h3></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -195,6 +224,8 @@ export default function EVModelList() {
                     </TableFooter>
                 </Table>
             </TableContainer>
-        </div>
+        </Container>
     );
 }
+
+export default withStyles(styles, { withTheme: true })(EVModelList);
