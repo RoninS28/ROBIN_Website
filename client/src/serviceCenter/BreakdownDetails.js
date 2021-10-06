@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Card } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import placeholder from './images/placeholder.png';
+
 function createData(property, data) {
     return { property, data};
   }

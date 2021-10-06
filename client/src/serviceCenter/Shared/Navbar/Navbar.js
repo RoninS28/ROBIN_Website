@@ -28,6 +28,9 @@ import BreakdownDetails from "../../BreakdownDetails";
 import BreakdownStatus from "../../BreakdownStatus";
 import BuyAccessoriesList from "../../BuyAccessoriesList";
 import BreakdownStatusList from "../../BreakdownStatusList";
+import BuyCategory from "../../BuyCategory";
+import Demo from "../../Demo";
+import AccessoriesDetails from "../../AccessoriesDetails";
 
 
 const drawerWidth = 220;
@@ -258,7 +261,37 @@ class Navbar extends React.Component {
                   <ListItemText primary="Buy" />
                 </ListItem>
               </Link>
+
+              <Link to="/buy-category" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Buy Category" />
+                </ListItem>
+              </Link>
           </List>
+
+          <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Item Details" />
+                </ListItem>
+              </Link>
+
+
+          <Link to="/demo" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Demo" />
+                </ListItem>
+              </Link>
+
+
           <Divider />
           <List>
             {["All mail", "Trash", "Spam"].map((text, index) => (
@@ -302,6 +335,10 @@ class Navbar extends React.Component {
               <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>
               <Route path='/breakdown-status-list' exact component={BreakdownStatusList}></Route>
               <Route path='/buy-accessories' exact component={BuyAccessoriesList}></Route>
+              <Route path='/buy-category' exact component={BuyCategory}></Route>
+              <Route path='/accessories-details' exact component={AccessoriesDetails}></Route>
+              
+              <Route path='/demo' exact component={Demo}></Route>
             </Switch>
          </div>
          
