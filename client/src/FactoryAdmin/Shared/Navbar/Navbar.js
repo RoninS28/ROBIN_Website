@@ -31,6 +31,7 @@ import OrderList from "../../Pages/OrderList";
 import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import { Breadcrumbs } from "@material-ui/core";
+import OrderDetail from "../../Pages/OrderDetail";
 
 
 
@@ -281,6 +282,24 @@ const Navbar = (props) => {
                   <ListItemText primary="Workers" />
                 </ListItem>
               </Link>
+
+              <Link to="/workerDetail" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Worker Detail" />
+                </ListItem>
+              </Link>
+
+              <Link to="/orderDetail" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Order Detail" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -310,6 +329,7 @@ const Navbar = (props) => {
               <Route path='/orders' exact component={OrderList} ></Route>
               <Route path='/workers' exact component={WorkerList} ></Route>
               <Route path='/workerDetail' exact component={WorkerListDetails}/>
+              <Route path='/orderDetail' exact component={OrderDetail}/>
             </Switch>
          </div>
 

@@ -22,36 +22,123 @@ import scooter1 from '../../images/scooter1.jpeg';
 import { makeStyles } from '@material-ui/styles';
 import { withStyles } from "@material-ui/core/styles";
 
+import PropTypes from 'prop-types';
+import { useTheme } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+
+
+
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core//TablePagination';
+
+
+import IconButton from '@material-ui/core/IconButton';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import LastPageIcon from '@material-ui/icons/LastPage';
+
 
 const styles = makeStyles((theme) => ({
-    orderList: {
-
-        background:"pink",
-
-        // [theme.breakpoints.down("sm")]: {
-        //     maxWidth:"xs",
-        // },
-        // [theme.breakpoints.up("sm")]: {
-        //     maxWidth:"sm",
-        // },
-        // [theme.breakpoints.down("md")]: {
-        //     maxWidth:"sm",
-        // },
-        // [theme.breakpoints.up("md")]: {
-        //     maxWidth:"md",
-        // },
-        // [theme.breakpoints.down("lg")]: {
-        //     maxWidth:"md",
-        // },
-        // [theme.breakpoints.up("lg")]: {
-        //     maxWidth:"lg",
-        // },
+    listWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "1rem"
+    },
+    topRow: {
+        display: "flex",
+        justifyContent: "flex-end",
+    },
+    rowHeader: {
+        fontWeight: "bold !important",
     }
 
 }));
 
+function TablePaginationActions(props) {
+    
+    const theme = useTheme();
+    const { count, page, rowsPerPage, onPageChange } = props;
+
+
+    const handleFirstPageButtonClick = (event) => {
+        onPageChange(event, 0);
+    };
+
+    const handleBackButtonClick = (event) => {
+        onPageChange(event, page - 1);
+    };
+
+    const handleNextButtonClick = (event) => {
+        onPageChange(event, page + 1);
+    };
+
+    const handleLastPageButtonClick = (event) => {
+        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+
+    return (
+        <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+            <IconButton
+                onClick={handleFirstPageButtonClick}
+                disabled={page === 0}
+                aria-label="first page"
+            >
+                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+            </IconButton>
+            <IconButton
+                onClick={handleBackButtonClick}
+                disabled={page === 0}
+                aria-label="previous page"
+            >
+                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+            </IconButton>
+            <IconButton
+                onClick={handleNextButtonClick}
+                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+                aria-label="next page"
+            >
+                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            </IconButton>
+            <IconButton
+                onClick={handleLastPageButtonClick}
+                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+                aria-label="last page"
+            >
+                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+            </IconButton>
+        </Box>
+    );
+}
+
+TablePaginationActions.propTypes = {
+    count: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired,
+    page: PropTypes.number.isRequired,
+    rowsPerPage: PropTypes.number.isRequired,
+  };
+
+
+
+function createData(id, model, Customer, Stage, img) {
+    return { id, model, Customer, Stage, img };
+}
+
+function getAllModels() {
+    const allModels = [];
+    orders.map(model => {
+        console.log(model);
+        allModels.push(createData(model.id, model.model, model.Customer, model.Stage, model.img))
+    })
+    return allModels
+}
+
+const rows = getAllModels();
+
 
 function OrderList(props) {
+
+
 
     const { classes, theme } = props;
     const xs=useMediaQuery(theme.breakpoints.down('xs'));
@@ -60,57 +147,101 @@ function OrderList(props) {
     const lg=useMediaQuery(theme.breakpoints.up('md')&&theme.breakpoints.down('lg'));
     const xl=useMediaQuery(theme.breakpoints.up('lg'));
 
+
+        const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
+
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows =
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+
     return (
         <div>
-                <div style={{marginLeft:"10vw"}}>
-                <h1>Order's List</h1>
-                <TextField id="standard-basic" label="Search orders" variant="standard" />
-                <Fab  aria-label="like" style={{marginLeft:"1vh"}}>
-                <SearchIcon/>
-                </Fab>
-           
-                <Fab color="primary" aria-label="add" style={{marginLeft:"90vh"}} >
-                    <PrintIcon />
-                </Fab>
-            
-                <Fab color="primary" aria-label="add" style={{marginLeft:"4vh"}}>
-                    <DownloadIcon/>
-                </Fab>
-                </div>
 
-                    <Container style={{marginTop:"3vh"}}  maxWidth={xs?"xs":(sm?"sm":(md?"md":(lg?"lg":(xl?"lg":"xl"))))} >
-                        <TableContainer component={Paper}>
-                            <Table sx={{ minWidth: 600 }} aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell aligh="center">Order ID</TableCell>
-                                        <TableCell align="center">Image</TableCell>
-                                        <TableCell align="center">Model</TableCell>
-                                        <TableCell align="center">Customer</TableCell>
-                                        <TableCell align="center">Stage</TableCell>
-                                        <TableCell align="center">View</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                            <TableBody>
-                                {orders.map((order) => (
-                                    <TableRow
-                                    key={order.id}
-                                    // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell align="center">{order.id}</TableCell>
-                                        <TableCell align="center"><img src={scooter1} style={{borderRadius:"35px",border:"2px solid black"}} alt={order.model} height="70px" width="70px"/></TableCell>
-                                        <TableCell align="center">{order.model}</TableCell>
-                                        <TableCell align="center">{order.Customer}</TableCell>
-                                        <TableCell align="center">{order.Stage}</TableCell>
-                                        <TableCell align="center">
-                                        <Button variant="contained" color="primary">View</Button>
-                                        </TableCell>
-                                    </TableRow>
-                            ))}
-                            </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Container>
+        <Container 
+            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
+            className={classes.listWrapper}>
+                <TableContainer component={Paper}>
+                    <Table  aria-label="custom pagination table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>ID</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>IMAGE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>MODEL</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>CUSTOMER</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>STAGE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>VIEW</h3></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {(rowsPerPage > 0
+                            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            : rows
+                        ).map((row) => (
+                            
+                            // individual row
+                            <TableRow>
+                                <TableCell  align="center">
+                                    {row.id}
+                                    </TableCell>
+                                <TableCell  align="center">
+                                    <img src={scooter1} style={{ height: "120px", width: "100px" }}/>
+                                </TableCell>
+                                <TableCell  align="center">
+                                    {row.model}
+                                </TableCell>
+                                <TableCell  align="center">
+                                    {row.Customer}
+                                </TableCell>
+                                <TableCell  align="center">
+                                    {row.Stage}
+                                </TableCell>
+                                <TableCell align="center">
+                                <Button variant="contained" color="primary" >View</Button>
+                                </TableCell>
+                            </TableRow>
+
+                        ))}
+
+                        {emptyRows > 0 && (
+                            <TableRow style={{ height: 53 * emptyRows }}>
+                                <TableCell colSpan={6} />
+                            </TableRow>
+                        )}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                rowsPerPageOptions={[3,5, 10, 25, { label: 'All', value: -1 }]}
+                                colSpan={3}
+                                count={rows.length}
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                SelectProps={{
+                                    inputProps: {
+                                        'aria-label': 'rows per page',
+                                    },
+                                    native: true,
+                                }}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                                ActionsComponent={TablePaginationActions}
+                            />
+                        </TableRow>
+                    </TableFooter>
+                    </Table>
+    </TableContainer>
+</Container>
     </div>
     )
 }
