@@ -31,6 +31,9 @@ import BreakdownStatusList from "../../BreakdownStatusList";
 import BuyCategory from "../../BuyCategory";
 import Demo from "../../Demo";
 import AccessoriesDetails from "../../AccessoriesDetails";
+import AssignedCustomers from "../../AssignedCustomers";
+import CustomerDetails from "../../CustomerDetails";
+import Servicing from "../../Servicing";
 
 
 const drawerWidth = 220;
@@ -217,6 +220,33 @@ class Navbar extends React.Component {
         >
           <div className={classes.toolbar} />
           <List>
+          <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Customers List" />
+              </ListItem>
+            </Link>
+
+            <Link to="/customer-details" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customer Details" />
+                </ListItem>
+              </Link>
+
+              <Link to="/servicing" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Servicing" />
+                </ListItem>
+              </Link>
+
               <Link to="/breakdown-list" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -281,6 +311,8 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
+          
+
 
           <Link to="/demo" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -329,7 +361,10 @@ class Navbar extends React.Component {
         
           <div className = 'back'>
             <Switch>
-              <Route path='/' exact component={BreakdownRequestsList} ></Route>
+              <Route path='/' exact component={AssignedCustomers} ></Route>
+              <Route path='/assigned-customers' exact component={AssignedCustomers}></Route>
+              <Route path='/customer-details' exact component={CustomerDetails}></Route>
+              <Route path='/servicing' exact component={Servicing}></Route>
               <Route path='/breakdown-list' exact component={BreakdownRequestsList} ></Route>
               <Route path='/breakdown-detail' exact component={BreakdownDetails} ></Route>
               <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>

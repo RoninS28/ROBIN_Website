@@ -28,6 +28,7 @@ const rows = [
     createData(5, 'Nutan D. Deshmukh', 'Kothrud', 9359123910, 
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
 ];
+
 function BreakdownRequestsList() {
     return (
         <div align="center" style={{padding:"1rem"}}>
@@ -36,11 +37,11 @@ function BreakdownRequestsList() {
                 <Table sx={{ minWidth: 650 }} aria-label="Requests List">
                     <TableHead>
                         <TableRow>
-                        <TableCell align="center">SR. NO.</TableCell>
-                        <TableCell align="left">NAME</TableCell>
-                        <TableCell align="left">ADDRESS</TableCell>
-                        <TableCell align="center">CONTACT</TableCell>
-                        <TableCell align="center">DETAILS</TableCell>
+                        <TableCell align="center"><b>SR. NO.</b></TableCell>
+                        <TableCell align="left"><b>NAME</b></TableCell>
+                        <TableCell align="left"><b>ADDRESS</b></TableCell>
+                        <TableCell align="center"><b>CONTACT</b></TableCell>
+                        <TableCell align="center"><b>DETAILS</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

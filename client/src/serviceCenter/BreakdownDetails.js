@@ -18,7 +18,8 @@ function createData(property, data) {
   const rows = [
     createData('NAME', 'Siddhesh R. Ramane'),
     createData('PROBLEM', 'Breaks have been Failed'),
-    createData('LOCATION', 'Tilak Square, GB Road'),
+    createData('ADDRESS', 'Tilak Square, GB Road'),
+    createData('PREFFERED LOCATION', 'Tilak Square, GB Road'),
     createData('IMAGE', 
         <img src={placeholder} alt="Image" width="250px" height="200px"></img>),
     createData('MAP',
@@ -29,7 +30,7 @@ function BreakdownDetails() {
     return(
         <div align="center" style={{padding:"1rem"}}>
             <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN DETAILS</b></Typography>  
-            <TableContainer component={Card } style={{ height:'500px', width: "800px"}}>
+            <TableContainer component={Card } style={{ height:'auto', width: "800px"}}>
                 <Table aria-label="Requests Details">
                   <TableBody>
                         {rows.map((row) => (
