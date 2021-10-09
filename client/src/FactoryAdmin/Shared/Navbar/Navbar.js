@@ -32,12 +32,19 @@ import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import { Breadcrumbs } from "@material-ui/core";
 import OrderDetail from "../../Pages/OrderDetail";
+import { useTheme } from '@material-ui/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TestDriveDetail from "../../Pages/TestDriveDetail";
 
 
 
 import { useLocation, useHistory } from 'react-router-dom';
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
+import TestDrive from "../../Pages/TestDrive";
+import Complaints from "../../Pages/Complaints";
 
 
 const drawerWidth = 220;
@@ -300,6 +307,33 @@ const Navbar = (props) => {
                   <ListItemText primary="Order Detail" />
                 </ListItem>
               </Link>
+
+              <Link to="/testDrive" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Test Drive" />
+                </ListItem>
+              </Link>
+
+              <Link to="/testDriveDetail" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Test Drive Detail" />
+                </ListItem>
+              </Link>
+
+              <Link to="/issues" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Complaints" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -330,6 +364,9 @@ const Navbar = (props) => {
               <Route path='/workers' exact component={WorkerList} ></Route>
               <Route path='/workerDetail' exact component={WorkerListDetails}/>
               <Route path='/orderDetail' exact component={OrderDetail}/>
+              <Route path='/testDrive' exact component={TestDrive}/>
+              <Route path='/testDriveDetail' exact component={TestDriveDetail}/>
+              <Route path='/issues'  exact component={Complaints} ></Route>
             </Switch>
          </div>
 
