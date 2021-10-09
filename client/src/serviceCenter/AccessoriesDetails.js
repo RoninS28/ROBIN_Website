@@ -54,9 +54,7 @@ function AccessoriesDetails(){
        <Paper sx={{ p: 2, margin: 'auto', flexGrow: 1 }} style={{ maxWidth: 'relative', maxHeight:'auto',}}>
       <Grid container spacing={2}>
         <Grid item>
-          <ButtonBase sx={{ width: 600, height: 500 }}>
-            <Img alt="complex" src={seat} style={{height:700}}/>
-          </ButtonBase>
+            <Img alt="complex" src={seat} style={{height:400}}/>
         </Grid>
         <Grid item l={12} sm container>
           <Grid item l container direction="column" spacing={2}>
@@ -98,31 +96,37 @@ function AccessoriesDetails(){
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-      <FormControl sx={{width:'10%'}}>
-      <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
-         <Select
-                style={{ width: '100%' , align:'center'}}
-                value={feature}
-                label="Amount"
-                onChange={handleChange}
-                name="status"
-                style={{marginRight:'20px'}}
-              >
-                <MenuItem value="1">1000</MenuItem>
-                <MenuItem value="2">2000</MenuItem>
-                <MenuItem value="3">3000</MenuItem>
-                <MenuItem value="4">4000</MenuItem>
-                <MenuItem value="5">5000</MenuItem>
-                <MenuItem value="6">6000</MenuItem>
-                <MenuItem value="7">7000</MenuItem>
-                <MenuItem value="8">8000</MenuItem>
-                <MenuItem value="9">9000</MenuItem>
-                <MenuItem value="10">10,000</MenuItem>
-            </Select>
-        </FormControl>
-      <Button variant="contained" color="primary" style={{marginTop:'10px'}}
->REQUEST FOR PARTS</Button>
+        <Grid item xs={12}>
+          <Grid>
+            <Grid item xs={12}>
+              <FormControl sx={{width:'10%'}}>
+                <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
+                  <Select
+                    style={{ width: '100%' , align:'center'}}
+                    value={feature}
+                    label="Amount"
+                    onChange={handleChange}
+                    name="status"
+                    style={{marginRight:'20px'}}
+                  >
+                    <MenuItem value="1">1000</MenuItem>
+                    <MenuItem value="2">2000</MenuItem>
+                    <MenuItem value="3">3000</MenuItem>
+                    <MenuItem value="4">4000</MenuItem>
+                    <MenuItem value="5">5000</MenuItem>
+                    <MenuItem value="6">6000</MenuItem>
+                    <MenuItem value="7">7000</MenuItem>
+                    <MenuItem value="8">8000</MenuItem>
+                    <MenuItem value="9">9000</MenuItem>
+                    <MenuItem value="10">10,000</MenuItem>
+                </Select>
+              </FormControl>
+              <Button variant="contained" color="primary" style={{marginTop:'10px'}}>REQUEST FOR PARTS</Button>
+            </Grid>
+          </Grid>
+        </Grid>
+    </Grid>
+
     </Paper>
     </div>
     )

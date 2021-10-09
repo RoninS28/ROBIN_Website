@@ -81,8 +81,10 @@ function Servicing() {
     };
     return (
         <div style={{padding:'1rem'}} sx={{ flexGrow: 1 }}> 
-        <Grid container spacing={2}>
-            <Grid item xs={12}>
+        <Grid container spacing={2}
+        justifyContent="center"
+        >
+            <Grid item xs={8}>
                 <Grid >
                     <Card elevation={3} >
                         <Grid item xs={12}>
@@ -107,7 +109,7 @@ function Servicing() {
                     </Card>
                 </Grid>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={8}>
                 <Grid>
                     <Card elevation={3} >
                         <Grid item xs={12} >
@@ -154,7 +156,7 @@ function Servicing() {
                 >
                     <DialogTitle>{"Proceed to Generate Receipt?"}</DialogTitle>
                     <DialogActions>
-                        <Link style={{ textDecoration: 'none' }} to="/demo"><Button variant="contained" color="primary">YES</Button></Link>
+                        <Link style={{ textDecoration: 'none' }} to="/billing"><Button variant="contained" color="primary">YES</Button></Link>
                         <Button onClick={handleClose}>NO</Button>
                     </DialogActions>
                 </Dialog>

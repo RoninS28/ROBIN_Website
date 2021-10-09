@@ -36,18 +36,18 @@ function BreakdownStatus() {
     return(
         <div align="center" style={{padding:"1rem"}}>
             <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>STATUS DETAILS</b></Typography>  
-          <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="status table">
+          <TableContainer component={Paper} style={{ width: 800 }}>
+          <Table  aria-label="status table">
           <TableBody>
           {rows.map((row) => (
            <TableRow
              key={row.name}
              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
            >
-             <TableCell component="th" scope="row">
+             <TableCell component="th" scope="row" align='center'>
                {row.property}
              </TableCell>
-             <TableCell align="left">{row.data}</TableCell>
+             <TableCell align="center">{row.data}</TableCell>
              
            </TableRow>
          ))}

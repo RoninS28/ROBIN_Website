@@ -34,6 +34,7 @@ import AccessoriesDetails from "../../AccessoriesDetails";
 import AssignedCustomers from "../../AssignedCustomers";
 import CustomerDetails from "../../CustomerDetails";
 import Servicing from "../../Servicing";
+import Billing from "../../Billing";
 
 
 const drawerWidth = 220;
@@ -311,6 +312,14 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
+            <Link to="/billing" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Billing" />
+              </ListItem>
+            </Link>
           
 
 
@@ -372,6 +381,7 @@ class Navbar extends React.Component {
               <Route path='/buy-accessories' exact component={BuyAccessoriesList}></Route>
               <Route path='/buy-category' exact component={BuyCategory}></Route>
               <Route path='/accessories-details' exact component={AccessoriesDetails}></Route>
+              <Route path='/billing' exact component={Billing}></Route>
               
               <Route path='/demo' exact component={Demo}></Route>
             </Switch>
