@@ -21,7 +21,12 @@ const factoryList = [
             email: "ramrao@gmail.com",
             phone: "8989898989",
             dateOfJoining: "2018-01-01"
-        }
+        },
+        orders: "50",
+        completed: "40",
+        pending: "10",
+        area: 10000,
+        annualProduction: 1000
 
     },
     {
@@ -46,8 +51,12 @@ const factoryList = [
             email: "shyamrao@gmail.com",
             phone: "8989898989",
             dateOfJoining: "2018-01-01"
-        }
-
+        },
+        orders: "50",
+        completed: "40",
+        pending: "10",
+        area: 20000,
+        annualProduction: 2000
     },
     {
         id: 3,
@@ -71,7 +80,12 @@ const factoryList = [
             email: "nikhil@gmail.com",
             phone: "8989898991",
             dateOfJoining: "2018-01-01"
-        }
+        },
+        orders: "50",
+        completed: "40",
+        pending: "10",
+        area: 10000,
+        annualProduction: 3000
 
     }
 ]
