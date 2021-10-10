@@ -45,6 +45,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 import TestDrive from "../../Pages/TestDrive";
 import Complaints from "../../Pages/Complaints";
+import WorkerComplaint from "../../Pages/WorkerComplaint";
+import CustomerComplaint from "../../Pages/CustomerComplaint";
 
 
 const drawerWidth = 220;
@@ -334,6 +336,23 @@ const Navbar = (props) => {
                   <ListItemText primary="Complaints" />
                 </ListItem>
               </Link>
+
+              <Link to="/workerComplaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Worker Complaint" />
+                </ListItem>
+              </Link>
+              <Link to="/customerComplaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customer Complaint" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -367,6 +386,8 @@ const Navbar = (props) => {
               <Route path='/testDrive' exact component={TestDrive}/>
               <Route path='/testDriveDetail' exact component={TestDriveDetail}/>
               <Route path='/issues'  exact component={Complaints} ></Route>
+              <Route path='/workerComplaint'exact component={WorkerComplaint}/>
+              <Route path="/customerComplaint" exact component={CustomerComplaint}/>
             </Switch>
          </div>
 

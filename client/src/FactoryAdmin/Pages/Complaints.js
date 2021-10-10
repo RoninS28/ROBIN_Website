@@ -26,11 +26,12 @@ import scooter1 from '../../images/scooter1.jpeg';
 import { makeStyles } from '@material-ui/styles';
 import { withStyles } from "@material-ui/core/styles";
 
+
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import workerComplaints from '../Data/WorkerComplaints';
 import { styled } from '@material-ui/styles';
-import {Pie, Doughnut} from 'react-chartjs-2';
+import {Pie, Doughnut,Line} from 'react-chartjs-2';
 
 
 
@@ -65,7 +66,7 @@ const styles = makeStyles((theme) => ({
 
 const state = {
     labels: ['January', 'February', 'March',
-             'April', 'May'],
+             'April', 'May','June','July','August','September','October','November','December'],
     datasets: [
       {
         label: 'Rainfall',
@@ -74,16 +75,46 @@ const state = {
           '#C9DE00',
           '#2FDE00',
           '#00A6B4',
-          '#6800B4'
+          '#6800B4',
+          '#B21F00',
+          '#C9DE00',
+          '#2FDE00',
+          '#00A6B4',
+          '#6800B4',
+          '#B21F00',
+          '#C9DE00'
         ],
         hoverBackgroundColor: [
         '#501800',
         '#4B5000',
         '#175000',
         '#003350',
-        '#35014F'
+        '#35014F',
+        '#501800',
+        '#4B5000',
+        '#175000',
+        '#003350',
+        '#35014F',
+        '#501800',
+        '#4B5000',
         ],
-        data: [65, 59, 80, 81, 56]
+        data:  [65, 59, 80, 81, 56,60,40,20,13,34,17,47]
+      }
+    ]
+  }
+
+  const state2 = {
+    labels: ['January', 'February', 'March',
+             'April', 'May','June','July','August','September','October','November','December'],
+    datasets: [
+      {
+        label: 'Issues',
+        fill: false,
+        lineTension: 0.5,
+        backgroundColor: 'rgba(75,192,192,1)',
+        borderColor: 'rgba(0,0,0,1)',
+        borderWidth: 2,
+        data: [65, 59, 80, 81, 56,60,40,20,13,34,17,47]
       }
     ]
   }
@@ -382,9 +413,34 @@ function Complaints(props) {
 
                 </div>
 
-            <div style={{marginTop:"4vh",height:"20vh",width:"20vw"}}>
+            <div style={{marginTop:"4vh",display:"flex",justifyContent:"space-evenly"}}>
+                <div>
+                <Card>
                 <Doughnut
                     data={state}
+                   height={300}
+                   width={300}
+                    options={{
+                        title:{
+                        display:true,
+                        text:'Average Rainfall per month',
+                        fontSize:20,
+                        },
+                        legend:{
+                        display:true,
+                        position:'right'
+                        }
+                    }}
+                    />
+                    </Card>
+                    </div>
+
+                    <div>
+                    <Card>
+                    <Line
+                    data={state2}
+                    height={300}
+                    width={400}
                     options={{
                         title:{
                         display:true,
@@ -397,8 +453,9 @@ function Complaints(props) {
                         }
                     }}
                     />
+                    </Card>
+                    </div>
             </div>
-
         </Container>        
         </div>
     )
