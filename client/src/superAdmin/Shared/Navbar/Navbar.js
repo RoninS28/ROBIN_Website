@@ -29,6 +29,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import FactoryDetail from "../../Pages/FactoryDetail";
 import FactoryList from "../../Pages/FactoryList";
 import FactoryOverview from "../../Pages/FactoryOverview";
+import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
+import AccessoryOrderList from "../../Pages/AccessoryOrderList";
 
 
 const drawerWidth = 220;
@@ -287,6 +289,24 @@ const Navbar = (props) => {
                   <ListItemText primary="Factory Overview" />
                 </ListItem>
               </Link>
+
+              <Link to="/orderReceipt" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Order Receipt" />
+                </ListItem>
+              </Link>
+
+              <Link to="/accessoryList" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Order List" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -311,6 +331,8 @@ const Navbar = (props) => {
               <Route path='/factory' exact component={FactoryDetail}></Route>
               <Route path='/factoryList' exact component={FactoryList}></Route>
               <Route path='/factoryOverview' exact component={FactoryOverview}></Route>
+              <Route path='/orderReceipt' exact component={AccessoryOrderReceipt}></Route>
+              <Route path='/accessoryList' exact component={AccessoryOrderList}></Route>
             </Switch>
         </div>
         </main>
