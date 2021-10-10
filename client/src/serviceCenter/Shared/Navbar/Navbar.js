@@ -35,6 +35,8 @@ import AssignedCustomers from "../../AssignedCustomers";
 import CustomerDetails from "../../CustomerDetails";
 import Servicing from "../../Servicing";
 import Billing from "../../Billing";
+import ServicemanList from "../../ServicemanList";
+import ServicemanDetails from "../../ServicemanDetails";
 
 
 const drawerWidth = 220;
@@ -230,23 +232,41 @@ class Navbar extends React.Component {
               </ListItem>
             </Link>
 
-            <Link to="/customer-details" style={{ textDecoration: 'none' }}>
+            {/* <Link to="/customer-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Customer Details" />
                 </ListItem>
+              </Link> */}
+
+              {/* <Link to="/servicemenlist" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Servicemen List" />
+                </ListItem>
               </Link>
 
-              <Link to="/servicing" style={{ textDecoration: 'none' }}>
+              <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Serviceman Details" />
+                </ListItem>
+              </Link> */}
+
+              {/* <Link to="/servicing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Servicing" />
                 </ListItem>
-              </Link>
+              </Link> */}
 
               <Link to="/breakdown-list" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -256,7 +276,7 @@ class Navbar extends React.Component {
                   <ListItemText primary="Requests" />
                 </ListItem>
               </Link>
-
+{/* 
               <Link to="/breakdown-detail" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -264,7 +284,7 @@ class Navbar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Request detail" />
                 </ListItem>
-              </Link>
+              </Link> */}
 
               <Link to="/breakdown-status-list" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -275,14 +295,14 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
+              {/* <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Request Status" />
                 </ListItem>
-              </Link>
+              </Link> */}
 
               <Link to="/buy-accessories" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -293,45 +313,45 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              <Link to="/buy-category" style={{ textDecoration: 'none' }}>
+              {/* <Link to="/buy-category" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Buy Category" />
                 </ListItem>
-              </Link>
-          </List>
+              </Link> */}
 
-          <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
+          {/* <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
-                    <InboxIcon />
+                    <InboxIcon/>
                   </ListItemIcon>
                   <ListItemText primary="Item Details" />
                 </ListItem>
-              </Link>
+              </Link> */}
 
-            <Link to="/billing" style={{ textDecoration: 'none' }}>
+            {/* <Link to="/billing" style={{ textDecoration: 'none' }}>
               <ListItem button>
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary="Billing" />
               </ListItem>
-            </Link>
+            </Link> */}
           
 
 
-          <Link to="/demo" style={{ textDecoration: 'none' }}>
+          {/* <Link to="/demo" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Demo" />
                 </ListItem>
-              </Link>
+              </Link> */}
 
+          </List>
 
           <Divider />
           <List>
@@ -382,6 +402,8 @@ class Navbar extends React.Component {
               <Route path='/buy-category' exact component={BuyCategory}></Route>
               <Route path='/accessories-details' exact component={AccessoriesDetails}></Route>
               <Route path='/billing' exact component={Billing}></Route>
+              <Route path='/servicemenlist' exact component={ServicemanList}></Route>
+              <Route path='/servicemandetails' exact component={ServicemanDetails}></Route>
               
               <Route path='/demo' exact component={Demo}></Route>
             </Switch>

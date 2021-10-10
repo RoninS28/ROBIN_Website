@@ -55,7 +55,7 @@ function BreakdownStatusList() {
                 <Table sx={{ minWidth: 650 }} aria-label="Requests List">
                     <TableHead>
                         <TableRow>
-                        <TableCell align="center">SELECT</TableCell>
+                        <TableCell align="left">SELECT</TableCell>
                         <TableCell align="center">ID. NO.</TableCell>
                         <TableCell align="left">NAME</TableCell>
                         <TableCell align="left">ADDRESS</TableCell>
