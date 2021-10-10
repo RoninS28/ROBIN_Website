@@ -47,6 +47,7 @@ import TestDrive from "../../Pages/TestDrive";
 import Complaints from "../../Pages/Complaints";
 import WorkerComplaint from "../../Pages/WorkerComplaint";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
+import BuyAccessories from "../../Pages/BuyAccessories";
 
 
 const drawerWidth = 220;
@@ -353,6 +354,14 @@ const Navbar = (props) => {
                   <ListItemText primary="Customer Complaint" />
                 </ListItem>
               </Link>
+              <Link to="/buyAccessories" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Buy Accessories" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -388,6 +397,7 @@ const Navbar = (props) => {
               <Route path='/issues'  exact component={Complaints} ></Route>
               <Route path='/workerComplaint'exact component={WorkerComplaint}/>
               <Route path="/customerComplaint" exact component={CustomerComplaint}/>
+              <Route path="/buyAccessories" exact component={BuyAccessories}/>
             </Switch>
          </div>
 

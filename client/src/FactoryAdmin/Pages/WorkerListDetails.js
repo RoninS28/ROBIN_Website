@@ -35,7 +35,7 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import leave from '../Data/Leave';
-import {Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import workerComplaints from '../Data/WorkerComplaints';
 
 const state = {
