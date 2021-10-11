@@ -31,6 +31,8 @@ import FactoryList from "../../Pages/FactoryList";
 import FactoryOverview from "../../Pages/FactoryOverview";
 import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
 import AccessoryOrderList from "../../Pages/AccessoryOrderList";
+import CustomerComplaintList from "../../Pages/CustomerComplaintList";
+import CustomerComplaint from "../../Pages/CustomerComplaint";
 
 
 const drawerWidth = 220;
@@ -307,6 +309,24 @@ const Navbar = (props) => {
                   <ListItemText primary="Order List" />
                 </ListItem>
               </Link>
+
+              <Link to="/customerComplaints" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Complaints" />
+                </ListItem>
+              </Link>
+
+              <Link to="/complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Complaint" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -333,6 +353,8 @@ const Navbar = (props) => {
               <Route path='/factoryOverview' exact component={FactoryOverview}></Route>
               <Route path='/orderReceipt' exact component={AccessoryOrderReceipt}></Route>
               <Route path='/accessoryList' exact component={AccessoryOrderList}></Route>
+              <Route path='/customerComplaints' exact component={CustomerComplaintList}></Route>
+              <Route path='/complaint' exact component={CustomerComplaint}></Route>
             </Switch>
         </div>
         </main>
