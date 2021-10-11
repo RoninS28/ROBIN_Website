@@ -21,7 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import scooter1 from '../../images/scooter1.jpeg';
 import { makeStyles } from '@material-ui/styles';
 import { withStyles } from "@material-ui/core/styles";
-
+import Checkbox from '@mui/material/Checkbox';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -136,6 +136,8 @@ function getAllModels() {
 
 const rows = getAllModels();
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 function OrderList(props) {
 
@@ -176,6 +178,7 @@ function OrderList(props) {
                     <Table  aria-label="custom pagination table">
                     <TableHead>
                         <TableRow>
+                         <TableCell  align="center" className={classes.rowHeader}><Checkbox {...label} /></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>ID</h3></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>IMAGE</h3></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>MODEL</h3></TableCell>
@@ -192,6 +195,9 @@ function OrderList(props) {
                             
                             // individual row
                             <TableRow>
+                                <TableCell  align="center">
+                                <Checkbox {...label} />
+                                    </TableCell>
                                 <TableCell  align="center">
                                     {row.id}
                                     </TableCell>

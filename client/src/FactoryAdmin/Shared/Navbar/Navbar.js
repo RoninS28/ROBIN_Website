@@ -48,6 +48,7 @@ import Complaints from "../../Pages/Complaints";
 import WorkerComplaint from "../../Pages/WorkerComplaint";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
 import BuyAccessories from "../../Pages/BuyAccessories";
+import AccessoryPage from "../../Pages/AccessoryPage";
 
 
 const drawerWidth = 220;
@@ -362,6 +363,14 @@ const Navbar = (props) => {
                   <ListItemText primary="Buy Accessories" />
                 </ListItem>
               </Link>
+              <Link to="/accessoryPage" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Accessory Page" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -398,6 +407,7 @@ const Navbar = (props) => {
               <Route path='/workerComplaint'exact component={WorkerComplaint}/>
               <Route path="/customerComplaint" exact component={CustomerComplaint}/>
               <Route path="/buyAccessories" exact component={BuyAccessories}/>
+              <Route path='/accessoryPage' exact component={AccessoryPage}/>
             </Switch>
          </div>
 

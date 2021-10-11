@@ -65,8 +65,7 @@ const styles = makeStyles((theme) => ({
 
 
 const state = {
-    labels: ['January', 'February', 'March',
-             'April', 'May','June','July','August','September','October','November','December'],
+    labels: ['Technical','Model Damage','Damage EV','Test Drive Issue'],
     datasets: [
       {
         label: 'Rainfall',
@@ -74,31 +73,15 @@ const state = {
           '#B21F00',
           '#C9DE00',
           '#2FDE00',
-          '#00A6B4',
-          '#6800B4',
-          '#B21F00',
-          '#C9DE00',
-          '#2FDE00',
-          '#00A6B4',
-          '#6800B4',
-          '#B21F00',
-          '#C9DE00'
+          '#00A6B4'
         ],
         hoverBackgroundColor: [
         '#501800',
         '#4B5000',
         '#175000',
-        '#003350',
-        '#35014F',
-        '#501800',
-        '#4B5000',
-        '#175000',
-        '#003350',
-        '#35014F',
-        '#501800',
-        '#4B5000',
+        '#003350'
         ],
-        data:  [65, 59, 80, 81, 56,60,40,20,13,34,17,47]
+        data:  [65, 59, 80, 81]
       }
     ]
   }
