@@ -9,6 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Container from '@material-ui/core/Container';
+
 
 //Details table
     function createData(property, data) {
@@ -40,6 +44,19 @@ import { Typography } from "@material-ui/core";
         createHistory(8, '02/09/2021', 'Oil Change, Brakes', '₹1000',), 
     ];    
 
+//complaints
+    const workerComplaints=[
+        {
+            id:1,
+            type:'Personal',
+            status:'Addressed',
+        },
+        {
+            id:2,
+            type:'Personal',
+            status:'Pending',
+        }
+    ]
 function CustomerDetails() {
     // const classes = useStyles();
     return (
@@ -113,6 +130,39 @@ function CustomerDetails() {
                     </Grid>
                 </Grid>
             </Grid>
+            {/* <div style={{marginTop:"4vh",marginBottom:"4vh"}}>
+            <Container maxWidth="lg" >
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table" >
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Complaint Id</TableCell>
+                        <TableCell align="center">Type</TableCell>
+                        <TableCell align="center">Status</TableCell>
+                        <TableCell align="center">View</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {workerComplaints.map((row) => (
+                        <TableRow
+                        key={row.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row">
+                            {row.id}
+                        </TableCell>
+                        <TableCell align="center">{row.type}</TableCell>
+                        <TableCell align="center">{row.status=='Addressed'?<span style={{color:'green'}}>Addressed</span>:<span style={{color:'red'}}>Pending</span>}</TableCell>
+                        <TableCell align="center">
+                        <Button variant="contained" color="primary">View</Button>
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            </Container>
+            </div> */}
         </div>
     )
 }

@@ -37,6 +37,10 @@ import Servicing from "../../Servicing";
 import Billing from "../../Billing";
 import ServicemanList from "../../ServicemanList";
 import ServicemanDetails from "../../ServicemanDetails";
+import CustomerComplaintList from "../../CustomerComplaintList";
+import CustomerComplaint from "../../CustomerComplaint";
+import ServicemanComplaintList from "../../ServicemanComplaintList";
+import ServicemanComplaint from "../../ServicemanComplaint";
 
 
 const drawerWidth = 220;
@@ -232,16 +236,16 @@ class Navbar extends React.Component {
               </ListItem>
             </Link>
 
-            {/* <Link to="/customer-details" style={{ textDecoration: 'none' }}>
+            <Link to="/customer-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Customer Details" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
-              {/* <Link to="/servicemenlist" style={{ textDecoration: 'none' }}>
+              <Link to="/servicemenlist" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
@@ -257,16 +261,16 @@ class Navbar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Serviceman Details" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
-              {/* <Link to="/servicing" style={{ textDecoration: 'none' }}>
+              <Link to="/servicing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Servicing" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
               <Link to="/breakdown-list" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -276,7 +280,7 @@ class Navbar extends React.Component {
                   <ListItemText primary="Requests" />
                 </ListItem>
               </Link>
-{/* 
+
               <Link to="/breakdown-detail" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -284,7 +288,7 @@ class Navbar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="Request detail" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
               <Link to="/breakdown-status-list" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -295,14 +299,14 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              {/* <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
+              <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Request Status" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
               <Link to="/buy-accessories" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -313,43 +317,77 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              {/* <Link to="/buy-category" style={{ textDecoration: 'none' }}>
+              <Link to="/buy-category" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Buy Category" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
-          {/* <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
+          <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon/>
                   </ListItemIcon>
                   <ListItemText primary="Item Details" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
-            {/* <Link to="/billing" style={{ textDecoration: 'none' }}>
+            <Link to="/billing" style={{ textDecoration: 'none' }}>
               <ListItem button>
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary="Billing" />
               </ListItem>
-            </Link> */}
-          
+            </Link>
 
+          <Link to="/customer-complaint-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="C Complaints List" />
+                </ListItem>
+              </Link> 
 
-          {/* <Link to="/demo" style={{ textDecoration: 'none' }}>
+              <Link to="/customer-complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="C Complaint Details" />
+                </ListItem>
+              </Link> 
+
+              <Link to="/serviceman-complaint-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="S Complaints List" />
+                </ListItem>
+              </Link> 
+
+              <Link to="/serviceman-complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="S Complaint Details" />
+                </ListItem>
+              </Link>  
+
+          <Link to="/demo" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="Demo" />
                 </ListItem>
-              </Link> */}
+              </Link>
 
           </List>
 
@@ -393,18 +431,22 @@ class Navbar extends React.Component {
               <Route path='/' exact component={AssignedCustomers} ></Route>
               <Route path='/assigned-customers' exact component={AssignedCustomers}></Route>
               <Route path='/customer-details' exact component={CustomerDetails}></Route>
+              <Route path='/servicemenlist' exact component={ServicemanList}></Route>
+              <Route path='/servicemandetails' exact component={ServicemanDetails}></Route>
               <Route path='/servicing' exact component={Servicing}></Route>
               <Route path='/breakdown-list' exact component={BreakdownRequestsList} ></Route>
               <Route path='/breakdown-detail' exact component={BreakdownDetails} ></Route>
-              <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>
               <Route path='/breakdown-status-list' exact component={BreakdownStatusList}></Route>
+              <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>
               <Route path='/buy-accessories' exact component={BuyAccessoriesList}></Route>
               <Route path='/buy-category' exact component={BuyCategory}></Route>
               <Route path='/accessories-details' exact component={AccessoriesDetails}></Route>
               <Route path='/billing' exact component={Billing}></Route>
-              <Route path='/servicemenlist' exact component={ServicemanList}></Route>
-              <Route path='/servicemandetails' exact component={ServicemanDetails}></Route>
-              
+              <Route path='/customer-complaint-list' exact component={CustomerComplaintList}></Route>
+              <Route path='/customer-complaint' exact component={CustomerComplaint}></Route>
+              <Route path='/serviceman-complaint-list' exact component={ServicemanComplaintList}></Route>
+              <Route path='/serviceman-complaint' exact component={ServicemanComplaint}></Route>
+            
               <Route path='/demo' exact component={Demo}></Route>
             </Switch>
          </div>
