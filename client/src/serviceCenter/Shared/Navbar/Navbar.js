@@ -42,6 +42,8 @@ import CustomerComplaint from "../../CustomerComplaint";
 import ServicemanComplaintList from "../../ServicemanComplaintList";
 import ServicemanComplaint from "../../ServicemanComplaint";
 import AppBreadCrumb from "../../AppBreadCrumb";
+import SMBreakdownStatus from "../../Serviceman/SMBreakdownStatus";
+import SMBreakdownDetails from "../../Serviceman/SMBreakdownDetails";
 
 
 const drawerWidth = 220;
@@ -381,6 +383,34 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>  
 
+
+              <Link to="/Serviceman/breakdown-details" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Breakdown Request" />
+                </ListItem>
+              </Link>  
+
+              <Link to="/Serviceman/breakdown-status" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Breakdown Status" />
+                </ListItem>
+              </Link>  
+          
+              <Link to="/Serviceman/billing" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Billing" />
+                </ListItem>
+              </Link> 
+
           <Link to="/demo" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -448,6 +478,10 @@ class Navbar extends React.Component {
               <Route path='/customer-complaint' exact component={CustomerComplaint}></Route>
               <Route path='/serviceman-complaint-list' exact component={ServicemanComplaintList}></Route>
               <Route path='/serviceman-complaint' exact component={ServicemanComplaint}></Route>
+
+              <Route path='/Serviceman/breakdown-details' exact component={SMBreakdownDetails}></Route>
+              <Route path='/Serviceman/breakdown-status' exact component={SMBreakdownStatus}></Route>
+              <Route path='/Serviceman/billing' exact component={Billing}></Route>
             
               <Route path='/demo' exact component={Demo}></Route>
             </Switch>
