@@ -15,26 +15,26 @@ import { Typography } from "@material-ui/core";
 
 import "./BreakdownStatusList.css"
 
-function createData( box, no, name, address, contact, aname, acontact, status, details) {
-    return { box, no, name, address, contact, aname, acontact, status, details};
+function createData( box, date, no, name, address, contact, aname, acontact, status, details) {
+    return { box, date, no, name, address, contact, aname, acontact, status, details};
   }
 
 const label = { inputProps: { 'aria-label': 'Select' } };
 
 const rows = [
-    createData( <Checkbox {...label}/>,
+    createData( <Checkbox {...label}/>, '01/01/21',
      16464, 'Siddhesh R Ramane', 'Kothrud', 9359123910, 'Nitin Kumar', 8888884161, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-status"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData( <Checkbox {...label}/>,
+    createData( <Checkbox {...label}/>,'01/01/21',
      24652, 'Kartik S Rane', 'Kothrud', 9359123910, 'Nitin Kumar', 8888884161, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-status"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData( <Checkbox {...label}/>,
+    createData( <Checkbox {...label}/>,'01/01/21',
      32563, 'Amey S Marathe', 'Kothrud', 9359123910, 'Nitin Kumar', 8888884161, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-status"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData( <Checkbox {...label}/>, 
+    createData( <Checkbox {...label}/>, '01/01/21',
     45464, 'Neha M Patil', 'Kothrud', 9359123910, 'Nitin Kumar', 8888884161, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-status"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData( <Checkbox {...label}/>,
+    createData( <Checkbox {...label}/>,'01/01/21',
     54566, 'Nutan D. Deshmukh', 'Kothrud', 9359123910, 'Nitin Kumar', 8888884161, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-status"><Button variant="contained" color="primary">VIEW</Button></Link>),
 ];
@@ -56,6 +56,7 @@ function BreakdownStatusList() {
                     <TableHead>
                         <TableRow>
                         <TableCell align="left">SELECT</TableCell>
+                        <TableCell align="center">DATE</TableCell>
                         <TableCell align="center">ID. NO.</TableCell>
                         <TableCell align="left">NAME</TableCell>
                         <TableCell align="left">ADDRESS</TableCell>
@@ -75,6 +76,7 @@ function BreakdownStatusList() {
                             <TableCell component="th" scope="row" align="left">
                             {row.box}
                             </TableCell>
+                            <TableCell align="center">{row.date}</TableCell>
                             <TableCell align="center">{row.no}</TableCell>
                             <TableCell align="left">{row.name}</TableCell>
                             <TableCell align="left">{row.address}</TableCell>

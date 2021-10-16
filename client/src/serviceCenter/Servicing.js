@@ -20,6 +20,7 @@ function createData(property, data) {
     }
 
   const rows = [
+    createData('DATE', '01/01/21'),
     createData('ID','C2K5464'),
     createData('NAME', 'Siddhesh R. Ramane'),
     createData('MODEL', 'CITY - 1 ELECTRIC SCOOTER'),

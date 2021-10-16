@@ -14,11 +14,14 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import React from "react";
 
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 function createData(property, data) {
     return { property, data};
   }
 
   const rows = [
+    createData('DATE', '01/01/21'),
     createData('NAME', 'Siddhesh R. Ramane'),
     createData('PROBLEM', 'Breaks have been Failed'),
     createData('ADDRESS', 'Tilak Square, GB Road'),
@@ -28,11 +31,14 @@ function createData(property, data) {
     createData('MAP',
         <IconButton aria-label="map"><RoomIcon /></IconButton>),
     createData('STATUS', 'PENDING'),
-
     ];        
 
 function BreakdownDetails() {
+    const [status, setStatus] = React.useState('');
 
+    const handleChange = (event) => {
+      setStatus(event.target.value);
+    };
     // const [disable, setDisable] = React.useState(false);
     
     return(
@@ -55,6 +61,25 @@ function BreakdownDetails() {
                     </TableBody>
                 </Table>
             </TableContainer>                    
+            <div align="center" className="update" style={{padding:"1rem"}}>
+                <label value="Update" style={{marginRight:"50px"}}>ASSIGN SERVICEMAN</label>
+                <Select 
+                    style={{ width: "30%" }}
+                    value={status}
+                    onChange={handleChange}
+                    name="status"
+                    displayEmpty
+                    
+                >
+                    <MenuItem value="name1">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name2">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name3">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name4">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name5">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name6">Kamlesh Raut</MenuItem>
+                    <MenuItem value="name7">Kamlesh Raut</MenuItem>
+                </Select>
+            </div>
             <div className="buttons" align="center">
                     <Button 
                         variant="contained" 

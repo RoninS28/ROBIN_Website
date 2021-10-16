@@ -18,6 +18,7 @@ function createData(property, data) {
   }
 
 const rows = [
+  createData('DATE', '01/01/21'),
   createData('CUSTOMER NAME', 'Siddhesh R. Ramane'),
   createData('CONTACT', 9999999999),
   createData('LOCATION', 'Tilak Square, GB Road'),

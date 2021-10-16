@@ -34,6 +34,7 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import { Line } from 'react-chartjs-2';
+import { CardHeader } from '@material-ui/core';
 
 const state = {
     labels: ['January', 'February', 'March',
@@ -82,14 +83,27 @@ const workerComplaints=[
     }
 ]
 
+const workerHistory=[
+    {
+        id:'C2NSFK',
+        date:'01/01/21',
+        address:'Kothrud',
+    },
+    {
+        id:'C2ADLF',
+        date:'01/01/21',
+        address:'Kothrud',
+    }
+]
+
 function ServicemanDetails() {
     return (
         <div style={{padding:'1rem'}}>
-            <div style={{display:"flex"}}>
-
-{/* Customer details card */}
-                <div style={{marginLeft:"2vh",marginTop:"0vh",width:"25vw"}}>
-                    <Card style={{borderRadius:"35px"}}>
+        <Grid container spacing={2} >
+            <Grid item xs={6}>
+            <Grid container   justifyContent="center">
+                <Grid item xs={10}>
+                    <Card elevation={3} style={{borderRadius:"35px"}}>
                         <CardContent>
                             <div style={{display:"flex",flexDirection:"column",justifyContent:"space-evenly",alignItems:"center" }}>
                                 
@@ -143,12 +157,13 @@ function ServicemanDetails() {
                             </div>
                         </CardContent>
                     </Card>
-                </div>
-
-{/* Working days */}
-                <div style={{marginLeft:"10vh",marginTop:"0vh",width:"25vw"}}>
-                    <div>
-                    <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={6}>
+                <Grid container justifyContent="center">
+                    <Grid item xs={10}>
+                    <Box sx={{bgcolor: 'background.paper' }} align='center'>
                         <nav aria-label="main mailbox folders">
                             <List>
                             <ListItem disablePadding >
@@ -173,10 +188,9 @@ function ServicemanDetails() {
                             </List>
                         </nav>
                     </Box>
-                    </div>
-
-                    <div style={{marginTop:"4vh"}}>
-                        <Line
+                    </Grid>
+                    <Grid item xs={10}>
+                    <Line
                         data={state}
                         options={{
                             title:{
@@ -190,79 +204,111 @@ function ServicemanDetails() {
                             }
                         }}
                         />
-                    </div>
-                </div>
-
-{/* Leave descriptions */}
-                <div>
-                <Container maxWidth="lg" >
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} aria-label="simple table" >
-                        <TableHead>
-                        <TableRow>
-                            <TableCell>LEAVE ID</TableCell>
-                            <TableCell align="center">DESCRIPTION</TableCell>
-                            <TableCell align="center">STATUS</TableCell>
-                            <TableCell align="center">VIEW</TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {leave.map((leave) => (
-                            <TableRow
-                            key={leave.id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                            <TableCell component="th" scope="row">
-                                {leave.id}
-                            </TableCell>
-                            <TableCell align="center">{leave.description}</TableCell>
-                            <TableCell align="center">{leave.status=='Approved'?<span style={{color:'green'}}>Approved</span>:(leave.status=='Pending'?<span style={{color:'yellow'}}>Pending</span>:<span style={{color:'red'}}>Denied</span>)}</TableCell>
-                            <TableCell align="center">
-                            <Button variant="contained" color="primary">View</Button>
-                            </TableCell>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Divider variant="middle" />
+            <Grid item xs={12}>
+                <Grid container justifyContent="center" spacing={2}>
+                    <Grid item xs={4}>
+                        <Typography variant="h4" style={{  paddingBottom:'20px', paddingTop:'20px', paddingLeft:'200px' }}><b>LEAVES</b></Typography> 
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="leaves table" >
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>LEAVE ID</TableCell>
+                                <TableCell align="center">DESCRIPTION</TableCell>
+                                <TableCell align="center">STATUS</TableCell>
+                                <TableCell align="center">VIEW</TableCell>
                             </TableRow>
-                        ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                </Container>
-                </div>
-            </div>
-
-{/* Worker Complaints */}
-            <div style={{marginTop:"4vh",marginBottom:"4vh"}}>
-            <Container maxWidth="lg" >
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table" >
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Complaint Id</TableCell>
-                        <TableCell align="center">Type</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">View</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {workerComplaints.map((row) => (
-                        <TableRow
-                        key={row.id}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row">
-                            {row.id}
-                        </TableCell>
-                        <TableCell align="center">{row.type}</TableCell>
-                        <TableCell align="center">{row.status=='Addressed'?<span style={{color:'green'}}>Addressed</span>:<span style={{color:'red'}}>Pending</span>}</TableCell>
-                        <TableCell align="center">
-                        <Button variant="contained" color="primary">View</Button>
-                        </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            </Container>
-            </div>
+                            </TableHead>
+                            <TableBody>
+                            {leave.map((leave) => (
+                                <TableRow
+                                key={leave.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                <TableCell component="th" scope="row">
+                                    {leave.id}
+                                </TableCell>
+                                <TableCell align="center">{leave.description}</TableCell>
+                                <TableCell align="center">{leave.status=='Approved'?<span style={{color:'green'}}>Approved</span>:(leave.status=='Pending'?<span style={{color:'yellow'}}>Pending</span>:<span style={{color:'red'}}>Denied</span>)}</TableCell>
+                                <TableCell align="center">
+                                <Button variant="contained" color="primary">View</Button>
+                                </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </Grid>
+                    <Grid item xs={4}>
+                    <Typography variant="h4" style={{  paddingBottom:'20px', paddingTop:'20px', paddingLeft:'150px' }}><b>COMPLAINTS</b></Typography> 
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="complaint table" >
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Complaint Id</TableCell>
+                                <TableCell align="center">Type</TableCell>
+                                <TableCell align="center">Status</TableCell>
+                                <TableCell align="center">View</TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {workerComplaints.map((row) => (
+                                <TableRow
+                                key={row.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                                <TableCell align="center">{row.type}</TableCell>
+                                <TableCell align="center">{row.status=='Addressed'?<span style={{color:'green'}}>Addressed</span>:<span style={{color:'red'}}>Pending</span>}</TableCell>
+                                <TableCell align="center">
+                                <Button variant="contained" color="primary">View</Button>
+                                </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </Grid>
+                    <Grid item xs={4}>
+                    <Typography variant="h4" style={{  paddingBottom:'20px', paddingTop:'20px', paddingLeft:'200px' }}><b>HISTORY</b></Typography> 
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="complaint table" >
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Id</TableCell>
+                                <TableCell align="center">Date</TableCell>
+                                <TableCell align="center">Address</TableCell>
+                                <TableCell align="center">View</TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {workerHistory.map((row) => (
+                                <TableRow
+                                key={row.id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                                <TableCell align="center">{row.date}</TableCell>
+                                <TableCell align="center">{row.address}</TableCell>
+                                <TableCell align="center">
+                                <Button variant="contained" color="primary">View</Button>
+                                </TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
         </div>
     )
 }

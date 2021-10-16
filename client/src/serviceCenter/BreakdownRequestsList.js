@@ -17,20 +17,20 @@ import "./BreakdownRequestsList.css"
 
 const label = { inputProps: { 'aria-label': 'Select' } };
 
-function createData(box, name, address, contact, status, details) {
-    return {box, name, address, contact, status, details};
+function createData(box, date, name, address, contact, status, details) {
+    return {box, date, name, address, contact, status, details};
   }
 
 const rows = [
-    createData(<Checkbox {...label}/>, 'Siddhesh R Ramane', 'Kothrud', 9359123910, 'PENDING',
+    createData(<Checkbox {...label}/>, '01/01/21', 'Siddhesh R Ramane', 'Kothrud', 9359123910, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData(<Checkbox {...label}/>,  'Kartik S Rane', 'Kothrud', 9359123910, 'PENDING',
+    createData(<Checkbox {...label}/>, '01/01/21', 'Kartik S Rane', 'Kothrud', 9359123910, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData(<Checkbox {...label}/>,  'Amey S Marathe', 'Kothrud', 9359123910, 'ACCEPTED',
+    createData(<Checkbox {...label}/>, '01/01/21', 'Amey S Marathe', 'Kothrud', 9359123910, 'ACCEPTED',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData(<Checkbox {...label}/>,  'Neha M Patil', 'Kothrud', 9359123910, 'PENDING',
+    createData(<Checkbox {...label}/>, '01/01/21', 'Neha M Patil', 'Kothrud', 9359123910, 'PENDING',
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
-    createData(<Checkbox {...label}/>,  'Nutan D. Deshmukh', 'Kothrud', 9359123910, 'ACCEPTED', 
+    createData(<Checkbox {...label}/>,  '01/01/21','Nutan D. Deshmukh', 'Kothrud', 9359123910, 'ACCEPTED', 
         <Link style={{ textDecoration: 'none' }} to="/breakdown-detail"><Button variant="contained" color="primary">VIEW</Button></Link>),
 ];
 
@@ -48,12 +48,14 @@ function BreakdownRequestsList() {
                 <Checkbox {...label}/>          
                 <label>SELECT ALL</label>         
             </div> 
-            <TableContainer component={Paper} >
-                <Table sx={{ minWidth: 650 }} aria-label="Requests List">
+            <TableContainer component={Paper}
+             >
+                <Table sx={{ minWidth: 650 }} aria-label="Requests List" 
+                checkboxSelection>
                     <TableHead>
                         <TableRow>
                         <TableCell align="left"><b>SELECT</b></TableCell>
-                        {/* <TableCell align="center"><b>SR. NO.</b></TableCell> */}
+                        <TableCell align="center"><b>DATE</b></TableCell>
                         <TableCell align="left"><b>NAME</b></TableCell>
                         <TableCell align="left"><b>ADDRESS</b></TableCell>
                         <TableCell align="center"><b>CONTACT</b></TableCell>
@@ -70,7 +72,7 @@ function BreakdownRequestsList() {
                              <TableCell align="left">
                             {row.box}
                             </TableCell>
-                            {/* <TableCell align="center">{row.no}</TableCell> */}
+                            <TableCell align="center">{row.date}</TableCell>
                             <TableCell align="left">{row.name}</TableCell>
                             <TableCell align="left">{row.address}</TableCell>
                             <TableCell align="center">{row.contact}</TableCell>
@@ -80,6 +82,7 @@ function BreakdownRequestsList() {
                         ))}
                     </TableBody>
                 </Table>
+                
             </TableContainer>      
             <div align="center" className="update" style={{padding:"1rem"}}>
             <Button variant="contained" color="primary" style={{marginLeft:'20px'}}>ACCEPT SELECTED REQUESTS</Button>
