@@ -2,6 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import { useState } from "react";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import { ButtonGroup,Button } from "@material-ui/core";
 
 export default function TestDrive() {
 
@@ -37,6 +44,16 @@ export default function TestDrive() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-600 shadow-lg rounded-lg bg-blueGray-200 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="btn-wrapper text-center">
+                  {/* <ButtonGroup>
+                      {["At Home", "At Outlet"].map((text, index) => (
+                      <Button button key={text}>
+                        <Button>
+                          {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        </Button>
+                        <Button primary={text} />
+                      </Button>
+                    ))}
+                  </ButtonGroup> */}
                   <button
                     className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                     type="button"
@@ -54,6 +71,7 @@ export default function TestDrive() {
                 </div>
                 
               </div>
+              
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <center><div className="text-blueGray-400 mb-3">
                   <img src={require("../Assets/elescooter.jpg").default}/>

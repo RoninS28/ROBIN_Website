@@ -336,7 +336,7 @@ class MiniDrawer extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
 
-          <Typography paragraph>
+          {/* <Typography paragraph>
             Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
             ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
             elementum integer enim neque volutpat ac tincidunt. Ornare
@@ -351,7 +351,7 @@ class MiniDrawer extends React.Component {
             accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
             ultrices sagittis orci a.
           </Typography>
-          <Typography paragraph>foo</Typography>
+          <Typography paragraph>foo</Typography> */}
         </main>
       </div>
     );
