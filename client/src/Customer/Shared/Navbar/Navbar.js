@@ -96,6 +96,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
 import { yellow } from "@material-ui/core/colors";
+import HomeIcon from '@mui/icons-material/Home';
+import Home from "@mui/icons-material/Home";
 
 const drawerWidth = 220;
 
@@ -217,6 +219,13 @@ class MiniDrawer extends React.Component {
     const { classes, theme } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
+    const CustomerPagesList = [
+      {
+        text: 'Home',
+        icon: <Home />,
+        path: '/'
+      }
+    ]
     return (
 
       <div className={classes.root}>
