@@ -1,111 +1,3 @@
-// import { red } from "@material-ui/core/colors";
-// import Button from "@material-ui/core/Button";
-// import {
-//     makeStyles
-//   } from "@material-ui/core";
-
-//   const useStyles = makeStyles((theme) => ({
-//     navlinks: {
-//       marginLeft: theme.spacing(5),
-//       display: "flex",
-//     },
-//    logo: {
-//       flexGrow: "0",
-//       cursor: "pointer",
-//       color: "Orange",
-//     },
-//     t1: {
-//       textDecoration: "none",
-//       color: "white",
-//       fontSize: "20px",
-//       marginLeft: theme.spacing(10),
-//       "&:hover": {
-//         color: "orange",
-//         borderBottom: "1px solid white",
-//       },
-//     },
-//   }));
-
-// export default function TestDrive() {
-    
-//     const classes = useStyles();
-//       const atHome = () => {
-//         document.getElementById('t1').style.color="white";
-//         document.getElementById('t2').style.color="black";
-//         document.getElementById('t1').style.backgroundColor="green";
-//         document.getElementById('t2').style.backgroundColor="white";
-//       };
-//       const atOutlet = () => {
-//         document.getElementById('t2').style.color="white";
-//         document.getElementById('t1').style.color="balck";
-//         document.getElementById('t2').style.backgroundColor="green";
-//         document.getElementById('t1').style.backgroundColor="white";
-//       };
-//     return (
-//           <div>
-//               <div className="multibutton">
-//                 <Button className="t1"
-//                     size="small"
-//                     onClick={atHome}
-                    
-//                 >
-//                 At Home
-                
-//                 </Button>
-
-//                 <Button className="t2"
-//                     size="small"
-//                     onClick={atOutlet}
-                
-//                 >
-//                 At Outlet
-                
-//                 </Button>
-                
-//                 <form>
-//                 <div className="container mx-auto px-4 h-full">
-//                     <div className="flex content-center items-center justify-center h-full">
-//                     <div className="flex flex-nowrap">
-//                         <div className="w-full lg:w-6/12 px-4">
-//                             <div className="relative w-full mb-3">
-//                                 <label
-//                                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-//                                     htmlFor="grid-password"
-//                                 >
-//                                     Email address
-//                                 </label>
-//                                 <input
-//                                     type="email"
-//                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-//                                     //defaultValue={data.email}
-//                                     //readOnly
-//                                 />
-//                             </div>
-//                         </div>
-//                         <div className="w-full lg:w-6/12 px-4">
-//                             <div className="relative w-full mb-3">
-//                                 <label
-//                                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-//                                     htmlFor="grid-password"
-//                                 >
-//                                     Name
-//                                 </label>
-//                                 <input
-//                                     type="name"
-//                                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-//                                 />
-//                             </div>
-//                         </div>
-//                     </div>
-//                     </div>
-//                 </div>
-//                 </form>
-//             </div>
-//         </div>
-//     );
-//   }
-  
-
 import React from "react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
@@ -113,16 +5,16 @@ import { useState } from "react";
 
 export default function TestDrive() {
 
-  const Genderoptions = [
+  const Timeslotoptions = [
     { label: "6am-12pm", value: "1" },
     { label: "12pm-8pm", value: "2" },
     { label: "8pm-6am", value: "3" },
   ];
 
-  const [genderValue, setgenderValue] = useState('');
+  const [TimeslotValue, setTimeslotValue] = useState('');
 
-  const GenderComponent = () => <Select onChange={(e)=>{setgenderValue(e.value)}} options={Genderoptions} value={Genderoptions.filter(function(option) {
-    return option.value === genderValue;
+  const TimeslotComponent = () => <Select onChange={(e)=>{setTimeslotValue(e.value)}} options={Timeslotoptions} value={Timeslotoptions.filter(function(option) {
+    return option.value === TimeslotValue;
   })}/>;
 
   const Modeloptions = [
@@ -288,7 +180,7 @@ export default function TestDrive() {
                       
                     /> */}
                     <div className = "w-full self-center">
-                      <GenderComponent />
+                      <TimeslotComponent />
                     </div>
                   </div>
                   </div>
