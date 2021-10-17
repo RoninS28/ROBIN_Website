@@ -10,25 +10,25 @@
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 // const useStyles = makeStyles((theme) => ({
-  // navlinks: {
-  //   marginLeft: theme.spacing(5),
-  //   display: "flex",
-  // },
+// navlinks: {
+//   marginLeft: theme.spacing(5),
+//   display: "flex",
+// },
 //  logo: {
 //     flexGrow: "0",
 //     cursor: "pointer",
 //     color: "Orange",
 //   },
-  // link: {
-  //   textDecoration: "none",
-  //   color: "white",
-  //   fontSize: "20px",
-  //   marginLeft: theme.spacing(10),
-  //   "&:hover": {
-  //     color: "orange",
-  //     borderBottom: "1px solid white",
-  //   },
-  // },
+// link: {
+//   textDecoration: "none",
+//   color: "white",
+//   fontSize: "20px",
+//   marginLeft: theme.spacing(10),
+//   "&:hover": {
+//     color: "orange",
+//     borderBottom: "1px solid white",
+//   },
+// },
 // //   end: {
 // //       marginRight: "5px",
 // //       justify: "right",
@@ -65,7 +65,7 @@
 //             <Link to="/" className={classes.link}>
 //               BreakDown
 //             </Link>
-            
+
 //           </div>
 //       </Toolbar>
 //     </AppBar>
@@ -95,6 +95,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
+import { yellow } from "@material-ui/core/colors";
 
 const drawerWidth = 220;
 
@@ -103,7 +104,8 @@ const styles = theme => ({
     display: "flex"
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: 'dodgerBlue'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -165,6 +167,7 @@ const styles = theme => ({
     padding: "0 8px",
     ...theme.mixins.toolbar
   },
+  toolbar1: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3
@@ -178,9 +181,9 @@ const styles = theme => ({
     fontSize: "20px",
     marginLeft: theme.spacing(10),
     "&:hover": {
-      color: "orange",
+      color: yellow[600],
       borderBottom: "1px solid white shadow",
-      
+
     },
   },
   navlinks: {
@@ -215,9 +218,11 @@ class MiniDrawer extends React.Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
+
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
+          elevation={2}
           position="fixed"
           className={classes.appBar}
           fooJon={classNames(classes.appBar, {
@@ -264,7 +269,7 @@ class MiniDrawer extends React.Component {
                 <Link to="/" className={classes.link}>
                   BreakDown
                 </Link>
-                
+
               </div>
             </Typography>
             <div>
@@ -353,6 +358,9 @@ class MiniDrawer extends React.Component {
           </Typography>
           <Typography paragraph>foo</Typography> */}
         </main>
+        {/* <div className={classes.toolbar1}>
+
+        </div> */}
       </div>
     );
   }
