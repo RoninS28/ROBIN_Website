@@ -6,6 +6,8 @@ import './Background/StarryNight.css';
 import Products from "../Pages/Products";
 import TestDrive from "../Pages/TestDrive";
 import Layout from "./Layout/Layout"
+import Bookings from "../Pages/Bookings";
+import BookingsStage from "../Pages/BookingsStage";
 
 
 function Routing() {
@@ -21,6 +23,7 @@ function Routing() {
           <Route path='/' exact component={Home} ></Route>
           <Route path='/products' exact component={Products} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
+          <Route path='/bookings' exact component={BookingsStage} ></Route>
         </Switch>
       </Layout>
       {/* </div> */}

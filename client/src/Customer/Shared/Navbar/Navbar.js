@@ -98,6 +98,16 @@ import { Link } from "react-router-dom";
 import { yellow } from "@material-ui/core/colors";
 import HomeIcon from '@mui/icons-material/Home';
 import Home from "@mui/icons-material/Home";
+import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
+import SpeedIcon from '@mui/icons-material/Speed';
+import BuildIcon from '@mui/icons-material/Build';
+import StoreIcon from '@mui/icons-material/Store';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
+import SurroundSoundIcon from '@mui/icons-material/SurroundSound';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+
+
+
 
 const drawerWidth = 220;
 
@@ -222,9 +232,46 @@ class MiniDrawer extends React.Component {
     const CustomerPagesList = [
       {
         text: 'Home',
-        icon: <Home />,
+        icon: <HomeIcon />,
         path: '/'
-      }
+      },
+      {
+        text: 'Products',
+        icon: <TwoWheelerIcon />,
+        path: '/products'
+      },
+      {
+        text: 'Test Drive',
+        icon: <SpeedIcon />,
+        path: '/testdrive'
+      },
+      {
+        text: 'Bookings',
+        icon: <StoreIcon />,
+        path: '/'
+      },
+      {
+        text: 'Servicing',
+        icon: <BuildIcon />,
+        path: '/'
+      },
+      {
+        text: 'Breakdown',
+        icon: <AgricultureIcon />,
+        path: '/'
+      },
+      {
+        text: 'Updates',
+        icon: <SurroundSoundIcon />,
+        path: '/'
+      },
+      {
+        text: 'Notifications',
+        icon: <NotificationsIcon />,
+        path: '/'
+      },
+
+
     ]
     return (
 
@@ -269,7 +316,7 @@ class MiniDrawer extends React.Component {
                 <Link to="/testdrive" className={classes.link}>
                   Test Drive
                 </Link>
-                <Link to="/" className={classes.link}>
+                <Link to="/bookings" className={classes.link}>
                   Booking
                 </Link>
                 <Link to="/" className={classes.link}>
@@ -325,7 +372,16 @@ class MiniDrawer extends React.Component {
           open={this.state.open}
         >
           <div className={classes.toolbar} />
+
           <List>
+            {CustomerPagesList.map((item) => (
+              <ListItem button key={item.text}>
+                <ListItemIcon >{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            ))}
+          </List>
+          {/* <List>
             {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
@@ -345,7 +401,7 @@ class MiniDrawer extends React.Component {
                 <ListItemText primary={text} />
               </ListItem>
             ))}
-          </List>
+          </List> */}
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
