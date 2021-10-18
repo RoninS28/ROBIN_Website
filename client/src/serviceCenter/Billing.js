@@ -41,7 +41,7 @@ function subtotal(items) {
 }
 
 const rowService = [
-  createRowService('08/08/2021', 'Pranav Shinde', 'Oil Change', 500.00),
+  createRowService('01/01/21', 'Pranav Shinde', 'Oil Change', 500.00),
   createRowService('', '', 'Wheel alignment', 500.00),
   createRowService('', '', 'Wash', 200.00),
 ];

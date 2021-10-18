@@ -13,6 +13,7 @@ import placeholder from '../images/placeholder.png';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import React from "react";
+import { makeStyles } from "@material-ui/core";
 
 function createData(property, data) {
     return { property, data};
@@ -37,29 +38,34 @@ function SMBreakdownDetails() {
     
     return(
         <div align="center" style={{padding:"1rem"}}>
-            <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN DETAILS</b></Typography>  
-            <TableContainer component={Card } style={{ height:'auto', width: "800px"}}>
-                <Table aria-label="Requests Details">
+            <Typography variant="h4" style={{ paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN DETAILS</b></Typography>
+            <Card>  
+            <TableContainer>
+                <Table aria-label="Requests Details" >
                   <TableBody>
                         {rows.map((row) => (
                         <TableRow
                             key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            
                         >
-                           <TableCell component="th" scope="row" align="center">
-                            {row.property}
+                           <TableCell component="th" scope="row" align="left" ><b>
+                            {row.property}</b>
                             </TableCell>
-                            <TableCell align="center">{row.data}</TableCell>
+                            <TableCell align="center" >{row.data}</TableCell>
                                         </TableRow>
                                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>                    
-            <div className="buttons" align="center">
+            </TableContainer>         
+            </Card>           
+            <div style={{paddingTop:'20px'}}>
+                  <Link style={{ textDecoration: 'none' }} to="/Serviceman/breakdown-status">
                     <Button 
                         variant="contained" 
                         color="primary" 
-                        style={{marginRight:'100px'}}
+                        style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px'}}
+                        // style={{marginRight:'100px'}}
 
     //Function: Disable button on click 
     //Problem: Doesn't work when going back to the same page and when refreshed
@@ -68,12 +74,13 @@ function SMBreakdownDetails() {
                         // disabled={disable} 
                         // onClick={() => setDisable(true)}
                     >
-                        ACCEPT
+                      <Typography variant="h6" ><b> OK</b></Typography>
                     </Button>
+                    </Link>
 
-                <Link style={{ textDecoration: 'none' }} to="">
+                {/* <Link style={{ textDecoration: 'none' }} to="">
                     <Button variant="contained" style={{marginLeft:'100px'}} >CANCEL</Button>
-                </Link>
+                </Link> */}
             </div>
         </div>
     )

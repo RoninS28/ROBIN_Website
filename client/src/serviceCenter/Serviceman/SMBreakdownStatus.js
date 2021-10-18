@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@material-ui/core/Button'
-import { Typography } from "@material-ui/core";
+import { Card, Typography } from "@material-ui/core";
 
 import * as React from 'react';
 
@@ -35,8 +35,9 @@ function SMBreakdownStatus() {
   };
     return(
         <div align="center" style={{padding:"1rem"}}>
-            <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>STATUS DETAILS</b></Typography>  
-          <TableContainer component={Paper} style={{ width: 800 }}>
+            <Typography variant="h4" style={{ paddingBottom:'20px', paddingTop:'20px'}}><b>STATUS DETAILS</b></Typography>  
+            <Card>
+          <TableContainer >
           <Table  aria-label="status table">
           <TableBody>
           {rows.map((row) => (
@@ -44,10 +45,10 @@ function SMBreakdownStatus() {
              key={row.name}
              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
            >
-             <TableCell component="th" scope="row" align='center'>
-               {row.property}
+             <TableCell component="th" scope="row" align='left'><b>
+               {row.property} </b>
              </TableCell>
-             <TableCell align="center">{row.data}</TableCell>
+             <TableCell align="center" >{row.data}</TableCell>
              
            </TableRow>
          ))}
@@ -55,22 +56,26 @@ function SMBreakdownStatus() {
        </TableBody>
      </Table>
    </TableContainer>
-   <div align="center" style={{padding:"1rem"}}>
-      <label value="Update"><b>UPDATE STATUS:&nbsp; </b></label>
+   </Card>
+   <div align="center" style={{paddingTop:"1rem"}} >
+   <label value="Update" ><b>UPDATE STATUS:&nbsp; </b></label>
           <Select
-                style={{ width: "10%" }}
+                style={{ width: "50%" }}
                 value={status}
                 onChange={handleChange}
                 name="status"
                 displayEmpty
-                
+
               >
-                <MenuItem value="Pending">Pending</MenuItem>
-                <MenuItem value="In Progress">In Progress</MenuItem>
+                <MenuItem value="Pending"  >Pending</MenuItem>
+                <MenuItem value="In Progress" >In Progress</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
             </Select>
-            <Button variant="contained" color="primary" style={{marginLeft:'20px'}}>UPDATE</Button>
-
+            <Button variant="contained" color="primary" 
+                        style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px', marginTop:'10px'}}
+                        >
+                <Typography variant="h6"><b> UPDATE</b></Typography>
+              </Button>
             </div>
         </div>    
     )

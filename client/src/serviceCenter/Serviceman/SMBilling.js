@@ -11,6 +11,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button'
 
 //Details table
 function createData(property, data) {
@@ -18,6 +19,7 @@ function createData(property, data) {
     }
 
   const rows = [
+    createData('DATE', '01/01/21'),
     createData('ID','C2K5464'),
     createData('NAME', 'Siddhesh R. Ramane'),
     createData('MODEL', 'CITY - 1 ELECTRIC SCOOTER'),
@@ -58,8 +60,9 @@ function Billing() {
             >
                 <Grid container item xs={12}
                     justifyContent="right"
+                    marginBottom='20px'
                 >
-                   <Grid item>
+                   <Grid item >
                         <IconButton>
                             <SaveAltIcon></SaveAltIcon>
                         </IconButton>
@@ -74,7 +77,7 @@ function Billing() {
                 justifyContent='center'
                 spacing='1rem'
                 alignItems="center"          
-                xs={10}
+                
                 >
                     <Grid item>
                             <Typography variant="h4" ><b>SALES INVOICE</b></Typography>  
@@ -103,7 +106,7 @@ function Billing() {
                     <Grid item xs={12}>
                         <Card elevation={3} >
                         <TableContainer>
-                            <Table sx={{ minWidth: 700 }} aria-label="spanning table">
+                            <Table aria-label="spanning table">
                                 <TableHead>
                                 <TableRow>
                                     <TableCell align="center" colSpan={3}><b>
@@ -147,6 +150,13 @@ function Billing() {
                         </TableContainer>            
                         </Card>
                     </Grid>
+                </Grid>
+                <Grid item xs={12} align="center">
+                <Button variant="contained" color="primary" 
+                        style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px', marginTop:'10px'}}
+                        >
+                <Typography variant="h6"><b>OK</b></Typography>
+              </Button>
                 </Grid>
             </Grid>
         </div>

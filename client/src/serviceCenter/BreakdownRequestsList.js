@@ -43,18 +43,14 @@ function BreakdownRequestsList() {
     };
     return (
         <div align="center" style={{padding:"1rem"}}>
-            <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN REQUESTS</b></Typography> 
-            <div className="select"  align="left">
-                <Checkbox {...label}/>          
-                <label>SELECT ALL</label>         
-            </div> 
+             <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>BREAKDOWN REQUESTS</b></Typography> 
             <TableContainer component={Paper}
              >
                 <Table sx={{ minWidth: 650 }} aria-label="Requests List" 
                 checkboxSelection>
                     <TableHead>
                         <TableRow>
-                        <TableCell align="left"><b>SELECT</b></TableCell>
+                        <TableCell align="left"><b><Checkbox {...label}/></b></TableCell>
                         <TableCell align="center"><b>DATE</b></TableCell>
                         <TableCell align="left"><b>NAME</b></TableCell>
                         <TableCell align="left"><b>ADDRESS</b></TableCell>

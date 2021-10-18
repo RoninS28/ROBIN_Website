@@ -44,7 +44,11 @@ import ServicemanComplaint from "../../ServicemanComplaint";
 import AppBreadCrumb from "../../AppBreadCrumb";
 import SMBreakdownStatus from "../../Serviceman/SMBreakdownStatus";
 import SMBreakdownDetails from "../../Serviceman/SMBreakdownDetails";
-
+import SMBilling from "../../Serviceman/SMBilling";
+import SMServices from "../../Serviceman/SMServices";
+import SMHistory from "../../Serviceman/SMHistory";
+import SMLeave from "../../Serviceman/SMLeave";
+import SMComplaint from "../../Serviceman/SMComplaint";
 
 const drawerWidth = 220;
 
@@ -230,7 +234,7 @@ class Navbar extends React.Component {
         >
           <div className={classes.toolbar} />
           <List>
-          <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
+          {/* <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
               <ListItem button>
                 <ListItemIcon>
                   <InboxIcon />
@@ -381,7 +385,7 @@ class Navbar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="S Complaint Details" />
                 </ListItem>
-              </Link>  
+              </Link>   */}
 
 
               <Link to="/Serviceman/breakdown-details" style={{ textDecoration: 'none' }}>
@@ -402,12 +406,47 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>  
           
+              <Link to="/Serviceman/services" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Services" />
+                </ListItem>
+              </Link> 
+
               <Link to="/Serviceman/billing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary="SM Billing" />
+                </ListItem>
+              </Link> 
+
+              <Link to="/Serviceman/history" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM History" />
+                </ListItem>
+              </Link> 
+
+              <Link to="/Serviceman/leave" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Leave" />
+                </ListItem>
+              </Link> 
+              <Link to="/Serviceman/complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="SM Complaint" />
                 </ListItem>
               </Link> 
 
@@ -479,10 +518,15 @@ class Navbar extends React.Component {
               <Route path='/serviceman-complaint-list' exact component={ServicemanComplaintList}></Route>
               <Route path='/serviceman-complaint' exact component={ServicemanComplaint}></Route>
 
+//Serviceman Module
               <Route path='/Serviceman/breakdown-details' exact component={SMBreakdownDetails}></Route>
               <Route path='/Serviceman/breakdown-status' exact component={SMBreakdownStatus}></Route>
-              <Route path='/Serviceman/billing' exact component={Billing}></Route>
-            
+              <Route path='/Serviceman/billing' exact component={SMBilling}></Route>
+              <Route path='/Serviceman/services' exact component={SMServices}></Route>
+              <Route path='/Serviceman/history' exact component={SMHistory}></Route>
+              <Route path='/Serviceman/leave' exact component={SMLeave}></Route>
+              <Route path='/Serviceman/complaints' exact component={SMComplaint}></Route>
+
               <Route path='/demo' exact component={Demo}></Route>
             </Switch>
          </div>

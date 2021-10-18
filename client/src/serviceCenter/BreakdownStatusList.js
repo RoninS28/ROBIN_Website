@@ -47,15 +47,11 @@ function BreakdownStatusList() {
     return (
         <div align="center" style={{padding:"1rem"}}>
         <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px', align:'center'}}><b>REQUEST STATUS</b></Typography>  
-            <div className="select"  align="left">
-                <Checkbox {...label}/>          
-                <label>SELECT ALL</label>         
-            </div>
             <TableContainer component={Paper} >
                 <Table sx={{ minWidth: 650 }} aria-label="Requests List">
                     <TableHead>
                         <TableRow>
-                        <TableCell align="left">SELECT</TableCell>
+                        <TableCell align="left"><Checkbox {...label}/></TableCell>
                         <TableCell align="center">DATE</TableCell>
                         <TableCell align="center">ID. NO.</TableCell>
                         <TableCell align="left">NAME</TableCell>
