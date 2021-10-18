@@ -3,35 +3,35 @@ const orders=[
     {
         id:1,
         model:"Hero Splender Plus",
-        Customer:"Akshay Jain",
+        num:20,
         Stage:"Brazing",
         img:{scooter1}
     },
     {
         id:2,
         model:"Hero Splender Plus",
-        Customer:"Akshay Jain",
+        num:20,
         Stage:"Brazing",
         img:{scooter1}
     },
     {
         id:3,
         model:"Hero Splender Plus",
-        Customer:"Akshay Jain",
+        num:20,
         Stage:"Brazing",
         img:{scooter1}
     },
     {
         id:4,
         model:"Hero Splender Plus",
-        Customer:"Akshay Jain",
+        num:20,
         Stage:"Brazing",
         img:{scooter1}
     },
     {
         id:5,
         model:"Hero Splender Plus",
-        Customer:"Akshay Jain",
+        num:20,
         Stage:"Brazing",
         img:{scooter1}
     }

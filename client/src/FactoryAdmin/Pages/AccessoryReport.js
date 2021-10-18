@@ -13,7 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import PrintIcon from '@material-ui/icons/Print';
 import DownloadIcon from '@material-ui/icons/FontDownload';
-import orders from '../Data/Order';
+import testDrive from '../Data/TestDrive';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Fab from "@material-ui/core/Fab";
@@ -21,7 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import scooter1 from '../../images/scooter1.jpeg';
 import { makeStyles } from '@material-ui/styles';
 import { withStyles } from "@material-ui/core/styles";
-import Checkbox from '@mui/material/Checkbox';
+
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -37,7 +37,13 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import { useHistory } from 'react-router';
+import MenuItem from "@material-ui/core/MenuItem";
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import report from '../Data/AccessoryReport';
+
 
 
 const styles = makeStyles((theme) => ({
@@ -55,6 +61,7 @@ const styles = makeStyles((theme) => ({
     }
 
 }));
+
 
 function TablePaginationActions(props) {
     
@@ -120,29 +127,52 @@ TablePaginationActions.propTypes = {
   };
 
 
-
-function createData(id, model,num, Stage, img) {
-    return { id, model, num, Stage, img };
+function createData(id, date,stat) {
+    return { id,date,stat };
 }
 
 function getAllModels() {
     const allModels = [];
-    orders.map(model => {
+    report.map(model => {
         console.log(model);
-        allModels.push(createData(model.id, model.model, model.num, model.Stage, model.img))
+        allModels.push(createData(model.id, model.date, model.stat))
     })
     return allModels
 }
 
 const rows = getAllModels();
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+//Dropdown
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+const names = [
+  'Request',
+  'Pending',
+  'Completed'
+];
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 
 
-function OrderList(props) {
 
 
-    const history=useHistory();
+function AccessoryReport(props) {
     const { classes, theme } = props;
     const xs=useMediaQuery(theme.breakpoints.down('xs'));
     const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
@@ -168,22 +198,35 @@ function OrderList(props) {
     };
 
 
+    const theme2 = useTheme();
+    const [personName, setPersonName] = React.useState([]);
+
+    const handleChange = (event) => {
+        const {
+        target: { value },
+        } = event;
+        setPersonName(
+        // On autofill we get a the stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+        );
+    };
+
+
+
     return (
-        <div>
+        <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
 
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
+
                 <TableContainer component={Paper}>
                     <Table  aria-label="custom pagination table">
                     <TableHead>
                         <TableRow>
-                         <TableCell  align="center" className={classes.rowHeader}><Checkbox {...label} /></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>BATCH ID</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>IMAGE</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>MODEL</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>STOCK</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>STAGE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>ID</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>DATE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>STATUS</h3></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>VIEW</h3></TableCell>
                         </TableRow>
                     </TableHead>
@@ -196,26 +239,18 @@ function OrderList(props) {
                             // individual row
                             <TableRow>
                                 <TableCell  align="center">
-                                <Checkbox {...label} />
-                                    </TableCell>
-                                <TableCell  align="center">
                                     {row.id}
                                     </TableCell>
                                 <TableCell  align="center">
-                                    <img src={scooter1} style={{ height: "120px", width: "100px" }}/>
+                                    {row.date}
                                 </TableCell>
                                 <TableCell  align="center">
-                                    {row.model}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.num}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.Stage}
+                                   <span> {row.stat=='Completed'?<span style={{color:'green'}}>{row.stat}</span>:<span style={{color:'red'}}>{row.stat} </span>} </span>
                                 </TableCell>
                                 <TableCell align="center">
-                                <Button variant="contained" color="primary" onClick={()=>history.push('/orderDetail')} >View</Button>
+                                <Button variant="contained" color="primary" >View</Button>
                                 </TableCell>
+                              
                             </TableRow>
 
                         ))}
@@ -249,8 +284,10 @@ function OrderList(props) {
                     </Table>
     </TableContainer>
 </Container>
+            
+            <div><h2><span style={{color:"blue"}}>Total :</span> 10</h2></div>
     </div>
     )
 }
 
-export default withStyles(styles, { withTheme: true })(OrderList);
+export default withStyles(styles, { withTheme: true })(AccessoryReport);

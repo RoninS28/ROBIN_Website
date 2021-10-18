@@ -90,7 +90,7 @@ function OrderDetail(props){
             <div className="modelDetail">
                         <div className="modelInfo" >
                             <div>
-                                <h1 style={{color:"red"}}>City Electric Scooter</h1>
+                                <h1 style={{color:"red"}}>BATCH ID:1</h1>
                             </div>
 
                             <div style={{marginLeft:"0vw"}}>
@@ -104,14 +104,14 @@ function OrderDetail(props){
                     
 
                     <div className="description">
-                        <div><h2><span style={{color:"blue"}}>Name</span>: Sandesh Mahajan</h2></div>
-                        <div><h2><span style={{color:"blue"}}>Contact</span>: +91 9999999999</h2></div>
+                        <div><h2><span style={{color:"blue"}}>Current Stage</span>: Machining</h2></div>
+                        <div><h2><span style={{color:"blue"}}>Stock</span>: 20</h2></div>
                         <div><h2><span style={{color:"blue"}}>Model</span>: City Electric Scooter</h2></div>
                         <div><h2><span style={{color:"blue"}}>Variant</span>: Top-End Model</h2></div>
                         <div><h2><span style={{color:"blue"}}>Color</span>: Red</h2></div>
-                        <div><h2><span style={{color:"blue"}}>Total Price</span>: 20,000/-</h2></div>
-                        <div><Button variant="contained" color="primary"><CallIcon/> Customer</Button></div>
-                        <div><Button variant="contained" color="secondary" style={{marginTop:"2vh"}}><MailOutlineIcon/> Customer</Button></div>
+                        <div><h2><span style={{color:"blue"}}>Price of each EV</span>: 20,000/-</h2></div>
+                        <div><Button variant="contained" color="primary"><CallIcon/> Outlet</Button></div>
+                        <div><Button variant="contained" color="secondary" style={{marginTop:"2vh"}}><MailOutlineIcon/> Outlet</Button></div>
                     </div>
 
             </div>
@@ -173,7 +173,7 @@ function OrderDetail(props){
                     </div>
                     </Box>
 
-                    <div><Button variant="contained" color="secondary">Update Customer</Button></div>
+                    <div><Button variant="contained" color="secondary">Update Status</Button></div>
             </div>
 
             
@@ -274,9 +274,9 @@ function OrderDetail(props){
             </div>
 
             <div className="workerInfo">
-                    <div><h2><span style={{color:"blue"}}>Name</span>: Sandesh Mahajan</h2></div>
+                    <div><h2><span style={{color:"blue"}}>Batch Supervisior</span>: Sandesh Mahajan</h2></div>
                     <div><h2><span style={{color:"blue"}}>Contact</span>: +91 9999999999</h2></div>
-                    <div><Button variant="contained" color="primary"><CallIcon/> Worker</Button><Button variant="contained" color="secondary" style={{marginLeft:"2vh"}}><MailOutlineIcon/> Worker</Button></div>
+                    <div><Button variant="contained" color="primary"><CallIcon/> Supervisior</Button><Button variant="contained" color="secondary" style={{marginLeft:"2vh"}}><MailOutlineIcon/> Supervisior</Button></div>
                     
             </div>
             

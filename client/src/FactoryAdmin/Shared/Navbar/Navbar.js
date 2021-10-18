@@ -19,6 +19,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { Link } from "react-router-dom";
+import AccessoryReport from "../../Pages/AccessoryReport";
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -38,6 +39,7 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TestDriveDetail from "../../Pages/TestDriveDetail";
+import AccessoryReportDetail from "../../Pages/AccessoryReportDetail";
 
 
 
@@ -371,6 +373,22 @@ const Navbar = (props) => {
                   <ListItemText primary="Accessory Page" />
                 </ListItem>
               </Link>
+              <Link to="/accessoryReport" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Accessory Report" />
+                </ListItem>
+              </Link>
+              <Link to="/accessoryReportDetail" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Accessory Report Detail" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -408,6 +426,8 @@ const Navbar = (props) => {
               <Route path="/customerComplaint" exact component={CustomerComplaint}/>
               <Route path="/buyAccessories" exact component={BuyAccessories}/>
               <Route path='/accessoryPage' exact component={AccessoryPage}/>
+              <Route path='/accessoryReport' exact component={AccessoryReport}/>
+              <Route path='/accessoryReportDetail' exact component={AccessoryReportDetail} />
             </Switch>
          </div>
 
