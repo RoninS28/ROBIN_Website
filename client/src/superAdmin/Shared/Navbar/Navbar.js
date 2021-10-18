@@ -34,6 +34,7 @@ import AccessoryOrderList from "../../Pages/AccessoryOrderList";
 import CustomerComplaintList from "../../Pages/CustomerComplaintList";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
+import Dashboard from "../../Pages/Dashboard";
 
 
 const drawerWidth = 220;
@@ -328,6 +329,15 @@ const Navbar = (props) => {
                   <ListItemText primary="Complaint" />
                 </ListItem>
               </Link>
+
+              <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
+              </Link>
           </List>
           <Divider />
           <List>
@@ -359,6 +369,7 @@ const Navbar = (props) => {
               <Route path='/accessoryList' exact component={AccessoryOrderList}></Route>
               <Route path='/customerComplaints' exact component={CustomerComplaintList}></Route>
               <Route path='/complaint' exact component={CustomerComplaint}></Route>
+              <Route path='/dashboard' exact component={Dashboard}></Route>
             </Switch>
         </div>
         </main>
