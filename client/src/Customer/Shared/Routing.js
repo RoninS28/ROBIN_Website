@@ -23,7 +23,7 @@ function Routing() {
           <Route path='/' exact component={Home} ></Route>
           <Route path='/products' exact component={Products} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
-          <Route path='/bookings' exact component={BookingsStage} ></Route>
+          <Route path='/bookings' exact component={Bookings} ></Route>
         </Switch>
       </Layout>
       {/* </div> */}

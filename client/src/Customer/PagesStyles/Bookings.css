@@ -1,0 +1,27 @@
+h1{
+    justify-content: flex-end;
+}
+div.statusRow{
+    display: flex;
+    justify-content: center;
+}
+div.image{
+    display: flex;
+    justify-content: center;
+}
+div.bookingrowInfo{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+div.statusColumn{
+    /* color: greenyellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    
+}
+
