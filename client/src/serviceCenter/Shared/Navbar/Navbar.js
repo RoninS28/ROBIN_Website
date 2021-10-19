@@ -234,6 +234,14 @@ class Navbar extends React.Component {
         >
           <div className={classes.toolbar} />
           <List>
+          <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Serviceman Details" />
+                </ListItem>
+              </Link>
           {/* <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
               <ListItem button>
                 <ListItemIcon>
@@ -261,14 +269,7 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Serviceman Details" />
-                </ListItem>
-              </Link>
+              
 
               <Link to="/servicing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -518,7 +519,7 @@ class Navbar extends React.Component {
               <Route path='/serviceman-complaint-list' exact component={ServicemanComplaintList}></Route>
               <Route path='/serviceman-complaint' exact component={ServicemanComplaint}></Route>
 
-//Serviceman Module
+{/* Serviceman Module */}
               <Route path='/Serviceman/breakdown-details' exact component={SMBreakdownDetails}></Route>
               <Route path='/Serviceman/breakdown-status' exact component={SMBreakdownStatus}></Route>
               <Route path='/Serviceman/billing' exact component={SMBilling}></Route>

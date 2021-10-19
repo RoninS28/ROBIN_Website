@@ -13,6 +13,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { Link } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 
 //Details table
 function createData(property, data) {
@@ -147,7 +148,10 @@ function SMServices() {
                 </Grid>
             </Grid>
             <Grid item xs={12} container justifyContent="center">
-                <Button variant='contained' color='primary' onClick={handleClickOpen}>CONFIRM</Button>
+                <Button variant='contained' color='primary' onClick={handleClickOpen} 
+                    style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px', marginTop:'10px',}}
+                >
+                <Typography variant="h6"><b>CONFIRM</b></Typography></Button>
                 <Dialog
                     open={open}
                     TransitionComponent={Transition}

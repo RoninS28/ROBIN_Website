@@ -58,9 +58,9 @@ function SMBreakdownStatus() {
    </TableContainer>
    </Card>
    <div align="center" style={{paddingTop:"1rem"}} >
-   <label value="Update" ><b>UPDATE STATUS:&nbsp; </b></label>
+      <label value="Update" ><b>UPDATE STATUS:&nbsp; </b></label>
           <Select
-                style={{ width: "50%" }}
+                style={{ width: "30%" }}
                 value={status}
                 onChange={handleChange}
                 name="status"
@@ -71,13 +71,13 @@ function SMBreakdownStatus() {
                 <MenuItem value="In Progress" >In Progress</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
             </Select>
-            <Button variant="contained" color="primary" 
-                        style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px', marginTop:'10px'}}
-                        >
-                <Typography variant="h6"><b> UPDATE</b></Typography>
-              </Button>
-            </div>
-        </div>    
+    </div>
+    <Button variant="contained" color="primary" 
+                style={{maxWidth: '150px', maxHeight: '50px', minWidth: '150px', minHeight: '50px', marginTop:'10px',}}
+                >
+        <Typography variant="h6"><b> UPDATE</b></Typography>
+      </Button>
+    </div>    
     )
 }
 
