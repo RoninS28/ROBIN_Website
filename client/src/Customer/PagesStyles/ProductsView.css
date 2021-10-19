@@ -1,0 +1,47 @@
+div.heading {
+    text-align: center;
+    font-size: 45px;
+    margin-top: 30px;
+    font-weight: '600';
+    font-family: 'Secular One', sans-serif;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.21), 0px 0px 5px greenyellow;
+    
+}
+
+div.image{
+    display: flex;
+    justify-content: center;
+    /* margin: 25px; */
+}
+
+.colors{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+@media (max-width: 600px){
+    .imageGrid{
+        order: 1;
+    
+    }
+    
+    .colorAvatars1{
+        order:2;
+        flex-direction: row;
+        
+    }
+    
+    .colorAvatars2{
+        order:3;
+        flex-direction: row;
+    }
+    .colors {
+        flex-direction: row;
+
+    }
+    
+}
