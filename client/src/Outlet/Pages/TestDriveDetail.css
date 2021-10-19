@@ -1,0 +1,32 @@
+.modelDetail{
+    display: flex;
+    justify-content: space-evenly;
+    
+
+}
+
+.modelImage{
+    height: 320px;
+    width:320px;
+}
+
+/* .description{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+} */
+
+.modelInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modelSteps{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

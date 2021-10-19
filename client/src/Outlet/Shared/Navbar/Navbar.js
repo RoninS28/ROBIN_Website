@@ -42,6 +42,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 import CustomerList from "../../Pages/CustomerList";
 import CustomerDetail from "../../Pages/CustomerDetail";
+import TestDrive from "../../Pages/TestDrive";
+import TestDriveDetail from "../../Pages/TestDriveDetail";
 
 
 
@@ -286,6 +288,22 @@ const Navbar = (props) => {
                   <ListItemText primary="Customer Detail" />
                 </ListItem>
               </Link>
+              <Link to='/testDrive' style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Test Drive" />
+                </ListItem>
+              </Link>
+              <Link to='/testDriveDetail' style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Test Drive Detail" />
+                </ListItem>
+              </Link>
 
               
 
@@ -324,6 +342,8 @@ const Navbar = (props) => {
               {/* <Route path="/" exact component={OrderList}/> */}
               <Route path='/customerList' exact component={CustomerList} ></Route>
               <Route path='/customerDetail' exact component={CustomerDetail}></Route>
+              <Route path='/testDrive' exact component={TestDrive}></Route>
+              <Route path='/testDriveDetail' exact component={TestDriveDetail}></Route>
               
             </Switch>
          </div>

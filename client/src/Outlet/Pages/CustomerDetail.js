@@ -26,31 +26,17 @@ import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core//TablePagination";
-
-import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
-import MenuItem from "@material-ui/core/MenuItem";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
-
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+import Grid from "@mui/material/Grid";
 
 const styles = (theme) => ({
   mainContainer: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    
   },
   custInfo: {
-    height: "60vh",
-    width: "30vw",
+    maxHeight: "60vh",
+    minwidth: "30vw",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -72,76 +58,13 @@ const styles = (theme) => ({
     display: "grid",
     gridTemplateColumns: "1fr 2fr",
   },
+  rootContainer: {
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "column",
+  },
 });
-
-function TablePaginationActions(props) {
-  const theme = useTheme();
-  const { count, page, rowsPerPage, onPageChange } = props;
-
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0);
-  };
-
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1);
-  };
-
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1);
-  };
-
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === "rtl" ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  );
-}
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-};
 
 const rows1 = [
   {
@@ -149,17 +72,61 @@ const rows1 = [
     model: "Hero Splender Plus",
     num: 20,
     Stage: "Brazing",
-    img:  scooter1 ,
+    img: scooter1,
   },
   {
     id: 2,
     model: "Hero Splender Plus",
     num: 20,
     Stage: "Brazing",
-    img:  scooter1 ,
+    img: scooter1,
   },
 ];
 
+const complaints = [
+  {
+    id: "1",
+    type: "Damage EV",
+    date: "04-08-2021",
+    status: "Addressed",
+  },
+  {
+    id: "2",
+    type: "Damage EV",
+    date: "04-08-2021",
+    status: "Addressed",
+  },
+  
+];
+
+const services = [
+  {
+    id: 1,
+    date: "02-07-2021",
+    vehicle: "4444-2222-9999",
+    cost: 500,
+  },
+  {
+    id: 2,
+    date: "02-07-2021",
+    vehicle: "4444-2222-9999",
+    cost: 500,
+  },
+  {
+    id: 3,
+    date: "02-07-2021",
+    vehicle: "4444-2222-9999",
+    cost: 500,
+  },
+  {
+    id: 4,
+    date: "02-07-2021",
+    vehicle: "4444-2222-9999",
+    cost: 500,
+  },
+];
+
+//orders
 function createData(id, model, Stage, img) {
   return { id, model, Stage, img };
 }
@@ -175,6 +142,41 @@ function getAllModels() {
 
 const rows = getAllModels();
 
+//complaints
+
+function createData2(id, type, status, date) {
+  return { id, type, date, status };
+}
+
+function getAllModels2() {
+  const allModels = [];
+  complaints.map((model) => {
+    console.log(model);
+    allModels.push(createData2(model.id, model.type, model.status, model.date));
+  });
+  return allModels;
+}
+
+const rows2 = getAllModels2();
+
+// services
+function createData3(id, date, vehicle, cost) {
+  return { id, date, vehicle, cost };
+}
+
+function getAllModels3() {
+  const allModels = [];
+  services.map((model) => {
+    console.log(model);
+    allModels.push(
+      createData3(model.id, model.date, model.vehicle, model.cost)
+    );
+  });
+  return allModels;
+}
+
+const rows3 = getAllModels3();
+
 function CustomerDetail(props) {
   const { classes, theme } = props;
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
@@ -189,170 +191,181 @@ function CustomerDetail(props) {
   );
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(3);
-
-  // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const theme2 = useTheme();
-  const [personName, setPersonName] = React.useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a the stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-
   return (
-    <div>
-      <div className={classes.mainContainer}>
-        <Card className={classes.custInfo}>
-          <div>
-            <AccountCircleIcon />
-          </div>
-          <div className={classes.custDetail}>
+    <div style={{paddingLeft:"2vw",paddingRight:"2vw"}}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6} lg={6}>
+          Detail's
+          <Card className={classes.custInfo}>
+            <div style={{ marginTop: "2vh" }}>
+              <AccountCircleIcon />
+            </div>
+            <div className={classes.custDetail}>
+              <div>
+                <h3>
+                  {" "}
+                  <span style={{ color: "blue" }}>Name:</span>{" "}
+                </h3>
+                <h3>
+                  {" "}
+                  <span style={{ color: "blue" }}>Phone:</span>{" "}
+                </h3>
+                <h3>
+                  {" "}
+                  <span style={{ color: "blue" }}>Email:</span>{" "}
+                </h3>
+                <h3>
+                  {" "}
+                  <span style={{ color: "blue" }}>Address:</span>{" "}
+                </h3>
+              </div>
+              <div>
+                <h3> Sandesh Mahajan</h3>
+                <h3> +91 9999999999 </h3>
+                <h3> sandeshmahajan@gmail.com </h3>
+                <h3> 12,Gloria Villa Shanti Nagar Pune </h3>
+              </div>
+            </div>
+
             <div>
-              <h3>
-                {" "}
-                <span style={{ color: "blue" }}>Name:</span>{" "}
-              </h3>
-              <h3>
-                {" "}
-                <span style={{ color: "blue" }}>Phone:</span>{" "}
-              </h3>
-              <h3>
-                {" "}
-                <span style={{ color: "blue" }}>Email:</span>{" "}
-              </h3>
-              <h3>
-                {" "}
-                <span style={{ color: "blue" }}>Address:</span>{" "}
-              </h3>
+              <Button
+                style={{ width: "7vw" }}
+                variant="contained"
+                color="secondary"
+              >
+                Call
+              </Button>
             </div>
             <div>
-              <h3> Sandesh Mahajan</h3>
-              <h3> +91 9999999999 </h3>
-              <h3> sandeshmahajan@gmail.com </h3>
-              <h3> 12,Gloria Villa Shanti Nagar Pune </h3>
+              <Button
+                style={{ marginTop: "2vh", marginBottom: "2vh", width: "7vw" }}
+                variant="contained"
+                color="primary"
+              >
+                Message
+              </Button>
             </div>
-          </div>
+          </Card>
+        </Grid>
 
-          <div>
-            <Button
-              style={{ width: "7vw" }}
-              variant="contained"
-              color="secondary"
-            >
-              Call
-            </Button>
-          </div>
-          <div>
-            <Button
-              style={{ marginTop: "2vh", width: "7vw" }}
-              variant="contained"
-              color="primary"
-            >
-              Message
-            </Button>
-          </div>
-        </Card>
-        <div>
-          <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-            className={classes.listWrapper}
-          >
-            <TableContainer component={Paper}>
-              <Table aria-label="custom pagination table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="center" className={classes.rowHeader}>
-                      <h3>ID</h3>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container>
+            Recent Service's
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID</TableCell>
+                  <TableCell align="center">DATE</TableCell>
+                  <TableCell align="center">VEHICLE</TableCell>
+                  <TableCell align="center">COST</TableCell>
+                  <TableCell align="center">VIEW</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows3.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.id}
                     </TableCell>
-                    <TableCell align="center" className={classes.rowHeader}>
-                      <h3>MODEL</h3>
-                    </TableCell>
-                    <TableCell align="center" className={classes.rowHeader}>
-                      <h3>STAGE</h3>
-                    </TableCell>
-                    <TableCell align="center" className={classes.rowHeader}>
-                      <h3>VIEW</h3>
+                    <TableCell align="center">{row.date}</TableCell>
+                    <TableCell align="center">{row.vehicle}</TableCell>
+                    <TableCell align="center">{row.cost}</TableCell>
+                    <TableCell align="center">
+                      <Button variant="contained" color="primary">
+                        View
+                      </Button>
                     </TableCell>
                   </TableRow>
-                </TableHead>
-                <TableBody>
-                  {(rowsPerPage > 0
-                    ? rows.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                    : rows
-                  ).map((row) => (
-                    // individual row
-                    <TableRow>
-                      <TableCell align="center">{row.id}</TableCell>
-                      <TableCell align="center">{row.model}</TableCell>
-                      <TableCell align="center">{row.Stage}</TableCell>
-                   
-                      <TableCell align="center">
-                        <Button variant="contained" color="primary">
-                          View
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-
-                  {emptyRows > 0 && (
-                    <TableRow style={{ height: 53 * emptyRows }}>
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-                <TableFooter>
-                  <TableRow>
-                    <TablePagination
-                      rowsPerPageOptions={[
-                        3,
-                        5,
-                        10,
-                        25,
-                        { label: "All", value: -1 },
-                      ]}
-                      colSpan={3}
-                      count={rows.length}
-                      rowsPerPage={rowsPerPage}
-                      page={page}
-                      SelectProps={{
-                        inputProps: {
-                          "aria-label": "rows per page",
-                        },
-                        native: true,
-                      }}
-                      onPageChange={handleChangePage}
-                      onRowsPerPageChange={handleChangeRowsPerPage}
-                      ActionsComponent={TablePaginationActions}
-                    />
-                  </TableRow>
-                </TableFooter>
-              </Table>
-            </TableContainer>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
           </Container>
-        </div>
-      </div>
+        </Grid>
+
+        <Grid item xs={12} md={6} lg={6}>
+          <Container>
+             Order's
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID</TableCell>
+                  <TableCell align="center">MODEL</TableCell>
+                  <TableCell align="center">STAGE</TableCell>
+                  <TableCell align="center">VIEW</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.id}
+                    </TableCell>
+                    <TableCell align="center">{row.model}</TableCell>
+                    <TableCell align="center">{row.Stage}</TableCell>
+                    <TableCell align="center">
+                      <Button variant="contained" color="primary">
+                        View
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          </Container>
+        </Grid>
+
+
+        <Grid item xs={12} md={6} lg={6}>
+          <Container>
+             Complaint's
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">ID</TableCell>
+                  <TableCell align="center">TYPE</TableCell>
+                  <TableCell align="center">DATE</TableCell>
+                  <TableCell align="center">STATUS</TableCell>
+                  <TableCell align="center">VIEW</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows2.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.id}
+                    </TableCell>
+                    <TableCell align="center">{row.type}</TableCell>
+                    <TableCell align="center">{row.date}</TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">
+                      <Button variant="contained" color="primary">
+                        View
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          </Container>
+        </Grid>
+
+
+      </Grid>
     </div>
   );
 }
