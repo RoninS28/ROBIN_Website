@@ -6,10 +6,33 @@ import BasicCard from './BasicCard';
 import { Line } from 'react-chartjs-2';
 import GroupedBar from './GroupedBar';
 import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css'
+import CustomPaginationActionsTable from './CustomPaginatorActionsTable';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 const styles = theme => ({
 
 });
+
+const pieData = {
+    labels: ['City Electric Scooter', 'City-1 Electric Scooter', 'City-2 Electric Scooter'],
+    datasets: [
+      {
+        label: 'EV Models',
+        backgroundColor: [
+          '#B21F00',
+          '#C9DE00',
+          '#2FDE00',
+        ],
+        hoverBackgroundColor: [
+        '#501800',
+        '#4B5000',
+        '#175000',
+        ],
+        data: [140, 59, 80]
+      }
+    ]
+}
 
 const lineData = {
     labels: ['November', 'December', 'January', 'February', 'March',
@@ -31,6 +54,7 @@ const Dashboard = (props) => {
 
     const { classes, theme } = props;
     const [value, onChange] = useState(new Date());
+    console.log(value)
 
     return (
         <div>
@@ -82,7 +106,7 @@ const Dashboard = (props) => {
                 </Grid>
             </div>
             <Grid container spacing={2} className={classes.chartContainer}>
-                <Grid item lg={6} md={6} sm={12}>
+                <Grid item lg={8} md={8} sm={12}>
                     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                         <Typography variant="h5" component="div">
                             Total EV Sales per month
@@ -103,7 +127,32 @@ const Dashboard = (props) => {
                         />
                     </Card>
                 </Grid>
-                <Grid item lg={6} md={6} sm={12}>
+                <Grid item lg={4} md={4} sm={12}>
+                <Card sx={{ minWidth: 275 }} className={classes.pieChart}>
+                    <Typography variant="h5" component="div">
+                    Average EV Sales per month
+                    </Typography>
+                    <Doughnut
+                        data={pieData}
+                        options={{
+                            title:{
+                            display:true,
+                            text:'Average EV Sales per month',
+                            fontSize:20
+                            },
+                            legend:{
+                            display:true,
+                            position:'right'
+                            }
+                        }}
+                    />
+                </Card>
+                </Grid>
+
+
+            </Grid>
+            <Grid container spacing={2} className={classes.chartContainer}>
+                <Grid item lg={8} md={8} sm={12}>
                     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                         <Typography variant="h5" component="div">
                             Some graph
@@ -111,13 +160,25 @@ const Dashboard = (props) => {
                         <GroupedBar />
                     </Card>
                 </Grid>
+                <Grid item lg={4} md={4} sm={12}>
+                    <Calendar
+                        onChange={onChange}
+                        showWeekNumbers
+                        value={value}
+                    />
+                </Grid>
             </Grid>
-            <div>
-      <Calendar
-        onChange={onChange}
-        value={value}
-      />
-    </div>
+            <Grid container spacing={2} className={classes.chartContainer}>
+                <Grid item lg={6} md={6} sm={12}>
+                    <CustomPaginationActionsTable />
+                </Grid>
+                <Grid item lg={6} md={6} sm={12}>
+                    <CustomPaginationActionsTable />
+                </Grid>
+                
+            </Grid>
+
+
 
         </div>
     )
