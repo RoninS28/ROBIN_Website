@@ -24,6 +24,7 @@ function Routing() {
           <Route path='/products' exact component={Products} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
           <Route path='/bookings' exact component={Bookings} ></Route>
+          <Route path='/bookingsstage' exact component={BookingsStage} ></Route>
         </Switch>
       </Layout>
       {/* </div> */}
