@@ -16,9 +16,6 @@ const useStyles = makeStyles((theme) => {
             textAlign: "center",
             fontSize: '40px',
             textShadow: '1px 1px 4px rgba(0, 0, 0, 0.21)',
-
-
-
         },
         statusRow: {
             // display: 'flex',
