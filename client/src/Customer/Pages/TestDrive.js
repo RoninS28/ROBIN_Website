@@ -223,7 +223,7 @@ export default function TestDrive() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Select EV Model
+                      EV Model
                     </label>
                     {/* <input
                       type="select"
@@ -231,7 +231,13 @@ export default function TestDrive() {
                       
                     /> */}
                     <div className = "w-full self-center">
-                      <ModelComponent />
+                      {/* <ModelComponent /> */}
+                      <input
+                        type="otp"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        placeholder="Shine S1"
+                        readOnly
+                      ></input>
                     </div>
                   </div>
                   </div>
