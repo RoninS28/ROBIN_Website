@@ -4,7 +4,8 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { color, display } from "@mui/system";
 import v2 from '../Assets/v2.jpeg'
-import '../PagesStyles/Bookings.css'
+import '../PagesStyles/Bookings.css';
+import { useHistory } from "react-router";
 
 
 
@@ -77,6 +78,7 @@ const Bookings = () => {
     const classes = useStyles()
     const myBookingsList = [
         {
+            id: 1,
             imagesrc: "v2",
             model: "CITY - 1 ELECTRIC SCOOTER",
             plateNumber: "MH 12 FP 9602",
@@ -87,6 +89,7 @@ const Bookings = () => {
 
         },
         {
+            id: 2,
             imagesrc: "v2",
             model: "CITY - 1 ELECTRIC SCOOTER",
             plateNumber: "????",
@@ -96,7 +99,15 @@ const Bookings = () => {
             deliveryDate: "28/06/2021"
 
         }
+
     ]
+
+    const history = useHistory()
+
+
+    const handleProduct = (e) => {
+        history.push('/bookingsStage/' + e.id)
+    }
     return (
         <div>
             <div className={classes.heading}>
@@ -128,7 +139,7 @@ const Bookings = () => {
                         // <div>
                         <Grid container item xs={12} md={12} lg={12} xl={12} >
 
-                            <Grid item spacing={3} key={item.plateNumber} xs={3} md={4} lg={4} xl={4} className={classes.image}>
+                            <Grid item spacing={3} key={item.plateNumber} xs={3} md={4} lg={4} xl={4} className={classes.image} onClick={(e) => handleProduct(item)}>
 
                                 <div className="image">
 
@@ -136,7 +147,7 @@ const Bookings = () => {
                                 </div>
 
                             </Grid>
-                            <Grid item spacing={3} key={item.plateNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo}>
+                            <Grid item spacing={3} key={item.plateNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo} onClick={(e) => handleProduct(item)}>
                                 <div className="bookingrowInfo">
                                     <div>
                                         {item.model}

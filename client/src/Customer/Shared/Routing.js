@@ -27,7 +27,7 @@ function Routing() {
           <Route path='/productsView/:id' exact component={ProductsView} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
           <Route path='/bookings' exact component={Bookings} ></Route>
-          <Route path='/bookingsStage' exact component={BookingsStage} ></Route>
+          <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
           <Route path='/servicingConfirm' exact component={ServicingConfirm} ></Route>
         </Switch>
       </Layout>
