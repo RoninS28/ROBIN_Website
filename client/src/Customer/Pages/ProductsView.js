@@ -7,7 +7,16 @@ import { useParams } from "react-router-dom";
 import v1 from '../Assets/v1.png'
 import v2 from '../Assets/v2uncropped.jpeg'
 import v3 from '../Assets/v3.jpeg'
+import i1 from '../Assets/i1.jpg'
+import i2 from '../Assets/i2.jpg'
+import i3 from '../Assets/i3.jpg'
+import i4 from '../Assets/i4.jpg'
+import i5 from '../Assets/i5.jpg'
+import i6 from '../Assets/i6.jpg'
+
+
 import '../PagesStyles/ProductsView.css'
+import { margin, style } from "@mui/system";
 
 
 const modelList = [
@@ -63,34 +72,60 @@ const modelList = [
         price: 21000
     },
 ]
-// !==============================================================================================================
-const useStyles = makeStyles(
+const featureList1 = [
     {
-        root: {
-            // fontSize: '100px'
-        },
-        heading: {
-            fontWeight: '600',
-            fontFamily: 'Secular One',
-            textShadow: '1px 1px 4px rgba(0, 0, 0, 0.21), 1px 1px 1px blue',
-            textAlign: 'center',
-            fontSize: '40px',
-            marginTop: '30px',
-        },
-
-        avatarColor: {
-            backgroundColor: (props) => props.color,
-            margin: '15px'
-        },
-        colorss: {
-            display: 'flex',
-
-            justifyContent: 'start',
-            alignItems: 'center'
-        }
-
-
+        feature: "3 Modes Drive",
+        img: i1
+    },
+    {
+        feature: "Thief Alert",
+        img: i2
+    },
+    {
+        feature: "Li-on\nBattery",
+        img: i3
     }
+]
+const featureList2 = [
+
+    {
+        feature: "Key Less\nDrive",
+        img: i4
+    },
+    {
+        feature: "Tubeless Tyre",
+        img: i5
+    },
+    {
+        feature: "Dual Disc",
+        img: i6
+    },
+]
+// !==============================================================================================================
+const useStyles = makeStyles((theme) =>
+({
+    root: {
+        // fontSize: '100px'
+    },
+    heading: {
+        fontWeight: '600',
+        fontFamily: 'Secular One',
+        textShadow: '1px 1px 4px rgba(0, 0, 0, 0.21), 1px 1px 1px blue',
+        textAlign: 'center',
+        fontSize: '40px',
+        marginTop: '30px',
+    },
+
+
+    colorss: {
+        display: 'flex',
+
+        justifyContent: 'start',
+        alignItems: 'center'
+    }
+
+
+})
 )
 
 const ProductsView = (props) => {
@@ -107,31 +142,45 @@ const ProductsView = (props) => {
             </div>
             <Grid container style={{ marginTop: '30px' }}>
 
-                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.colorss && "colorAvatars1"}>
-                    <div className="colors">
-                        {/* <AvatarGroup variant="circular" className="avatargroup"> */}
-                        {model.colors.map(color => (
-                            <Avatar color={color} className={classes.avatarColor} />
+                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.features && "featureAvatars1"}>
+                    <div className="features f1" >
+                        {featureList1.map(feature => (
+                            <div className="featureColumn">
+
+                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '50px', width: '50px' }} />
+                                <p>{feature.feature}</p>
+                            </div>
                         ))}
-                        {/* </AvatarGroup> */}
                     </div>
                 </Grid>
 
 
                 <Grid item sm={12} md={6} lg={6} xl={6} className="imageGrid">
-                    <div className="image">
-                        <img src={model.image} alt="image" width="300" height="300" />
+                    <div className="imgNcolors" >
+
+                        <div className="image">
+                            <img src={model.image} alt="image" width="350" height="350" />
+                        </div>
+                        <div className="colors">
+                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
+                        </div>
                     </div>
                 </Grid>
 
 
-                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.colorss && "colorAvatars2"}>
-                    <div className="colors">
-                        {/* <AvatarGroup variant="circular" className="avatargroup"> */}
-                        {model.colors.map(color => (
-                            <Avatar color={color} className={classes.avatarColor} />
+                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.features && "featureAvatars2"}>
+                    <div className="features f2">
+                        {featureList2.map(feature => (
+                            <div className="featureColumn">
+
+                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '50px', width: '50px' }} />
+                                <p>{feature.feature}</p>
+                            </div>
+
                         ))}
-                        {/* </AvatarGroup> */}
                     </div>
                 </Grid>
 
