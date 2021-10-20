@@ -1,4 +1,4 @@
-import { Avatar, Grid } from "@material-ui/core";
+import { Avatar, Button, Grid } from "@material-ui/core";
 import { yellow, blue, orange, green } from "@material-ui/core/colors";
 import { AvatarGroup } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -14,6 +14,7 @@ import i4 from '../Assets/i4.jpg'
 import i5 from '../Assets/i5.jpg'
 import i6 from '../Assets/i6.jpg'
 
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 import '../PagesStyles/ProductsView.css'
 import { margin, style } from "@mui/system";
@@ -142,12 +143,12 @@ const ProductsView = (props) => {
             </div>
             <Grid container style={{ marginTop: '30px' }}>
 
-                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.features && "featureAvatars1"}>
+                <Grid item sm={12} md={4} lg={4} xl={4} className={classes.features && "featureAvatars1"}>
                     <div className="features f1" >
                         {featureList1.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '50px', width: '50px' }} />
+                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
                         ))}
@@ -155,28 +156,28 @@ const ProductsView = (props) => {
                 </Grid>
 
 
-                <Grid item sm={12} md={6} lg={6} xl={6} className="imageGrid">
+                <Grid item sm={12} md={4} lg={4} xl={4} className="imageGrid">
                     <div className="imgNcolors" >
 
                         <div className="image">
                             <img src={model.image} alt="image" width="350" height="350" />
                         </div>
                         <div className="colors">
-                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '25px', width: '25px', margin: '10px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
                         </div>
                     </div>
                 </Grid>
 
 
-                <Grid item sm={12} md={3} lg={3} xl={3} className={classes.features && "featureAvatars2"}>
+                <Grid item sm={12} md={4} lg={4} xl={4} className={classes.features && "featureAvatars2"}>
                     <div className="features f2">
                         {featureList2.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '50px', width: '50px' }} />
+                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
 
@@ -185,6 +186,138 @@ const ProductsView = (props) => {
                 </Grid>
 
             </Grid>
+            <div style={{ marginTop: '30px', backgroundColor: 'black', borderRadius: '70px', color: "white", padding: '30px', paddingLeft: '10px', paddingRight: '10px', marginLeft: '180px', marginRight: '180px' }} >
+
+                <Grid container spacing={3} justifyContent="space-around">
+
+
+                    <Grid item >
+                        <div className="uniqueFeatureCol">
+                            <div className="highlightUniqueFeature">
+                                {model.battery}
+                                <div className="unithighlight" >
+                                    KWH
+                                </div>
+                            </div>
+                            <div className="descUniqueFeature">
+                                LITHIUM - ION
+                            </div>
+                            <div className="descUniqueFeature">
+                                REMV. BATTERY
+                            </div>
+                        </div>
+                    </Grid>
+                    <Grid item >
+                        <div className="uniqueFeatureCol">
+                            <div className="highlightUniqueFeature">
+                                {model.range}
+                                <div className="unithighlight" >
+                                    KM
+                                </div>
+                            </div>
+                            <div className="descUniqueFeature">
+                                RANGE
+                            </div>
+
+                        </div>
+                    </Grid>
+                    <Grid item >
+                        <div className="uniqueFeatureCol">
+                            <div className="highlightUniqueFeature">
+                                {model.voltage}
+                                <div className="unithighlight" >
+                                    VOLT
+                                </div>
+                            </div>
+                            <div className="descUniqueFeature">
+                                VOLTAGE
+                            </div>
+
+                        </div>
+                    </Grid>
+                    <Grid item >
+                        <div className="uniqueFeatureCol">
+                            <div className="highlightUniqueFeature">
+                                {model.chargingTime}
+                                <div className="unithighlight" >
+                                    HRS
+                                </div>
+                            </div>
+                            <div className="descUniqueFeature">
+                                CHARGING
+                            </div>
+                            <div className="descUniqueFeature">
+                                TIME
+                            </div>
+                        </div>
+                    </Grid>
+                    <Grid item >
+                        <div className="uniqueFeatureCol">
+                            <div className="highlightUniqueFeature">
+                                {model.groundClearance}
+                                <div className="unithighlight" >
+                                    MM
+                                </div>
+                            </div>
+                            <div className="descUniqueFeature">
+                                GROUND
+                            </div>
+                            <div className="descUniqueFeature">
+                                CLEARANCE
+                            </div>
+                        </div>
+                    </Grid>
+
+                </Grid>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className="knowMoreButtonDiv" >
+                        <button >KNOW MORE<ChevronRightIcon style={{ fontSize: '32px' }} /></button>
+                        {/* <Button variant="contained" className="knowMoreButtonDiv" endIcon={<ChevronRightIcon />}>
+                            Send
+                        </Button> */}
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+                <div className="bookNowButtonDiv" >
+                    <button >BOOK NOW</button>
+
+                </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '100px' }}>
+
+                <div className="buttonPara">
+                    Would you like a test drive? Take one now for free!!
+                </div>
+                <div className="takeTestDriveButtonDiv" >
+                    <button >TAKE TEST DRIVE</button>
+                </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '100px' }}>
+                <div className="buttonPara">
+                    Would you like a test drive? Take one now for free!!
+                </div>
+
+                <div className="chatBotButtonDiv" >
+                    <button >CHATBOT</button>
+
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
 
         </div>
     );
