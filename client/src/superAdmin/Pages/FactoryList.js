@@ -29,6 +29,7 @@ import Typography from '@material-ui/core/Typography';
 import { factoryList } from '../Data/FactoryList'
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from '@material-ui/core';
+import GenericTable from './GenericTable';
 
 
 const styles = theme => ({
@@ -58,69 +59,6 @@ const styles = theme => ({
 
 })
 
-
-function TablePaginationActions(props) {
-    const theme = useTheme();
-    const { count, page, rowsPerPage, onPageChange } = props;
-
-
-    const handleFirstPageButtonClick = (event) => {
-        onPageChange(event, 0);
-    };
-
-    const handleBackButtonClick = (event) => {
-        onPageChange(event, page - 1);
-    };
-
-    const handleNextButtonClick = (event) => {
-        onPageChange(event, page + 1);
-    };
-
-    const handleLastPageButtonClick = (event) => {
-        onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-    };
-
-    return (
-        <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-            <IconButton
-                onClick={handleFirstPageButtonClick}
-                disabled={page === 0}
-                aria-label="first page"
-            >
-                {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-            </IconButton>
-            <IconButton
-                onClick={handleBackButtonClick}
-                disabled={page === 0}
-                aria-label="previous page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </IconButton>
-            <IconButton
-                onClick={handleNextButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="next page"
-            >
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </IconButton>
-            <IconButton
-                onClick={handleLastPageButtonClick}
-                disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-                aria-label="last page"
-            >
-                {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-            </IconButton>
-        </Box>
-    );
-}
-
-TablePaginationActions.propTypes = {
-    count: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
-    rowsPerPage: PropTypes.number.isRequired,
-};
-
 function createData(id, name, orders, completed, pending) {
     return { id, name, orders, completed, pending };
 }
@@ -135,6 +73,7 @@ function getAllFactories() {
 }
 
 const rows = getAllFactories();
+const labels = ["name", "orders", "completed", "pending", "actions"];
 
 
 // Actual Function
@@ -227,76 +166,7 @@ const FactoryList = (props) => {
                 <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>
 
             </div>
-
-
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
-                <TableHead>
-                        <TableRow>
-                            <TableCell align="center" className={classes.rowHeader}><h3>Name</h3></TableCell>
-                            <TableCell align="center" className={classes.rowHeader}><h3>Orders</h3></TableCell>
-                            <TableCell align="center" className={classes.rowHeader}><h3>Completed</h3></TableCell>
-                            <TableCell align="center" className={classes.rowHeader}><h3>Pending</h3></TableCell>
-                            <TableCell align="center" className={classes.rowHeader}><h3>Actions</h3></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {(rowsPerPage > 0
-                            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            : rows
-                        ).map((row) => (
-                            
-                            // individual row
-                            <TableRow style={{ height: "2em" }}>
-                                <TableCell style={{ width: 160 }} align="center">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell style={{ width: 160 }} align="center">
-                                    {row.orders}
-                                </TableCell>
-                                <TableCell style={{ width: 160 }} align="center">
-                                    {row.completed}
-                                </TableCell>
-                                <TableCell style={{ width: 160 }} align="center">
-                                    {row.pending}
-                                </TableCell>
-                                <TableCell style={{ width: 160 }} align="center">
-                                    <div className={classes.btnContainer}>
-                                        <Button className={classes.btn} variant="contained" color="primary">View Details</Button>
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-
-                        ))}
-
-                        {emptyRows > 0 && (
-                            <TableRow style={{ height: 53 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                            </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                                colSpan={3}
-                                count={rows.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: {
-                                        'aria-label': 'rows per page',
-                                    },
-                                    native: true,
-                                }}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
+            <GenericTable rows={rows} labels={labels}/>
         </Container>
     );
 }

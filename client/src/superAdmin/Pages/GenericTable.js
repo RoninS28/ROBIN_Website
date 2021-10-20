@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -15,6 +16,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
+import Button from '@material-ui/core/Button';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -97,7 +99,11 @@ const rows = [
   createData('Oreo', 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
-export default function CustomPaginationActionsTable(props) {
+export default function GenericTable(props) {
+
+  const rows = props.rows;
+  const labels = props.labels;
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -117,21 +123,24 @@ export default function CustomPaginationActionsTable(props) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <TableHead>
+          <TableRow style={{ height: "2em" }}>
+            {labels.map(label => (
+              <TableCell align="center"><h3>{label.toUpperCase()}</h3></TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
         <TableBody>
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.calories}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.fat}
-              </TableCell>
+            <TableRow key={row.name} style={{ height: "2em" }}>
+              {labels.map(label => (
+                <TableCell style={{ width: 160 }} align="center">
+                  {label == 'actions' ? <Button variant="contained" color="primary">View Details</Button> : row[label]}
+                </TableCell>
+              ))}
             </TableRow>
           ))}
 

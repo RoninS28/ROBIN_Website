@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 import GroupedBar from './GroupedBar';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
-import CustomPaginationActionsTable from './CustomPaginatorActionsTable';
+import GenericTable from './GenericTable';
 import {Pie, Doughnut} from 'react-chartjs-2';
 
 const styles = theme => ({
@@ -170,10 +170,10 @@ const Dashboard = (props) => {
             </Grid>
             <Grid container spacing={2} className={classes.chartContainer}>
                 <Grid item lg={6} md={6} sm={12}>
-                    <CustomPaginationActionsTable />
+                    <GenericTable />
                 </Grid>
                 <Grid item lg={6} md={6} sm={12}>
-                    <CustomPaginationActionsTable />
+                    <GenericTable />
                 </Grid>
                 
             </Grid>
