@@ -50,6 +50,22 @@ const lineData = {
     ]
 }
 
+function createData(orderId, factoryName, dateOfOrder, status) {
+    return { orderId, factoryName, dateOfOrder, status };
+}
+
+const rows = [
+    createData('C2K5464', 'Noga Factory', '10 Oct 2021', 'Pending'),
+    createData('C2K5463', 'Noga Factory', '10 Oct 2020', 'Completed'),
+    createData('C2K5465', 'Alpha Factory', '10 Sept 2021', 'Completed'),
+    createData('C2K5466', 'Alpha Factory', '20 Sept 2021', 'Pending'),
+    createData('C2K5467', 'Noga Factory', '10 Aug 2021', 'Completed'),
+    createData('C2K5468', 'Beta Factory', '1 Oct 2021', 'Pending'),
+    createData('C2K5469', 'Beta Factory', '11 Sept 2021', 'Completed'),
+];
+
+const labels = ["orderId", "factoryName", "dateOfOrder", "status", "actions"];
+
 const Dashboard = (props) => {
 
     const { classes, theme } = props;
@@ -160,6 +176,11 @@ const Dashboard = (props) => {
                         <GroupedBar />
                     </Card>
                 </Grid>
+            </Grid>
+            <Grid container spacing={2} className={classes.chartContainer}>
+                <Grid item lg={12} md={12} sm={12}>
+                    <GenericTable rows={rows} labels={labels}/>
+                </Grid>
                 <Grid item lg={4} md={4} sm={12}>
                     <Calendar
                         onChange={onChange}
@@ -167,13 +188,8 @@ const Dashboard = (props) => {
                         value={value}
                     />
                 </Grid>
-            </Grid>
-            <Grid container spacing={2} className={classes.chartContainer}>
-                <Grid item lg={6} md={6} sm={12}>
-                    <GenericTable />
-                </Grid>
-                <Grid item lg={6} md={6} sm={12}>
-                    <GenericTable />
+                <Grid item lg={8} md={8} sm={12}>
+                    <GenericTable rows={rows} labels={labels}/>
                 </Grid>
                 
             </Grid>

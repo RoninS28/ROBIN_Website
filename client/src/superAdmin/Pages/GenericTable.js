@@ -18,6 +18,24 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import Button from '@material-ui/core/Button';
 
+function formatCamelCase(str) {
+  let res = "";
+  let curr = "";
+
+  for(let i=0; i<str.length; i++) {
+    let c = str.charAt(i);
+    if(c >= 'A' && c <= 'Z') {
+      res += curr + " ";
+      curr = c;
+    }
+    else {
+      curr += c;
+    }
+  }
+  res += curr;
+  return res.toUpperCase();
+}
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -108,18 +126,14 @@ export default function GenericTable(props) {
         <TableHead>
           <TableRow style={{ height: "2em" }}>
 
-
-
             {labels.map(label => (
               <TableCell align="center">
                 {(() => {
                   switch (label) {
                     case 'imgUrl':
                       return <h3>IMAGE</h3>;
-                    case 'basePrice':
-                      return <h3>BASE PRICE</h3>;
                     default:
-                      return <h3>{label.toUpperCase()}</h3>;
+                      return <h3>{formatCamelCase(label)}</h3>;
                   }
                 })()}
               </TableCell>
@@ -138,7 +152,7 @@ export default function GenericTable(props) {
                   {(() => {
                     switch (label) {
                       case 'actions':
-                        return <Button variant="contained" color="primary">View Details</Button>;
+                        return <Button variant="contained" color="primary">View</Button>;
                       case 'imgUrl':
                         return <img src={row[label]} style={{ height: "120px", width: "100px" }} />;
                       case 'colors':
