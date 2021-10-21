@@ -18,6 +18,24 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import Button from '@material-ui/core/Button';
 
+function formatCamelCase(str) {
+  let res = "";
+  let curr = "";
+
+  for(let i=0; i<str.length; i++) {
+    let c = str.charAt(i);
+    if(c >= 'A' && c <= 'Z') {
+      res += curr + " ";
+      curr = c;
+    }
+    else {
+      curr += c;
+    }
+  }
+  res += curr;
+  return res.toUpperCase();
+}
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -79,25 +97,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, calories, fat) {
-  return { name, calories, fat };
-}
 
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
 export default function GenericTable(props) {
 
@@ -125,8 +125,18 @@ export default function GenericTable(props) {
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow style={{ height: "2em" }}>
+
             {labels.map(label => (
-              <TableCell align="center"><h3>{label.toUpperCase()}</h3></TableCell>
+              <TableCell align="center">
+                {(() => {
+                  switch (label) {
+                    case 'imgUrl':
+                      return <h3>IMAGE</h3>;
+                    default:
+                      return <h3>{formatCamelCase(label)}</h3>;
+                  }
+                })()}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
@@ -138,7 +148,36 @@ export default function GenericTable(props) {
             <TableRow key={row.name} style={{ height: "2em" }}>
               {labels.map(label => (
                 <TableCell style={{ width: 160 }} align="center">
-                  {label == 'actions' ? <Button variant="contained" color="primary">View Details</Button> : row[label]}
+
+                  {(() => {
+                    switch (label) {
+                      case 'actions':
+                        return <Button variant="contained" color="primary">View</Button>;
+                      case 'imgUrl':
+                        return <img src={row[label]} style={{ height: "120px", width: "100px" }} />;
+                      case 'colors':
+                        return (
+                          <div style={{ display: "flex", justifyContent: "center" }}>
+                            {row[label].map(color => (
+                              <div
+                                style={{
+                                  backgroundColor: color,
+                                  height: "20px",
+                                  width: "20px",
+                                  borderRadius: "50%",
+                                  margin: "auto 3px"
+                                }}>
+
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      default:
+                        return row[label];
+                    }
+                  })()}
+
+                  {/* {label == 'actions' ? <Button variant="contained" color="primary">View Details</Button> : row[label]} */}
                 </TableCell>
               ))}
             </TableRow>
