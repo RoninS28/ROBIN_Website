@@ -27,6 +27,7 @@ import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from "@mui/material/Grid";
+import GenericTable from "./GenericTable";
 
 const styles = (theme) => ({
   mainContainer: {
@@ -140,7 +141,8 @@ function getAllModels() {
   return allModels;
 }
 
-const rows = getAllModels();
+const orders = getAllModels();
+const orderLabels=["id","model","Stage","img","actions"]
 
 //complaints
 
@@ -157,7 +159,8 @@ function getAllModels2() {
   return allModels;
 }
 
-const rows2 = getAllModels2();
+const complaintsRows = getAllModels2();
+const complaintsLabels=["id","type","status","date","actions"]
 
 // services
 function createData3(id, date, vehicle, cost) {
@@ -175,7 +178,8 @@ function getAllModels3() {
   return allModels;
 }
 
-const rows3 = getAllModels3();
+const servicesRows = getAllModels3();
+const servicesLabels=["id","date","vehicle","cost","actions"]
 
 function CustomerDetail(props) {
   const { classes, theme } = props;
@@ -194,7 +198,7 @@ function CustomerDetail(props) {
   return (
     <div style={{paddingLeft:"2vw",paddingRight:"2vw"}}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item xs={12} md={12} lg={12}>
           Detail's
           <Card className={classes.custInfo}>
             <div style={{ marginTop: "2vh" }}>
@@ -248,119 +252,27 @@ function CustomerDetail(props) {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={6}>
+        {/* //Services */}
+        <Grid item xs={12} md={12} lg={12}>
           <Container>
             Recent Service's
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">ID</TableCell>
-                  <TableCell align="center">DATE</TableCell>
-                  <TableCell align="center">VEHICLE</TableCell>
-                  <TableCell align="center">COST</TableCell>
-                  <TableCell align="center">VIEW</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows3.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="center">{row.date}</TableCell>
-                    <TableCell align="center">{row.vehicle}</TableCell>
-                    <TableCell align="center">{row.cost}</TableCell>
-                    <TableCell align="center">
-                      <Button variant="contained" color="primary">
-                        View
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+            <GenericTable rows={servicesRows} labels={servicesLabels}/>
           </Container>
         </Grid>
-
-        <Grid item xs={12} md={6} lg={6}>
+{/* 
+          Orders */}
+        <Grid item xs={12} md={12} lg={12}>
           <Container>
              Order's
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">ID</TableCell>
-                  <TableCell align="center">MODEL</TableCell>
-                  <TableCell align="center">STAGE</TableCell>
-                  <TableCell align="center">VIEW</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="center">{row.model}</TableCell>
-                    <TableCell align="center">{row.Stage}</TableCell>
-                    <TableCell align="center">
-                      <Button variant="contained" color="primary">
-                        View
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+             <GenericTable rows={orders} labels={orderLabels}/>
           </Container>
         </Grid>
 
-
-        <Grid item xs={12} md={6} lg={6}>
+          {/* Complaints */}
+        <Grid item xs={12} md={12} lg={12}>
           <Container>
              Complaint's
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">ID</TableCell>
-                  <TableCell align="center">TYPE</TableCell>
-                  <TableCell align="center">DATE</TableCell>
-                  <TableCell align="center">STATUS</TableCell>
-                  <TableCell align="center">VIEW</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows2.map((row) => (
-                  <TableRow
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row">
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="center">{row.type}</TableCell>
-                    <TableCell align="center">{row.date}</TableCell>
-                    <TableCell align="center">{row.status}</TableCell>
-                    <TableCell align="center">
-                      <Button variant="contained" color="primary">
-                        View
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+              <GenericTable rows={complaintsRows} labels={complaintsLabels}/>
           </Container>
         </Grid>
 

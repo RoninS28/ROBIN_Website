@@ -44,6 +44,10 @@ import CustomerList from "../../Pages/CustomerList";
 import CustomerDetail from "../../Pages/CustomerDetail";
 import TestDrive from "../../Pages/TestDrive";
 import TestDriveDetail from "../../Pages/TestDriveDetail";
+import OrderList from "../../Pages/OrderList";
+import OrderDetail from "../../Pages/OrderDetail";
+import Complaints from "../../Pages/Complaints";
+import ComplaintDetail from "../../Pages/ComplaintDetail";
 
 
 
@@ -272,7 +276,7 @@ const Navbar = (props) => {
         >
           <div className={classes.toolbar} />
           <List>
-              <Link to='/customerList' style={{ textDecoration: 'none' }}>
+              <Link to='/customers' style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
@@ -280,14 +284,7 @@ const Navbar = (props) => {
                   <ListItemText primary="Customer List" />
                 </ListItem>
               </Link>
-              <Link to='/customerDetail' style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Customer Detail" />
-                </ListItem>
-              </Link>
+              
               <Link to='/testDrive' style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -296,18 +293,27 @@ const Navbar = (props) => {
                   <ListItemText primary="Test Drive" />
                 </ListItem>
               </Link>
-              <Link to='/testDriveDetail' style={{ textDecoration: 'none' }}>
+              
+              <Link to='/orderList' style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Test Drive Detail" />
+                  <ListItemText primary="Order List" />
+                </ListItem>
+              </Link>
+             
+              <Link to='/complaints' style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Complaints" />
                 </ListItem>
               </Link>
 
-              
+            
 
-             
 
              
 
@@ -340,11 +346,14 @@ const Navbar = (props) => {
           <div className = 'back'>
             <Switch>
               {/* <Route path="/" exact component={OrderList}/> */}
-              <Route path='/customerList' exact component={CustomerList} ></Route>
-              <Route path='/customerDetail' exact component={CustomerDetail}></Route>
+              <Route path='/customers' exact component={CustomerList} ></Route>
+              <Route path='/customers/:id' exact component={CustomerDetail}></Route>
               <Route path='/testDrive' exact component={TestDrive}></Route>
               <Route path='/testDriveDetail' exact component={TestDriveDetail}></Route>
-              
+              <Route path='/orderList' exact component={OrderList}></Route>
+              <Route path='/orderDetail' exact component={OrderDetail}></Route>
+              <Route path='/complaints' exact component={Complaints}></Route>
+              <Route path='/complaintDetail' exact component={ComplaintDetail}></Route>
             </Switch>
          </div>
 
