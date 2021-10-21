@@ -36,6 +36,20 @@ export default function TestDrive() {
     return option.value === modelValue;
   })}/>;
 
+
+  const handleProductadd = () => {
+    var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
+    document.getElementById('wrapper').innerHTML += dummy;  
+  }
+
+  const handleProductremove = () => {
+    var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
+    if (!document.getElementById('wrapper').innerHTML)
+      return;
+    else
+      document.getElementById('wrapper').innerHTML -= dummy;  
+  }
+
   return (
     <>
       <div className="container mx-auto px-4 h-full" style={{backgroundColor:""}}>
@@ -55,16 +69,18 @@ export default function TestDrive() {
                     ))}
                   </ButtonGroup> */}
                   <button
-                    className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
+                    className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
-                    style={{backgroundColor:"lightblue"}}
+                    style={{backgroundColor:"lightblue",borderWidth:"3px", borderColor:"#334756"}}
+                    onClick={handleProductremove}
                   >
                     <center>At Home</center>
                   </button>
                   <button
-                    className="lg:w-3/12 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" 
+                    className="lg:w-3/12 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150" 
                     type="button"
-                    style={{outlineColor:"lightblue"}}
+                    style={{borderColor:"lightblue", borderWidth:"3px"}}
+                    onClick={handleProductadd}
                   >
                     <center>At Oulet</center>
                   </button>
@@ -81,28 +97,28 @@ export default function TestDrive() {
                 <div className="flex flex-wrap">
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Name
                     </label>
                     <input
                       type="name"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder=""
                     />
                   </div>
 
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Date of Birth
                     </label>
                     <input
                       type="date"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       
                     />
                   </div>
@@ -111,28 +127,28 @@ export default function TestDrive() {
                   <div className="flex flex-wrap">
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Pincode
                     </label>
                     <input
                       type="Pincode"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder=""
                     />
                   </div>
 
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Mobile No
                     </label>
                     <input
                       type="mobileno"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       
                     />
                   </div>
@@ -141,28 +157,28 @@ export default function TestDrive() {
                   <div className="flex flex-wrap">
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Dl No
                     </label>
                     <input
                       type="Dlno"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder=""
                     />
                   </div>
 
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Address
                     </label>
                     <input
                       type="address"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       
                     />
                   </div>
@@ -173,68 +189,70 @@ export default function TestDrive() {
                   <div className="flex flex-wrap">
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Select Preferred Date
                     </label>
                     <input
                       type="date"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder=""
                     />
                   </div>
 
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Select Time Slot
                     </label>
                     {/* <input
                       type="select"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       
                     /> */}
-                    <div className = "w-full self-center">
-                      <TimeslotComponent />
-                    </div>
+                    
+                                    <div className="w-full self-center my-2 text-xl">
+                                        <TimeslotComponent />
+                                    </div>
+                                
                   </div>
                   </div>
 
                   <div className="flex flex-wrap">
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Enter OTP
                     </label>
                     <input
                       type="otp"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder=""
                     />
                   </div>
 
                   <div className="relative w-full lg:w-6/12 mb-3 px-2">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       EV Model
                     </label>
                     {/* <input
                       type="select"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       
                     /> */}
                     <div className = "w-full self-center">
                       {/* <ModelComponent /> */}
                       <input
                         type="otp"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="Shine S1"
                         readOnly
                       ></input>
@@ -242,14 +260,31 @@ export default function TestDrive() {
                   </div>
                   </div>
 
+                 
+                  <div className="flex flex-wrap" id="wrapper">
+                  {/* <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Enter OTP
+                    </label>
+                    <input
+                      type="otp"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder=""
+                    />
+                  </div> */}
+                  </div>
+
 
 
 
                   <div className="text-center mt-6">
                     <button
-                      className="bg-blueGray-800 w-full lg:w-6/12 text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      className="bg-blueGray-800 w-full lg:w-6/12 text-black active:bg-blueGray-600 text-xl font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
-                      style={{backgroundColor:"orange"}}
+                      style={{ backgroundColor: "white" , borderRadius:"15px", borderColor:"#1F64CC", borderWidth:"5px"}}
                     >
                       Confirm Test Drive
                     </button>

@@ -186,12 +186,7 @@ const BookingsStage = () => {
                                        
                                     </div>
 
-                                    {/* <div>
-                                        {item.name}
-                                    </div>
-                                    <div style={{textAlign:"center"}}>
-                                        {item.description}
-                                    </div> */}
+                                    
 
 
                                 </div>
@@ -207,14 +202,7 @@ const BookingsStage = () => {
                                     </div>
                                 </div>
                             </Grid>
-                            {/* <Grid item spacing={3} key={item.plateNumber} xs={3} md={4} lg={4} xl={4} className={classes.image}>
-
-                                <div className="image">
-
-                                    <img src={v2} alt="image" height="200px" width="200px" />
-                                </div>
-
-                            </Grid> */}
+                            
                         </Grid>
 
 
