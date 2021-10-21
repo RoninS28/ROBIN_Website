@@ -47,7 +47,6 @@ import SMBreakdownDetails from "../../Serviceman/SMBreakdownDetails";
 import SMBilling from "../../Serviceman/SMBilling";
 import SMServices from "../../Serviceman/SMServices";
 import SMHistory from "../../Serviceman/SMHistory";
-import SMLeave from "../../Serviceman/SMLeave";
 import SMComplaint from "../../Serviceman/SMComplaint";
 
 const drawerWidth = 220;
@@ -234,14 +233,7 @@ class Navbar extends React.Component {
         >
           <div className={classes.toolbar} />
           <List>
-          <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Serviceman Details" />
-                </ListItem>
-              </Link>
+         
           {/* <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
               <ListItem button>
                 <ListItemIcon>
@@ -269,7 +261,14 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link>
 
-              
+               <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <InboxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Serviceman Details" />
+                </ListItem>
+              </Link>
 
               <Link to="/servicing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -386,7 +385,8 @@ class Navbar extends React.Component {
                   </ListItemIcon>
                   <ListItemText primary="S Complaint Details" />
                 </ListItem>
-              </Link>   */}
+              </Link>  
+ */}
 
 
               <Link to="/Serviceman/breakdown-details" style={{ textDecoration: 'none' }}>
@@ -434,15 +434,7 @@ class Navbar extends React.Component {
                 </ListItem>
               </Link> 
 
-              <Link to="/Serviceman/leave" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="SM Leave" />
-                </ListItem>
-              </Link> 
-              <Link to="/Serviceman/complaint" style={{ textDecoration: 'none' }}>
+              <Link to="/Serviceman/complaints" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <InboxIcon />
@@ -525,7 +517,6 @@ class Navbar extends React.Component {
               <Route path='/Serviceman/billing' exact component={SMBilling}></Route>
               <Route path='/Serviceman/services' exact component={SMServices}></Route>
               <Route path='/Serviceman/history' exact component={SMHistory}></Route>
-              <Route path='/Serviceman/leave' exact component={SMLeave}></Route>
               <Route path='/Serviceman/complaints' exact component={SMComplaint}></Route>
 
               <Route path='/demo' exact component={Demo}></Route>

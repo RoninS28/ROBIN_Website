@@ -37,6 +37,8 @@ import Typography from '@material-ui/core/Typography';
 import {Line} from 'react-chartjs-2';
 import {Pie, Doughnut} from 'react-chartjs-2';
 import { Grid } from '@mui/material';
+import GenericTable from './GenericTable';
+
 
 const styles = theme => ({
 
@@ -164,20 +166,28 @@ TablePaginationActions.propTypes = {
     rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(complaintId, customerName, complaintType, dateOfOrder, status) {
-    return { complaintId, customerName, complaintType,dateOfOrder, status };
+function createData(complaintId, customerName, complaintType, dateOfOrder, status, action) {
+    return { complaintId, customerName, complaintType,dateOfOrder, status, action };
 }
+const labels = ["complaintId", "customerName", "complaintType", "dateOfOrder", "status","action"];
 
 const rows = [
-    createData('C2K5464', 'Siddhesh R Ramane', 'Improper Service', '10 Oct 2021', 'Pending'),
-    createData('C2K5463', 'Kartik S Rane', 'Late Arrival', '10 Oct 2020', 'Addressed'),
-    createData('C2K5465', 'Amey S Marathe', 'Improper Service', '10 Sept 2021', 'Addressed'),
-    createData('C2K5466', 'Neha M Patil', 'Miscellaneous', '20 Sept 2021', 'Pending'),
-    createData('C2K5467', 'Nutan D. Deshmukh', 'Miscellaneous', '10 Aug 2021', 'Addressed'),
-    createData('C2K5468', 'Tripada Kyada', 'Improper Service', '1 Oct 2021', 'Pending'),
-    createData('C2K5469', 'Vivek Katkar', 'Improper Service', '11 Sept 2021', 'Addressed'),
-];
-
+    createData('C2K5464', 'Siddhesh R Ramane', 'Improper Service', '10 Oct 2021', 'Pending',
+    <Button  variant="contained" color="primary">View</Button>    ),
+    createData('C2K5463', 'Kartik S Rane', 'Late Arrival', '10 Oct 2020', 'Addressed',
+    <Button  variant="contained" color="primary">View</Button>),
+    createData('C2K5465', 'Amey S Marathe', 'Improper Service', '10 Sept 2021', 'Addressed',
+    <Button  variant="contained" color="primary">View</Button>),
+    createData('C2K5466', 'Neha M Patil', 'Miscellaneous', '20 Sept 2021', 'Pending',
+    <Button  variant="contained" color="primary">View</Button>),
+    createData('C2K5467', 'Nutan D. Deshmukh', 'Miscellaneous', '10 Aug 2021', 'Addressed',
+    <Button  variant="contained" color="primary">View</Button>),
+    createData('C2K5468', 'Tripada Kyada', 'Improper Service', '1 Oct 2021', 'Pending',
+    <Button  variant="contained" color="primary">View</Button>),
+    createData('C2K5469', 'Vivek Katkar', 'Improper Service', '11 Sept 2021', 'Addressed',
+    <Button  variant="contained" color="primary">View</Button>),
+    
+]
 
 // Actual Function
 const ServicemanComplaintList = (props) => {
@@ -310,7 +320,7 @@ const ServicemanComplaintList = (props) => {
                 </Box>
             </div>
 
-            <TableContainer component={Paper}>
+            {/* <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
                 <TableHead>
                         <TableRow>
@@ -381,7 +391,8 @@ const ServicemanComplaintList = (props) => {
                         </TableRow>
                     </TableFooter>
                 </Table>
-            </TableContainer>
+            </TableContainer> */}
+           <GenericTable rows={rows} labels={labels}/>
 
             {/* <Grid container spacing={2}>
                 <Grid item xs={4}>

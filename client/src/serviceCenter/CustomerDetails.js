@@ -12,7 +12,34 @@ import { Typography } from "@material-ui/core";
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import GenericTable from './GenericTable';
 
+const styles = theme => ({
+
+    listWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "1rem"
+    },
+    topRow: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "1rem",
+        marginBottom: "1rem"
+    },
+    rowHeader: {
+        fontWeight: "bold !important",
+    },
+    statRow: {
+        display: "flex",
+        justifyContent: "center"
+    },
+    statCard: {
+        margin: "1rem"
+    }
+    
+
+})
 
 //Details table
     function createData(property, data) {
@@ -29,10 +56,14 @@ import Container from '@material-ui/core/Container';
     createData('WARRANTY TILL', 'N.A.'),
     ];
 
+
 //History Table
     function createHistory(no, date, service, cost) {
         return { no, date, service, cost};
       }
+
+    const labels = ["no", "date", "service", "cost"];
+
     const rowsHistory = [
         createHistory(1, '02/02/2021', 'Oil Change', '₹500',), 
         createHistory(2, '02/03/2021', 'Oil Change, Brakes, Headlights', '₹1500',), 
@@ -57,8 +88,13 @@ import Container from '@material-ui/core/Container';
             status:'Pending',
         }
     ]
-function CustomerDetails() {
+
+   
+
+function CustomerDetails(props) {
     // const classes = useStyles();
+    const { classes, theme } = props;
+
     return (
             <div style={{padding:'1rem'}}> 
             <Grid container spacing={1}>
@@ -98,72 +134,13 @@ function CustomerDetails() {
                                 <Typography variant="subtitle2"><hr /></Typography>
                             </Grid>
                             <Grid item xs={12}>     
-                                <TableContainer >
-                                    <Table sx={{ minWidth: 650 }} aria-label="History">
-                                        <TableHead>
-                                            <TableRow>
-                                            <TableCell align="center"><b>SR. NO.</b></TableCell>
-                                            <TableCell align="left"><b>DATE</b></TableCell>
-                                            <TableCell align="left"><b>SERVICE</b></TableCell>
-                                            <TableCell align="center"><b>COST</b></TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {rowsHistory.map((rowsHistory) => (
-                                            <TableRow
-                                                key={rowsHistory.no}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row" align="center">
-                                                {rowsHistory.no}
-                                                </TableCell>
-                                                <TableCell align="left" >{rowsHistory.date}</TableCell>
-                                                <TableCell align="left">{rowsHistory.service}</TableCell>
-                                                <TableCell align="center">{rowsHistory.cost}</TableCell>
-                                            </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                </TableContainer>                               
+                                <GenericTable rows={rowsHistory} labels={labels}/>
                             </Grid>
                         </Card>
                     </Grid>
                 </Grid>
             </Grid>
-            {/* <div style={{marginTop:"4vh",marginBottom:"4vh"}}>
-            <Container maxWidth="lg" >
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table" >
-                    <TableHead>
-                    <TableRow>
-                        <TableCell>Complaint Id</TableCell>
-                        <TableCell align="center">Type</TableCell>
-                        <TableCell align="center">Status</TableCell>
-                        <TableCell align="center">View</TableCell>
-                    </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {workerComplaints.map((row) => (
-                        <TableRow
-                        key={row.id}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row">
-                            {row.id}
-                        </TableCell>
-                        <TableCell align="center">{row.type}</TableCell>
-                        <TableCell align="center">{row.status=='Addressed'?<span style={{color:'green'}}>Addressed</span>:<span style={{color:'red'}}>Pending</span>}</TableCell>
-                        <TableCell align="center">
-                        <Button variant="contained" color="primary">View</Button>
-                        </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            </Container>
-            </div> */}
-        </div>
+          </div>
     )
 }
 

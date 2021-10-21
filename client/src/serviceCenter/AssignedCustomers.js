@@ -9,13 +9,44 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { Typography } from "@material-ui/core";
+import GenericTable from './GenericTable';
+
+const styles = theme => ({
+
+    listWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "1rem"
+    },
+    topRow: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "1rem",
+        marginBottom: "1rem"
+    },
+    rowHeader: {
+        fontWeight: "bold !important",
+    },
+    statRow: {
+        display: "flex",
+        justifyContent: "center"
+    },
+    statCard: {
+        margin: "1rem"
+    }
+    
+
+})
+
 
 function createData(no, name, address, contact, details, service) {
     return { no, name, address, contact, details, service};
   }
 
+const labels = ["no", "name", "address", "contact", "details", "service"];
+
   const rows = [
-    createData(1, 'Siddhesh R Ramane', 'Sadashiv Apts,1145,shi, F.c.road,opp.police', 9359123910, 
+    createData(1, 'Siddhesh R Ramane', 'Sadashiv Apts,1145,shi, F.c.road,opp.police', 9359123910,
         <Link style={{ textDecoration: 'none' }} to="/customer-details"><Button variant="contained" color="primary">VIEW</Button></Link>,
         <Link style={{ textDecoration: 'none' }} to="/servicing"><Button variant="contained" color="primary">PROCEED</Button></Link>),
     createData(2, 'Kartik S Rane', 'Jabde Bungalow, Chatunsigi Temple', 9359123910, 
@@ -54,41 +85,12 @@ function createData(no, name, address, contact, details, service) {
         
 ];
 
-function AssignedCustomers() {
+function AssignedCustomers(props) {
+    const { classes, theme } = props;
     return (
         <div align="center" style={{padding:"1rem"}}>
         <Typography variant="h4" style={{ textShadow: "2px 2px #c4c4c4", paddingBottom:'20px', paddingTop:'20px'}}><b>CUSTOMER LIST</b></Typography>  
-            <TableContainer component={Paper} >
-                <Table sx={{ minWidth: 650 }} aria-label="Requests List">
-                    <TableHead>
-                        <TableRow>
-                        <TableCell align="center"><b>SR. NO.</b></TableCell>
-                        <TableCell align="left"><b>NAME</b></TableCell>
-                        <TableCell align="left"><b>ADDRESS</b></TableCell>
-                        <TableCell align="center"><b>CONTACT</b></TableCell>
-                        <TableCell align="center"><b>DETAILS</b></TableCell>
-                        <TableCell align="center"><b>SERVICE</b></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row" align="center">
-                            {row.no}
-                            </TableCell>
-                            <TableCell align="left">{row.name}</TableCell>
-                            <TableCell align="left">{row.address}</TableCell>
-                            <TableCell align="center">{row.contact}</TableCell>
-                            <TableCell align="center">{row.details}</TableCell>
-                            <TableCell align="center">{row.service}</TableCell>
-                        </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>        
+           <GenericTable rows={rows} labels={labels}/>
         </div>
     )
 }

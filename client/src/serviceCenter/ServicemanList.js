@@ -30,6 +30,36 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { Link } from 'react-router-dom';
+import GenericTable from './GenericTable';
+
+const styles = theme => ({
+
+    listWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        marginBottom: "1rem"
+    },
+    topRow: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "1rem",
+        marginBottom: "1rem"
+    },
+    rowHeader: {
+        fontWeight: "bold !important",
+    },
+    statRow: {
+        display: "flex",
+        justifyContent: "center"
+    },
+    statCard: {
+        margin: "1rem"
+    }
+    
+
+})
+
+const labels = ["id", "name", "phone", "email", "position", "address", "salary", "view"];
 
 const workers=[
     {
@@ -94,21 +124,21 @@ const workers=[
     }
 ]
 
-const styles = makeStyles((theme) => ({
-    listWrapper: {
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "1rem"
-    },
-    topRow: {
-        display: "flex",
-        justifyContent: "flex-end",
-    },
-    rowHeader: {
-        fontWeight: "bold !important",
-    }
+// const styles = makeStyles((theme) => ({
+//     listWrapper: {
+//         display: "flex",
+//         flexDirection: "column",
+//         marginBottom: "1rem"
+//     },
+//     topRow: {
+//         display: "flex",
+//         justifyContent: "flex-end",
+//     },
+//     rowHeader: {
+//         fontWeight: "bold !important",
+//     }
 
-}));
+// }));
 
 function TablePaginationActions(props) {
     
@@ -166,12 +196,12 @@ function TablePaginationActions(props) {
     );
 }
 
-TablePaginationActions.propTypes = {
-    count: PropTypes.number.isRequired,
-    onPageChange: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
-    rowsPerPage: PropTypes.number.isRequired,
-};
+// TablePaginationActions.propTypes = {
+//     count: PropTypes.number.isRequired,
+//     onPageChange: PropTypes.func.isRequired,
+//     page: PropTypes.number.isRequired,
+//     rowsPerPage: PropTypes.number.isRequired,
+// };
 
 function createData(id,name, phone, email,position,address,salary) {
     return { id, name,phone,email, position,address,salary};
@@ -191,36 +221,36 @@ const rows = getAllModels();
 
 function ServicemanList(props) {
 
-    const { classes, theme } = props;
-    const xs=useMediaQuery(theme.breakpoints.down('xs'));
-    const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
-    const md=useMediaQuery(theme.breakpoints.up('sm')&&theme.breakpoints.down('md'));
-    const lg=useMediaQuery(theme.breakpoints.up('md')&&theme.breakpoints.down('lg'));
-    const xl=useMediaQuery(theme.breakpoints.up('lg'));
+    // const { classes, theme } = props;
+    // const xs=useMediaQuery(theme.breakpoints.down('xs'));
+    // const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
+    // const md=useMediaQuery(theme.breakpoints.up('sm')&&theme.breakpoints.down('md'));
+    // const lg=useMediaQuery(theme.breakpoints.up('md')&&theme.breakpoints.down('lg'));
+    // const xl=useMediaQuery(theme.breakpoints.up('lg'));
 
 
-        const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(3);
+    //     const [page, setPage] = React.useState(0);
+    // const [rowsPerPage, setRowsPerPage] = React.useState(3);
 
     // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    // const emptyRows =
+    //     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
+    // const handleChangePage = (event, newPage) => {
+    //     setPage(newPage);
+    // };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
+    // const handleChangeRowsPerPage = (event) => {
+    //     setRowsPerPage(parseInt(event.target.value, 10));
+    //     setPage(0);
+    // };
 
     return (
-        <div>
-            <Container 
-            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
-            className={classes.listWrapper}>
-                <TableContainer component={Paper}>
+        <div style={{padding:'1rem'}}>
+            {/* <Container>  */}
+            {/* // maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
+            // className={classes.listWrapper}> */}
+                {/* <TableContainer component={Paper}>
                     <Table  aria-label="custom pagination table">
                     <TableHead>
                         <TableRow>
@@ -297,8 +327,9 @@ function ServicemanList(props) {
                         </TableRow>
                     </TableFooter>
                     </Table>
-    </TableContainer>
-</Container>
+    </TableContainer>*/}
+               <GenericTable rows={rows} labels={labels}/>
+{/* </Container>  */}
         </div>
     )
 }
