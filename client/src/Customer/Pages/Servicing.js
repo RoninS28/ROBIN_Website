@@ -101,9 +101,9 @@ const Servicing = () => {
             id: 2,
             imagesrc: "v2",
             model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "????",
+            plateNumber: "MH 12 SG 5488",
             purchaseDate: "08/09/2021",
-            status: "Pending",
+            status: "Past Due",
             stage: "3",
             deliveryDate: "28/06/2021",
             exServicingDate: "08/09/2021",
@@ -115,7 +115,12 @@ const Servicing = () => {
 
     const history = useHistory()
 
-
+    const pastDueStyle = {
+        color: 'red',
+    }
+    const upToDateStyle = {
+        color: '#B2E424',
+    }
 
 
     return (
@@ -123,7 +128,7 @@ const Servicing = () => {
 
 
             <div className={classes.heading}>
-                My Bookings
+                Servicing
             </div>
             <Grid container spacing={3} justifyContent="flex-end" className={classes.statusRow}>
                 <Grid item xs={5} md={3} lg={3} xl={3} justifyContent="flex-end" >
@@ -179,11 +184,14 @@ const Servicing = () => {
                             <Grid item spacing={3} key={item.plateNumber} xs={4} md={3} lg={3} xl={3} className={classes.statusColumn} >
                                 <div className="statusColumn">
 
-                                    <div>
+                                    <div style={item.status == 'Past Due' ? pastDueStyle : upToDateStyle}>
                                         {item.status}
                                     </div>
-                                    <div>
-                                        {item.status == 'Pending' ? item.stage : item.deliveryDate}
+                                    <div style={{ color: 'rgba(0,0,0,0.5)' }}>
+                                        {item.status == 'Past Due' ? "Ex-servicing date:" : "Next servicing:"}
+                                    </div>
+                                    <div style={{ color: '#F49F20' }}>
+                                        {item.status == 'Past Due' ? item.exServicingDate : item.nextServicingDate}
                                     </div>
                                 </div>
                             </Grid>

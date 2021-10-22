@@ -59,7 +59,7 @@ const ServicingBook = (props) => {
             id: 2,
             imagesrc: v2,
             model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "????",
+            plateNumber: "MH 12 SG 5488",
             purchaseDate: "08/09/2021",
             status: "Pending",
             stage: "3",
