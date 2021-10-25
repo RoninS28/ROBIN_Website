@@ -26,9 +26,9 @@ import EVModelList from "../../Pages/EVModelList"
 import '../Background/StarryNight.css';
 import EVModelDetail from "../../Pages/EVModelDetail";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import FactoryDetail from "../../Pages/FactoryDetail";
-import FactoryList from "../../Pages/FactoryList";
-import FactoryOverview from "../../Pages/FactoryOverview";
+import GenericDetail from "../../Pages/GenericDetail";
+import GenericList from "../../Pages/GenericList";
+import GenericOverview from "../../Pages/GenericOverview";
 import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
 import AccessoryOrderList from "../../Pages/AccessoryOrderList";
 import CustomerComplaintList from "../../Pages/CustomerComplaintList";
@@ -263,7 +263,25 @@ const Navbar = (props) => {
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Factory List" />
+                  <ListItemText primary="Factories" />
+                </ListItem>
+              </Link>
+
+              <Link to="/outlets" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Outlets" />
+                </ListItem>
+              </Link>
+
+              <Link to="/service-centers" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Service Centers" />
                 </ListItem>
               </Link>
 
@@ -276,21 +294,12 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
-              <Link to="/customerComplaints" style={{ textDecoration: 'none' }}>
+              <Link to="/complaints" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
                   <ListItemText primary="Complaints" />
-                </ListItem>
-              </Link>
-
-              <Link to="/complaint" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Complaint" />
                 </ListItem>
               </Link>
 
@@ -315,14 +324,28 @@ const Navbar = (props) => {
             <Switch>
               <Route path='/models' exact component={EVModelList} ></Route>
               <Route path='/models/:id' exact component={EVModelDetail} ></Route>
-              <Route path='/factories/add' exact component={FactoryDetail}></Route>
-              <Route path='/factories/:id/edit' exact component={FactoryDetail}></Route>
-              <Route path='/factories' exact component={FactoryList}></Route>
-              <Route path='/factories/:id' exact component={FactoryOverview}></Route>
+
+              <Route path='/factories/add' exact component={GenericDetail}></Route>
+              <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
+              <Route path='/factories' exact component={GenericList}></Route>
+              <Route path='/factories/:id' exact component={GenericOverview}></Route>
+              
+              <Route path='/outlets/add' exact component={GenericDetail}></Route>
+              <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
+              <Route path='/outlets' exact component={GenericList}></Route>
+              <Route path='/outlets/:id' exact component={GenericOverview}></Route>
+
+              <Route path='/service-centers/add' exact component={GenericDetail}></Route>
+              <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
+              <Route path='/service-centers' exact component={GenericList}></Route>
+              <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
+
               <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
               <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
-              <Route path='/customerComplaints' exact component={CustomerComplaintList}></Route>
-              <Route path='/complaint' exact component={CustomerComplaint}></Route>
+              
+              <Route path='/complaints' exact component={CustomerComplaintList}></Route>
+              <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
+              
               <Route path='/dashboard' exact component={Dashboard}></Route>
             </Switch>
         </div>

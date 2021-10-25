@@ -226,7 +226,7 @@ const CustomerComplaintList = (props) => {
                     </FormControl>
                 </Box>
             </div>
-            <GenericTable rows={rows} labels={labels}/>
+            <GenericTable rows={rows} labels={labels} view='/complaints/1'/>
 
             <Grid container spacing={2}>
                 <Grid item xs={4}>

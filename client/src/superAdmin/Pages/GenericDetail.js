@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { withStyles } from "@material-ui/core/styles";
 
 import { factoryList } from '../Data/FactoryList';
+import { outletList } from '../Data/OutletList';
+import { serviceCenterList } from '../Data/ServiceCenterList';
 import TextField from '@material-ui/core/TextField';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { useLocation } from 'react-router';
 
 const styles = theme => ({ 
     wrapperDiv: {
@@ -70,13 +73,35 @@ const styles = theme => ({
     }
 })
 
-const FactoryDetail = (props) => {
+const GenericDetail = (props) => {
 
     const {classes, theme} = props;
 
+    const location = useLocation();
+    const arrList = location.pathname.split('/');
+    const componentName = arrList[1];
+
+    // ['', 'factories', '1', 'edit']
+    // ['', 'factories', '1']
+
+    let componentNameSingular = '';
+
+    let obj = {}
+    if (componentName == 'factories') {
+        console.log("Herererer")
+        componentNameSingular = 'Factory'
+        obj = factoryList[0];
+    } else if (componentName == 'outlets') {
+        componentNameSingular = 'Outlet'
+        obj = outletList[0];
+    } else if (componentName == 'service-centers') {
+        componentNameSingular = 'Service Center'
+        obj = serviceCenterList[0]
+    }
+
     const {
         id, name, address, fax, email, phone, dateOfEstablishment, licenceNumber, manager
-    } = factoryList[0];
+    } = obj;
     
     const { line1, line2, city, state, pinCode } = address;
     const { 
@@ -146,4 +171,4 @@ const FactoryDetail = (props) => {
     )
 }
 
-export default withStyles(styles, { withTheme: true })(FactoryDetail);
+export default withStyles(styles, { withTheme: true })(GenericDetail);

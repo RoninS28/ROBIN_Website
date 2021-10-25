@@ -178,8 +178,6 @@ export default function GenericTable(props) {
                         return row[label];
                     }
                   })()}
-
-                  {/* {label == 'actions' ? <Button variant="contained" color="primary">View Details</Button> : row[label]} */}
                 </TableCell>
               ))}
             </TableRow>
