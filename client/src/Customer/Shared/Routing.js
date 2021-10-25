@@ -27,7 +27,7 @@ function Routing() {
           <Route path='/' exact component={Home} ></Route>
           <Route path='/products' exact component={Products} ></Route>
           <Route path='/productsView/:id' exact component={ProductsView} ></Route>
-          <Route path='/testdrive' exact component={TestDrive} ></Route>
+          <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
           <Route path='/bookings' exact component={Bookings} ></Route>
           <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
           <Route path='/servicing' exact component={Servicing} ></Route>

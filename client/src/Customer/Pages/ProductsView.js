@@ -4,6 +4,7 @@ import { AvatarGroup } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useHistory } from "react-router";
 import v1 from '../Assets/v1.png'
 import v2 from '../Assets/v2uncropped.jpeg'
 import v3 from '../Assets/v3.jpeg'
@@ -131,8 +132,13 @@ const useStyles = makeStyles((theme) =>
 
 const ProductsView = (props) => {
     const classes = useStyles(props)
+    const history = useHistory()
     const id = props.match.params.id;
     const model = modelList.find(item => item.id == id)
+
+    const handleTestDrive = (e) => {
+        history.push("/testdrive/" + e.id)
+    }
     // const model = model1.
     console.log(model)
     // modelList.
@@ -297,7 +303,7 @@ const ProductsView = (props) => {
                     Would you like a test drive? Take one now for free!!
                 </div>
                 <div className="takeTestDriveButtonDiv" >
-                    <button >TAKE TEST DRIVE</button>
+                    <button onClick={() => handleTestDrive(model)}>TAKE TEST DRIVE</button>
                 </div>
             </div>
 

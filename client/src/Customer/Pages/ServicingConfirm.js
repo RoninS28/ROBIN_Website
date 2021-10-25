@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => {
         },
         grids: {
             width: '100%',
-            flexGrow: "1", marginTop:"20px"
+            flexGrow: "1", marginTop: "20px"
         },
         image: {
             alignItems: 'self',
@@ -81,7 +81,7 @@ const ServicingConfirm = () => {
     const myBookingsList = [
         {
             imagesrc: "v2",
-            owner: "Rohan Shiveshwarkar",
+            owner: "Dhananjay Mahajan",
             model: "CITY - 1 ELECTRIC SCOOTER",
             chasis: "xxxxxxxxxxxx",
             plateNumber: "MH 12 FP 9602",
@@ -118,7 +118,7 @@ const ServicingConfirm = () => {
 
                 <Grid container spacing={3} justifyContent="space-evenly" className={classes.bookingrow}>
                     {myBookingsList.map(item => (
-                        
+
                         <Grid container item xs={12} md={12} lg={12} xl={12}>
                             <Grid item spacing={3} key={item.plateNumber} xs={2} md={2} lg={2} xl={2}>
                             </Grid>
@@ -150,7 +150,7 @@ const ServicingConfirm = () => {
                             </Grid>
                             <Grid item spacing={3} key={item.plateNumber} xs={3} md={3} lg={3} xl={3}>
                             </Grid>
-                            
+
                         </Grid>
 
 
@@ -160,7 +160,7 @@ const ServicingConfirm = () => {
 
             </div>
 
-            <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "" , marginTop:"40px", fontSize:"25px"}}>
+            <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "", marginTop: "40px", fontSize: "25px" }}>
                 <div className="flex content-center items-center justify-center h-full">
                     <div className="w-full lg:w-8/12 mt-10 px-4">
                         <form>
@@ -169,7 +169,7 @@ const ServicingConfirm = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
                                         htmlFor="grid-password"
-                                        
+
                                     >
                                         Select Appointment Date:
                                     </label>
@@ -225,7 +225,7 @@ const ServicingConfirm = () => {
                                     </label>
                                 </div>
                                 <div className="relative w-full lg:w-6/12 mb-3 px-2">
-                                    
+
                                     <textarea rows="5" className="relative w-full" style={{ borderWidth: "0.5px", borderColor: "black", borderRadius: "5px" }}></textarea>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@ const ServicingConfirm = () => {
                                 <button
                                     className="w-full lg:w-6/12 text-black text-xl font-bold uppercase px-6 py-3  mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                     type="button"
-                                    style={{ backgroundColor: "white" , borderRadius:"15px", borderColor:"#FFD700", borderWidth:"5px"}}
+                                    style={{ backgroundColor: "white", borderRadius: "15px", borderColor: "#FFD700", borderWidth: "5px" }}
                                 >
                                     Confirm Appointment
                                 </button>
@@ -242,7 +242,7 @@ const ServicingConfirm = () => {
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
 
 
 
