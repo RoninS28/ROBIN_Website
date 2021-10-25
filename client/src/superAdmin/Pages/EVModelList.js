@@ -90,7 +90,7 @@ const EVModelList = (props) => {
 
                 <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
             </div>
-            <GenericTable rows={rows} labels={labels}/>
+            <GenericTable rows={rows} labels={labels} view={'/models/1'}/>
             
         </Container>
     );

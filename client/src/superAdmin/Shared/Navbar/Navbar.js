@@ -258,25 +258,7 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
-              <Link to="/model" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="EV Model" />
-                </ListItem>
-              </Link>
-
-              <Link to="/factory" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Factory Detail" />
-                </ListItem>
-              </Link>
-
-              <Link to="/factoryList" style={{ textDecoration: 'none' }}>
+              <Link to="/factories" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
@@ -285,30 +267,12 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
-              <Link to="/factoryOverview" style={{ textDecoration: 'none' }}>
+              <Link to="/accessory-orders" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Factory Overview" />
-                </ListItem>
-              </Link>
-
-              <Link to="/orderReceipt" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Order Receipt" />
-                </ListItem>
-              </Link>
-
-              <Link to="/accessoryList" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Order List" />
+                  <ListItemText primary="Accessory List" />
                 </ListItem>
               </Link>
 
@@ -339,17 +303,6 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
           </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -361,12 +314,13 @@ const Navbar = (props) => {
           <div className = 'back'>
             <Switch>
               <Route path='/models' exact component={EVModelList} ></Route>
-              <Route path='/model' exact component={EVModelDetail} ></Route>
-              <Route path='/factory' exact component={FactoryDetail}></Route>
-              <Route path='/factoryList' exact component={FactoryList}></Route>
-              <Route path='/factoryOverview' exact component={FactoryOverview}></Route>
-              <Route path='/orderReceipt' exact component={AccessoryOrderReceipt}></Route>
-              <Route path='/accessoryList' exact component={AccessoryOrderList}></Route>
+              <Route path='/models/:id' exact component={EVModelDetail} ></Route>
+              <Route path='/factories/add' exact component={FactoryDetail}></Route>
+              <Route path='/factories/:id/edit' exact component={FactoryDetail}></Route>
+              <Route path='/factories' exact component={FactoryList}></Route>
+              <Route path='/factories/:id' exact component={FactoryOverview}></Route>
+              <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
+              <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
               <Route path='/customerComplaints' exact component={CustomerComplaintList}></Route>
               <Route path='/complaint' exact component={CustomerComplaint}></Route>
               <Route path='/dashboard' exact component={Dashboard}></Route>

@@ -30,6 +30,8 @@ import { factoryList } from '../Data/FactoryList'
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from '@material-ui/core';
 import GenericTable from './GenericTable';
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router";
 
 
 const styles = theme => ({
@@ -90,6 +92,7 @@ const FactoryList = (props) => {
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const history =useHistory();
 
 
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -163,10 +166,11 @@ const FactoryList = (props) => {
                         </IconButton>
                     </Paper>
 
-                <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>
+                    <Button onClick={()=>history.push("/factories/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>
+                
 
             </div>
-            <GenericTable rows={rows} labels={labels}/>
+            <GenericTable rows={rows} labels={labels} view="/factories/1"/>
         </Container>
     );
 }

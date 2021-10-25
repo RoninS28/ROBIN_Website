@@ -17,6 +17,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import Button from '@material-ui/core/Button';
+import { useHistory } from "react-router";
 
 function formatCamelCase(str) {
   let res = "";
@@ -106,6 +107,7 @@ export default function GenericTable(props) {
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const history =useHistory();
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -152,7 +154,7 @@ export default function GenericTable(props) {
                   {(() => {
                     switch (label) {
                       case 'actions':
-                        return <Button variant="contained" color="primary">View</Button>;
+                        return <Button onClick={()=>history.push(props.view)} variant="contained" color="primary">View</Button>;
                       case 'imgUrl':
                         return <img src={row[label]} style={{ height: "120px", width: "100px" }} />;
                       case 'colors':

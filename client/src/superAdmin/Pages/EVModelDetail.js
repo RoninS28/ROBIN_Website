@@ -228,8 +228,8 @@ const EVModelDetail = (props) => {
                 </div>
 
                 <div className={classes.btnContainer}>
-                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary">Delete Model</Button>
-                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary">Save Details</Button>
+                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary">Delete</Button>
+                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary">Save</Button>
                 </div>
             </div>
         </div>

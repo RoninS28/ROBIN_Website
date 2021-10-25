@@ -16,6 +16,8 @@ import { useMediaQuery } from '@material-ui/core';
 import {Doughnut} from 'react-chartjs-2';
 import {Line} from 'react-chartjs-2';
 import GenericTable from './GenericTable';
+import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from 'react-router';
 
 
 const styles = theme => ({
@@ -110,6 +112,8 @@ const FactoryOverview = (props) => {
     const lg = useMediaQuery(theme.breakpoints.up('md') && theme.breakpoints.down('lg'))
     const xl = useMediaQuery(theme.breakpoints.up('lg'))
 
+    const history =useHistory();
+
     return (
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
@@ -127,9 +131,15 @@ const FactoryOverview = (props) => {
                             <Typography sx={{ fontSize: 14, margin:"1" }} color="text.secondary" gutterBottom>
                             Factory Name
                             </Typography>
-                            <Typography variant="h5" component="div">
-                            Noga Factory
-                            </Typography>
+                            <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                <Typography variant="h5" component="div">
+                                Noga Factory
+                                </Typography>
+                                
+                                <div onClick={()=>history.push("/factories/1/edit")}>
+                                    <EditIcon />
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
                             

@@ -161,7 +161,7 @@ const AccessoryOrderList = (props) => {
                     </FormControl>
                 </Box>
             </div>
-            <GenericTable rows={rows} labels={labels}/>
+            <GenericTable rows={rows} labels={labels} view={'/accessory-orders/1'}/>
         </Container>
     );
 }

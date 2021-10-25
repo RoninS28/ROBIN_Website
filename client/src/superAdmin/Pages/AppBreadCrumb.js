@@ -35,8 +35,9 @@ function AppBreadCrumb() {
     : currentRoutes.map((route, index) => {
     return (index !== currentRoutes.length - 1
     ? <Link key={index} color="inherit" style={{ cursor: 'pointer' }} onClick={() => {
-    navigate(route)
-    }} >
+      navigate.push("/"+route);
+      console.log(route);
+      }} >
     {route}
     </Link>
     : <Typography key={index} color="textPrimary">{route}</Typography>)
