@@ -39,13 +39,27 @@ import { Line } from "react-chartjs-2";
 import workerComplaints from "../Data/WorkerComplaints";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
+import { Input, useMediaQuery } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   container: {},
 }));
 
 const state = {
-  labels: ["January", "February", "March", "April", "May","June","July",'August','September','October','November','December'],
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
   datasets: [
     {
       label: "Working Graph",
@@ -54,7 +68,7 @@ const state = {
       backgroundColor: "rgba(75,192,192,1)",
       borderColor: "rgba(0,0,0,1)",
       borderWidth: 2,
-      data: [65, 59, 80, 81, 56,40,25,89,23,26,34,47],
+      data: [65, 59, 80, 81, 56, 40, 25, 89, 23, 26, 34, 47],
     },
   ],
 };
@@ -62,11 +76,23 @@ const state = {
 function WorkerListDetails(props) {
   const { classes, theme } = props;
 
+  const xs = useMediaQuery(theme.breakpoints.down("xs"));
+  const sm = useMediaQuery(
+    theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
+  );
+  const md = useMediaQuery(
+    theme.breakpoints.up("sm") && theme.breakpoints.down("md")
+  );
+  const lg = useMediaQuery(
+    theme.breakpoints.up("md") && theme.breakpoints.down("lg")
+  );
+  const xl = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <div>
       <Grid container spacing={1}>
         <Grid item xs={12} md={4} lg={4}>
-          <Card style={{ borderRadius: "35px" }}>
+          <Card maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl} style={{ borderRadius: "35px" }}>
             <CardContent>
               <div
                 style={{
@@ -181,84 +207,83 @@ function WorkerListDetails(props) {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={8} lg={8}>
-          <Card style={{marginLeft:'2vw',width:'20vw'}}>
-            <nav aria-label="main mailbox folders">
-              <List>
-                <ListItem disablePadding>
-                  <ListItemText primary="Total Working Days : 100" />
-                </ListItem>
-                <Divider />
-                <ListItem disablePadding>
-                  <ListItemText primary="Total Leaves : 5" />
-                </ListItem>
-              </List>
-            </nav>
-            <Divider />
-            <nav aria-label="secondary mailbox folders">
-              <List>
-                <ListItem disablePadding>
-                  <ListItemText primary="Leaves Available : 20" />
-                </ListItem>
-                <Divider />
-                <ListItem disablePadding>
-                  <ListItemText primary="Leave Applications : 2" />
-                </ListItem>
-              </List>
-            </nav>
-          </Card>
-
-          <div style={{ marginTop: "2vh" }}>
-            <Container maxWidth="lg">
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>LEAVE ID</TableCell>
-                      <TableCell align="center">DESCRIPTION</TableCell>
-                      <TableCell align="center">STATUS</TableCell>
-                      <TableCell align="center">VIEW</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {leave.map((leave) => (
-                      <TableRow
-                        key={leave.id}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {leave.id}
-                        </TableCell>
-                        <TableCell align="center">
-                          {leave.description}
-                        </TableCell>
-                        <TableCell align="center">
-                          {leave.status == "Approved" ? (
-                            <span style={{ color: "green" }}>Approved</span>
-                          ) : leave.status == "Pending" ? (
-                            <span style={{ color: "yellow" }}>Pending</span>
-                          ) : (
-                            <span style={{ color: "red" }}>Denied</span>
-                          )}
-                        </TableCell>
-                        <TableCell align="center">
-                          <Button variant="contained" color="primary">
-                            View
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Container>
-          </div>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Total Working Days: 100</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Total Leaves: 5</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Leaves Availabe: 20</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Leave Applications: 2</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
         </Grid>
 
         <Grid item xs={12} md={12} lg={12}>
-          <Container maxWidth="lg">
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>LEAVE ID</TableCell>
+                    <TableCell align="center">DESCRIPTION</TableCell>
+                    <TableCell align="center">STATUS</TableCell>
+                    <TableCell align="center">VIEW</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {leave.map((leave) => (
+                    <TableRow
+                      key={leave.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {leave.id}
+                      </TableCell>
+                      <TableCell align="center">{leave.description}</TableCell>
+                      <TableCell align="center">
+                        {leave.status == "Approved" ? (
+                          <span style={{ color: "green" }}>Approved</span>
+                        ) : leave.status == "Pending" ? (
+                          <span style={{ color: "yellow" }}>Pending</span>
+                        ) : (
+                          <span style={{ color: "red" }}>Denied</span>
+                        )}
+                      </TableCell>
+                      <TableCell align="center">
+                        <Button variant="contained" color="primary">
+                          View
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+        </Grid>
+
+        <Grid item xs={12} md={12} lg={12}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -300,23 +325,22 @@ function WorkerListDetails(props) {
         </Grid>
 
         <Grid item xs={12} md={12} lg={12}>
-        <div style={{ marginTop: "4vh"}}>
-                <Line
-                  data={state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: "Average Rainfall per month",
-                      fontSize: 20,
-                    },
-                    legend: {
-                      display: true,
-                      position: "right",
-                    },
-                  }}
-                />
-              </div>
-
+          <div style={{ marginTop: "4vh" }}>
+            <Line
+              data={state}
+              options={{
+                title: {
+                  display: true,
+                  text: "Average Rainfall per month",
+                  fontSize: 20,
+                },
+                legend: {
+                  display: true,
+                  position: "right",
+                },
+              }}
+            />
+          </div>
         </Grid>
       </Grid>
     </div>

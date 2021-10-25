@@ -97,7 +97,6 @@ const complaints = [
     date: "04-08-2021",
     status: "Addressed",
   },
-  
 ];
 
 const services = [
@@ -112,37 +111,25 @@ const services = [
     date: "02-07-2021",
     vehicle: "4444-2222-9999",
     cost: 500,
-  },
-  {
-    id: 3,
-    date: "02-07-2021",
-    vehicle: "4444-2222-9999",
-    cost: 500,
-  },
-  {
-    id: 4,
-    date: "02-07-2021",
-    vehicle: "4444-2222-9999",
-    cost: 500,
-  },
+  }
 ];
 
 //orders
-function createData(id, model, Stage, img) {
-  return { id, model, Stage, img };
+function createData(id, model, Stage) {
+  return { id, model, Stage };
 }
 
 function getAllModels() {
   const allModels = [];
   rows1.map((model) => {
     console.log(model);
-    allModels.push(createData(model.id, model.model, model.Stage, model.img));
+    allModels.push(createData(model.id, model.model, model.Stage));
   });
   return allModels;
 }
 
 const orders = getAllModels();
-const orderLabels=["id","model","Stage","img","actions"]
+const orderLabels = ["id", "model", "Stage", "actions"];
 
 //complaints
 
@@ -160,7 +147,7 @@ function getAllModels2() {
 }
 
 const complaintsRows = getAllModels2();
-const complaintsLabels=["id","type","status","date","actions"]
+const complaintsLabels = ["id", "type", "status", "date", "actions"];
 
 // services
 function createData3(id, date, vehicle, cost) {
@@ -179,7 +166,7 @@ function getAllModels3() {
 }
 
 const servicesRows = getAllModels3();
-const servicesLabels=["id","date","vehicle","cost","actions"]
+const servicesLabels = ["id", "date", "vehicle", "cost", "actions"];
 
 function CustomerDetail(props) {
   const { classes, theme } = props;
@@ -196,86 +183,99 @@ function CustomerDetail(props) {
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
-    <div style={{paddingLeft:"2vw",paddingRight:"2vw"}}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={12} lg={12}>
-          Detail's
-          <Card className={classes.custInfo}>
-            <div style={{ marginTop: "2vh" }}>
-              <AccountCircleIcon />
-            </div>
-            <div className={classes.custDetail}>
-              <div>
-                <h3>
-                  {" "}
-                  <span style={{ color: "blue" }}>Name:</span>{" "}
-                </h3>
-                <h3>
-                  {" "}
-                  <span style={{ color: "blue" }}>Phone:</span>{" "}
-                </h3>
-                <h3>
-                  {" "}
-                  <span style={{ color: "blue" }}>Email:</span>{" "}
-                </h3>
-                <h3>
-                  {" "}
-                  <span style={{ color: "blue" }}>Address:</span>{" "}
-                </h3>
+    <div style={{ paddingLeft: "2vw", paddingRight: "2vw" }}>
+      <Grid container spacing={2} marginBottom={2}>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            Details
+            <Card className={classes.custInfo}>
+              <div style={{ marginTop: "2vh" }}>
+                <AccountCircleIcon />
               </div>
-              <div>
-                <h3> Sandesh Mahajan</h3>
-                <h3> +91 9999999999 </h3>
-                <h3> sandeshmahajan@gmail.com </h3>
-                <h3> 12,Gloria Villa Shanti Nagar Pune </h3>
+              <div className={classes.custDetail}>
+                <div>
+                  <h3>
+                    {" "}
+                    <span style={{ color: "blue" }}>Name:</span>{" "}
+                  </h3>
+                  <h3>
+                    {" "}
+                    <span style={{ color: "blue" }}>Phone:</span>{" "}
+                  </h3>
+                  <h3>
+                    {" "}
+                    <span style={{ color: "blue" }}>Email:</span>{" "}
+                  </h3>
+                  <h3>
+                    {" "}
+                    <span style={{ color: "blue" }}>Address:</span>{" "}
+                  </h3>
+                </div>
+                <div>
+                  <h3> Sandesh Mahajan</h3>
+                  <h3> +91 9999999999 </h3>
+                  <h3> sandeshmahajan@gmail.com </h3>
+                  <h3> 12,Gloria Villa Shanti Nagar Pune </h3>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <Button
-                style={{ width: "7vw" }}
-                variant="contained"
-                color="secondary"
-              >
-                Call
-              </Button>
-            </div>
-            <div>
-              <Button
-                style={{ marginTop: "2vh", marginBottom: "2vh", width: "7vw" }}
-                variant="contained"
-                color="primary"
-              >
-                Message
-              </Button>
-            </div>
-          </Card>
+              <div>
+                <Button
+                  style={{ width: "7vw" }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Call
+                </Button>
+              </div>
+              <div>
+                <Button
+                  style={{
+                    marginTop: "2vh",
+                    marginBottom: "1vh",
+                    width: "7vw",
+                  }}
+                  variant="contained"
+                  color="primary"
+                >
+                  Message
+                </Button>
+              </div>
+            </Card>
+          </Container>
         </Grid>
 
         {/* //Services */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Container>
-            Recent Service's
-            <GenericTable rows={servicesRows} labels={servicesLabels}/>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            Recent Services
+            <GenericTable rows={servicesRows} labels={servicesLabels} />
           </Container>
         </Grid>
-{/* 
+        {/* 
           Orders */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Container>
-             Order's
-             <GenericTable rows={orders} labels={orderLabels}/>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            Orders
+            <GenericTable rows={orders} labels={orderLabels} />
           </Container>
         </Grid>
 
-          {/* Complaints */}
-        <Grid item xs={12} md={12} lg={12}>
-          <Container>
-             Complaint's
-              <GenericTable rows={complaintsRows} labels={complaintsLabels}/>
+        {/* Complaints */}
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            Complaints
+            <GenericTable rows={complaintsRows} labels={complaintsLabels} />
           </Container>
         </Grid>
-
 
       </Grid>
     </div>

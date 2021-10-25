@@ -37,18 +37,16 @@ import { useTheme } from '@material-ui/styles';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TestDriveDetail from "../../Pages/TestDriveDetail";
+
 import AccessoryReportDetail from "../../Pages/AccessoryReportDetail";
 
 
 
 import { useLocation, useHistory } from 'react-router-dom';
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
-import TestDrive from "../../Pages/TestDrive";
+
 import Complaints from "../../Pages/Complaints";
-import WorkerComplaint from "../../Pages/WorkerComplaint";
-import CustomerComplaint from "../../Pages/CustomerComplaint";
+import CustomerComplaint from "../../Pages/Customercomplaints";
 import BuyAccessories from "../../Pages/BuyAccessories";
 import AccessoryPage from "../../Pages/AccessoryPage";
 
@@ -296,43 +294,13 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
-              <Link to="/workerDetail" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Worker Detail" />
-                </ListItem>
-              </Link>
+              
 
-              <Link to="/orderDetail" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Order Detail" />
-                </ListItem>
-              </Link>
+             
 
-              <Link to="/testDrive" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Test Drive" />
-                </ListItem>
-              </Link>
+             
 
-              <Link to="/testDriveDetail" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Test Drive Detail" />
-                </ListItem>
-              </Link>
-
-              <Link to="/issues" style={{ textDecoration: 'none' }}>
+              <Link to="/complaints" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
@@ -341,22 +309,7 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
-              <Link to="/workerComplaint" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Worker Complaint" />
-                </ListItem>
-              </Link>
-              <Link to="/customerComplaint" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Customer Complaint" />
-                </ListItem>
-              </Link>
+              
               <Link to="/buyAccessories" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -417,13 +370,11 @@ const Navbar = (props) => {
               {/* <Route path="/" exact component={OrderList}/> */}
               <Route path='/orders' exact component={OrderList} ></Route>
               <Route path='/workers' exact component={WorkerList} ></Route>
-              <Route path='/workerDetail' exact component={WorkerListDetails}/>
-              <Route path='/orderDetail' exact component={OrderDetail}/>
-              <Route path='/testDrive' exact component={TestDrive}/>
-              <Route path='/testDriveDetail' exact component={TestDriveDetail}/>
-              <Route path='/issues'  exact component={Complaints} ></Route>
-              <Route path='/workerComplaint'exact component={WorkerComplaint}/>
-              <Route path="/customerComplaint" exact component={CustomerComplaint}/>
+              <Route path='/workers/:id' exact component={WorkerListDetails}/>
+              <Route path='/orders/:id' exact component={OrderDetail}/>
+              
+              <Route path='/complaints'  exact component={Complaints} ></Route>
+              <Route path="/complaints/:id" exact component={CustomerComplaint}/>
               <Route path="/buyAccessories" exact component={BuyAccessories}/>
               <Route path='/accessoryPage' exact component={AccessoryPage}/>
               <Route path='/accessoryReport' exact component={AccessoryReport}/>

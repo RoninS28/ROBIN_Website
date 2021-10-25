@@ -23,8 +23,8 @@ const styles = makeStyles((theme) => ({
     flexDirection: "row",
   },
   modelImage: {
-    height: 220,
-    width: 220,
+    height: 400,
+    width: 400,
   },
   modelInfo: {
     display: "flex",
@@ -55,7 +55,7 @@ function TestDriveDetail(props)
           </div>
 
           <div style={{ marginLeft: "0vw" }}>
-            <img src={scooter1} className="modelImage" alt="EV" />
+            <img src={scooter1} className={classes.modelImage} alt="EV" />
           </div>
 
           <div>

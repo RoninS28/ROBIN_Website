@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
+import Grid from '@material-ui/core/Grid'
 
 function ComplaintDetail(props) {
 
@@ -22,7 +23,7 @@ function ComplaintDetail(props) {
           alignItems: "center",
         }}
       >
-        <Card style={{ height: "40vh", width: "40vw" }}>
+        <Card style={{ height: "40vh", width: "40vw" ,overflow:'scroll'}}>
           <CardContent>
             <div style={{ display: "flex" }}>
               <Avatar alt="Kamlesh Raut" src="/static/images/avatar/1.jpg" />
@@ -62,7 +63,7 @@ function ComplaintDetail(props) {
           marginTop: "4vh",
         }}
       >
-        <Card style={{ height: "30vh", width: "40vw" }}>
+        <Card style={{ height: "30vh", width: "40vw",overflow:'scroll' }}>
           <CardContent>
             <div style={{ display: "flex" }}>
               <Avatar alt="You" src="/static/images/avatar/1.jpg" />

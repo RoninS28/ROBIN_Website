@@ -1,8 +1,7 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/styles';
-import { withStyles } from "@material-ui/core/styles";
+
 import scooter1 from '../../images/scooter1.jpeg';
-import './OrderDetail.css'
+
 import { Button } from '@material-ui/core';
 import CallIcon from '@material-ui/icons/Call';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
@@ -20,11 +19,63 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DoneIcon from '@material-ui/icons/Done';
 import Done from '@material-ui/icons/Done';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import { makeStyles } from "@material-ui/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 
 const steps = ['Deformation', 'Casting', 'Polymer process','Machining','Finishing'];
 
+
+const styles = makeStyles((theme) => ({
+    modelDetail:{
+        display: "flex",
+        justifyContent: "space-evenly",
+    },
+    modelImage:{
+        height: 320,
+        width:320,
+    },
+    description:{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+    },
+    modelInfo:{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    modelSteps:{
+        marginTop: 20,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    stepDescription:{
+        marginTop: 20,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginBottom: 20,
+    },
+    workerInfo:{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+    }
+
+    
+
+
+
+}))
+
 function OrderDetail(props){
+
+        const classes=styles();
 
         const [expanded, setExpanded] = React.useState(false);
 
@@ -87,14 +138,14 @@ function OrderDetail(props){
     return (
         <div>
 
-            <div className="modelDetail">
-                        <div className="modelInfo" >
+            <div className={classes.modelDetail}>
+                        <div className={classes.modelInfo} >
                             <div>
                                 <h1 style={{color:"red"}}>BATCH ID:1</h1>
                             </div>
 
                             <div style={{marginLeft:"0vw"}}>
-                                <img src={scooter1} className="modelImage" alt="EV"/>
+                                <img src={scooter1} className={classes.modelImage} alt="EV"/>
                             </div>
 
                             <div>
@@ -103,7 +154,7 @@ function OrderDetail(props){
                         </div>
                     
 
-                    <div className="description">
+                    <div className={classes.description}>
                         <div><h2><span style={{color:"blue"}}>Current Stage</span>: Machining</h2></div>
                         <div><h2><span style={{color:"blue"}}>Stock</span>: 20</h2></div>
                         <div><h2><span style={{color:"blue"}}>Model</span>: City Electric Scooter</h2></div>
@@ -116,7 +167,7 @@ function OrderDetail(props){
 
             </div>
 
-            <div  className="modelSteps">
+            <div  className={classes.modelSteps}>
 
                             <Box sx={{ width: '80%' }}>
                     <Stepper nonLinear activeStep={activeStep}>
@@ -178,7 +229,7 @@ function OrderDetail(props){
 
             
 
-            <div className="stepDescription">
+            <div className={classes.stepDescription}>
                     
                     <div>
                         <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
@@ -273,7 +324,7 @@ function OrderDetail(props){
 
             </div>
 
-            <div className="workerInfo">
+            <div className={classes.workerInfo}>
                     <div><h2><span style={{color:"blue"}}>Batch Supervisior</span>: Sandesh Mahajan</h2></div>
                     <div><h2><span style={{color:"blue"}}>Contact</span>: +91 9999999999</h2></div>
                     <div><Button variant="contained" color="primary"><CallIcon/> Supervisior</Button><Button variant="contained" color="secondary" style={{marginLeft:"2vh"}}><MailOutlineIcon/> Supervisior</Button></div>
@@ -286,4 +337,4 @@ function OrderDetail(props){
     )
 }
 
-export default OrderDetail;
+export default withStyles(styles, { withTheme: true })(OrderDetail);

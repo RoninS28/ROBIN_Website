@@ -13,7 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import PrintIcon from '@material-ui/icons/Print';
 import DownloadIcon from '@material-ui/icons/FontDownload';
-import testDrive from '../Data/TestDrive';
+import orders from '../Data/Order';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Fab from "@material-ui/core/Fab";
@@ -37,12 +37,8 @@ import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
-import MenuItem from "@material-ui/core/MenuItem";
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-
+import workers from '../Data/Workers.js';
+import { useHistory } from 'react-router';
 
 
 const styles = makeStyles((theme) => ({
@@ -60,7 +56,6 @@ const styles = makeStyles((theme) => ({
     }
 
 }));
-
 
 function TablePaginationActions(props) {
     
@@ -123,61 +118,33 @@ TablePaginationActions.propTypes = {
     onPageChange: PropTypes.func.isRequired,
     page: PropTypes.number.isRequired,
     rowsPerPage: PropTypes.number.isRequired,
-  };
+};
 
-
-function createData(id, name,model,where,date) {
-    return { id,name,model,where,date };
+function createData(id,name, phone, email,position,address,salary) {
+    return { id, name,phone,email, position,address,salary};
 }
 
 function getAllModels() {
     const allModels = [];
-    testDrive.map(model => {
+    workers.map(model => {
         console.log(model);
-        allModels.push(createData(model.id, model.name, model.model, model.where, model.date))
+        allModels.push(createData(model.id, model.name, model.phone, model.email, model.position,model.address,model.salary))
     })
     return allModels
 }
 
 const rows = getAllModels();
 
-//Dropdown
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
+function WorkerList(props) {
 
-const names = [
-  'Request',
-  'Pending',
-  'Completed'
-];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-
-
-
-function TestDrive(props) {
     const { classes, theme } = props;
     const xs=useMediaQuery(theme.breakpoints.down('xs'));
     const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
     const md=useMediaQuery(theme.breakpoints.up('sm')&&theme.breakpoints.down('md'));
     const lg=useMediaQuery(theme.breakpoints.up('md')&&theme.breakpoints.down('lg'));
     const xl=useMediaQuery(theme.breakpoints.up('lg'));
+
+    const history=useHistory();
 
 
         const [page, setPage] = React.useState(0);
@@ -197,71 +164,23 @@ function TestDrive(props) {
     };
 
 
-    const theme2 = useTheme();
-    const [personName, setPersonName] = React.useState([]);
-
-    const handleChange = (event) => {
-        const {
-        target: { value },
-        } = event;
-        setPersonName(
-        // On autofill we get a the stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-        );
-    };
-
-
-
     return (
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
+        <div>
 
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
-
-                        <div style={{marginBottom:"2vh"}}>
-                            <FormControl sx={{ m: 1, width: 500, mt: 3 }}>
-                                <Select
-                                multiple
-                                displayEmpty
-                                value={personName}
-                                onChange={handleChange}
-                                input={<OutlinedInput />}
-                                renderValue={(selected) => {
-                                    if (selected.length === 0) {
-                                    return <em>Placeholder</em>;
-                                    }
-
-                                    return selected.join(', ');
-                                }}
-                                MenuProps={MenuProps}
-                                inputProps={{ 'aria-label': 'Without label' }}
-                                >
-                                <MenuItem disabled value="">
-                                    <em>Placeholder</em>
-                                </MenuItem>
-                                {names.map((name) => (
-                                    <MenuItem
-                                    key={name}
-                                    value={name}
-                                    style={getStyles(name, personName, theme)}
-                                    >
-                                    {name}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                            </FormControl>
-                        </div>
-
                 <TableContainer component={Paper}>
                     <Table  aria-label="custom pagination table">
                     <TableHead>
                         <TableRow>
                             <TableCell  align="center" className={classes.rowHeader}><h3>ID</h3></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>NAME</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>MODEL</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>PLACE</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>DATE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>PHONE</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>EMAIL</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>POSITION</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>ADDRESS</h3></TableCell>
+                            <TableCell  align="center" className={classes.rowHeader}><h3>SALARY</h3></TableCell>
                             <TableCell  align="center" className={classes.rowHeader}><h3>VIEW</h3></TableCell>
                         </TableRow>
                     </TableHead>
@@ -280,16 +199,22 @@ function TestDrive(props) {
                                     {row.name}
                                 </TableCell>
                                 <TableCell  align="center">
-                                    {row.model}
+                                    {row.phone}
                                 </TableCell>
                                 <TableCell  align="center">
-                                    {row.where}
+                                    {row.email}
                                 </TableCell>
                                 <TableCell  align="center">
-                                    {row.date}
+                                    {row.position}
+                                </TableCell>
+                                <TableCell  align="center">
+                                    {row.address}
+                                </TableCell>
+                                <TableCell  align="center">
+                                    {row.salary}
                                 </TableCell>
                                 <TableCell align="center">
-                                <Button variant="contained" color="primary" >View</Button>
+                                <Button onClick={()=>history.push('/workerList/1')} variant="contained" color="primary" >View</Button>
                                 </TableCell>
                             </TableRow>
 
@@ -324,10 +249,9 @@ function TestDrive(props) {
                     </Table>
     </TableContainer>
 </Container>
-            
-            <div><h2><span style={{color:"blue"}}>Total :</span> 10</h2></div>
     </div>
     )
+   
 }
 
-export default withStyles(styles, { withTheme: true })(TestDrive);
+export default withStyles(styles, { withTheme: true })(WorkerList);

@@ -18,6 +18,7 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
+import Checkbox from '@mui/material/Checkbox';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -108,6 +109,9 @@ const rows = [
   createData("Oreo", 437, 18.0),
 ].sort((a, b) => (a.calories < b.calories ? -1 : 1));
 
+const label1 = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+
 export default function GenericTable(props) {
   const rows = props.rows;
   const labels = props.labels;
@@ -136,7 +140,7 @@ export default function GenericTable(props) {
           <TableRow style={{ height: "2em" }}>
             {labels.map((label) => (
               <TableCell align="center">
-                <h3>{label.toUpperCase()}</h3>
+                {label!="checkbox"?<h3>{label.toUpperCase()}</h3>:<Checkbox {...label1} />}
               </TableCell>
             ))}
           </TableRow>
@@ -156,6 +160,10 @@ export default function GenericTable(props) {
                         return <Button onClick={()=>history.push(props.view)} variant="contained" color="primary"> View </Button>;
                       case "img":
                         return <img style={{ height: "90px", width: "80px" }} src={row[label]}/>;
+
+                    case "checkbox":
+                        return <Checkbox {...label1} />
+
                       default:
                         return <span>{row[label]}</span>;
                     }

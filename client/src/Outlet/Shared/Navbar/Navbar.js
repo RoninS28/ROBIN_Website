@@ -48,7 +48,8 @@ import OrderList from "../../Pages/OrderList";
 import OrderDetail from "../../Pages/OrderDetail";
 import Complaints from "../../Pages/Complaints";
 import ComplaintDetail from "../../Pages/ComplaintDetail";
-
+import WorkerList from "../../Pages/WorkerList";
+import WorkerListDetails from "../../Pages/WorkerListDetails";
 
 
 const drawerWidth = 220;
@@ -312,6 +313,24 @@ const Navbar = (props) => {
                 </ListItem>
               </Link>
 
+              <Link to='/workerList' style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Workers" />
+                </ListItem>
+              </Link>
+
+              <Link to='/workerList/1' style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="My Profile" />
+                </ListItem>
+              </Link>
+
             
 
 
@@ -321,17 +340,8 @@ const Navbar = (props) => {
               
               
           </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+        
+          
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -349,11 +359,13 @@ const Navbar = (props) => {
               <Route path='/customers' exact component={CustomerList} ></Route>
               <Route path='/customers/:id' exact component={CustomerDetail}></Route>
               <Route path='/testDrive' exact component={TestDrive}></Route>
-              <Route path='/testDriveDetail' exact component={TestDriveDetail}></Route>
+              <Route path='/testDrive/:id' exact component={TestDriveDetail}></Route>
               <Route path='/orderList' exact component={OrderList}></Route>
               <Route path='/orderDetail' exact component={OrderDetail}></Route>
               <Route path='/complaints' exact component={Complaints}></Route>
-              <Route path='/complaintDetail' exact component={ComplaintDetail}></Route>
+              <Route path='/complaints/:id' exact component={ComplaintDetail}></Route>
+              <Route path='/workerList' exact component={WorkerList}></Route>
+              <Route path='/workerList/:id' exact component={WorkerListDetails}></Route>
             </Switch>
          </div>
 

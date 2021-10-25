@@ -40,6 +40,8 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import GenericTable from "./GenericTable";
+import GenericStatCard from "./GenericStatCard";
+import Grid from "@material-ui/core/Grid";
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -53,6 +55,12 @@ const styles = makeStyles((theme) => ({
   },
   rowHeader: {
     fontWeight: "bold !important",
+  },
+  statCards: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
   },
 }));
 
@@ -218,6 +226,20 @@ function TestDrive(props) {
         flexDirection: "column",
       }}
     >
+      <Grid  container spacing={1}>
+        <Grid item sm={12} lg={2} md={2}>
+          <GenericStatCard title="Total Test Drive:" subtitle="10" />
+        </Grid>
+
+        <Grid item sm={12} lg={2} md={2}>
+          <GenericStatCard title="Test Drive At Home:" subtitle="7" />
+        </Grid>
+
+        <Grid item sm={12} lg={2} md={2}>
+          <GenericStatCard title="Test Drive At Outlet:" subtitle="3" />
+        </Grid>
+      </Grid>
+
       <Container
         maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
         className={classes.listWrapper}
@@ -256,7 +278,7 @@ function TestDrive(props) {
           </FormControl>
         </div>
 
-        <GenericTable rows={rows} labels={labels} view='/testDriveDetail' />
+        <GenericTable rows={rows} labels={labels} view="/testDrive/1" />
       </Container>
 
       <div>
