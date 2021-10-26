@@ -49,6 +49,7 @@ import Complaints from "../../Pages/Complaints";
 import CustomerComplaint from "../../Pages/Customercomplaints";
 import BuyAccessories from "../../Pages/BuyAccessories";
 import AccessoryPage from "../../Pages/AccessoryPage";
+import Dashboard from "../../Pages/Dashboard";
 
 
 const drawerWidth = 220;
@@ -276,6 +277,15 @@ const Navbar = (props) => {
         >
           <div className={classes.toolbar} />
           <List>
+          <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
+              </Link>
+
               <Link to="/orders" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
@@ -379,6 +389,7 @@ const Navbar = (props) => {
               <Route path='/accessoryPage' exact component={AccessoryPage}/>
               <Route path='/accessoryReport' exact component={AccessoryReport}/>
               <Route path='/accessoryReportDetail' exact component={AccessoryReportDetail} />
+              <Route path='/dashboard' exact component={Dashboard}/>
             </Switch>
          </div>
 

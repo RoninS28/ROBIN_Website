@@ -19,6 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import SearchBar from 'material-ui-search-bar';
+import Accessory from './Accessory';
 
 const flexContainer = {
     display: 'flex',
@@ -122,11 +123,20 @@ function BuyAccessories() {
             <Grid container rowSpacing={3} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               {itemData.map((item)=>(
                   <Grid item xs={3}>
-                    <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
-                      <img src={item.img} style={{height:"15vh",width:"10vw"}}/>
-                      <h3>{item.name}</h3>
-                      <Button variant="contained" color="primary">Add</Button>
-                    </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <img src={item.img} style={{ height: "15vh", width: "10vw" }} />
+                    <h3>{item.name}</h3>
+                    <Button variant="contained" color="primary">
+                      Add
+                    </Button>
+                  </div>
                 </Grid>
               ))}
           </Grid>
