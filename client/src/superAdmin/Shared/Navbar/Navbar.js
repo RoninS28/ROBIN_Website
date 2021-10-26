@@ -207,123 +207,122 @@ const Navbar = (props) => {
     );
 
     return (
-        <div className={classes.root}>
-            <Router>
+        <Router>
 
-                {/* This is the top horizontal bar */}
-                <Box sx={{ flexGrow: 1 }}>
-                    <AppBar position="static">
-                        <Toolbar>
+            {/* This is the top horizontal bar */}
+            <Box sx={{ flexGrow: 1 }}>
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="open drawer"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon onClick={toggleDrawer('left', true)} />
+                        </IconButton>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ display: { xs: 'none', md: 'block' } }}
+                        >
+                            RobIN | Robust Intelligent Network
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{ display: { xs: 'block', md: 'none' } }}
+                        >
+                            RobIN
+                        </Typography>
+                        <Box sx={{ flexGrow: 1 }} />
+                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                             <IconButton
                                 size="large"
-                                edge="start"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
                                 color="inherit"
-                                aria-label="open drawer"
-                                sx={{ mr: 2 }}
                             >
-                                <MenuIcon onClick={toggleDrawer('left', true)}/>
+                                <AccountCircle />
                             </IconButton>
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                component="div"
-                                sx={{ display: { xs: 'none', md: 'block' } }}
+                        </Box>
+                        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                            <IconButton
+                                size="large"
+                                aria-label="show more"
+                                aria-controls={mobileMenuId}
+                                aria-haspopup="true"
+                                onClick={handleMobileMenuOpen}
+                                color="inherit"
                             >
-                                RobIN | Robust Intelligent Network
-                            </Typography>
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                component="div"
-                                sx={{ display: { xs: 'block', md: 'none' } }}
-                            >
-                                RobIN
-                            </Typography>
-                            <Box sx={{ flexGrow: 1 }} />
-                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                <IconButton
-                                    size="large"
-                                    edge="end"
-                                    aria-label="account of current user"
-                                    aria-controls={menuId}
-                                    aria-haspopup="true"
-                                    onClick={handleProfileMenuOpen}
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                            </Box>
-                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                <IconButton
-                                    size="large"
-                                    aria-label="show more"
-                                    aria-controls={mobileMenuId}
-                                    aria-haspopup="true"
-                                    onClick={handleMobileMenuOpen}
-                                    color="inherit"
-                                >
-                                    <MoreIcon />
-                                </IconButton>
-                            </Box>
-                        </Toolbar>
-                    </AppBar>
-                    {renderMobileMenu}
-                    {renderMenu}
-                </Box>
+                                <MoreIcon />
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+                {renderMenu}
+            </Box>
 
 
-                {/* This is for vertical side drawer */}
-                <div>
-                    {['left'].map((anchor) => (
-                        <React.Fragment key={anchor}>
-                            {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
-                            <Drawer
-                                anchor={anchor}
-                                open={state[anchor]}
-                                onClose={toggleDrawer(anchor, false)}
-                            >
-                                {list(anchor)}
-                            </Drawer>
-                        </React.Fragment>
-                    ))}
+            {/* This is for vertical side drawer */}
+            <div>
+                {['left'].map((anchor) => (
+                    <React.Fragment key={anchor}>
+                        {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
+                        <Drawer
+                            anchor={anchor}
+                            open={state[anchor]}
+                            onClose={toggleDrawer(anchor, false)}
+                        >
+                            {list(anchor)}
+                        </Drawer>
+                    </React.Fragment>
+                ))}
+            </div>
+
+            {/* The main content that is shown on the screen */}
+            <main className={classes.content}>
+
+                {/* Routes for various components */}
+                <div className='back'>
+                    <Switch>
+                        <Route path='/models' exact component={EVModelList} ></Route>
+                        <Route path='/models/:id' exact component={EVModelDetail} ></Route>
+
+                        <Route path='/factories/add' exact component={GenericDetail}></Route>
+                        <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
+                        <Route path='/factories' exact component={GenericList}></Route>
+                        <Route path='/factories/:id' exact component={GenericOverview}></Route>
+
+                        <Route path='/outlets/add' exact component={GenericDetail}></Route>
+                        <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
+                        <Route path='/outlets' exact component={GenericList}></Route>
+                        <Route path='/outlets/:id' exact component={GenericOverview}></Route>
+
+                        <Route path='/service-centers/add' exact component={GenericDetail}></Route>
+                        <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
+                        <Route path='/service-centers' exact component={GenericList}></Route>
+                        <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
+
+                        <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
+                        <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
+
+                        <Route path='/complaints' exact component={CustomerComplaintList}></Route>
+                        <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
+
+                        <Route path='/dashboard' exact component={Dashboard}></Route>
+                    </Switch>
                 </div>
+            </main>
+        </Router>
 
-                {/* The main content that is shown on the screen */}
-                <main className={classes.content}>
-
-                    {/* Routes for various components */}
-                    <div className='back'>
-                        <Switch>
-                            <Route path='/models' exact component={EVModelList} ></Route>
-                            <Route path='/models/:id' exact component={EVModelDetail} ></Route>
-
-                            <Route path='/factories/add' exact component={GenericDetail}></Route>
-                            <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
-                            <Route path='/factories' exact component={GenericList}></Route>
-                            <Route path='/factories/:id' exact component={GenericOverview}></Route>
-
-                            <Route path='/outlets/add' exact component={GenericDetail}></Route>
-                            <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
-                            <Route path='/outlets' exact component={GenericList}></Route>
-                            <Route path='/outlets/:id' exact component={GenericOverview}></Route>
-
-                            <Route path='/service-centers/add' exact component={GenericDetail}></Route>
-                            <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
-                            <Route path='/service-centers' exact component={GenericList}></Route>
-                            <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
-
-                            <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
-                            <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
-
-                            <Route path='/complaints' exact component={CustomerComplaintList}></Route>
-                            <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
-
-                            <Route path='/dashboard' exact component={Dashboard}></Route>
-                        </Switch>
-                    </div>
-                </main>
-            </Router>
-        </div>
     )
 }
 

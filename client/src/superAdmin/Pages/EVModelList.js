@@ -24,7 +24,6 @@ import Container from '@material-ui/core/Container';
 
 import { evModelList } from '../Data/EVModels'
 import EVModelDetail from './EVModelDetail';
-import EVModelItem from './EVModelItem';
 import { withStyles } from "@material-ui/core/styles";
 import { Grid, useMediaQuery } from '@material-ui/core';
 
@@ -32,20 +31,19 @@ import GenericTable from './GenericTable';
 
 
 const styles = theme => ({
-
-    listWrapper: {
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: "1rem"
+    mainContainer: {
+        margin: 0
     },
-    topRow: {
+    gridItem: {
+        marginLeft: "auto", 
+        marginRight: "auto"
+    },
+    flexContainer: {
+        marginLeft: "auto", 
+        marginRight: "auto",
         display: "flex",
         justifyContent: "flex-end",
-    },
-    rowHeader: {
-        fontWeight: "bold !important",
     }
-    
 
 })
 
@@ -81,18 +79,16 @@ const EVModelList = (props) => {
 
 
     return (
-        <Container 
-            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
-            className={classes.listWrapper}>
-
-            <div className={classes.topRow}>
-                {/* Breadcrumb */}
-
-                <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
-            </div>
-            <GenericTable rows={rows} labels={labels} view={'/models/1'}/>
-            
-        </Container>
+        <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2} className={classes.mainContainer}>
+                <Grid item xs={11} className={classes.flexContainer}>
+                    <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New EV</Button>
+                </Grid>
+                <Grid item xs={11} className={classes.gridItem}>
+                    <GenericTable rows={rows} labels={labels} view={'/models/1'}/>
+                </Grid>
+            </Grid>
+        </Box>
     );
 }
 

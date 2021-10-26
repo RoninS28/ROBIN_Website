@@ -24,7 +24,6 @@ import Container from '@material-ui/core/Container';
 
 import { evModelList } from '../Data/EVModels'
 import EVModelDetail from './EVModelDetail';
-import EVModelItem from './EVModelItem';
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from '@material-ui/core';
 
