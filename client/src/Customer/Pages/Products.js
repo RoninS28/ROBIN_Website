@@ -5,6 +5,10 @@ import ImageCarousel from "../Shared/ImageCarousel/ImageCarousel";
 import v1 from '../Assets/v1.png'
 import v2 from '../Assets/v2uncropped.jpeg'
 import v3 from '../Assets/v3.jpeg'
+import v4 from '../Assets/v4.png'
+import v5 from '../Assets/v5.png'
+import v6 from '../Assets/v6.png'
+import v7 from '../Assets/v7.png'
 import '../PagesStyles/Products.css'
 import { useHistory } from "react-router";
 
@@ -68,9 +72,60 @@ export default function Products() {
       price: 20500
     },
     {
-      model: "CITY 3",
+      model: "CITY TR",
       id: "M003",
-      image: v3,
+      image: v4,
+      colors: [
+        yellow[500],
+        blue[500],
+        green[500],
+        orange[500]
+      ],
+      battery: "1.9",
+      range: "90",
+      voltage: "72",
+      chargingTime: "3-4",
+      groundClearance: "165",
+      price: 21000
+    },
+    {
+      model: "ZEUS RX2",
+      id: "M004",
+      image: v5,
+      colors: [
+        yellow[500],
+        blue[500],
+        green[500],
+        orange[500]
+      ],
+      battery: "1.8",
+      range: "80",
+      voltage: "72",
+      chargingTime: "3-4",
+      groundClearance: "170",
+      price: 20000
+    },
+    {
+      model: "PEGASUS",
+      id: "M005",
+      image: v6,
+      colors: [
+        yellow[500],
+        blue[500],
+        green[500],
+        orange[500]
+      ],
+      battery: "1.9",
+      range: "85",
+      voltage: "72",
+      chargingTime: "3-4",
+      groundClearance: "172",
+      price: 20500
+    },
+    {
+      model: "PATRIOT",
+      id: "M006",
+      image: v7,
       colors: [
         yellow[500],
         blue[500],
