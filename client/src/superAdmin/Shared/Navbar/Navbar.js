@@ -1,31 +1,28 @@
-import React, { useState, useEffect } from "react";
-import classNames from "classnames";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import { Link } from "react-router-dom";
 
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MoreIcon from '@mui/icons-material/MoreVert';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import MailIcon from '@mui/icons-material/Mail';
+import { Link } from "react-router-dom";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import EVModelList from "../../Pages/EVModelList"
 import '../Background/StarryNight.css';
 import EVModelDetail from "../../Pages/EVModelDetail";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import GenericDetail from "../../Pages/GenericDetail";
 import GenericList from "../../Pages/GenericList";
 import GenericOverview from "../../Pages/GenericOverview";
@@ -33,326 +30,301 @@ import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
 import AccessoryOrderList from "../../Pages/AccessoryOrderList";
 import CustomerComplaintList from "../../Pages/CustomerComplaintList";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
-import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 import Dashboard from "../../Pages/Dashboard";
 
-
-const drawerWidth = 220;
-
 const styles = theme => ({
-  root: {
-    display: "flex"
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36
-  },
-  menuButtonIconClosed: {
-    transition: theme.transitions.create(["transform"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    transform: "rotate(0deg)"
-  },
-  menuButtonIconOpen: {
-    transition: theme.transitions.create(["transform"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    transform: "rotate(180deg)"
-  },
-  hide: {
-    display: "none"
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap"
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  },
-  drawerClose: {
-    transition: theme.transitions.create("width", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    overflowX: "hidden",
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up("sm")]: {
-      width: theme.spacing.unit * 9 + 1
-    }
-  },
-  toolbar: {
-    display: "flex",
-    alignItems: "center",
-    marginTop: theme.spacing.unit,
-    justifyContent: "flex-end",
-    // padding: "0 8px",
-    ...theme.mixins.toolbar
-  },
-  content: {
-    flexGrow: 1,
-    // padding: theme.spacing.unit * 3
-  },
-  logoLg: {
-    display: 'none',
-    flexGrow: 1,
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-    },
-  },
-  logoSm: {
-    display: "block",
-    flexGrow: 1,
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    }
-  }
 });
 
 const Navbar = (props) => {
-  const { classes, theme } = props;
-  const [open, setOpen] = useState(true);
-  const [anchorEl, setAnchorEl] = useState(null);
+    const { classes, theme } = props;
 
-  const matches = useMediaQuery(theme.breakpoints.up('md'));
-  console.log("variable ", matches)
-  
-  useEffect(() => {
-    setOpen(matches ? true : false)
-  }, [matches])
+    // Appbar related states
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const handleDrawerOpen = () => {
-    if(open)
-      setOpen(false);
-    else
-      setOpen(true);
-  }
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  }
+    const handleProfileMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleMobileMenuClose = () => {
+        setMobileMoreAnchorEl(null);
+    };
 
-  const handleClose = () => {
-    setAnchorEl(null)
-  };
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+        handleMobileMenuClose();
+    };
 
-  return (
-    <div className={classes.root}>
-      <Router>
-        <CssBaseline />
-        {/* This is the top horizontal bar */}
-        <AppBar
-          position="fixed"
-          className={classes.appBar}
-          fooJon={classNames(classes.appBar, {
-            [classes.appBarShift]: open
-          })}
+    const handleMobileMenuOpen = (event) => {
+        setMobileMoreAnchorEl(event.currentTarget);
+    };
+
+    const menuId = 'primary-search-account-menu';
+    const renderMenu = (
+        <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            id={menuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
         >
-          <Toolbar disableGutters={true}>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={handleDrawerOpen}
-              className={classes.menuButton}
-            >
-              <MenuIcon
-                classes={{
-                  root: open
-                    ? classes.menuButtonIconOpen
-                    : classes.menuButtonIconClosed
-                }}
-              />
-            </IconButton>
-            
-            <Typography
-              variant="h6"
-              color="inherit"
-              className={classes.logoLg}
-              noWrap
-            >
-              RobIN | Robust Intelligent Network
-            </Typography>
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        </Menu>
+    );
 
-            <Typography
-              variant="h6"
-              color="inherit"
-              className={classes.logoSm}
-              noWrap
-            >
-              RobIN
-            </Typography>
-
-            <div>
-              <IconButton
-                aria-owns={anchorEl ? "menu-appbar" : undefined}
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right"
-                }}
-                open={anchorEl}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          </Toolbar>
-        </AppBar>
-        {/* This is for vertical side drawer */}
-        <Drawer
-          variant="permanent"
-          className={classNames(classes.drawer, {
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
-          })}
-          classes={{
-            paper: classNames({
-              [classes.drawerOpen]: open,
-              [classes.drawerClose]: !open
-            })
-          }}
-          open={open}
+    // For mobile screen, Appbar will change and the below will be rendered
+    const mobileMenuId = 'primary-search-account-menu-mobile';
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
         >
-          <div className={classes.toolbar} />
-          <List>
-              <Link to="/models" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="EV Models" />
-                </ListItem>
-              </Link>
-
-              <Link to="/factories" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Factories" />
-                </ListItem>
-              </Link>
-
-              <Link to="/outlets" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Outlets" />
-                </ListItem>
-              </Link>
-
-              <Link to="/service-centers" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Service Centers" />
-                </ListItem>
-              </Link>
-
-              <Link to="/accessory-orders" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Accessory List" />
-                </ListItem>
-              </Link>
-
-              <Link to="/complaints" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Complaints" />
-                </ListItem>
-              </Link>
-
-              <Link to="/dashboard" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Dashboard" />
-                </ListItem>
-              </Link>
-          </List>
-        </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+            <MenuItem onClick={handleProfileMenuOpen}>
+                <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                <p>Profile</p>
+            </MenuItem>
+        </Menu>
+    );
 
 
-          <AppBreadCrumb/>
-        
-        
-          <div className = 'back'>
-            <Switch>
-              <Route path='/models' exact component={EVModelList} ></Route>
-              <Route path='/models/:id' exact component={EVModelDetail} ></Route>
+    // Sidebar related states
+    const [state, setState] = React.useState({
+        left: false,
+    });
 
-              <Route path='/factories/add' exact component={GenericDetail}></Route>
-              <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
-              <Route path='/factories' exact component={GenericList}></Route>
-              <Route path='/factories/:id' exact component={GenericOverview}></Route>
-              
-              <Route path='/outlets/add' exact component={GenericDetail}></Route>
-              <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
-              <Route path='/outlets' exact component={GenericList}></Route>
-              <Route path='/outlets/:id' exact component={GenericOverview}></Route>
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
 
-              <Route path='/service-centers/add' exact component={GenericDetail}></Route>
-              <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
-              <Route path='/service-centers' exact component={GenericList}></Route>
-              <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
+        setState({ ...state, [anchor]: open });
+    };
 
-              <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
-              <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
-              
-              <Route path='/complaints' exact component={CustomerComplaintList}></Route>
-              <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
-              
-              <Route path='/dashboard' exact component={Dashboard}></Route>
-            </Switch>
+    // It contains all the Links
+    const list = (anchor) => (
+        <Box
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                <Link to="/models" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="EV Models" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/factories" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Factories" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/outlets" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Outlets" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/service-centers" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Service Centers" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/accessory-orders" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Accessory List" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/complaints" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Complaints" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/dashboard" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <MailIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Dashboard" />
+                    </ListItem>
+                </Link>
+            </List>
+        </Box>
+    );
+
+    return (
+        <div className={classes.root}>
+            <Router>
+
+                {/* This is the top horizontal bar */}
+                <Box sx={{ flexGrow: 1 }}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <IconButton
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                                aria-label="open drawer"
+                                sx={{ mr: 2 }}
+                            >
+                                <MenuIcon onClick={toggleDrawer('left', true)}/>
+                            </IconButton>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="div"
+                                sx={{ display: { xs: 'none', md: 'block' } }}
+                            >
+                                RobIN | Robust Intelligent Network
+                            </Typography>
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="div"
+                                sx={{ display: { xs: 'block', md: 'none' } }}
+                            >
+                                RobIN
+                            </Typography>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                            </Box>
+                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                <IconButton
+                                    size="large"
+                                    aria-label="show more"
+                                    aria-controls={mobileMenuId}
+                                    aria-haspopup="true"
+                                    onClick={handleMobileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <MoreIcon />
+                                </IconButton>
+                            </Box>
+                        </Toolbar>
+                    </AppBar>
+                    {renderMobileMenu}
+                    {renderMenu}
+                </Box>
+
+
+                {/* This is for vertical side drawer */}
+                <div>
+                    {['left'].map((anchor) => (
+                        <React.Fragment key={anchor}>
+                            {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
+                            <Drawer
+                                anchor={anchor}
+                                open={state[anchor]}
+                                onClose={toggleDrawer(anchor, false)}
+                            >
+                                {list(anchor)}
+                            </Drawer>
+                        </React.Fragment>
+                    ))}
+                </div>
+
+                {/* The main content that is shown on the screen */}
+                <main className={classes.content}>
+
+                    {/* Routes for various components */}
+                    <div className='back'>
+                        <Switch>
+                            <Route path='/models' exact component={EVModelList} ></Route>
+                            <Route path='/models/:id' exact component={EVModelDetail} ></Route>
+
+                            <Route path='/factories/add' exact component={GenericDetail}></Route>
+                            <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
+                            <Route path='/factories' exact component={GenericList}></Route>
+                            <Route path='/factories/:id' exact component={GenericOverview}></Route>
+
+                            <Route path='/outlets/add' exact component={GenericDetail}></Route>
+                            <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
+                            <Route path='/outlets' exact component={GenericList}></Route>
+                            <Route path='/outlets/:id' exact component={GenericOverview}></Route>
+
+                            <Route path='/service-centers/add' exact component={GenericDetail}></Route>
+                            <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
+                            <Route path='/service-centers' exact component={GenericList}></Route>
+                            <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
+
+                            <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
+                            <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
+
+                            <Route path='/complaints' exact component={CustomerComplaintList}></Route>
+                            <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
+
+                            <Route path='/dashboard' exact component={Dashboard}></Route>
+                        </Switch>
+                    </div>
+                </main>
+            </Router>
         </div>
-        </main>
-      </Router>
-    </div>
-  )
+    )
 }
 
 export default withStyles(styles, { withTheme: true })(Navbar);
