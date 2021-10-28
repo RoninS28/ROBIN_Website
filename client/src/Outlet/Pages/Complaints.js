@@ -11,9 +11,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import { Input, useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
@@ -22,10 +21,6 @@ import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import workerComplaints from "../Data/WorkerComplaints";
 import { styled } from "@material-ui/styles";
-
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core//TablePagination";
-
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";

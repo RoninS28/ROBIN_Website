@@ -1,34 +1,11 @@
 import React from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import { Input, useMediaQuery } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import PrintIcon from "@material-ui/icons/Print";
-import DownloadIcon from "@material-ui/icons/FontDownload";
-import orders from "../Data/Order";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Fab from "@material-ui/core/Fab";
-import TextField from "@material-ui/core/TextField";
-import scooter1 from "../../images/scooter1.jpeg";
+import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
-
 import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core//TablePagination";
-
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";

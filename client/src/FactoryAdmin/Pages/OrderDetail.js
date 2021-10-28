@@ -1,18 +1,8 @@
 import React from "react";
-
 import scooter1 from "../../images/scooter1.jpeg";
-
 import { Button } from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
-
-import Box from "@material-ui/core/Box";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepButton from "@material-ui/core/StepButton";
-import Typography from "@material-ui/core/Typography";
-
-
 import { makeStyles } from "@material-ui/styles";
 import { Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";

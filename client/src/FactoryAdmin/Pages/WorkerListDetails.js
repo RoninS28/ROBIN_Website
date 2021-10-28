@@ -1,46 +1,30 @@
 import React from "react";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import CallIcon from "@material-ui/icons/Call";
 import EmailIcon from "@material-ui/icons/Email";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import StarIcon from "@material-ui/icons/Star";
-import WorkIcon from "@material-ui/icons/Work";
 import Work from "@material-ui/icons/Work";
 import HomeIcon from "@material-ui/icons/Home";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
-import orders from "../Data/Order";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
-import InboxIcon from "@material-ui/icons/Inbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import leave from "../Data/Leave";
-import { Line } from "react-chartjs-2";
 import workerComplaints from "../Data/WorkerComplaints";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import LineChart from "./LineChart";
+import GenericTable from "./GenericTable";
 
 const styles = makeStyles((theme) => ({
   container: {},
@@ -74,6 +58,10 @@ const state = {
   ],
 };
 
+const label1=['id','description','status','actions'];
+
+const label2=['id','type','status','actions'];
+
 function WorkerListDetails(props) {
   const { classes, theme } = props;
 
@@ -96,8 +84,8 @@ function WorkerListDetails(props) {
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item sx={12} md={4} lg={4}>
-          <Card style={{ borderRadius: "35px" }}  maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
+        <Grid item xs={12} md={4} lg={4}>
+          <Card style={{ borderRadius: "35px",marginLeft:'2vw',marginRight:'1vw'}}  maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
             <CardContent>
               <div
                 style={{
@@ -212,9 +200,9 @@ function WorkerListDetails(props) {
           </Card>
         </Grid>
 
-        <Grid item sx={12} md={8} lg={8}>
+        <Grid item xs={12} md={8} lg={8}>
           <Container
-            maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
           >
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -237,99 +225,20 @@ function WorkerListDetails(props) {
           </Container>
 
           <div style={{ marginTop: "2vh" }}>
-            <Container maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>LEAVE ID</TableCell>
-                      <TableCell align="center">DESCRIPTION</TableCell>
-                      <TableCell align="center">STATUS</TableCell>
-                      <TableCell align="center">VIEW</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {leave.map((leave) => (
-                      <TableRow
-                        key={leave.id}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
-                      >
-                        <TableCell component="th" scope="row">
-                          {leave.id}
-                        </TableCell>
-                        <TableCell align="center">
-                          {leave.description}
-                        </TableCell>
-                        <TableCell align="center">
-                          {leave.status == "Approved" ? (
-                            <span style={{ color: "green" }}>Approved</span>
-                          ) : leave.status == "Pending" ? (
-                            <span style={{ color: "yellow" }}>Pending</span>
-                          ) : (
-                            <span style={{ color: "red" }}>Denied</span>
-                          )}
-                        </TableCell>
-                        <TableCell align="center">
-                          <Button variant="contained" color="primary">
-                            View
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+            <Container maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
+              <GenericTable rows={leave} labels={label1}/>
             </Container>
           </div>
         </Grid>
 
-        <Grid item sx={12} md={12} lg={12}>
-          <Container maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Complaint Id</TableCell>
-                    <TableCell align="center">Type</TableCell>
-                    <TableCell align="center">Status</TableCell>
-                    <TableCell align="center">View</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {workerComplaints.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.id}
-                      </TableCell>
-                      <TableCell align="center">{row.type}</TableCell>
-                      <TableCell align="center">
-                        {row.status == "Addressed" ? (
-                          <span style={{ color: "green" }}>Addressed</span>
-                        ) : (
-                          <span style={{ color: "red" }}>Pending</span>
-                        )}
-                      </TableCell>
-                      <TableCell align="center">
-                        <Button variant="contained" color="primary">
-                          View
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+        <Grid item xs={12} md={12} lg={12}>
+          <Container maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
+            <GenericTable rows={workerComplaints} labels={label2} />
           </Container>
         </Grid>
 
-        <Grid item sx={12} sm={12} md={10} lg={10}>
-          
-          <Card>
+        <Grid item xs={12} sm={12} md={8} lg={8}>
+          <Card style={{marginLeft:'2vw'}}>
             <LineChart state={state}/>
           </Card>
         </Grid>

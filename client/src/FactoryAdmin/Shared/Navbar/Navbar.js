@@ -193,28 +193,12 @@ const Navbar = (props) => {
             <ListItemText primary="Buy Accessories" />
           </ListItem>
         </Link>
-        <Link to="/accessoryPage" style={{ textDecoration: 'none' }}>
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Accessory Page" />
-          </ListItem>
-        </Link>
         <Link to="/accessoryReport" style={{ textDecoration: 'none' }}>
           <ListItem button>
             <ListItemIcon>
               <MailIcon />
             </ListItemIcon>
             <ListItemText primary="Accessory Report" />
-          </ListItem>
-        </Link>
-        <Link to="/accessoryReportDetail" style={{ textDecoration: 'none' }}>
-          <ListItem button>
-            <ListItemIcon>
-              <MailIcon />
-            </ListItemIcon>
-            <ListItemText primary="Accessory Report Detail" />
           </ListItem>
         </Link>
       </List>
@@ -318,9 +302,9 @@ const Navbar = (props) => {
             <Route path='/complaints' exact component={Complaints} ></Route>
             <Route path="/complaints/:id" exact component={CustomerComplaint} />
             <Route path="/buyAccessories" exact component={BuyAccessories} />
-            <Route path='/accessoryPage' exact component={AccessoryPage} />
+            <Route path='/buyAccessories/:id' exact component={AccessoryPage} />
             <Route path='/accessoryReport' exact component={AccessoryReport} />
-            <Route path='/accessoryReportDetail' exact component={AccessoryReportDetail} />
+            <Route path='/accessoryReport/:id' exact component={AccessoryReportDetail} />
             <Route path='/dashboard' exact component={Dashboard} />
           </Switch>
         </div>

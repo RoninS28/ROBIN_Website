@@ -11,30 +11,15 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Input, useMediaQuery } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import PrintIcon from "@material-ui/icons/Print";
-import DownloadIcon from "@material-ui/icons/FontDownload";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Fab from "@material-ui/core/Fab";
-import TextField from "@material-ui/core/TextField";
-import scooter1 from "../../images/scooter1.jpeg";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
 
 import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import workerComplaints from "../Data/WorkerComplaints";
-import { styled } from "@material-ui/styles";
-import { Pie, Doughnut, Line } from "react-chartjs-2";
-
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core//TablePagination";
-
 import IconButton from "@material-ui/core/IconButton";
 import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -45,6 +30,7 @@ import { useHistory } from "react-router";
 import GenericTable from "./GenericTable";
 import DoughNut from "../../Outlet/Pages/DoughNut";
 import LineChart from "../../Outlet/Pages/LineChart";
+import { Grid } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -231,170 +217,142 @@ function Complaints(props) {
 
   return (
     <div>
-      <Container
-        maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-        className={classes.listWrapper}
-      >
-        <div
-          style={{ display: "flex", flexDirection: "row", marginBottom: "2vh" }}
-        >
-          <Box style={{ width: "10vw" }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={type}
-                label="Type"
-                onChange={handleChange}
-              >
-                <MenuItem value="Customer">Customer</MenuItem>
-                <MenuItem value="Worker">Worker</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+      <Grid container spacing={1} marginBottom={2}>
+        <Grid item xs={12} md={12} lg={12}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            className={classes.listWrapper}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                marginBottom: "2vh",
+              }}
+            >
+              <Box style={{ width: "10vw" }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={type}
+                    label="Type"
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="Customer">Customer</MenuItem>
+                    <MenuItem value="Worker">Worker</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
 
-          <Box style={{ width: "10vw" }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={status}
-                label="Type"
-                onChange={handleChange2}
-              >
-                <MenuItem value="Customer">Addressed</MenuItem>
-                <MenuItem value="Worker">Pending</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </div>
-        <GenericTable rows={rows} labels={labels} view='/complaints/1' />
+              <Box style={{ width: "10vw" }}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={status}
+                    label="Type"
+                    onChange={handleChange2}
+                  >
+                    <MenuItem value="Customer">Addressed</MenuItem>
+                    <MenuItem value="Worker">Pending</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
+            </div>
+          </Container>
+        </Grid>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            marginBottom: "2vh",
-            marginTop: "4vh",
-          }}
-        >
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">Type</TableCell>
-                  <TableCell align="center">Total</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow
-                  key={1}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Techincal
-                  </TableCell>
-                  <TableCell align="center">30</TableCell>
-                </TableRow>
+        <Grid item xs={12} md={12} lg={12}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <GenericTable rows={rows} labels={labels} view="/complaints/1" />
+          </Container>
+        </Grid>
 
-                <TableRow
-                  key={2}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Damaged EV
-                  </TableCell>
-                  <TableCell align="center">25</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Type</TableCell>
+                    <TableCell align="center">Total</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    key={1}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">Techincal</TableCell>
+                    <TableCell align="center">30</TableCell>
+                  </TableRow>
 
-          <TableContainer style={{ marginLeft: "4vw" }} component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">Type</TableCell>
-                  <TableCell align="center">Total</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow
-                  key={1}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Model Damage
-                  </TableCell>
-                  <TableCell align="center">30</TableCell>
-                </TableRow>
+                  <TableRow
+                    key={2}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">Damaged EV</TableCell>
+                    <TableCell align="center">25</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+        </Grid>
 
-                <TableRow
-                  key={2}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    Test Drive Issue
-                  </TableCell>
-                  <TableCell align="center">25</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+        <Grid item xs={12} md={6} lg={6}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center">Type</TableCell>
+                    <TableCell align="center">Total</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow
+                    key={1}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">Model Damage</TableCell>
+                    <TableCell align="center">30</TableCell>
+                  </TableRow>
 
-        <div
-          style={{
-            marginTop: "4vh",
-            display: "flex",
-            justifyContent: "space-evenly",
-          }}
-        >
-          <div>
-            <Card>
-              <Doughnut
-                data={state}
-                height={300}
-                width={300}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Average Rainfall per month",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Card>
-          </div>
+                  <TableRow
+                    key={2}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">Test Drive Issue</TableCell>
+                    <TableCell align="center">25</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+        </Grid>
 
-          <div>
-            <Card>
-              <Line
-                data={state2}
-                height={300}
-                width={400}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Average Rainfall per month",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Card>
-          </div>
-        </div>
-      </Container>
+        <Grid item xs={12} md={8} lg={8}>
+          <Card style={{ height: "60vh" }}>
+            <LineChart state={state2} />
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} md={4} lg={4}>
+          <Card>
+            <DoughNut state={state} />
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 }
