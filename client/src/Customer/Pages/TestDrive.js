@@ -9,6 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { ButtonGroup, Button } from "@material-ui/core";
+import { makeStyles } from "@mui/styles";
 
 export default function TestDrive() {
 
@@ -37,18 +38,29 @@ export default function TestDrive() {
   })} />;
 
 
-  // const handleProductadd = () => {
-  //   var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
-  //   document.getElementById('wrapper').innerHTML += dummy;
-  // }
+  const handleProductadd = () => {
+    // var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
+    // document.getElementById('wrapper').innerHTML += dummy;
+    document.getElementById('wrapper').style=useStyles1;
+  }
 
-  // const handleProductremove = () => {
-  //   var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
-  //   if (!document.getElementById('wrapper').innerHTML)
-  //     return;
-  //   else
-  //     document.getElementById('wrapper').innerHTML -= dummy;
-  // }
+  const handleProductremove = () => {
+    // var dummy = '<span>Label: <input type="text"><small>(ft)</small></span>\r\n';
+    // if (!document.getElementById('wrapper').innerHTML)
+    //   return;
+    // else
+    //   document.getElementById('wrapper').innerHTML -= dummy;
+    document.getElementById('wrapper').style=useStyles2;
+  }
+    const useStyles1 = makeStyles((theme) => {
+    return {
+      display: "block",
+    }})
+
+    const useStyles2 = makeStyles((theme) => {
+    return {
+      display: "none",
+    }})
 
   return (
     <>
@@ -72,7 +84,7 @@ export default function TestDrive() {
                     className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
                     style={{ backgroundColor: "lightblue", borderWidth: "3px", borderColor: "#334756" }}
-                  // onClick={handleProductremove}
+                  onClick={handleProductremove}
                   >
                     <center>At Home</center>
                   </button>
@@ -80,7 +92,7 @@ export default function TestDrive() {
                     className="lg:w-3/12 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
                     style={{ borderColor: "lightblue", borderWidth: "3px" }}
-                  // onClick={handleProductadd}
+                  onClick={handleProductadd}
                   >
                     <center>At Oulet</center>
                   </button>
@@ -277,6 +289,21 @@ export default function TestDrive() {
                     />
                   </div> */}
                   {/* </div> */}
+                  <div className={useStyles1} id="wrapper">
+                  <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Enter OTP
+                    </label>
+                    <input
+                      type="otp"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder=""
+                    />
+                  </div>
+                  </div>
 
 
 
