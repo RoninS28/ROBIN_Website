@@ -43,6 +43,8 @@ import LastPageIcon from "@material-ui/icons/LastPage";
 import { useHistory } from "react-router";
 
 import GenericTable from "./GenericTable";
+import DoughNut from "../../Outlet/Pages/DoughNut";
+import LineChart from "../../Outlet/Pages/LineChart";
 
 const styles = makeStyles((theme) => ({
   listWrapper: {

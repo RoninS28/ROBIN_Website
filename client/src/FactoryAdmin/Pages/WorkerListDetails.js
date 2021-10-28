@@ -39,13 +39,28 @@ import { Line } from "react-chartjs-2";
 import workerComplaints from "../Data/WorkerComplaints";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "@material-ui/core";
+import LineChart from "./LineChart";
 
 const styles = makeStyles((theme) => ({
   container: {},
 }));
 
 const state = {
-  labels: ["January", "February", "March", "April", "May","June","July",'August','September','October','November','December'],
+  labels: [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ],
   datasets: [
     {
       label: "Working Graph",
@@ -54,7 +69,7 @@ const state = {
       backgroundColor: "rgba(75,192,192,1)",
       borderColor: "rgba(0,0,0,1)",
       borderWidth: 2,
-      data: [65, 59, 80, 81, 56,40,25,89,23,26,34,47],
+      data: [65, 59, 80, 81, 56, 40, 25, 89, 23, 26, 34, 47],
     },
   ],
 };
@@ -62,11 +77,27 @@ const state = {
 function WorkerListDetails(props) {
   const { classes, theme } = props;
 
+  const xs = useMediaQuery(theme.breakpoints.down("xs"));
+
+  const sm = useMediaQuery(
+    theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
+  );
+
+  const md = useMediaQuery(
+    theme.breakpoints.up("sm") && theme.breakpoints.down("md")
+  );
+
+  const lg = useMediaQuery(
+    theme.breakpoints.up("md") && theme.breakpoints.down("lg")
+  );
+
+  const xl = useMediaQuery(theme.breakpoints.up("lg"));
+
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item xs={12} md={4} lg={4}>
-          <Card style={{ borderRadius: "35px" }}>
+        <Grid item sx={12} md={4} lg={4}>
+          <Card style={{ borderRadius: "35px" }}  maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
             <CardContent>
               <div
                 style={{
@@ -90,7 +121,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <CallIcon />
@@ -101,7 +132,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <EmailIcon marginLeft="5vw" />
@@ -114,7 +145,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <StarIcon />
@@ -128,7 +159,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <Work />
@@ -139,7 +170,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <span>Salary: Rs.40000</span>
@@ -149,7 +180,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <HomeIcon />
@@ -161,7 +192,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <Fab color="primary" aria-label="add">
@@ -181,35 +212,32 @@ function WorkerListDetails(props) {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={8} lg={8}>
-          <Card style={{marginLeft:'2vw',width:'20vw'}}>
-            <nav aria-label="main mailbox folders">
-              <List>
-                <ListItem disablePadding>
-                  <ListItemText primary="Total Working Days : 100" />
-                </ListItem>
-                <Divider />
-                <ListItem disablePadding>
-                  <ListItemText primary="Total Leaves : 5" />
-                </ListItem>
-              </List>
-            </nav>
-            <Divider />
-            <nav aria-label="secondary mailbox folders">
-              <List>
-                <ListItem disablePadding>
-                  <ListItemText primary="Leaves Available : 20" />
-                </ListItem>
-                <Divider />
-                <ListItem disablePadding>
-                  <ListItemText primary="Leave Applications : 2" />
-                </ListItem>
-              </List>
-            </nav>
-          </Card>
+        <Grid item sx={12} md={8} lg={8}>
+          <Container
+            maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Total Working Days : 100</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Total Leaves : 5</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Leaves Available : 20</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Leave Applications : 2</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
 
           <div style={{ marginTop: "2vh" }}>
-            <Container maxWidth="lg">
+            <Container maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
@@ -257,8 +285,8 @@ function WorkerListDetails(props) {
           </div>
         </Grid>
 
-        <Grid item xs={12} md={12} lg={12}>
-          <Container maxWidth="lg">
+        <Grid item sx={12} md={12} lg={12}>
+          <Container maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
@@ -299,24 +327,11 @@ function WorkerListDetails(props) {
           </Container>
         </Grid>
 
-        <Grid item xs={12} md={12} lg={12}>
-        <div style={{ marginTop: "4vh"}}>
-                <Line
-                  data={state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: "Average Rainfall per month",
-                      fontSize: 20,
-                    },
-                    legend: {
-                      display: true,
-                      position: "right",
-                    },
-                  }}
-                />
-              </div>
-
+        <Grid item sx={12} sm={12} md={10} lg={10}>
+          
+          <Card>
+            <LineChart state={state}/>
+          </Card>
         </Grid>
       </Grid>
     </div>

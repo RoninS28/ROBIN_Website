@@ -7,23 +7,53 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
-import Grid from '@material-ui/core/Grid'
+import Grid from '@material-ui/core/Grid';
+import { useMediaQuery } from "@material-ui/core";
+import { makeStyles } from "@material-ui/styles";
+import { useTheme } from "@emotion/react";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = makeStyles((theme) => ({
+
+  cardOne:{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cardTwo:{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop:'4vh'
+  }
+
+}));
+
 
 function ComplaintDetail(props) {
 
+  const {classes,theme}=props;
+
     const name=props.name;
     const content=props.content;
+    const xs = useMediaQuery(theme.breakpoints.down("xs"));
+  const sm = useMediaQuery(
+    theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
+  );
+  const md = useMediaQuery(
+    theme.breakpoints.up("sm") && theme.breakpoints.down("md")
+  );
+  const lg = useMediaQuery(
+    theme.breakpoints.up("md") && theme.breakpoints.down("lg")
+  );
+  const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <div>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        className={classes.cardOne}
       >
-        <Card style={{ height: "40vh", width: "40vw" ,overflow:'scroll'}}>
+        <Card  maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
           <CardContent>
             <div style={{ display: "flex" }}>
               <Avatar alt="Kamlesh Raut" src="/static/images/avatar/1.jpg" />
@@ -56,14 +86,9 @@ function ComplaintDetail(props) {
         </Card>
       </div>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "4vh",
-        }}
+        className={classes.cardTwo}
       >
-        <Card style={{ height: "30vh", width: "40vw",overflow:'scroll' }}>
+        <Card  maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl} >
           <CardContent>
             <div style={{ display: "flex" }}>
               <Avatar alt="You" src="/static/images/avatar/1.jpg" />
@@ -90,4 +115,4 @@ function ComplaintDetail(props) {
   );
 }
 
-export default ComplaintDetail;
+export default withStyles(styles, { withTheme: true })(ComplaintDetail);

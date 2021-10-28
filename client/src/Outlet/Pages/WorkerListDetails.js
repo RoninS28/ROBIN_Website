@@ -35,11 +35,12 @@ import DraftsIcon from "@material-ui/icons/Drafts";
 import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import leave from "../Data/Leave";
-import { Line } from "react-chartjs-2";
+
 import workerComplaints from "../Data/WorkerComplaints";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
-import { Input, useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
+import LineChart from "./LineChart";
 
 const styles = makeStyles((theme) => ({
   container: {},
@@ -77,22 +78,29 @@ function WorkerListDetails(props) {
   const { classes, theme } = props;
 
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
+
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
   );
+
   const md = useMediaQuery(
     theme.breakpoints.up("sm") && theme.breakpoints.down("md")
   );
+
   const lg = useMediaQuery(
     theme.breakpoints.up("md") && theme.breakpoints.down("lg")
   );
+
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
     <div>
       <Grid container spacing={1}>
-        <Grid item xs={12} md={4} lg={4}>
-          <Card maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl} style={{ borderRadius: "35px" }}>
+        <Grid item sm={12} md={4} lg={4}>
+          <Card
+            style={{ borderRadius: "35px" }}
+            maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+          >
             <CardContent>
               <div
                 style={{
@@ -116,7 +124,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <CallIcon />
@@ -127,7 +135,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <EmailIcon marginLeft="5vw" />
@@ -140,7 +148,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <StarIcon />
@@ -154,7 +162,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <Work />
@@ -165,7 +173,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <span>Salary: Rs.40000</span>
@@ -175,7 +183,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <HomeIcon />
@@ -187,7 +195,7 @@ function WorkerListDetails(props) {
                   style={{
                     display: "flex",
                     flexDirection: "row",
-                    marginTop: "2vh",
+                    marginTop: "1vh",
                   }}
                 >
                   <Fab color="primary" aria-label="add">
@@ -207,82 +215,84 @@ function WorkerListDetails(props) {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={6}>
+        <Grid item sx={12} md={8} lg={8}>
           <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
           >
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableBody>
                   <TableRow>
-                    <TableCell>Total Working Days: 100</TableCell>
+                    <TableCell>Total Working Days : 100</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Total Leaves: 5</TableCell>
+                    <TableCell>Total Leaves : 5</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Leaves Availabe: 20</TableCell>
+                    <TableCell>Leaves Available : 20</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell>Leave Applications: 2</TableCell>
+                    <TableCell>Leave Applications : 2</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
           </Container>
-        </Grid>
 
-        <Grid item xs={12} md={12} lg={12}>
-          <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-          >
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>LEAVE ID</TableCell>
-                    <TableCell align="center">DESCRIPTION</TableCell>
-                    <TableCell align="center">STATUS</TableCell>
-                    <TableCell align="center">VIEW</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {leave.map((leave) => (
-                    <TableRow
-                      key={leave.id}
-                      sx={{
-                        "&:last-child td, &:last-child th": { border: 0 },
-                      }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {leave.id}
-                      </TableCell>
-                      <TableCell align="center">{leave.description}</TableCell>
-                      <TableCell align="center">
-                        {leave.status == "Approved" ? (
-                          <span style={{ color: "green" }}>Approved</span>
-                        ) : leave.status == "Pending" ? (
-                          <span style={{ color: "yellow" }}>Pending</span>
-                        ) : (
-                          <span style={{ color: "red" }}>Denied</span>
-                        )}
-                      </TableCell>
-                      <TableCell align="center">
-                        <Button variant="contained" color="primary">
-                          View
-                        </Button>
-                      </TableCell>
+          <div style={{ marginTop: "2vh" }}>
+            <Container
+              maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            >
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>LEAVE ID</TableCell>
+                      <TableCell align="center">DESCRIPTION</TableCell>
+                      <TableCell align="center">STATUS</TableCell>
+                      <TableCell align="center">VIEW</TableCell>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Container>
+                  </TableHead>
+                  <TableBody>
+                    {leave.map((leave) => (
+                      <TableRow
+                        key={leave.id}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {leave.id}
+                        </TableCell>
+                        <TableCell align="center">
+                          {leave.description}
+                        </TableCell>
+                        <TableCell align="center">
+                          {leave.status == "Approved" ? (
+                            <span style={{ color: "green" }}>Approved</span>
+                          ) : leave.status == "Pending" ? (
+                            <span style={{ color: "yellow" }}>Pending</span>
+                          ) : (
+                            <span style={{ color: "red" }}>Denied</span>
+                          )}
+                        </TableCell>
+                        <TableCell align="center">
+                          <Button variant="contained" color="primary">
+                            View
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Container>
+          </div>
         </Grid>
 
-        <Grid item xs={12} md={12} lg={12}>
+        <Grid item sx={12} md={12} lg={12}>
           <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            maxWidth={xs ? "sx" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
           >
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -324,23 +334,10 @@ function WorkerListDetails(props) {
           </Container>
         </Grid>
 
-        <Grid item xs={12} md={12} lg={12}>
-          <div style={{ marginTop: "4vh" }}>
-            <Line
-              data={state}
-              options={{
-                title: {
-                  display: true,
-                  text: "Average Rainfall per month",
-                  fontSize: 20,
-                },
-                legend: {
-                  display: true,
-                  position: "right",
-                },
-              }}
-            />
-          </div>
+        <Grid item sx={12} sm={12} md={10} lg={10}>
+          <Card>
+            <LineChart state={state} />
+          </Card>
         </Grid>
       </Grid>
     </div>

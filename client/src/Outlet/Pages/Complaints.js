@@ -14,15 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import { Input, useMediaQuery } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
-import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
-import PrintIcon from "@material-ui/icons/Print";
-import DownloadIcon from "@material-ui/icons/FontDownload";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Fab from "@material-ui/core/Fab";
-import TextField from "@material-ui/core/TextField";
-import scooter1 from "../../images/scooter1.jpeg";
+
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -30,7 +22,6 @@ import PropTypes from "prop-types";
 import { useTheme } from "@material-ui/core/styles";
 import workerComplaints from "../Data/WorkerComplaints";
 import { styled } from "@material-ui/styles";
-import { Pie, Doughnut, Line } from "react-chartjs-2";
 
 import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core//TablePagination";
@@ -44,6 +35,10 @@ import { useHistory } from "react-router";
 import GenericTable from "./GenericTable";
 import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core";
+import LineChart from "./LineChart";
+import DoughNut from "./DoughNut";
+import { Doughnut } from "react-chartjs-2";
+import { Card } from "@material-ui/core";
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -214,7 +209,7 @@ function Complaints(props) {
 
   return (
     <div>
-      <Grid container spacing={2} marginBottom={2}>
+      <Grid container spacing={1} marginBottom={2}>
         <Grid item xs={12} md={12} lg={12}>
           <Container
             maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
@@ -287,9 +282,7 @@ function Complaints(props) {
                     key={1}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell align="center">
-                      Techincal
-                    </TableCell>
+                    <TableCell align="center">Techincal</TableCell>
                     <TableCell align="center">30</TableCell>
                   </TableRow>
 
@@ -297,9 +290,7 @@ function Complaints(props) {
                     key={2}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell align="center">
-                      Damaged EV
-                    </TableCell>
+                    <TableCell align="center">Damaged EV</TableCell>
                     <TableCell align="center">25</TableCell>
                   </TableRow>
                 </TableBody>
@@ -343,55 +334,15 @@ function Complaints(props) {
         </Grid>
 
         <Grid item xs={12} md={8} lg={8}>
-          <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-          >
-            <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
-              <Typography variant="h5" component="div">
-                Issues per month
-              </Typography>
-              <Line
-                data={state2}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Total EV Sales by months",
-                    fontSize: 20,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              />
-            </Card>
-          </Container>
+          <Card style={{ height: "60vh" }}>
+            <LineChart state={state2} />
+          </Card>
         </Grid>
 
         <Grid item xs={12} md={4} lg={4}>
-          <Container
-            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-          >
-                 <Card style={{marginTop:'1.5vh'}} sx={{ minWidth: 275 }} className={classes.pieChart}>
-                    <Typography variant="h5" component="div">
-                    Issues per type
-                    </Typography>
-                    <Doughnut
-                        data={state}
-                        options={{
-                            title:{
-                            display:true,
-                            text:'Average EV Sales per month',
-                            fontSize:20
-                            },
-                            legend:{
-                            display:true,
-                            position:'right'
-                            }
-                        }}
-                    />
-                </Card>
-          </Container>
+          <Card>
+            <DoughNut state={state} />
+          </Card>
         </Grid>
       </Grid>
     </div>
