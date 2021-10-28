@@ -30,7 +30,7 @@ import { factoryList } from '../Data/FactoryList'
 import { outletList } from '../Data/OutletList';
 import { serviceCenterList } from '../Data/ServiceCenterList';
 import { withStyles } from "@material-ui/core/styles";
-import { useMediaQuery } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
 import GenericTable from './GenericTable';
 import { Link, useLocation } from 'react-router-dom';
 import { useHistory } from "react-router";
@@ -39,26 +39,13 @@ import GenericStatCard from './GenericStatCard';
 
 const styles = theme => ({
 
-    listWrapper: {
+    btnWrapper: {
         display: "flex",
-        flexDirection: "column",
-        marginBottom: "1rem"
-    },
-    topRow: {
-        display: "flex",
-        justifyContent: "space-between",
-        marginTop: "1rem",
-        marginBottom: "1rem"
-    },
-    rowHeader: {
-        fontWeight: "bold !important",
-    },
-    statRow: {
-        display: "flex",
-        justifyContent: "center"
-    },
-    statCard: {
-        margin: "1rem"
+        justifyContent: "center",
+        [theme.breakpoints.up("sm")]: {
+            padding: "1rem",
+            justifyContent: "flex-end",
+        },
     }
 
 
@@ -156,73 +143,77 @@ const GenericList = (props) => {
     };
 
     return (
-        <Container
-            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))}
-            className={classes.listWrapper}>
+        <Box sx={{ flexGrow: 1 }} m={2}>
+            <Grid container spacing={1}>
 
-            <div className={classes.topRow}>
-                {/* Breadcrumb */}
-
-            </div>
-
-            <div className={classes.statRow}>
-                <GenericStatCard
-                    title="Total Orders"
-                    subtitle="120"
-                />
-                <GenericStatCard
-                    title="Orders Completed"
-                    subtitle="80"
-                />
-                <GenericStatCard
-                    title="Orders Pending"
-                    subtitle="40"
-                />
-            </div>
-
-            <div className={classes.topRow}>
-                {/* Serachbar and add Factory button */}
-                <Paper style={{ width: "300px", display: "flex", justifyContent: "space-between" }}>
-                    <InputBase
-                        sx={{ ml: 1, flex: 1 }}
-                        placeholder={`Search ${componentNameSingular}`}
-                        inputProps={{ 'aria-label': 'search factory' }}
+                <Grid item xs={12} sm={12} md={6} lg={4}>
+                    <GenericStatCard
+                        title="Total Orders"
+                        subtitle="120"
                     />
-                    <IconButton type="submit" sx={{ p: '2px' }} aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
+                </Grid>
 
+                <Grid item xs={12} sm={12} md={6} lg={4}>
+                    <GenericStatCard
+                        title="Orders Completed"
+                        subtitle="80"
+                    />
+                </Grid>
 
-                {(() => {
-                    switch (componentNameSingular) {
-                        case 'Factory':
-                            return <Button onClick={() => history.push("/factories/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>;
-                        case 'Outlet':
-                            return <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>;
-                        case 'Service Center':
-                            return <Button onClick={() => history.push("/service-centers/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Service Center</Button>;
-                        default:
-                            return <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add</Button>;
-                    }
-                })()}
+                <Grid item xs={12} sm={12} md={6} lg={4}>
+                    <GenericStatCard
+                        title="Orders Pending"
+                        subtitle="40"
+                    />
+                </Grid>
 
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <Paper style={{ display: "grid", gridTemplateColumns: "12fr 1fr" }}>
+                        <InputBase
+                            sx={{ ml: 1 }}
+                            placeholder={`Search ${componentNameSingular}`}
+                            inputProps={{ 'aria-label': 'search factory' }}
+                        />
+                        <IconButton type="submit" sx={{ p: '2px' }} aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                    </Paper>
+                </Grid>
 
+                <Grid item xs={12} sm={12} md={6} lg={6}>
+                    <div className={classes.btnWrapper}>
+                        {(() => {
+                            switch (componentNameSingular) {
+                                case 'Factory':
+                                    return <Button onClick={() => history.push("/factories/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>;
+                                case 'Outlet':
+                                    return <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>;
+                                case 'Service Center':
+                                    return <Button onClick={() => history.push("/service-centers/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Service Center</Button>;
+                                default:
+                                    return <Button variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add</Button>;
+                            }
+                        })()}
+                    </div>
+                </Grid>
 
-            </div>
-            {(() => {
-                switch (componentNameSingular) {
-                    case 'Factory':
-                        return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
-                    case 'Outlet':
-                        return <GenericTable rows={rows} labels={labels} view="/outlets/1" />;
-                    case 'Service Center':
-                        return <GenericTable rows={rows} labels={labels} view="/service-centers/1" />;
-                    default:
-                        return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
-                }
-            })()}
-        </Container>
+                <Grid item xs={12}>
+                    {(() => {
+                        switch (componentNameSingular) {
+                            case 'Factory':
+                                return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
+                            case 'Outlet':
+                                return <GenericTable rows={rows} labels={labels} view="/outlets/1" />;
+                            case 'Service Center':
+                                return <GenericTable rows={rows} labels={labels} view="/service-centers/1" />;
+                            default:
+                                return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
+                        }
+                    })()}
+                </Grid>
+
+            </Grid>
+        </Box>
     );
 }
 

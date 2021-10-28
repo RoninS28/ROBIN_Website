@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
-import {evModelList} from '../Data/EVModels';
+import { evModelList } from '../Data/EVModels';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { SketchPicker } from 'react-color';
 import { withStyles } from "@material-ui/core/styles";
+import Carousel from 'react-material-ui-carousel'
+
+import scooter1_i2 from '../../images/scooter1_i2.png';
+import scooter1_i3 from '../../images/scooter1_i3.png';
+import scooter1_i4 from '../../images/scooter1_i4.png';
 
 
 const styles = theme => ({
@@ -29,7 +34,7 @@ const styles = theme => ({
             marginLeft: "2rem",
         },
         [theme.breakpoints.down("sm")]: {
-            marginLeft: "0.4rem",
+            marginLeft: "1rem",
         }
     },
     modelWrapper: {
@@ -38,6 +43,7 @@ const styles = theme => ({
             display: "grid",
             gap: "1rem",
             gridTemplateColumns: "0.6fr 1.2fr",
+            margin: "2rem",
         },
     },
     modelImage: {
@@ -112,14 +118,14 @@ const styles = theme => ({
         justifyContent: "center",
     },
     colorPickerWrapper: {
-        marginLeft: "2rem",
-        marginTop: "2rem",
         [theme.breakpoints.up("sm")]: {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-        }
+            marginLeft: "2rem"
+        },
+        marginTop: "2rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
     },
     btnContainer: {
         display: "flex",
@@ -128,6 +134,13 @@ const styles = theme => ({
     },
     btn: {
         marginLeft: "1rem",
+    },
+    btnImgWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "1rem"
     }
 });
 
@@ -147,7 +160,7 @@ const EVModelDetail = (props) => {
 
     const { classes, theme } = props;
 
-    const {name, basePrice, imgUrl, colors, features, safety, design} = evModelList[0];
+    const { name, basePrice, imgUrl, colors, features, safety, design } = evModelList[0];
 
     const [pickerBackground, setPickerBackground] = useState('#fff');
 
@@ -158,24 +171,31 @@ const EVModelDetail = (props) => {
     return (
         <div className={classes.modelWrapper}>
             <div className={classes.imageWrapper}>
-                <img className={classes.modelImage} src={imgUrl} alt={`EV Model Pic: ${name}`}/>
-                <Button variant="contained" style={{ margin: "1rem" }} color="primary">Upload</Button>
+                <div className={classes.btnImgWrapper}>
+                    <Carousel>
+                        <img className={classes.modelImage} src={imgUrl} alt={`EV Model Pic: ${name}`} />
+                        <img className={classes.modelImage} src={scooter1_i2} alt={`EV Model Pic: ${name}`} />
+                        <img className={classes.modelImage} src={scooter1_i3} alt={`EV Model Pic: ${name}`} />
+                        <img className={classes.modelImage} src={scooter1_i4} alt={`EV Model Pic: ${name}`} />
+                    </Carousel>
+                    <Button variant="contained" color="primary" style={{ marginTop: "0.6rem" }}>Upload</Button>
+                </div>
 
                 <div className={classes.modelBasicColorContainer}>
                     <div className={classes.colorWrapper}>
                         <h2>Colors</h2>
                         <div className={classes.colorChipWrapper}>
                             {colors.map(color => (
-                                <Chip 
-                                className={classes.modelBasicChipItem} 
-                                onDelete={handleColorDelete} 
-                                style={{backgroundColor: color}}
+                                <Chip
+                                    className={classes.modelBasicChipItem}
+                                    onDelete={handleColorDelete}
+                                    style={{ backgroundColor: color }}
                                 />
                             ))}
                         </div>
                     </div>
                     <div className={classes.colorPickerWrapper}>
-                        <SketchPicker 
+                        <SketchPicker
                             color={pickerBackground}
                             onChangeComplete={handlePickerChangeComplete}
                         />
@@ -184,34 +204,34 @@ const EVModelDetail = (props) => {
                 </div>
 
             </div>
-            
+
             <div className={classes.modelBasicDetails}>
                 <div className={classes.inputTextWrapper}>
-                    <TextField id="standard-basic" label="Name" variant="standard" className={classes.inputText} value={name}/>
-                    <TextField id="standard-basic" label="Base Price" variant="standard" className={classes.inputText} value={basePrice}/>
+                    <TextField id="standard-basic" label="Name" variant="standard" className={classes.inputText} value={name} />
+                    <TextField id="standard-basic" label="Base Price" variant="standard" className={classes.inputText} value={basePrice} />
                 </div>
                 <div className={classes.modelBasicFeatures}>
                     <h2>Features</h2>
                     <div className={classes.inputTextWrapper}>
                         {Object.entries(features).map(([key, value]) => (
-                            <TextField id={key} label={key} variant="standard" className={classes.inputText} value={value}/>
-                        ))} 
+                            <TextField id={key} label={key} variant="standard" className={classes.inputText} value={value} />
+                        ))}
                     </div>
                 </div>
 
                 <div className="Model-basic-chip-container">
                     <h2>Design</h2>
                     <div className={classes.chipWrapper}>
-                    {design.map(item => (
-                        <Chip className={classes.modelBasicChipItem} label={item} onDelete={handleDesignDelete} />
-                    ))}
+                        {design.map(item => (
+                            <Chip className={classes.modelBasicChipItem} label={item} onDelete={handleDesignDelete} />
+                        ))}
                     </div>
 
-                    <div style={{marginTop: "1rem", marginLeft: "0.6rem"}}>
-                        <TextField label="Add new Design Feature" variant="standard" className={classes.inputText}/>
+                    <div style={{ marginTop: "1rem", marginLeft: "0.6rem" }}>
+                        <TextField label="Add new Design Feature" variant="standard" className={classes.inputText} />
                         <Button variant="contained" style={{ margin: "1rem" }} color="primary">Add</Button>
                     </div>
-                    
+
                 </div>
 
                 <div className="Model-basic-chip-container">
@@ -221,8 +241,8 @@ const EVModelDetail = (props) => {
                             <Chip className={classes.modelBasicChipItem} label={item} onDelete={handleSafetyDelete} />
                         ))}
                     </div>
-                    <div style={{marginTop: "1rem", marginLeft: "0.6rem"}}>
-                        <TextField label="Add new Safety Feature" variant="standard" className={classes.inputText}/>
+                    <div style={{ marginTop: "1rem", marginLeft: "0.6rem" }}>
+                        <TextField label="Add new Safety Feature" variant="standard" className={classes.inputText} />
                         <Button variant="contained" style={{ margin: "1rem" }} color="primary">Add</Button>
                     </div>
                 </div>

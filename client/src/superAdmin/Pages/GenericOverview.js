@@ -8,13 +8,15 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import Box from '@material-ui/core/Box';
+import { Grid } from '@material-ui/core';
 
 
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from '@material-ui/core';
 
-import { Doughnut } from 'react-chartjs-2';
-import { Line } from 'react-chartjs-2';
+import DoughNut from './DoughNut';
+import LineChart from './LineChart';
 import GenericTable from './GenericTable';
 import EditIcon from '@mui/icons-material/Edit';
 import { useHistory, useLocation } from 'react-router';
@@ -145,111 +147,191 @@ const GenericOverview = (props) => {
     }
 
     return (
-        <Container
-            maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))}
-            className={classes.listWrapper}>
+        <Box sx={{ flexGrow: 1 }} m={2}>
+            <Grid container spacing={1}>
 
-            <div className={classes.topRow}>
-                {/* Breadcrumb */}
+                {/* Stat Card container */}
+                <Grid item xs={12} sm={12} md={12} lg={8}>
 
-            </div>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title={sampleTitle}
+                                subtitle={sampleSubtitle}
+                                editBtnUrl={editBtnUrl}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Average Annual Prod."
+                                subtitle="35000 units"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Total Area"
+                                subtitle="20,000 sq. ft"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Sales last month"
+                                subtitle="Rs. 1,00,000"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Total Employees"
+                                subtitle="70"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Sales Income"
+                                subtitle="Rs. 1,50,000"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Max Capacity"
+                                subtitle="2000 units"
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={6}>
+                            <GenericStatCard
+                                title="Total Revenue"
+                                subtitle="Rs. 50,000"
+                            />
+                        </Grid>
+                    </Grid>
 
-            <div className={classes.statRow}>
-                <div>
-                    <GenericStatCard
-                        title={sampleTitle}
-                        subtitle={sampleSubtitle}
-                        editBtnUrl={editBtnUrl}
-                    />
-                    <GenericStatCard
-                        title="Total Area"
-                        subtitle="20,000 sq. ft"
-                    />
-                    <GenericStatCard
-                        title="Total Employees"
-                        subtitle="70"
-                    />
-                    <GenericStatCard
-                        title="Max Capacity"
-                        subtitle="2000 units"
-                    />
+                </Grid>
 
-                </div>
-
-                <div>
-                    <GenericStatCard
-                        title="Average Annual Prod."
-                        subtitle="35000 units"
-                    />
-                    <GenericStatCard
-                        title="Sales last month"
-                        subtitle="Rs. 1,00,000"
-                    />
-                    <GenericStatCard
-                        title="Sales Income"
-                        subtitle="Rs. 1,50,000"
-                    />
-                    <GenericStatCard
-                        title="Total Revenue"
-                        subtitle="Rs. 50,000"
-                    />
-                </div>
-
-
-                <Card sx={{ minWidth: 275 }} className={classes.pieChart}>
-                    <Typography variant="h5" component="div">
-                        Average EV Sales per month
+                {/* Doughnut statistic */}
+                <Grid item xs={12} sm={12} md={12} lg={4}>
+                    <Card>
+                        <DoughNut state={pieData} />
+                    </Card>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Complaints from Factory</Button>
+                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Requests from Factory</Button>
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Typography variant="h5" component="div" style={{ padding: "0.2rem" }}>
+                        EV Sales this month
                     </Typography>
-                    <Doughnut
-                        data={pieData}
-                        options={{
-                            title: {
-                                display: true,
-                                text: 'Average EV Sales per month',
-                                fontSize: 20
-                            },
-                            legend: {
-                                display: true,
-                                position: 'right'
-                            }
-                        }}
-                    />
-                </Card>
-            </div>
+                    <GenericTable rows={rows} labels={labels} />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={12}>
+                    <Card>
+                        <LineChart state={lineData} />
+                    </Card>
+                </Grid>
 
-            <div className={classes.topRow}>
-                {/* Serachbar and add Factory button */}
-                <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Complaints from Factory</Button>
-                <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Requests from Factory</Button>
+            </Grid>
+        </Box>
+        // <Container
+        //     maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))}
+        //     className={classes.listWrapper}>
 
-            </div>
 
-            <Typography variant="h5" component="div" style={{ padding: "0.2rem" }}>
-                EV Sales this month
-            </Typography>
-            <GenericTable rows={rows} labels={labels} />
+        //     <div className={classes.statRow}>
+        //         <div>
+        // <GenericStatCard
+        //     title={sampleTitle}
+        //     subtitle={sampleSubtitle}
+        //     editBtnUrl={editBtnUrl}
+        // />
+        // <GenericStatCard
+        //     title="Total Area"
+        //     subtitle="20,000 sq. ft"
+        // />
+        // <GenericStatCard
+        //     title="Total Employees"
+        //     subtitle="70"
+        // />
+        // <GenericStatCard
+        //     title="Max Capacity"
+        //     subtitle="2000 units"
+        // />
 
-            <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
-                <Typography variant="h5" component="div">
-                    Total EV Sales per month
-                </Typography>
-                <Line
-                    data={lineData}
-                    options={{
-                        title: {
-                            display: true,
-                            text: 'Total EV Sales by months',
-                            fontSize: 20
-                        },
-                        legend: {
-                            display: true,
-                            position: 'right'
-                        }
-                    }}
-                />
-            </Card>
+        //         </div>
 
-        </Container>
+        //         <div>
+        // <GenericStatCard
+        //     title="Average Annual Prod."
+        //     subtitle="35000 units"
+        // />
+        // <GenericStatCard
+        //     title="Sales last month"
+        //     subtitle="Rs. 1,00,000"
+        // />
+        // <GenericStatCard
+        //     title="Sales Income"
+        //     subtitle="Rs. 1,50,000"
+        // />
+        // <GenericStatCard
+        //     title="Total Revenue"
+        //     subtitle="Rs. 50,000"
+        // />
+        //         </div>
+
+
+        //         <Card sx={{ minWidth: 275 }} className={classes.pieChart}>
+        // <Typography variant="h5" component="div">
+        //     Average EV Sales per month
+        // </Typography>
+        //             <Doughnut
+        //                 data={pieData}
+        //                 options={{
+        //                     title: {
+        //                         display: true,
+        //                         text: 'Average EV Sales per month',
+        //                         fontSize: 20
+        //                     },
+        //                     legend: {
+        //                         display: true,
+        //                         position: 'right'
+        //                     }
+        //                 }}
+        //             />
+        //         </Card>
+        //     </div>
+
+        //     <div className={classes.topRow}>
+        //         {/* Serachbar and add Factory button */}
+        //         <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Complaints from Factory</Button>
+        //         <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Requests from Factory</Button>
+
+        //     </div>
+
+        // <Typography variant="h5" component="div" style={{ padding: "0.2rem" }}>
+        //     EV Sales this month
+        // </Typography>
+        // <GenericTable rows={rows} labels={labels} />
+
+        //     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
+        //         <Typography variant="h5" component="div">
+        //             Total EV Sales per month
+        //         </Typography>
+        //         <Line
+        //             data={lineData}
+        //             options={{
+        //                 title: {
+        //                     display: true,
+        //                     text: 'Total EV Sales by months',
+        //                     fontSize: 20
+        //                 },
+        //                 legend: {
+        //                     display: true,
+        //                     position: 'right'
+        //                 }
+        //             }}
+        //         />
+        //     </Card>
+
+        // </Container>
     );
 }
 
