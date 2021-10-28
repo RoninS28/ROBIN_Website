@@ -258,7 +258,7 @@ class MiniDrawer extends React.Component {
       {
         text: 'Breakdown',
         icon: <AgricultureIcon />,
-        path: '/'
+        path: '/chatbot'
       },
       {
         text: 'Updates',
@@ -313,8 +313,8 @@ class MiniDrawer extends React.Component {
                 <Link to="/products" className={classes.link}>
                   Products
                 </Link>
-                <Link to="/testdrive" className={classes.link}>
-                  Test Drive
+                <Link to="/chatbot" className={classes.link}>
+                  Chatbot
                 </Link>
                 <Link to="/bookings" className={classes.link}>
                   Booking

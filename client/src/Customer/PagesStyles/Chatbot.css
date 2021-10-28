@@ -1,0 +1,253 @@
+body {
+    /* background-color: #282c34; */
+    font-family: 'Secular One', sans-serif;
+    font-size:20px ;
+    font-weight: 700;
+
+  }
+
+  div.header{
+    font-family: 'Secular One', sans-serif;
+    font-weight: 900;
+
+      font-size: 40px;
+      display: flex;
+      justify-content: center;
+      color: #F49F20;
+      text-shadow: 0px 0px 1px white, 1px 3px 4px rgba(0, 0, 0, 0.25);
+
+  }
+  
+  /* .App {
+    text-align: center;
+    max-width: 728px;
+    margin: 0 auto;
+  }
+  
+  .App header {
+    background-color: #181717;
+    height: 10vh;
+    min-height: 50px;
+    color: white;
+    position: fixed;
+    width: 100%;
+    max-width: 728px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .App section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: rgb(40, 37, 53);
+  }
+   */
+  main {
+    padding: 10px;
+    height: 80vh;
+    margin: 10vh 0 10vh;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  
+  main::-webkit-scrollbar-track {
+    /* background: #1e1e24; */
+  }
+  
+  main::-webkit-scrollbar-thumb {
+    /* background: #6649b8; */
+  }
+  
+  form {
+      color: black;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    /* background-color: rgb(24, 23, 23); */
+    width: 90%;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    border-radius: 20px;
+    /* max-width: 728px; */
+    display: flex;
+    font-size: 1.5rem;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.20), 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  form button {
+    /* width: 20%; */
+    font-family: 'Secular One', sans-serif;
+    font-size: 20px;
+    background-color: white;
+    color: rgba(0, 0, 0, 0.50);
+    border-radius: 20px;
+  }
+  
+  
+  input {
+    line-height: 1.5;
+    width: 100%;
+    /* max-width: 1000px; */
+    font-size: 1.5rem;
+    background: white;
+    color: rgba(0, 0, 0, 0.70);
+    outline: none;
+    border: none;
+    padding: 20px;
+    border-radius: 20px;
+    border-right: 1px solid rgba(0, 0, 0, 0.20);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  button {
+    /* background-color: #282c34; Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.25rem;
+  }
+  
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  
+  /* .sign-in {
+    color: #282c34;
+    background: white;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  
+  
+  
+  ul, li {
+    text-align: left;
+    list-style: none;
+  }
+   */
+  p {
+    max-width: 500px;
+    margin-bottom: 12px;
+    line-height: 24px;
+    padding: 15px 25px;
+    border-radius: 20px;
+    position: relative;
+    color: white;
+    text-align: start;
+  }
+
+  
+  .message {
+    display: flex;
+    align-items: center;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.438);
+
+  }
+  
+  
+  .sent {
+    flex-direction: row-reverse;
+  }
+  
+  .sent p {
+    color: rgba(0, 0, 0, 0.700);
+    color: white;
+    background: #FFD700;
+    align-self: flex-end;
+    font-weight: 900;
+    font-size: 18px;
+  }
+  .received p {
+    background: #F49F20;
+    color: rgba(0, 0, 0, 0.700);
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+
+  }
+  
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 2px 5px;
+  }
+
+  .messageCol{
+      display: flex;
+      flex-direction: column;
+  }
+  
+  .trailersent p{
+   
+        
+        /* margin-top: 12px; */
+        margin-left: 4px;
+        margin-right: 4px;
+        line-height: 24px;
+        padding: 3px 12px;
+        border-radius: 25px;
+        border: 2px solid #E22121;
+        position: relative;
+        color: black;
+        text-align: center;
+        font-size: 16px;
+        text-transform: capitalize;
+
+      
+  }
+  div.trailersent{
+      display: flex;
+      justify-content: end;
+      flex-direction: row-reverse;
+  }
+  .trailerreceived p{
+   
+        
+        /* margin-top: 12px; */
+        margin-left: 4px;
+        margin-right: 4px;
+        line-height: 24px;
+        padding: 3px 12px;
+        border-radius: 25px;
+        border: 2px solid #F49F20;
+        position: relative;
+        color: black;
+        text-align: center;
+        font-size: 16px;
+        text-transform: capitalize;
+      
+  }
+  div.trailerreceived{
+      display: flex;
+      justify-content: start;
+      /* flex-direction: row-reverse; */
+  }
+
+  p.timestamp{
+      color: rgba(0, 0, 0, 0.500);
+      font-weight: bold;
+      font-size: 14;
+      border: none;
+  }

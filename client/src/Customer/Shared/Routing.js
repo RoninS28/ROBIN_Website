@@ -12,6 +12,7 @@ import ProductsView from "../Pages/ProductsView";
 import ServicingConfirm from "../Pages/ServicingConfirm";
 import Servicing from "../Pages/Servicing";
 import ServicingBook from "../Pages/ServicingBook";
+import Chatbot from "../Pages/Chatbot";
 
 
 function Routing() {
@@ -32,6 +33,7 @@ function Routing() {
           <Route path='/bookings' exact component={Bookings} ></Route>
           <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
           <Route path='/servicing' exact component={Servicing} ></Route>
+          <Route path='/chatbot' exact component={Chatbot} ></Route>
           <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
           <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
         </Switch>
