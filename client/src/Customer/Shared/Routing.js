@@ -13,6 +13,8 @@ import ServicingConfirm from "../Pages/ServicingConfirm";
 import Servicing from "../Pages/Servicing";
 import ServicingBook from "../Pages/ServicingBook";
 import Chatbot from "../Pages/Chatbot";
+import TestDriveBooking from "../Pages/TestDriveBooking";
+import TestDriveOutlet from "../Pages/TestDriveOutlet";
 
 
 function Routing() {
@@ -30,6 +32,8 @@ function Routing() {
           <Route path='/productsView/:id' exact component={ProductsView} ></Route>
           <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
+          <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>
+          <Route path='/TestDriveOutlet' exact component={TestDriveOutlet} ></Route>
           <Route path='/bookings' exact component={Bookings} ></Route>
           <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
           <Route path='/servicing' exact component={Servicing} ></Route>

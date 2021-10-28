@@ -44,20 +44,20 @@ export default function Home() {
       </div>
 
       <div style={{ backgroundColor: "black", padding: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        {/* <Grid container spacing={3} justifyContent="space-evenly"> */}
-        {/* <Grid container xs={12} md={12} lg={12} xl={12} sx={{ border: 1 }} style={{ borderRadius: "0.5rem", borderColor: "black" }}> */}
-        {/* <Grid spacing={3} xs={4} md={4} lg={4} xl={4} > */}
+        <Grid container spacing={3} justifyContent="space-evenly">
+        <Grid container xs={12} md={12} lg={12} xl={12} sx={{ border: 1 }} style={{ borderRadius: "0.5rem", borderColor: "black" }}>
+        <Grid spacing={3} xs={4} md={4} lg={4} xl={4} >
         <div style={{ color: "white", fontSize: "40px", textAlign: "center", textShadow: "-1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px blue", alignSelf: 'start' }}>
           <center>We're Happy to Help you...</center>
         </div>
-        {/* </Grid> */}
-        {/* <Grid spacing={3} xs={8} md={8} lg={8} xl={8} > */}
-        <div className="image">
-          <img src={props.image3} />
+        </Grid>
+        <Grid spacing={3} xs={8} md={8} lg={8} xl={8} >
+        <div className="image" style={{justifyContent:"right",justifyItems:"right"}}>
+          <img src={props.image3} width="600px" />
         </div>
-        {/* </Grid> */}
-        {/* </Grid> */}
-        {/* </Grid> */}
+        </Grid>
+        </Grid>
+        </Grid>
         <div style={{ marginTop: "30px", color: "white", fontSize: "40px", textAlign: "center", textShadow: "-1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen", display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => handleTestDrive()}>
           <center>Book a free Test Drive Today</center><KeyboardArrowRight style={{ color: "white", fontSize: "60px" }} />
         </div>

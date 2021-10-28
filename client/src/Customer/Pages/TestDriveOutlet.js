@@ -1,76 +1,67 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import Select from "react-select";
 import { useState } from "react";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { ButtonGroup, Button } from "@material-ui/core";
-import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
-import TestDriveOutlet from "./TestDriveOutlet";
 
-export default function TestDrive() {
-
-  const home=true;
-
-  const Timeslotoptions = [
-    { label: "6am-12pm", value: "1" },
-    { label: "12pm-8pm", value: "2" },
-    { label: "8pm-6am", value: "3" },
-  ];
-
-  const [TimeslotValue, setTimeslotValue] = useState('');
-
-  const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
-    return option.value === TimeslotValue;
-  })} />;
-
-  const Modeloptions = [
-    { label: "Shine s1", value: "1" },
-    { label: "Glamour s2", value: "2" },
-    { label: "Hornet s3", value: "3" },
-  ];
-
-  const [modelValue, setmodelValue] = useState('');
-
-  const ModelComponent = () => <Select onChange={(e) => { setmodelValue(e.value) }} options={Modeloptions} value={Modeloptions.filter(function (option) {
-    return option.value === modelValue;
-  })} />;
+export default function TestDriveOutlet() {
+    const home=false;
+    const Timeslotoptions = [
+        { label: "6am-12pm", value: "1" },
+        { label: "12pm-8pm", value: "2" },
+        { label: "8pm-6am", value: "3" },
+      ];
+    
+      const [TimeslotValue, setTimeslotValue] = useState('');
+    
+      const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
+        return option.value === TimeslotValue;
+      })} />;
+    
+      const Modeloptions = [
+        { label: "Shine s1", value: "1" },
+        { label: "Glamour s2", value: "2" },
+        { label: "Hornet s3", value: "3" },
+      ];
+    
+      const [modelValue, setmodelValue] = useState('');
+    
+      const ModelComponent = () => <Select onChange={(e) => { setmodelValue(e.value) }} options={Modeloptions} value={Modeloptions.filter(function (option) {
+        return option.value === modelValue;
+      })} />;
 
 
-  const history = useHistory()
+      const Outletoptions = [
+        { label: "Katraj", value: "1" },
+        { label: "Pimpri", value: "2" },
+        { label: "Baner-Pashan", value: "3" },
+      ];
+    
+      const [OutletValue, setOutletValue] = useState('');
+    
+      const OutletComponent = () => <Select onChange={(e) => { setOutletValue(e.value) }} options={Outletoptions} value={Outletoptions.filter(function (option) {
+        return option.value === OutletValue;
+      })} />;
+    
+    
+      const history = useHistory()
+    
+    
+      const handleTestDriveBooking = () => {
+        history.push('/TestDriveBooking')
+                      
+      }
+    
+      const handleTestDrive = () => {
+        history.push('/TestDrive')
+      }
+    
+      const handleTestDriveOutlet = () => {
+        history.push('/TestDriveOutlet')
+      }
 
 
-  const handleTestDriveBooking = () => {
-    history.push('/TestDriveBooking')
-                  
-  }
-
-  const handleTestDrive = () => {
-    history.push('/TestDrive')
-  }
-
-  const handleTestDriveOutlet = () => {
-    history.push('/TestDriveOutlet')
-  }
-
-    const useStyles1 = makeStyles((theme) => {
-    return {
-      display: "block",
-    }})
-
-    const useStyles2 = makeStyles((theme) => {
-    return {
-      display: "none",
-    }})
-
-  return (
-    <>
-      <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "" }}>
+    return (
+            <>
+                <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "" }}>
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-8/12 mt-10 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-600 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -281,6 +272,24 @@ export default function TestDrive() {
                   </div>
 
 
+                  <div id="wrapper">
+                  <center><div className="relative w-full lg:w-6/12 mb-12 px-2">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Select Outlet
+                      </label>
+
+                      <div className="w-full self-center my-2 text-xl">
+                        <OutletComponent />
+                      </div>
+
+                    </div>
+                    </center>
+                  </div>
+
+
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 w-full lg:w-6/12 text-black active:bg-blueGray-600 text-xl font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -298,6 +307,10 @@ export default function TestDrive() {
           </div>
         </div>
       </div>
-    </>
+
+            </>
   );
 }
+
+
+

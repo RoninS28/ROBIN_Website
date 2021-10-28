@@ -197,7 +197,7 @@ const BookingsStage = () => {
                         <Grid container item xs={12} md={12} lg={12} xl={12} sx={{ border: 1 }} style={{ borderRadius: "0.5rem", borderColor: "blue" }}>
 
 
-                            <Grid item spacing={3} key={item.id} xs={8} md={8} lg={8} xl={8} className={classes.bookingrowInfo} style={{ borderRadius: "0.5", borderColor: "rgba(0,0,0,0.3)" }}>
+                            <Grid item spacing={3} key={item.id} xs={9} md={9} lg={9} xl={9} className={classes.bookingrowInfo} style={{ borderRadius: "0.5", borderColor: "rgba(0,0,0,0.3)" }}>
                                 <div className="bookingstageInfo" style={item.status == 'completed' ? finishedBoxStyle : item.status == 'ongoing' ? ongoingBoxStyle : pendingBoxStyle}>
                                     <div class="grid-container">
 
@@ -215,8 +215,8 @@ const BookingsStage = () => {
 
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.id} xs={4} md={4} lg={3} xl={3} className={classes.statusColumn} style={{ marginLeft: "40px", marginRight: "20px" }}>
-                                <div className="statusColumn" >
+                            <Grid item spacing={3} key={item.id} xs={3} md={3} lg={3} xl={3} className={classes.statusColumn} >
+                                <center><div className="statusColumn" >
 
                                     <div>
                                         {/* {item.status} */}
@@ -224,7 +224,7 @@ const BookingsStage = () => {
                                     <div>
                                         {item.status === 'completed' ? <CheckIcon style={{ color: "#8FFF00", fontSize: "100px" }} /> : item.status == 'ongoing' ? <ApartmentIcon style={{ color: "#FF9B04", fontSize: "100px" }} /> : <AccessTimeIcon style={{ color: "rgba(0,0,0,0.2)", fontSize: "100px" }} />}
                                     </div>
-                                </div>
+                                </div></center>
                             </Grid>
 
                         </Grid>
