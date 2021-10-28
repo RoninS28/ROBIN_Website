@@ -6,7 +6,8 @@ import { Grid } from "@material-ui/core";
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import './BookingsStage.css';
+import '../PagesStyles/BookingsStage.css'
+// import ' PagesStyles/BookingsStage.css';
 import CheckIcon from '@mui/icons-material/Check';
 
 const useStyles = makeStyles((theme) => {
@@ -168,7 +169,7 @@ const BookingsStage = () => {
 
 
     return (
-        <div>
+        <div className="bookingsStageScreen">
             {/* client\src\Customer\Assets\v2.jpeg */}
             <div className={classes.heading}>
                 {vehicleInfo.model}

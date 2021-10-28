@@ -1,32 +1,32 @@
-div.root{
+div.servicingBookScreen{
     font-family: 'Secular One', sans-serif;
 }
-div.allDetails{
+div.servicingBookScreen div.allDetails{
     font-family: 'Secular One', sans-serif;
     font-size: 35px;
 }
-div.allDetailsText{
+div.servicingBookScreen div.allDetailsText{
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.formFilling{
+div.servicingBookScreen .formFilling{
     margin-top: 80px;
     font-size: 25px;
 }
 
-.servicingtable{
+div.servicingBookScreen .servicingtable{
     margin-top: 80px;
     font-family: 'Secular One', sans-serif;
-    font-size: 40px;
+    font-size: 25px;
 }
-.servicingdata{
+div.servicingBookScreen .servicingdata{
     /* margin-top: 80px; */
-    font-size: 26px;
+    font-size: 20px;
     font-family: 'Secular One', sans-serif;
 }
 
-div.furtherAction{
+div.servicingBookScreen div.furtherAction{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +36,7 @@ div.furtherAction{
     font-family: 'Secular One', sans-serif;
 }
 
-div.bookServicingButtonDiv{
+div.servicingBookScreen div.bookServicingButtonDiv{
     display: flex;
     justify-content: center;
     text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
@@ -52,4 +52,12 @@ div.bookServicingButtonDiv{
     padding-right: 20px;
     /* padding-left: 18px; */
     border: 4px solid #B2E424;
+}
+
+div.servicingBookScreen div.bookServicingButtonDiv button{
+    font-family: 'Secular One', sans-serif;
+    font-size: 22px;
+    background-color: white;
+    border: none;
+    color: #B2E424;
 }

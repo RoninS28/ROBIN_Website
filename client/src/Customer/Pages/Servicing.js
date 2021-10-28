@@ -124,7 +124,7 @@ const Servicing = () => {
 
 
     return (
-        <div className="root">
+        <div className="servicingScreen">
 
 
             <div className={classes.heading}>
@@ -162,7 +162,7 @@ const Servicing = () => {
 
                                 <div className="image">
 
-                                    <img src={v2} alt="image" height="200px" width="200px" />
+                                    <img src={v2} alt="image" height="200px" width="260px" />
                                 </div>
 
                             </Grid>

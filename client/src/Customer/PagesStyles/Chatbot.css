@@ -1,12 +1,6 @@
-body {
-    /* background-color: #282c34; */
-    font-family: 'Secular One', sans-serif;
-    font-size:20px ;
-    font-weight: 700;
 
-  }
 
-  div.header{
+  div#chatbotScreen div#chatbotHeader{
     font-family: 'Secular One', sans-serif;
     font-weight: 900;
 
@@ -49,7 +43,7 @@ body {
     background-color: rgb(40, 37, 53);
   }
    */
-  main {
+   div#chatbotScreen div.main {
     padding: 10px;
     height: 80vh;
     margin: 10vh 0 10vh;
@@ -58,19 +52,19 @@ body {
     flex-direction: column;
   }
   
-  main::-webkit-scrollbar {
+  div#chatbotScreen div.main::-webkit-scrollbar {
     width: 0.25rem;
   }
   
-  main::-webkit-scrollbar-track {
-    /* background: #1e1e24; */
+  /* main::-webkit-scrollbar-track {
+    background: #1e1e24;
   }
   
   main::-webkit-scrollbar-thumb {
-    /* background: #6649b8; */
-  }
+    background: #6649b8;
+  } */
   
-  form {
+  div#chatbotScreen form.chatbotForm {
       color: black;
     height: 10vh;
     position: fixed;
@@ -87,7 +81,7 @@ body {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.20), 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   
-  form button {
+  div#chatbotScreen form.chatbotForm button {
     /* width: 20%; */
     font-family: 'Secular One', sans-serif;
     font-size: 20px;
@@ -97,7 +91,7 @@ body {
   }
   
   
-  input {
+  div#chatbotScreen input.chatbotInput {
     line-height: 1.5;
     width: 100%;
     /* max-width: 1000px; */
@@ -113,8 +107,8 @@ body {
     border-bottom-right-radius: 0;
   }
   
-  button {
-    /* background-color: #282c34; Green */
+  div#chatbotScreen button {
+    background-color: #282c34; 
     border: none;
     color: white;
     padding: 15px 32px;
@@ -125,10 +119,10 @@ body {
     font-size: 1.25rem;
   }
   
-  button:disabled {
+  /* button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
+  } */
   
   
   /* .sign-in {
@@ -146,7 +140,7 @@ body {
     list-style: none;
   }
    */
-  p {
+  div#chatbotScreen p {
     max-width: 500px;
     margin-bottom: 12px;
     line-height: 24px;
@@ -158,7 +152,7 @@ body {
   }
 
   
-  .message {
+  div#chatbotScreen .message {
     display: flex;
     align-items: center;
     text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.438);
@@ -166,11 +160,11 @@ body {
   }
   
   
-  .sent {
+  div#chatbotScreen .sent {
     flex-direction: row-reverse;
   }
   
-  .sent p {
+  div#chatbotScreen .sent p {
     color: rgba(0, 0, 0, 0.700);
     color: white;
     background: #FFD700;
@@ -178,7 +172,7 @@ body {
     font-weight: 900;
     font-size: 18px;
   }
-  .received p {
+  div#chatbotScreen .received p {
     background: #F49F20;
     color: rgba(0, 0, 0, 0.700);
     color: white;
@@ -187,19 +181,19 @@ body {
 
   }
   
-  img {
+  /* img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin: 2px 5px;
-  }
+  } */
 
-  .messageCol{
+  div#chatbotScreen .messageCol{
       display: flex;
       flex-direction: column;
   }
   
-  .trailersent p{
+  div#chatbotScreen .trailersent p{
    
         
         /* margin-top: 12px; */
@@ -217,12 +211,12 @@ body {
 
       
   }
-  div.trailersent{
+  div#chatbotScreen div.trailersent{
       display: flex;
       justify-content: end;
       flex-direction: row-reverse;
   }
-  .trailerreceived p{
+  div#chatbotScreen .trailerreceived p{
    
         
         /* margin-top: 12px; */
@@ -239,13 +233,13 @@ body {
         text-transform: capitalize;
       
   }
-  div.trailerreceived{
+  div#chatbotScreen div.trailerreceived{
       display: flex;
       justify-content: start;
       /* flex-direction: row-reverse; */
   }
 
-  p.timestamp{
+  div#chatbotScreen p.timestamp{
       color: rgba(0, 0, 0, 0.500);
       font-weight: bold;
       font-size: 14;

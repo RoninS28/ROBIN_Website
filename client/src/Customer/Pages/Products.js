@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => {
       color: blue[500],
       marginTop: '20px',
       textAlign: "center",
-      fontSize: '40px',
+      fontSize: '26px',
       textShadow: '1px 1px 4px rgba(0, 0, 0, 0.21)',
     },
   }
@@ -143,11 +143,11 @@ export default function Products() {
 
 
   return (
-    <div className="root">
+    <div className="productsViewScreen">
 
 
-      <div className={classes.heading}>
-        <h1>Products Page</h1>
+      <div className="heading">
+        Products Page
       </div>
       {/* <ImageCarousel/> */}
       <Grid container spacing={3}>
@@ -156,7 +156,7 @@ export default function Products() {
           <Grid item spacing={3} key={model.id} xs={12} md={6} lg={4} xl={4} onClick={(e) => handleProduct(model)}>
             <div className="productDisplay">
               <div className="image">
-                <img src={model.image} alt="image" width="250" height="200" />
+                <img src={model.image} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
                 {model.model}

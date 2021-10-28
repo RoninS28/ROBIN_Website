@@ -1,4 +1,4 @@
-div.heading {
+div.productsViewScreen div.heading {
     text-align: center;
     font-size: 45px;
     margin-top: 30px;
@@ -7,25 +7,25 @@ div.heading {
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.21), 0px 0px 5px greenyellow;
     
 }
-div.imgNcolors{
+div.productsViewScreen div.imgNcolors{
     display: flex;
     flex-direction: column;
     align-items: center;
 
 }
 
-div.image{
+div.productsViewScreen div.image{
     display: flex;
     justify-content: center;
     /* margin: 25px; */
 }
 
-div.colors{
+div.productsViewScreen div.colors{
     display: flex;
     margin: 20px;
 }
 
-.featureColumn{
+div.productsViewScreen .featureColumn{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,7 +35,7 @@ div.colors{
 
 }
 
-.features{
+div.productsViewScreen .features{
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -43,17 +43,17 @@ div.colors{
     
 }
 
-.featureAvatar{
+div.productsViewScreen .featureAvatar{
     height: '70px';
     width: '70px';
     margin: 15px;
 }
-.f1{
+div.productsViewScreen .f1{
     display: flex;
     justify-content: end;
 }
 
-div.uniqueFeatureCol{
+div.productsViewScreen div.uniqueFeatureCol{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,7 +62,7 @@ div.uniqueFeatureCol{
 }
 
 
-div.highlightUniqueFeature{
+div.productsViewScreen div.highlightUniqueFeature{
     font-size: 48px;
     font-family: 'Secular One', sans-serif;
     padding: 10px;
@@ -79,7 +79,7 @@ div.highlightUniqueFeature{
     margin-bottom: 20px;
     text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
 }
-div.unithighlight{
+div.productsViewScreen div.unithighlight{
     font-size: 20px; 
     font-weight: bold;
 }
@@ -90,7 +90,7 @@ div.descUniqueFeature{
     
 }
 
-div.knowMoreButtonDiv{
+div.productsViewScreen div.knowMoreButtonDiv{
     display: flex;
     justify-content: center;
     margin-top: 60px;
@@ -106,7 +106,7 @@ div.knowMoreButtonDiv{
 
 }
 
-div.bookNowButtonDiv{
+div.productsViewScreen div.bookNowButtonDiv{
     display: flex;
     justify-content: center;
     margin-top: 100px;
@@ -124,7 +124,7 @@ div.bookNowButtonDiv{
 }
 
 
-div.takeTestDriveButtonDiv{
+div.productsViewScreen div.takeTestDriveButtonDiv{
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -142,7 +142,7 @@ div.takeTestDriveButtonDiv{
 }
 
 
-div.chatBotButtonDiv{
+div.productsViewScreen div.chatBotButtonDiv{
     display: flex;
     justify-content: center;
     margin-top: 20px;
@@ -159,7 +159,7 @@ div.chatBotButtonDiv{
     border: 4px solid #FFD700;
 }
 
-div.buttonPara{
+div.productsViewScreen div.buttonPara{
  font-size: 30px;   
  font-family: 'Secular One', sans-serif;
 margin-top: 10px;
@@ -175,35 +175,35 @@ text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
 /* ! MEDIA QUERY */
 
 @media (max-width: 960px){
-    .imageGrid{
+    div.productsViewScreen .imageGrid{
         order: 1;
     
     }
     
-    .featureAvatars1{
+    div.productsViewScreen .featureAvatars1{
         order:2;
         flex-direction: row;
         
     }
     
-    .featureAvatars2{
+    div.productsViewScreen .featureAvatars2{
         order:3;
         flex-direction: row;
     }
-    .features {
+    div.productsViewScreen .features {
         flex-direction: row;
     }
     
 }
 @media (max-width: 600px){
-    div.image{
+    div.productsViewScreen div.image{
         /* display: flex;
         justify-content: center; */
         /* margin: 25px; */
         height: 220px;
         width: 220px;
     }
-    div.heading{
+    div.productsViewScreen div.heading{
         font-size: 30px;
         text-align: center;
 

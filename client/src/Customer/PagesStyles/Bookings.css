@@ -1,22 +1,22 @@
-h1{
+div.bookingScreen h1{
     justify-content: flex-end;
 }
-div.statusRow{
+div.bookingScreen div.statusRow{
     display: flex;
     justify-content: center;
 }
-div.image{
+div.bookingScreen div.image{
     display: flex;
     justify-content: center;
 }
-div.bookingrowInfo{
+div.bookingScreen div.bookingrowInfo{
     display: flex;
     flex-direction: column;
 
     align-items: center;
 }
 
-div.statusColumn{
+div.bookingScreen div.statusColumn{
     /* color: greenyellow; */
     display: flex;
     flex-direction: column;

@@ -143,7 +143,7 @@ const ProductsView = (props) => {
     console.log(model)
     // modelList.
     return (
-        <div className={classes.root}>
+        <div className={classes.root, "productsViewScreen"}>
             <div className="heading">
                 {model.model}
             </div>

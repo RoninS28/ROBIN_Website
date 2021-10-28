@@ -57,23 +57,23 @@ const ChatRoom = () => {
     }
 
     return (
-        <div >
+        <div id="chatbotScreen">
 
-            <div className="header" >
+            <div className="header" id="chatbotHeader" >
                 SMART CHATBOT
             </div>
 
 
-            <main>
+            <div className="main">
 
                 {messages && messages.map(msg => <ChatMessage key={msg.id} msg={msg} />)}
                 <div ref={dummy}></div>
-            </main>
+            </div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 
-                <form onSubmit={avoidRefresh} >
+                <form onSubmit={avoidRefresh} className="chatbotForm" >
 
-                    <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Write your response" />
+                    <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Write your response" className="chatbotInput" />
                     <button >Category</button>
                     <button type="submit" onClick={sendMessage}><SendIcon style={{ color: '#4EBCEC' }} /></button>
                 </form>
