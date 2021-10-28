@@ -13,7 +13,7 @@ function GenericStatCard(props) {
     const history = useHistory();
 
     return (
-        <Card sx={{ minWidth: 275 }} style={{ margin: "1rem" }}>
+        <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {title}
@@ -26,7 +26,7 @@ function GenericStatCard(props) {
                     </Grid>
                     <Grid item lg={2}>
                         {editBtnUrl && (
-                            <span onClick={() => history.push(editBtnUrl)}>
+                            <span onClick={() => history.push(editBtnUrl)} style={{  }}>
                                 <EditIcon />
                             </span>
                         )}
