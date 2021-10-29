@@ -268,7 +268,7 @@ class MiniDrawer extends React.Component {
       {
         text: 'Notifications',
         icon: <NotificationsIcon />,
-        path: '/'
+        path: '/notifications'
       },
 
 
@@ -322,8 +322,8 @@ class MiniDrawer extends React.Component {
                 <Link to="/servicing" className={classes.link}>
                   Servicing
                 </Link>
-                <Link to="/" className={classes.link}>
-                  BreakDown
+                <Link to="/notifications" className={classes.link}>
+                  Notifications
                 </Link>
 
               </div>

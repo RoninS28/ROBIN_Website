@@ -15,6 +15,7 @@ import ServicingBook from "../Pages/ServicingBook";
 import Chatbot from "../Pages/Chatbot";
 import TestDriveBooking from "../Pages/TestDriveBooking";
 import TestDriveOutlet from "../Pages/TestDriveOutlet";
+import NotificationsRoom from "../Pages/NotificationsChat";
 
 
 function Routing() {
@@ -38,6 +39,7 @@ function Routing() {
           <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
           <Route path='/servicing' exact component={Servicing} ></Route>
           <Route path='/chatbot' exact component={Chatbot} ></Route>
+          <Route path='/notifications' exact component={NotificationsRoom} ></Route>
           <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
           <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
         </Switch>
