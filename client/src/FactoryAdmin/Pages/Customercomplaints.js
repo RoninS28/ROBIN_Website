@@ -12,32 +12,17 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = makeStyles((theme) => ({
   cardOne: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    flexDirection: "column",
+    
     marginLeft: "5vw",
     marginRight: "5vw",
   },
   cardTwo: {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-    flexDirection: "column",
+   
     marginTop: "2vh",
     marginLeft: "5vw",
     marginRight: "5vw",
   },
-  sender: {
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-  },
-  receiver: {
-    display: "flex",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
+  
 }));
 
 function CustomerComplaints(props) {
@@ -62,9 +47,8 @@ function CustomerComplaints(props) {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={12} md={6} lg={6}>
 
-          <div className={classes2.sender}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
             <Card className={classes2.cardOne}>
               <CardContent>
                 <div style={{ display: "flex" }}>
@@ -100,12 +84,11 @@ function CustomerComplaints(props) {
                 </Button>
               </CardActions>
             </Card>
-          </div>
+          
         </Grid>
 
         <Grid  item xs={12} sm={12} md={12} lg={12}>
-          <div className={classes2.receiver}>
-            <Card className={classes2.cardTwo}>
+            <Card  maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl} className={classes2.cardTwo}>
               <CardContent>
                 <div style={{ display: "flex" }}>
                   <Avatar alt="You" src="/static/images/avatar/1.jpg" />
@@ -114,64 +97,20 @@ function CustomerComplaints(props) {
                   </span>
                 </div>
 
-                <div style={{ marginTop: "2vh" }}>
-                  <TextField
-                    id="standard-basic"
-                    style={{ width: "38vw" }}
-                    label="Reply"
-                    variant="standard"
+                <div>
+                  <TextField 
+                     label="Reply" fullWidth
                   />
                 </div>
+                
               </CardContent>
               <CardActions>
                 <Button variant="contained" color="primary">
                   Send
                 </Button>
               </CardActions>
+              
             </Card>
-          </div>
-
-        </Grid>
-
-        <Grid item xs={12} sm={12} md={6} lg={6}>
-
-          <div className={classes2.sender}>
-            <Card className={classes2.cardOne}>
-              <CardContent>
-                <div style={{ display: "flex" }}>
-                  <Avatar
-                    alt="Kamlesh Raut"
-                    src="/static/images/avatar/1.jpg"
-                  />
-                  <span style={{ marginLeft: "2vw", fontSize: "20px" }}>
-                    Akshay Jain, Pune
-                  </span>
-                </div>
-
-                <div style={{ marginTop: "2vh" }}>
-                  Dear Sir, The goods supplied as part of this contract are not
-                  of satisfactory quality. One of the radiators leaks and has
-                  ruined my carpet. I enclose copies of photos of the damage to
-                  my carpets from the leaky radiator in support of my claim. I
-                  would like you to replace the leaky radiator, and the other
-                  radiators that have all been painted using paint meant for
-                  walls and provide payment to cover for the cost of the damaged
-                  carpet. Please respond to my complaint in the next 14 days. If
-                  you fail to respond or put the problem right in this time, I
-                  will have no option but to consider taking the matter further.
-                  Yours faithfully
-                </div>
-              </CardContent>
-              <CardActions>
-                <Button variant="contained" color="secondary">
-                  Call
-                </Button>
-                <Button variant="contained" color="primary">
-                  Report
-                </Button>
-              </CardActions>
-            </Card>
-          </div>
         </Grid>
       </Grid>
     </div>

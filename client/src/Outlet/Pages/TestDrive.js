@@ -218,75 +218,137 @@ function TestDrive(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Grid  container spacing={1}>
-        <Grid item sm={12} lg={2} md={2}>
+    <div>
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={12} lg={4} md={6}>
           <GenericStatCard title="Total Test Drive:" subtitle="10" />
         </Grid>
 
-        <Grid item sm={12} lg={2} md={2}>
+        <Grid item xs={12} sm={12} lg={4} md={6}>
           <GenericStatCard title="Test Drive At Home:" subtitle="7" />
         </Grid>
 
-        <Grid item sm={12} lg={2} md={2}>
+        <Grid item xs={12} sm={12} lg={4} md={6}>
           <GenericStatCard title="Test Drive At Outlet:" subtitle="3" />
         </Grid>
-      </Grid>
 
-      <Container
-        maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-        className={classes.listWrapper}
-      >
-        <div style={{ marginBottom: "2vh" }}>
-          <FormControl sx={{ m: 1, width: 500, mt: 3 }}>
-            <Select
-              multiple
-              displayEmpty
-              value={personName}
-              onChange={handleChange}
-              input={<OutlinedInput />}
-              renderValue={(selected) => {
-                if (selected.length === 0) {
-                  return <em>Placeholder</em>;
-                }
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Container
+            maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+            className={classes.listWrapper}
+          >
+            <div style={{ marginBottom: "2vh" }}>
+              <FormControl sx={{ m: 1, width: 500, mt: 3 }}>
+                <Select
+                  multiple
+                  displayEmpty
+                  value={personName}
+                  onChange={handleChange}
+                  input={<OutlinedInput />}
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return <em>Placeholder</em>;
+                    }
 
-                return selected.join(", ");
-              }}
-              MenuProps={MenuProps}
-              inputProps={{ "aria-label": "Without label" }}
-            >
-              <MenuItem disabled value="">
-                <em>Placeholder</em>
-              </MenuItem>
-              {names.map((name) => (
-                <MenuItem
-                  key={name}
-                  value={name}
-                  style={getStyles(name, personName, theme)}
+                    return selected.join(", ");
+                  }}
+                  MenuProps={MenuProps}
+                  inputProps={{ "aria-label": "Without label" }}
                 >
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
+                  <MenuItem disabled value="">
+                    <em>Placeholder</em>
+                  </MenuItem>
+                  {names.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(name, personName, theme)}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
 
-        <GenericTable rows={rows} labels={labels} view="/testDrive/1" />
-      </Container>
+            <GenericTable rows={rows} labels={labels} view="/testDrive/1" />
+          </Container>
+        </Grid>
 
-      <div>
-        <h2>
-          <span style={{ color: "blue" }}>Total :</span> 10
-        </h2>
-      </div>
+        
+
+      </Grid>
     </div>
+    // <div
+    //   style={{
+    //     display: "flex",
+    //     justifyContent: "center",
+    //     alignItems: "center",
+    //     flexDirection: "column",
+    //   }}
+    // >
+    //   <Grid  container spacing={1}>
+    //     <Grid item xs={12} sm={12} lg={3} md={6}>
+    //       <GenericStatCard title="Total Test Drive:" subtitle="10" />
+    //     </Grid>
+
+    //     <Grid item xs={12} sm={12} lg={3} md={6}>
+    //       <GenericStatCard title="Test Drive At Home:" subtitle="7" />
+    //     </Grid>
+
+    //     <Grid item xs={12} sm={12} lg={3} md={6}>
+    //       <GenericStatCard title="Test Drive At Outlet:" subtitle="3" />
+    //     </Grid>
+    //   </Grid>
+
+    //   <Container
+    //     maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+    //     className={classes.listWrapper}
+    //   >
+    //     <div style={{ marginBottom: "2vh" }}>
+    //       <FormControl sx={{ m: 1, width: 500, mt: 3 }}>
+    //         <Select
+    //           multiple
+    //           displayEmpty
+    //           value={personName}
+    //           onChange={handleChange}
+    //           input={<OutlinedInput />}
+    //           renderValue={(selected) => {
+    //             if (selected.length === 0) {
+    //               return <em>Placeholder</em>;
+    //             }
+
+    //             return selected.join(", ");
+    //           }}
+    //           MenuProps={MenuProps}
+    //           inputProps={{ "aria-label": "Without label" }}
+    //         >
+    //           <MenuItem disabled value="">
+    //             <em>Placeholder</em>
+    //           </MenuItem>
+    //           {names.map((name) => (
+    //             <MenuItem
+    //               key={name}
+    //               value={name}
+    //               style={getStyles(name, personName, theme)}
+    //             >
+    //               {name}
+    //             </MenuItem>
+    //           ))}
+    //         </Select>
+    //       </FormControl>
+    //     </div>
+
+    //     <GenericTable rows={rows} labels={labels} view="/testDrive/1" />
+    //   </Container>
+
+    //   <div>
+    //     <h2>
+    //       <span style={{ color: "blue" }}>Total :</span> 10
+    //     </h2>
+    //   </div>
+
+    // </div>
   );
 }
 

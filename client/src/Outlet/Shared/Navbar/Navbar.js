@@ -32,6 +32,7 @@ import Complaints from "../../Pages/Complaints";
 import ComplaintDetail from "../../Pages/ComplaintDetail";
 import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
+import Dashboard from "../../Pages/Dashboard";
 
 const styles = theme => ({
 });
@@ -194,6 +195,17 @@ const Navbar = (props) => {
             <ListItemText primary="My Profile" />
           </ListItem>
         </Link>
+
+        <Link to='/dashboard' style={{ textDecoration: 'none' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
+
+
       </List>
     </Box>
   );
@@ -297,6 +309,7 @@ const Navbar = (props) => {
             <Route path='/complaints/:id' exact component={ComplaintDetail}></Route>
             <Route path='/workerList' exact component={WorkerList}></Route>
             <Route path='/workerList/:id' exact component={WorkerListDetails}></Route>
+            <Route path='/dashboard' exact component={Dashboard}></Route>
           </Switch>
         </div>
       </main>
