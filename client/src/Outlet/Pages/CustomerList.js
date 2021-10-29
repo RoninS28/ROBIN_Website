@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import { Input, useMediaQuery } from "@material-ui/core";
+import { Grid, Input, useMediaQuery } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import PrintIcon from "@material-ui/icons/Print";
@@ -142,7 +142,7 @@ function getAllModels() {
 
 const rows = getAllModels();
 
-const labels=["id","name","phone","email","address","actions"];
+const labels = ["id", "name", "phone", "email", "address", "actions"];
 
 //Dropdown
 const ITEM_HEIGHT = 48;
@@ -211,28 +211,25 @@ function CustomerList(props) {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Container
-        maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
-        className={classes.listWrapper}
-      >
-       
-        <GenericTable rows={rows} labels={labels} view='/customers/1'/>
-      </Container>
-
-      <div>
-        <h2>
-          <span style={{ color: "blue" }}>Total :</span> 10
-        </h2>
-      </div>
-    </div>
+    <Box sx={{ flexGrow: 1 }} m={2}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <GenericTable rows={rows} labels={labels} view='/customers/1' />
+        </Grid>
+        <Grid item xs={12}>
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}>
+            <h2>
+              <span style={{ color: "blue" }}>Total :</span> 10
+            </h2>
+          </div>
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

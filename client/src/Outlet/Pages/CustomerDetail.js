@@ -183,7 +183,7 @@ function CustomerDetail(props) {
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
   return (
-    <div style={{ paddingLeft: "2vw", paddingRight: "2vw" }}>
+    <div style={{ paddingLeft: "2", paddingRight: "2" }}>
       <Grid container spacing={2} marginBottom={2}>
         <Grid item xs={12} md={6} lg={6}>
           <Container
@@ -223,7 +223,7 @@ function CustomerDetail(props) {
 
               <div>
                 <Button
-                  style={{ width: "7vw" }}
+                  style={{ width: "100px" }}
                   variant="contained"
                   color="secondary"
                 >
@@ -235,7 +235,7 @@ function CustomerDetail(props) {
                   style={{
                     marginTop: "2vh",
                     marginBottom: "1vh",
-                    width: "7vw",
+                    width: "100px",
                   }}
                   variant="contained"
                   color="primary"

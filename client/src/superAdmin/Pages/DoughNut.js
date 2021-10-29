@@ -5,12 +5,12 @@ function DoughNut(props) {
 
   const state = props.state;
   const options = {
-    maintainAspectRatio: true	// Don't maintain w/h ratio
+    maintainAspectRatio: false	// Don't maintain w/h ratio
   };
 
   return (
     <div>
-      <div>
+      <div style={{height:'60vh'}}>
         <Doughnut
           data={state}
           options={options}

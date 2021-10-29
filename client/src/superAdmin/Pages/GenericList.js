@@ -166,6 +166,7 @@ const GenericList = (props) => {
 
     const location = useLocation();
     const componentName = location.pathname.substring(1);
+    console.log(location);
     let componentNameSingular = '';
 
     let rows = []
@@ -197,7 +198,7 @@ const GenericList = (props) => {
     }
 
 
-    // accessory order list states
+    // accessory order list states / complaints
 
     const [requestSource, setRequestSource] = React.useState('Factory');
 
