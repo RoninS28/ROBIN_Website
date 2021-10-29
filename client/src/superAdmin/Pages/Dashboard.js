@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { useTheme } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
-import { Card, Grid, Typography } from '@material-ui/core';
+import { Box, Card, Grid, Typography } from '@material-ui/core';
 import BasicCard from './BasicCard';
 import { Line } from 'react-chartjs-2';
 import GroupedBar from './GroupedBar';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import GenericTable from './GenericTable';
-import {Pie, Doughnut} from 'react-chartjs-2';
+import { Pie, Doughnut } from 'react-chartjs-2';
+import GenericStatCard from './GenericStatCard';
+import DoughNut from './DoughNut';
+import LineChart from './LineChart';
 
 const styles = theme => ({
 
@@ -17,20 +20,20 @@ const styles = theme => ({
 const pieData = {
     labels: ['City Electric Scooter', 'City-1 Electric Scooter', 'City-2 Electric Scooter'],
     datasets: [
-      {
-        label: 'EV Models',
-        backgroundColor: [
-          '#B21F00',
-          '#C9DE00',
-          '#2FDE00',
-        ],
-        hoverBackgroundColor: [
-        '#501800',
-        '#4B5000',
-        '#175000',
-        ],
-        data: [140, 59, 80]
-      }
+        {
+            label: 'EV Models',
+            backgroundColor: [
+                '#B21F00',
+                '#C9DE00',
+                '#2FDE00',
+            ],
+            hoverBackgroundColor: [
+                '#501800',
+                '#4B5000',
+                '#175000',
+            ],
+            data: [140, 59, 80]
+        }
     ]
 }
 
@@ -73,101 +76,48 @@ const Dashboard = (props) => {
     console.log(value)
 
     return (
-        <div>
-            <div className={classes.statContainer}>
-                <Grid container spacing={2}>
-                    <Grid item lg={3} md={6} sm={12}>
-                        <Card sx={{ minWidth: 275 }} style={{ minHeight: 135 }}>
-                            <Typography variant="h3" component="div" style={{ padding: "1rem" }}>
-                                150
-                            </Typography>
-                            <Typography color="text.secondary" gutterBottom style={{ padding: "0.2rem", paddingLeft: "1rem" }}>
-                                New Orders
-                            </Typography>
-                        </Card>
-                    </Grid>
-
-                    <Grid item lg={3} md={6} sm={12}>
-                        <Card sx={{ minWidth: 275 }} style={{ minHeight: 135 }}>
-                            <Typography variant="h3" component="div" style={{ padding: "1rem" }}>
-                                53%
-                            </Typography>
-                            <Typography color="text.secondary" gutterBottom style={{ padding: "0.2rem", paddingLeft: "1rem" }}>
-                                Test Drives
-                            </Typography>
-                        </Card>
-                    </Grid>
-
-                    <Grid item lg={3} md={6} sm={12}>
-                        <Card sx={{ minWidth: 275 }} style={{ minHeight: 135 }}>
-                            <Typography variant="h3" component="div" style={{ padding: "1rem" }}>
-                                44
-                            </Typography>
-                            <Typography color="text.secondary" gutterBottom style={{ padding: "0.2rem", paddingLeft: "1rem" }}>
-                                Service Requests
-                            </Typography>
-                        </Card>
-                    </Grid>
-
-                    <Grid item lg={3} md={6} sm={12}>
-                        <Card sx={{ minWidth: 275 }} style={{ minHeight: 135 }}>
-                            <Typography variant="h3" component="div" style={{ padding: "1rem" }}>
-                                20
-                            </Typography>
-                            <Typography color="text.secondary" gutterBottom style={{ padding: "0.2rem", paddingLeft: "1rem" }}>
-                                Service Completed
-                            </Typography>
-                        </Card>
-                    </Grid>
+        <Box sx={{ flexGrow: 1 }} m={2}>
+            <Grid container spacing={2}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
+                    <GenericStatCard
+                        subtitle="150"
+                        title="New Orders"
+                    />
                 </Grid>
-            </div>
-            <Grid container spacing={2} className={classes.chartContainer}>
-                <Grid item lg={8} md={8} sm={12}>
-                    <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
+                    <GenericStatCard
+                        subtitle="53%"
+                        title="Test Drives"
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
+                    <GenericStatCard
+                        subtitle="44"
+                        title="Service Requests"
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={3}>
+                    <GenericStatCard
+                        subtitle="20"
+                        title="Service Completed"
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={12} lg={8}>
+                    <Card>
                         <Typography variant="h5" component="div">
                             Total EV Sales per month
                         </Typography>
-                        <Line
-                            data={lineData}
-                            options={{
-                                title: {
-                                    display: true,
-                                    text: 'Total EV Sales by months',
-                                    fontSize: 20
-                                },
-                                legend: {
-                                    display: true,
-                                    position: 'right'
-                                }
-                            }}
-                        />
+                        <LineChart state={lineData} />
                     </Card>
                 </Grid>
-                <Grid item lg={4} md={4} sm={12}>
-                <Card sx={{ minWidth: 275 }} className={classes.pieChart}>
-                    <Typography variant="h5" component="div">
-                    Average EV Sales per month
-                    </Typography>
-                    <Doughnut
-                        data={pieData}
-                        options={{
-                            title:{
-                            display:true,
-                            text:'Average EV Sales per month',
-                            fontSize:20
-                            },
-                            legend:{
-                            display:true,
-                            position:'right'
-                            }
-                        }}
-                    />
-                </Card>
+                <Grid item xs={12} sm={12} md={12} lg={4}>
+                    <Card>
+                        <Typography variant="h5" component="div">
+                            Average EV Sales this month
+                        </Typography>
+                        <DoughNut state={pieData} />
+                    </Card>
                 </Grid>
-
-
-            </Grid>
-            <Grid container spacing={2} className={classes.chartContainer}>
                 <Grid item lg={8} md={8} sm={12}>
                     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                         <Typography variant="h5" component="div">
@@ -176,12 +126,38 @@ const Dashboard = (props) => {
                         <GroupedBar />
                     </Card>
                 </Grid>
-            </Grid>
-            <Grid container spacing={2} className={classes.chartContainer}>
-                <Grid item lg={12} md={12} sm={12}>
-                    <GenericTable rows={rows} labels={labels}/>
-                </Grid>
                 <Grid item lg={4} md={4} sm={12}>
+                    <Grid container spacing={2} style={{ marginTop: "0.6rem" }}>
+                        <Grid item xs={12}>
+                            <GenericStatCard
+                                subtitle="150"
+                                title="New Orders"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <GenericStatCard
+                                subtitle="53%"
+                                title="Test Drives"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <GenericStatCard
+                                subtitle="44"
+                                title="Service Requests"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <GenericStatCard
+                                subtitle="20"
+                                title="Service Completed"
+                            />
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item lg={12} md={12} sm={12}>
+                    <GenericTable rows={rows} labels={labels} />
+                </Grid>
+                <Grid item lg={4} md={4} sm={12} >
                     <Calendar
                         onChange={onChange}
                         showWeekNumbers
@@ -189,14 +165,10 @@ const Dashboard = (props) => {
                     />
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
-                    <GenericTable rows={rows} labels={labels}/>
+                    <GenericTable rows={rows} labels={labels} />
                 </Grid>
-                
             </Grid>
-
-
-
-        </div>
+        </Box>
     )
 }
 

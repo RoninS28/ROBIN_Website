@@ -27,8 +27,6 @@ import GenericDetail from "../../Pages/GenericDetail";
 import GenericList from "../../Pages/GenericList";
 import GenericOverview from "../../Pages/GenericOverview";
 import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
-import AccessoryOrderList from "../../Pages/AccessoryOrderList";
-import CustomerComplaintList from "../../Pages/CustomerComplaintList";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
 import Dashboard from "../../Pages/Dashboard";
 
@@ -312,9 +310,9 @@ const Navbar = (props) => {
                         <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
 
                         <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
-                        <Route path='/accessory-orders' exact component={AccessoryOrderList}></Route>
+                        <Route path='/accessory-orders' exact component={GenericList}></Route>
 
-                        <Route path='/complaints' exact component={CustomerComplaintList}></Route>
+                        <Route path='/complaints' exact component={GenericList}></Route>
                         <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
 
                         <Route path='/dashboard' exact component={Dashboard}></Route>
