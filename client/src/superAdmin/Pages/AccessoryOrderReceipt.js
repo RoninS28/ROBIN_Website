@@ -71,11 +71,11 @@ const AccessoryOrderReceipt = (props) => {
     const { classes, theme } = props;
 
     return (
-        <div style={{ padding: '1rem' }}>
+        <div>
             <Grid container
                 justifyContent="center">
                 <Grid container item xs={12}
-                    justifyContent="right">
+                    justifyContent="right" style={{ padding: "0.6rem" }}>
                     <Grid item>
                         <IconButton>
                             <SaveAltIcon></SaveAltIcon>
