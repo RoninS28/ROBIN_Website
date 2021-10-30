@@ -251,3 +251,11 @@
     color: #E22121;
     background-color: #F49F20;
   }
+
+  div#chatbotScreen .chatbotForm  div.actionsGridDiv p.actiondesc{
+    /* display: flex;
+    flex-direction: column; */
+    color: red;
+    text-align: center;
+    /* align-items: center; */
+  }

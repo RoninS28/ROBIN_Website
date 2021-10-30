@@ -14,6 +14,13 @@ import {
     bindTrigger,
     bindPopover,
 } from 'material-ui-popup-state/hooks'
+import { Avatar, Badge, Grid } from "@material-ui/core";
+import i1 from '../Assets/i1.jpg'
+import i2 from '../Assets/i2.jpg'
+import i3 from '../Assets/i3.jpg'
+import i4 from '../Assets/i4.jpg'
+import i5 from '../Assets/i5.jpg'
+import i6 from '../Assets/i6.jpg'
 
 const styles = (theme) => ({
     typography: {
@@ -30,6 +37,63 @@ const ChatRoom = ({ classes }) => {
         variant: 'popover',
         popupId: 'demoPopover',
     })
+
+    const [badgeCount, setBadgeCount] = useState(0)
+
+    const [categoryList, setcategoryList] = useState([
+        {
+            id: 1,
+            feature: "3 Modes Drive",
+            img: i1,
+            selected: false
+        },
+        {
+            id: 2,
+            feature: "Thief Alert",
+            img: i2,
+            selected: false
+        },
+        {
+            id: 3,
+            feature: "Li-on\nBattery",
+            img: i3,
+            selected: false
+        },
+        {
+            id: 4,
+            feature: "Key Less\nDrive",
+            img: i4,
+            selected: false
+        },
+        {
+            id: 5,
+            feature: "Tubeless Tyre",
+            img: i5,
+            selected: false
+        },
+        {
+            id: 6,
+            feature: "Dual Disc",
+            img: i6,
+            selected: false
+        },
+    ])
+
+    const handleCategory = (cat) => {
+        const newList = categoryList.map((item) => {
+            if (item.id === cat.id) {
+                const updatedItem = {
+                    ...item,
+                    selected: !item.selected
+                }
+                return updatedItem
+            }
+            return item
+        })
+        setcategoryList(newList)
+        setBadgeCount(categoryList.filter(item => item.selected === true).length)
+
+    }
 
     const [messages, setMessages] = useState([
         {
@@ -92,13 +156,31 @@ const ChatRoom = ({ classes }) => {
 
                 {messages && messages.map(msg => <ChatMessage key={msg.id} msg={msg} />)}
                 <div ref={dummy}></div>
+
+
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+
+            <div style={{ display: 'flex', justifyContent: 'center', }}>
+                <div style={{ color: 'red', width: '20px', height: '20px', backgroundColor: 'red', marginBottom: '170px', height: '10vh', position: 'fixed' }}>
+
+
+                    hellosvsdvsdvdvv
+
+                </div>
 
                 <form onSubmit={avoidRefresh} className="chatbotForm" >
 
                     <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Write your response" className="chatbotInput" />
-                    <Button  {...bindTrigger(popupState)}>Category</Button>
+
+
+                    <Button  {...bindTrigger(popupState)}>
+                        <Badge color="secondary" badgeContent={badgeCount} >
+
+                            Category
+                        </Badge>
+
+                    </Button>
+
 
 
                     <Popover
@@ -118,11 +200,25 @@ const ChatRoom = ({ classes }) => {
                         }}
                         marginThreshold='100'
 
-                        sx={{ marginBottom: '30px', width: '100%' }}
-                        style={{ marginBottom: '80px', width: '100%' }}
+
                     >
-                        <div style={{ padding: '80px', width: '100%' }}>
-                            hello
+                        <div style={{ padding: '60px', borderRadius: '20px' }} className="actionsGridDiv">
+                            <Grid container spacing={3}>
+                                {categoryList.map(category => (
+
+                                    <Grid item xs={6} md={3} lg={2} xl={2} >
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={() => handleCategory(category)}>
+
+                                            <Avatar src={category.img} className="categoryAvatar" style={{ height: '60px', width: '60px', }} />
+                                            <p className="actiondesc" style={{ textAlign: 'center', fontFamily: 'Secular One, sans-serif', fontSize: '20px' }}>{category.feature}</p>
+                                        </div>
+                                    </Grid>
+                                ))}
+
+
+
+                            </Grid>
+
                         </div>
                         {/* <Typography className={classes.typography}>
                             The content of the Popover.
