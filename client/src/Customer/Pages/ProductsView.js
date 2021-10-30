@@ -139,6 +139,12 @@ const ProductsView = (props) => {
     const handleTestDrive = (e) => {
         history.push("/testdrive/" + e.id)
     }
+    const handleBookNow = (e) => {
+        history.push("/productsSelection/" + e.id)
+    }
+    const handleChatbot = () => {
+        history.push("/chatbot")
+    }
     // const model = model1.
     console.log(model)
     // modelList.
@@ -292,7 +298,7 @@ const ProductsView = (props) => {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 
                 <div className="bookNowButtonDiv" >
-                    <button >BOOK NOW</button>
+                    <button onClick={() => handleBookNow(model)}>BOOK NOW</button>
 
                 </div>
             </div>
@@ -313,7 +319,7 @@ const ProductsView = (props) => {
                 </div>
 
                 <div className="chatBotButtonDiv" >
-                    <button >CHATBOT</button>
+                    <button onClick={handleChatbot}>CHATBOT</button>
 
                 </div>
             </div>
