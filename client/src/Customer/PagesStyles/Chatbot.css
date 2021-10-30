@@ -245,3 +245,9 @@
       font-size: 14;
       border: none;
   }
+
+  div#chatbotScreen .chatbotForm .chatbotPopover{
+    width: 100%;
+    color: #E22121;
+    background-color: #F49F20;
+  }

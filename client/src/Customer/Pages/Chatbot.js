@@ -4,8 +4,32 @@ import ChatMessage from "./ChatMessageModel";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import SendIcon from '@mui/icons-material/Send';
 
-const ChatRoom = () => {
+import PropTypes from 'prop-types'
+import { withStyles } from '@mui/styles'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import Popover from '@mui/material/Popover'
+import {
+    usePopupState,
+    bindTrigger,
+    bindPopover,
+} from 'material-ui-popup-state/hooks'
+
+const styles = (theme) => ({
+    typography: {
+        // margin: theme.spacing.unit * 2,
+        padding: '20px',
+        marginBottom: '50px'
+    },
+})
+
+
+const ChatRoom = ({ classes }) => {
     const dummy = useRef()
+    const popupState = usePopupState({
+        variant: 'popover',
+        popupId: 'demoPopover',
+    })
 
     const [messages, setMessages] = useState([
         {
@@ -74,7 +98,37 @@ const ChatRoom = () => {
                 <form onSubmit={avoidRefresh} className="chatbotForm" >
 
                     <input type="text" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Write your response" className="chatbotInput" />
-                    <button >Category</button>
+                    <Button  {...bindTrigger(popupState)}>Category</Button>
+
+
+                    <Popover
+                        className="chatbotPopover"
+                        {...bindPopover(popupState)}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+
+
+                        }}
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+
+
+                        }}
+                        marginThreshold='100'
+
+                        sx={{ marginBottom: '30px', width: '100%' }}
+                        style={{ marginBottom: '80px', width: '100%' }}
+                    >
+                        <div style={{ padding: '80px', width: '100%' }}>
+                            hello
+                        </div>
+                        {/* <Typography className={classes.typography}>
+                            The content of the Popover.
+                        </Typography> */}
+                    </Popover>
+
                     <button type="submit" onClick={sendMessage}><SendIcon style={{ color: '#4EBCEC' }} /></button>
                 </form>
             </div>
@@ -82,4 +136,8 @@ const ChatRoom = () => {
     );
 }
 
-export default ChatRoom;
+ChatRoom.propTypes = {
+    classes: PropTypes.object.isRequired,
+}
+
+export default withStyles(styles)(ChatRoom);
