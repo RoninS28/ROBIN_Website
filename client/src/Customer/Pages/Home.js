@@ -5,6 +5,7 @@ import img3 from "../Assets/hpimg3.png";
 import { useHistory } from "react-router";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import { Grid } from "@material-ui/core";
+import ImageSlider from "../Shared/ImageSlider/ImageSlider.js";
 
 export default function Home() {
   const props = {
@@ -28,9 +29,11 @@ export default function Home() {
         <div style={{ color: "white", textShadow: "2px 2px blue", fontSize: "40px" }}>
           <center>WE BUILD THE VEHICLES FOR FUTURE.</center>
         </div>
-        <div className="image">
+        {/* <div className="image">
           <img src={props.image1} />
-        </div>
+        </div> */}
+
+        <ImageSlider/>
 
       </div>
 
