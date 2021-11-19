@@ -139,7 +139,7 @@ const GenericList = (props) => {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const history = useHistory();
 
-    // Extracting the last keyword from URL and deciding which component to load...
+    // Extracting the last keyword from URL and deciding which component to load...(Factory / Outlet / Service Center)
     const location = useLocation();
     const componentName = location.pathname.substring(1);
     console.log(location);

@@ -43,6 +43,7 @@ const styles = theme => ({
 
 })
 
+// Sample Table data...This will change according to the component: eg. Factory, Service Center, Outlet...
 function createData(name, orders, completed, pending) {
     return { name, orders, completed, pending };
 }
@@ -58,6 +59,7 @@ const labels = ["name", "orders", "completed", "pending"];
 
 
 
+// Sample Pie Data...This will also change
 const pieData = {
     labels: ['City Electric Scooter', 'City-1 Electric Scooter', 'City-2 Electric Scooter'],
     datasets: [
@@ -78,6 +80,7 @@ const pieData = {
     ]
 }
 
+// Sample Line chart data
 const lineData = {
     labels: ['November', 'December', 'January', 'February', 'March',
         'April', 'May', 'June', 'July', 'August', 'September', 'October'],
@@ -99,13 +102,8 @@ const GenericOverview = (props) => {
 
     const { classes, theme } = props;
 
-    const xs = useMediaQuery(theme.breakpoints.down('xs'));
-    const sm = useMediaQuery(theme.breakpoints.up('xs') && theme.breakpoints.down('sm'))
-    const md = useMediaQuery(theme.breakpoints.up('sm') && theme.breakpoints.down('md'))
-    const lg = useMediaQuery(theme.breakpoints.up('md') && theme.breakpoints.down('lg'))
-    const xl = useMediaQuery(theme.breakpoints.up('lg'))
-
     const history = useHistory();
+
 
     const location = useLocation();
     const arrList = location.pathname.split('/');
@@ -197,15 +195,18 @@ const GenericOverview = (props) => {
 
                 </Grid>
 
-                {/* Doughnut statistic */}
+                {/* Doughnut statistics */}
                 <Grid item xs={12} sm={12} md={12} lg={4}>
                     <Card>
                         <DoughNut state={pieData} />
                     </Card>
                 </Grid>
+
+                {/* More Features Buttons */}
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Complaints from Factory</Button>
-                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>View Requests from Factory</Button>
+                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>Complaints</Button>
+                    <Button onClick={() => history.push(`/${arrList[1]}/${arrList[2]}/stocks`)} align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>Existing Stocks</Button>
+                    <Button align="left" variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>Stock Requests</Button>
                 </Grid>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                     <Typography variant="h5" component="div" style={{ padding: "0.2rem" }}>

@@ -19,6 +19,28 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router";
 
+function formatCamelCase(str) {
+
+  // Usage of this function:
+  // thisLetterMy => THIS LETTER MY
+
+  let res = "";
+  let curr = "";
+
+  for(let i=0; i<str.length; i++) {
+    let c = str.charAt(i);
+    if(c >= 'A' && c <= 'Z') {
+      res += curr + " ";
+      curr = c;
+    }
+    else {
+      curr += c;
+    }
+  }
+  res += curr;
+  return res.toUpperCase();
+}
+
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -136,7 +158,7 @@ export default function GenericTable(props) {
           <TableRow style={{ height: "2em" }}>
             {labels.map((label) => (
               <TableCell align="center">
-                <h3>{label.toUpperCase()}</h3>
+                <h3>{formatCamelCase(label)}</h3>
               </TableCell>
             ))}
           </TableRow>
