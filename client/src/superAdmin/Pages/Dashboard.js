@@ -1,14 +1,10 @@
 import React, { useState } from 'react'
-import { useTheme } from '@material-ui/core/styles';
 import { withStyles } from "@material-ui/core/styles";
 import { Box, Card, Grid, Typography } from '@material-ui/core';
-import BasicCard from './BasicCard';
-import { Line } from 'react-chartjs-2';
 import GroupedBar from './GroupedBar';
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import GenericTable from './GenericTable';
-import { Pie, Doughnut } from 'react-chartjs-2';
 import GenericStatCard from './GenericStatCard';
 import DoughNut from './DoughNut';
 import LineChart from './LineChart';
@@ -74,6 +70,15 @@ const Dashboard = (props) => {
     const { classes, theme } = props;
     const [value, onChange] = useState(new Date());
     console.log(value)
+
+
+    // Layout of Dashboard can change depending upon the situation
+    // Current layout: 
+    // 4 stat cards
+    // 1 line chart  --- 1 pie chart
+    // 1 bar ghaph  --- 4 stat cards vertical
+    // some table
+    // calendar --- some other table
 
     return (
         <Box sx={{ flexGrow: 1 }} m={2}>

@@ -182,6 +182,7 @@ const EVModelDetail = (props) => {
                 </div>
 
                 <div className={classes.modelBasicColorContainer}>
+                    {/* Colors available */}
                     <div className={classes.colorWrapper}>
                         <h2>Colors</h2>
                         <div className={classes.colorChipWrapper}>
@@ -195,6 +196,7 @@ const EVModelDetail = (props) => {
                         </div>
                     </div>
                     <div className={classes.colorPickerWrapper}>
+                        {/* Color Picker */}
                         <SketchPicker
                             color={pickerBackground}
                             onChangeComplete={handlePickerChangeComplete}
@@ -205,6 +207,7 @@ const EVModelDetail = (props) => {
 
             </div>
 
+            {/* Model Features Text fields */}
             <div className={classes.modelBasicDetails}>
                 <div className={classes.inputTextWrapper}>
                     <TextField id="standard-basic" label="Name" variant="standard" className={classes.inputText} value={name} />
