@@ -30,6 +30,7 @@ import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
 import CustomerComplaint from "../../Pages/CustomerComplaint";
 import Dashboard from "../../Pages/Dashboard";
 import GenericStockList from "../../Pages/GenericStockList";
+import GenericSalesList from "../../Pages/GenericSalesList";
 
 const styles = theme => ({
 });
@@ -304,8 +305,10 @@ const Navbar = (props) => {
                         <Route path='/outlets/add' exact component={GenericDetail}></Route>
                         <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
                         <Route path='/outlets' exact component={GenericList}></Route>
+                        <Route path='/outlets/sales' exact component={GenericSalesList}></Route>
                         <Route path='/outlets/:id' exact component={GenericOverview}></Route>
                         <Route path='/outlets/:id/stocks' exact component={GenericStockList}></Route>
+                        
 
                         <Route path='/service-centers/add' exact component={GenericDetail}></Route>
                         <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>

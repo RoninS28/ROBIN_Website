@@ -47,44 +47,44 @@ const styles = theme => ({
 })
 
 // Fetching Factory Data
-function createFactoryData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createFactoryData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllFactories() {
     const allFactories = [];
     factoryList.map(factory => {
         console.log(factory);
-        allFactories.push(createFactoryData(factory.id, factory.name, factory.orders, factory.completed, factory.pending))
+        allFactories.push(createFactoryData(factory.id, factory.name, factory.address.state, factory.address.city, factory.email, factory.status))
     })
     return allFactories
 }
 
 
 // Fetching Outlet Data
-function createOutletData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createOutletData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllOutlets() {
     const allOutlets = [];
     outletList.map(outlet => {
         console.log(outlet);
-        allOutlets.push(createOutletData(outlet.id, outlet.name, outlet.orders, outlet.completed, outlet.pending))
+        allOutlets.push(createOutletData(outlet.id, outlet.name, outlet.address.state, outlet.address.city, outlet.email, outlet.status))
     })
     return allOutlets
 }
 
 
 // Fetching Service Center Data
-function createServiceCenterData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createServiceCenterData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllServiceCenters() {
     const allServiceCenters = [];
     serviceCenterList.map(serviceCenter => {
-        allServiceCenters.push(createServiceCenterData(serviceCenter.id, serviceCenter.name, serviceCenter.orders, serviceCenter.completed, serviceCenter.pending))
+        allServiceCenters.push(createServiceCenterData(serviceCenter.id, serviceCenter.name, serviceCenter.address.state, serviceCenter.address.city, serviceCenter.email, serviceCenter.status))
     })
     return allServiceCenters
 }
@@ -150,17 +150,19 @@ const GenericList = (props) => {
     if (componentName == 'factories') {
         componentNameSingular = 'Factory'
         rows = getAllFactories();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
+
+        // id, name, state, city, contact, status
     }
     else if (componentName == 'outlets') {
         componentNameSingular = 'Outlet'
         rows = getAllOutlets();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
     }
     else if (componentName == 'service-centers') {
         componentNameSingular = 'Service Center'
         rows = getAllServiceCenters();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
     }
     else if (componentName == 'accessory-orders') {
         componentNameSingular = 'Accessory Orders';
@@ -304,7 +306,10 @@ const GenericList = (props) => {
                                 case 'Factory':
                                     return <Button onClick={() => history.push("/factories/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>;
                                 case 'Outlet':
-                                    return <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>;
+                                    return <> 
+                                        <Button onClick={() => history.push("/outlets/sales")} variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>Sales Report</Button>
+                                        <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>
+                                        </>
                                 case 'Service Center':
                                     return <Button onClick={() => history.push("/service-centers/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Service Center</Button>;
                                 case 'Accessory Orders':
