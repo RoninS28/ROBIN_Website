@@ -1,6 +1,6 @@
 import './App.css';
 
-import Routing from './FactoryWorker/Shared/Routing';
+import {Routing as FactoryWorkerRouting} from './FactoryWorker/Shared/Routing';
 import {BrowserRouter} from 'react-router-dom'
 
 
@@ -9,7 +9,7 @@ function App()
   return (
     <div>
       <BrowserRouter>
-      <Routing/>
+      <FactoryWorkerRouting/>
     </BrowserRouter>
     </div>
   );
