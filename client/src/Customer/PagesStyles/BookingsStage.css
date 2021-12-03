@@ -1,0 +1,29 @@
+div.bookingsStageScreen .item2 { 
+    /* grid-area: menu;  */
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    vertical-align:middle;
+}
+div.bookingsStageScreen .item3 {
+    /* grid-area: main;  */
+    grid-column: 2 / span 2;
+    grid-row: 1 ;
+    font-size:xx-large;
+}
+div.bookingsStageScreen .item4 { 
+    /* grid-area: right;  */
+    grid-column: 2 / span 2;
+    grid-row: 2 ;
+}
+
+div.bookingsStageScreen .grid-container {
+display: flex;
+/* grid-template-areas:
+    'menu menu main main main main'
+    'menu menu right right right right'; */
+}
+
+div.bookingsStageScreen .grid-container > div {
+text-align: center;
+}
+

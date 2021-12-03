@@ -1,0 +1,160 @@
+div.productsSelectionScreen{
+    font-family: 'Secular One', sans-serif;
+
+}
+
+div.productsSelectionScreen div.heading {
+    text-align: center;
+    font-size: 45px;
+    margin-top: 30px;
+    font-weight: '600';
+    font-family: 'Secular One', sans-serif;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.21), 0px 0px 5px greenyellow;
+    
+}
+div.productsSelectionScreen div.imgNcolors{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+div.productsSelectionScreen div.image{
+    display: flex;
+    justify-content: center;
+    /* margin: 25px; */
+}
+
+div.productsSelectionScreen div.colors{
+    display: flex;
+    margin: 20px;
+}
+
+div.productsSelectionScreen .featureColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Secular One', sans-serif;
+
+}
+
+div.productsSelectionScreen .features{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    
+}
+
+div.productsSelectionScreen .featureAvatar{
+    height: '70px';
+    width: '70px';
+    margin: 15px;
+}
+div.productsSelectionScreen .f1{
+    display: flex;
+    justify-content: end;
+}
+
+
+
+div.productsSelectionScreen div#deliveryTimeDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    color: rgba(0, 0, 0, 0.60);
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+div.productsSelectionScreen div.variantsChoiceDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 45px;
+}
+
+div.productsSelectionScreen div.discountsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 45px;
+}
+
+
+div.productsSelectionScreen .variantNdiscountsGrid p.variantNdiscountsTitle{
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.70);
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    /* text-align: center; */
+
+}
+
+div.productsSelectionScreen div.pricingDiv{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    align-items: center;
+}
+
+div.productsSelectionScreen div.proceedToCheckoutButtonDiv{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+
+    font-family: 'Secular One', sans-serif;
+    font-size: 40px;
+    color: #FF9B04;
+    background-color: white;
+    border-radius: 22px;
+    width: max-content;
+    padding: 10px;
+    /* padding-left: 18px; */
+    border: 4px solid #FF9B04;
+}
+
+
+
+
+
+/* ! MEDIA QUERY */
+
+@media (max-width: 960px){
+    div.productsSelectionScreen .imageGrid{
+        order: 1;
+    
+    }
+    
+    div.productsSelectionScreen .featureAvatars1{
+        order:2;
+        flex-direction: row;
+        
+    }
+    
+    div.productsSelectionScreen .featureAvatars2{
+        order:3;
+        flex-direction: row;
+    }
+    div.productsSelectionScreen .features {
+        flex-direction: row;
+    }
+    
+}
+@media (max-width: 600px){
+    div.productsSelectionScreen div.image{
+        /* display: flex;
+        justify-content: center; */
+        /* margin: 25px; */
+        height: 220px;
+        width: 220px;
+    }
+    div.productsSelectionScreen div.heading{
+        font-size: 30px;
+        text-align: center;
+
+    }
+}

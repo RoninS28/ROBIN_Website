@@ -1,6 +1,6 @@
 //import logo from './logo.svg';
 import './App.css';
-import Routing from "./Customer/Shared/Routing";
+import { Routing as CustomerRouting } from "./Customer/Shared/Routing";
 
 function App() {
   return (
@@ -16,11 +16,11 @@ function App() {
     //       target="_blank"
     //       rel="noopener noreferrer"
     //     >
-    //       Learn React
+    //       Learn Reac
     //     </a>
     //   </header>
     // </div>
-    <Routing/>
+    <CustomerRouting />
   );
 }
 
