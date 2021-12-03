@@ -1,3 +1,9 @@
+
+//import logo from './logo.svg';
+
+import { Routing as CustomerRouting } from "./Customer/Shared/Routing";
+
+
 import './App.css';
 import {BrowserRouter} from 'react-router-dom'
 
@@ -18,9 +24,13 @@ function App() {
     <BrowserRouter>
       {/* <SuperAdminRouting/> */}
       {/* <OutletRouting /> */}
+
+      {/* <CustomerRouting /> */}
       <FactoryAdminRouting />
+        
     </BrowserRouter>
     </div>
+
   );
 }
 
