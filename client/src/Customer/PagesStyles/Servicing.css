@@ -1,0 +1,54 @@
+div.servicingScreen div.servicingScreenh1{
+    justify-content: flex-end;
+}
+div.servicingScreen div.statusRow{
+    display: flex;
+    justify-content: center;
+}
+div.servicingScreen div.image{
+    display: flex;
+    justify-content: center;
+}
+div.servicingScreen div.bookingrowInfo{
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+div.servicingScreen div.statusColumn{
+    /* color: greenyellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+div.servicingScreen div.bookServicingButtonDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+    /* margin-bottom: 20px; */
+    font-family: 'Secular One', sans-serif;
+    font-size: 30px;
+    color: #FF9B04;
+    background-color: white;
+    border-radius: 28px;
+    width: max-content;
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* padding-left: 18px; */
+    border: 4px solid #FF9B04;
+    margin-top: 0;
+}
+
+div.servicingScreen div.bookServicingButtonDiv button{
+    font-family: 'Secular One', sans-serif;
+    font-size: 22px;
+    background-color: white;
+    border: none;
+    color: #FF9B04;
+}

@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -37,11 +38,9 @@
   }
 }
 
-.search{
-  width: 10vw;
-  margin-left: 15vw;
-  box-shadow: 0 0 40px rgba(0,0,0,0.2);
-  border-radius: 5px;
-  height:3vh;
-  margin-top: 7vh;
+
+
+h2 {
+    margin: 0.8rem;
+
 }
