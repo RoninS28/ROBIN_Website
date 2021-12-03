@@ -1,26 +1,36 @@
+
 //import logo from './logo.svg';
-import './App.css';
+
 import { Routing as CustomerRouting } from "./Customer/Shared/Routing";
+
+
+import './App.css';
+import {BrowserRouter} from 'react-router-dom'
+
+// Factory Admin Routing
+import {Routing as FactoryAdminRouting} from './FactoryAdmin/Shared/Routing';
+
+// SuperAdmin Routing
+// import {Routing as SuperAdminRouting}  from './superAdmin/Shared/Routing';
+
+// Outlet Routing
+// import {Routing as OutletRouting} from './Outlet/Shared/Routing';
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn Reac
-    //     </a>
-    //   </header>
-    // </div>
-    <CustomerRouting />
+    <div >
+
+    
+    <BrowserRouter>
+      {/* <SuperAdminRouting/> */}
+      {/* <OutletRouting /> */}
+
+      {/* <CustomerRouting /> */}
+      <FactoryAdminRouting />
+        
+    </BrowserRouter>
+    </div>
+
   );
 }
 
