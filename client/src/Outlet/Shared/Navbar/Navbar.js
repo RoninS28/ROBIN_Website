@@ -33,6 +33,7 @@ import ComplaintDetail from "../../Pages/ComplaintDetail";
 import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import Dashboard from "../../Pages/Dashboard";
+import GenericStockList from "../../Pages/GenericStockList";
 
 const styles = theme => ({
 });
@@ -205,6 +206,15 @@ const Navbar = (props) => {
           </ListItem>
         </Link>
 
+        <Link to='/stocks' style={{ textDecoration: 'none' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Existing Stocks" />
+          </ListItem>
+        </Link>
+
 
       </List>
     </Box>
@@ -310,6 +320,7 @@ const Navbar = (props) => {
             <Route path='/workerList' exact component={WorkerList}></Route>
             <Route path='/workerList/:id' exact component={WorkerListDetails}></Route>
             <Route path='/dashboard' exact component={Dashboard}></Route>
+            <Route path='/stocks' exact component={GenericStockList}></Route>
           </Switch>
         </div>
       </main>

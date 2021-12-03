@@ -72,6 +72,8 @@ const styles = theme => ({
 
 const GenericDetail = (props) => {
 
+    // This page will be common to factory, outlet, service center DETAIL INFO 
+
     const { classes, theme } = props;
 
     const location = useLocation();
@@ -118,6 +120,7 @@ const GenericDetail = (props) => {
         <Box sx={{ flexGrow: 1 }} m={2}>
             <Grid container spacing={2}>
 
+                {/* Left side input fields */}
                 <Grid item xs={12} sm={12} md={6} lg={8}>
                     <h2>General Info</h2>
                     <div className={classes.inputTextWrapper}>
@@ -140,6 +143,8 @@ const GenericDetail = (props) => {
                     </div>
                 </Grid>
 
+
+                {/* Right side input fields */}
                 <Grid item xs={12} sm={12} md={6} lg={4}>
                     <h2>Managerial Info</h2>
                     <Box className={classes.inputSelect} style={{ paddingBottom: "1rem" }}>

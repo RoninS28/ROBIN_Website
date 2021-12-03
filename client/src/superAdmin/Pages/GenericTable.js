@@ -20,6 +20,10 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router";
 
 function formatCamelCase(str) {
+
+  // Usage of this function:
+  // thisLetterMy => THIS LETTER MY
+
   let res = "";
   let curr = "";
 
@@ -151,6 +155,13 @@ export default function GenericTable(props) {
               {labels.map(label => (
                 <TableCell style={{ width: 160 }} align="center">
 
+                  {/* If the label is in this switch, then output certain specific elements like
+                    for 'actions' output a button, 
+                    'imgUrl' => output an <img>
+                    colors => color palette
+                  */}
+
+                  {/* else, return row[label] */}
                   {(() => {
                     switch (label) {
                       case 'actions':

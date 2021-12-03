@@ -26,7 +26,8 @@ const factoryList = [
         completed: "40",
         pending: "10",
         area: 10000,
-        annualProduction: 1000
+        annualProduction: 1000,
+        status: "open",
 
     },
     {
@@ -56,7 +57,8 @@ const factoryList = [
         completed: "40",
         pending: "10",
         area: 20000,
-        annualProduction: 2000
+        annualProduction: 2000,
+        status: "open",
     },
     {
         id: 3,
@@ -85,7 +87,8 @@ const factoryList = [
         completed: "40",
         pending: "10",
         area: 10000,
-        annualProduction: 3000
+        annualProduction: 3000,
+        status: "closed",
 
     }
 ]

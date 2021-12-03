@@ -3,7 +3,6 @@ import PrintIcon from '@material-ui/icons/Print';
 import { Grid, IconButton } from '@mui/material';
 // import { SaveAlt } from '@material-ui/icons';
 import SaveAltIcon from '@material-ui/icons/SaveAlt'
-import { Typography } from "@material-ui/core";
 import {Card} from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

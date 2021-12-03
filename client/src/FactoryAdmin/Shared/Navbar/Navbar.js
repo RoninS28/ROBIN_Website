@@ -33,6 +33,7 @@ import BuyAccessories from "../../Pages/BuyAccessories";
 import AccessoryPage from "../../Pages/AccessoryPage";
 import Dashboard from "../../Pages/Dashboard";
 import AccessoryReport from '../../Pages/AccessoryReport'
+import GenericStockList from "../../Pages/GenericStockList";
 
 const styles = theme => ({
 });
@@ -201,6 +202,14 @@ const Navbar = (props) => {
             <ListItemText primary="Accessory Report" />
           </ListItem>
         </Link>
+        <Link to="/stocks" style={{ textDecoration: 'none' }}>
+          <ListItem button>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Existing Stocks" />
+          </ListItem>
+        </Link>
       </List>
     </Box >
   );
@@ -306,6 +315,7 @@ const Navbar = (props) => {
             <Route path='/accessoryReport' exact component={AccessoryReport} />
             <Route path='/accessoryReport/:id' exact component={AccessoryReportDetail} />
             <Route path='/dashboard' exact component={Dashboard} />
+            <Route path='/stocks' exact component={GenericStockList} />
           </Switch>
         </div>
       </main>

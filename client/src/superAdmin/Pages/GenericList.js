@@ -1,29 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { useTheme } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
-import FirstPageIcon from '@material-ui/icons/FirstPage';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import LastPageIcon from '@material-ui/icons/LastPage';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 
 
 import { factoryList } from '../Data/FactoryList'
@@ -32,7 +13,7 @@ import { serviceCenterList } from '../Data/ServiceCenterList';
 import { withStyles } from "@material-ui/core/styles";
 import { Grid, useMediaQuery } from '@material-ui/core';
 import GenericTable from './GenericTable';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useHistory } from "react-router";
 import GenericStatCard from './GenericStatCard';
 
@@ -66,44 +47,44 @@ const styles = theme => ({
 })
 
 // Fetching Factory Data
-function createFactoryData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createFactoryData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllFactories() {
     const allFactories = [];
     factoryList.map(factory => {
         console.log(factory);
-        allFactories.push(createFactoryData(factory.id, factory.name, factory.orders, factory.completed, factory.pending))
+        allFactories.push(createFactoryData(factory.id, factory.name, factory.address.state, factory.address.city, factory.email, factory.status))
     })
     return allFactories
 }
 
 
 // Fetching Outlet Data
-function createOutletData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createOutletData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllOutlets() {
     const allOutlets = [];
     outletList.map(outlet => {
         console.log(outlet);
-        allOutlets.push(createOutletData(outlet.id, outlet.name, outlet.orders, outlet.completed, outlet.pending))
+        allOutlets.push(createOutletData(outlet.id, outlet.name, outlet.address.state, outlet.address.city, outlet.email, outlet.status))
     })
     return allOutlets
 }
 
 
 // Fetching Service Center Data
-function createServiceCenterData(id, name, orders, completed, pending) {
-    return { id, name, orders, completed, pending };
+function createServiceCenterData(id, name, state, city, contact, status) {
+    return { id, name, state, city, contact, status };
 }
 
 function getAllServiceCenters() {
     const allServiceCenters = [];
     serviceCenterList.map(serviceCenter => {
-        allServiceCenters.push(createServiceCenterData(serviceCenter.id, serviceCenter.name, serviceCenter.orders, serviceCenter.completed, serviceCenter.pending))
+        allServiceCenters.push(createServiceCenterData(serviceCenter.id, serviceCenter.name, serviceCenter.address.state, serviceCenter.address.city, serviceCenter.email, serviceCenter.status))
     })
     return allServiceCenters
 }
@@ -153,17 +134,12 @@ const GenericList = (props) => {
 
     const { classes, theme } = props;
 
-    const xs = useMediaQuery(theme.breakpoints.down('xs'));
-    const sm = useMediaQuery(theme.breakpoints.up('xs') && theme.breakpoints.down('sm'))
-    const md = useMediaQuery(theme.breakpoints.up('sm') && theme.breakpoints.down('md'))
-    const lg = useMediaQuery(theme.breakpoints.up('md') && theme.breakpoints.down('lg'))
-    const xl = useMediaQuery(theme.breakpoints.up('lg'))
-
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const history = useHistory();
 
+    // Extracting the last keyword from URL and deciding which component to load...(Factory / Outlet / Service Center)
     const location = useLocation();
     const componentName = location.pathname.substring(1);
     console.log(location);
@@ -174,17 +150,19 @@ const GenericList = (props) => {
     if (componentName == 'factories') {
         componentNameSingular = 'Factory'
         rows = getAllFactories();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
+
+        // id, name, state, city, contact, status
     }
     else if (componentName == 'outlets') {
         componentNameSingular = 'Outlet'
         rows = getAllOutlets();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
     }
     else if (componentName == 'service-centers') {
         componentNameSingular = 'Service Center'
         rows = getAllServiceCenters();
-        labels = ["name", "orders", "completed", "pending", "actions"];
+        labels = ["name", "state", "city", "contact", "status", "actions"];
     }
     else if (componentName == 'accessory-orders') {
         componentNameSingular = 'Accessory Orders';
@@ -328,7 +306,10 @@ const GenericList = (props) => {
                                 case 'Factory':
                                     return <Button onClick={() => history.push("/factories/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Factory</Button>;
                                 case 'Outlet':
-                                    return <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>;
+                                    return <> 
+                                        <Button onClick={() => history.push("/outlets/sales")} variant="contained" color="primary" style={{ marginBottom: "1rem", marginRight: "1rem" }}>Sales Report</Button>
+                                        <Button onClick={() => history.push("/outlets/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Outlet</Button>
+                                        </>
                                 case 'Service Center':
                                     return <Button onClick={() => history.push("/service-centers/add")} variant="contained" color="primary" style={{ marginBottom: "1rem" }}>Add New Service Center</Button>;
                                 case 'Accessory Orders':
