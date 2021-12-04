@@ -16,7 +16,6 @@ import {Routing as SuperAdminRouting}  from './superAdmin/Shared/Routing';
 import {Routing as OutletRouting} from './Outlet/Shared/Routing';
 
 import {Routing as FactoryWorkerRouting} from './FactoryWorker/Shared/Routing';
-import {BrowserRouter} from 'react-router-dom'
 
 
 function App() 
@@ -27,13 +26,14 @@ function App()
 
     
     <BrowserRouter>
-      <SuperAdminRouting/>
-      {/* <OutletRouting /> */}
+      
+      {/* <OutletRouting /> 
+      </* SuperAdminRouting/ */}
 
       {/* <CustomerRouting /> */}
       {/* <FactoryAdminRouting /> */}
 
-      {/* <FactoryWorkerRouting/> */}
+      { <FactoryWorkerRouting/> }
         
 
     </BrowserRouter>

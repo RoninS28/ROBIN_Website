@@ -47,7 +47,7 @@ function Inspection()
 {
     return(
         <div>
-            <h1>In Inspection</h1>
+            <h1>In Inspection hello</h1>
         </div>
     );
 }
