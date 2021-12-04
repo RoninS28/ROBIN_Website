@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
 import PageHeader from "./PageHeader";
+import NewModel from "./NewModel";
 import TwoWheelerIcon from '@mui/icons-material/TwoWheeler';
-import {makeStyles} from '@material-ui/core';
+import {Paper, makeStyles, CssBaseline} from '@material-ui/core';
 
 
-const useStyle = makeStyles(theme => ({
+const useStyles = makeStyles(theme => ({
     pageContent: {
         margin: theme.spacing(2),
         padding: theme.spacing(2)
@@ -22,13 +23,21 @@ const useStyle = makeStyles(theme => ({
 
 export default function Inspection() {
 
+    const classes=useStyles();
+    
     return (
-       
+       <>
             <PageHeader
                 title="Vehicles' Inspection"
                 subTitle="Manufacturing in factory"
                 icon={<TwoWheelerIcon fontSize="large" />}
             />
+            
+            <Paper className={classes.pageContent}>
+            <NewModel/>
+            </Paper>
+            <CssBaseline/>
            
+           </>
     )
 }
