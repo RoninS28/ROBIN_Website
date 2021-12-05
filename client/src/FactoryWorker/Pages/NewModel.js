@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles, TextField } from '@material-ui/core';
 import { useForm, Form } from './useForm';
 import Controls from './controls/Controls'
@@ -15,14 +15,16 @@ const initialFValues = {
     
 }
 
-export default function NewModel() {
-    
+export default function NewModel(props) {
+   
+    const { addOrEdit, recordForEdit } = props
+   
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('MdName' in fieldValues)
-            temp.fullName = fieldValues.MdName ? "" : "This field is required."
+            temp.MdName = fieldValues.MdName ? "" : "This field is required."
         if ('MnName' in fieldValues)
-        temp.email = fieldValues.MnName ? "" : "This field is required."
+        temp.MnName = fieldValues.MnName ? "" : "This field is required."
         if ('mobile' in fieldValues)
             temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
         if ('status' in fieldValues)
@@ -47,11 +49,15 @@ export default function NewModel() {
     const handleSubmit = e => {
          e.preventDefault()
          if (validate()){
-            Servicedata.insertEmployee(values)
-            resetForm()
+            addOrEdit(values, resetForm);
         }
     }
-
+    useEffect(() => {
+        if (recordForEdit != null)
+            setValues({
+                ...recordForEdit
+            })
+    }, [recordForEdit])
     return(
         <Form onSubmit={handleSubmit}>
            <Grid container>
