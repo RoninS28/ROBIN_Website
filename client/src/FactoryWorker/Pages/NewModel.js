@@ -16,31 +16,60 @@ const initialFValues = {
 }
 
 export default function NewModel() {
-    const {
-        values,
-        setValues,
-        handleInputChange       
-    } = useForm(initialFValues);
-
     
+    const validate = (fieldValues = values) => {
+        let temp = { ...errors }
+        if ('MdName' in fieldValues)
+            temp.fullName = fieldValues.MdName ? "" : "This field is required."
+        if ('MnName' in fieldValues)
+        temp.email = fieldValues.MnName ? "" : "This field is required."
+        if ('mobile' in fieldValues)
+            temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+        if ('status' in fieldValues)
+            temp.status = fieldValues.status.length !=0 ? "" : "This field is required."
+        setErrors({
+            ...temp
+        })
+        if (fieldValues == values)
+        return Object.values(temp).every(x => x == "")
+    }
+    
+    const {
+         values,
+         setValues,
+        errors,
+         setErrors,
+         handleInputChange  ,
+         resetForm     
+    } = useForm(initialFValues, true, validate);
+
+
+    const handleSubmit = e => {
+         e.preventDefault()
+         if (validate()){
+            Servicedata.insertEmployee(values)
+            resetForm()
+        }
+    }
+
     return(
-        <Form>
+        <Form onSubmit={handleSubmit}>
            <Grid container>
                 <Grid item xs={6}>
                 <Controls.Input
                         name="MdName"
-                        label="Model"                       
+                        label="Model Name"                       
                         value={values.MdName}
                         onChange={handleInputChange}
-                        
+                        error={errors.MdName}
                     />
                     
                     <Controls.Input
                         label="Manager Name"
                         name="MnName"                                           
-                        value={values.Mnname}
+                        value={values.MnName}
                         onChange={handleInputChange}
-                        
+                        error={errors.MnName}
                     />
 
                     <Controls.Input
@@ -48,7 +77,7 @@ export default function NewModel() {
                         name="mobile"                                           
                         value={values.mobile}
                         onChange={handleInputChange}
-                        
+                        error={errors.mobile}
                     />
                   
                     </Grid>
@@ -59,7 +88,7 @@ export default function NewModel() {
                         value={values.status}
                         onChange={handleInputChange}
                         options={Servicedata.getDepartmentCollection()}
-                      
+                        error={errors.status}
                     />
 
                     <Controls.DatePicker
@@ -76,6 +105,7 @@ export default function NewModel() {
                         <Controls.Button
                             text="Reset"
                             color="default"
+                            onClick={resetForm}
                              />
                     </div>
                     </Grid>

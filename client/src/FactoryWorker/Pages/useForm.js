@@ -26,8 +26,10 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
     return {
         values,
         setValues,
-        handleInputChange
-     
+        errors,
+        setErrors,
+        handleInputChange,
+        resetForm
 
     }
 }
