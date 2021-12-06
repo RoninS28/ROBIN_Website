@@ -41,16 +41,14 @@ export default function Inspection() {
 
     const classes=useStyles();
     const [recordForEdit, setRecordForEdit] = useState(null)
-    const [records, setRecords] = useState(Servicedata.getAllEmployees())
+   
     const [filterFn, setFilterFn] = useState({ fn: items => { return items; } })
     const [openPopup, setOpenPopup] = useState(false)
     
     const {
         TblContainer,
-        TblHead,
-        TblPagination,
-        recordsAfterPagingAndSorting
-    } = useTable(records, headCells, filterFn);
+        TblHead
+    } = useTable( headCells, filterFn);
 
     const handleSearch = e => {
         let target = e.target;
@@ -65,14 +63,11 @@ export default function Inspection() {
     }
     
     const addOrEdit = (employee, resetForm) => {
-        if (employee.id == 0)
-            Servicedata.insertEmployee(employee)
-        else
-            Servicedata.updateEmployee(employee)
+       
         resetForm()
         setRecordForEdit(null)
         setOpenPopup(false)
-        setRecords(Servicedata.getAllEmployees())
+        
     }
 
     const openInPopup = item => {
@@ -111,31 +106,9 @@ export default function Inspection() {
                     />
                 <TblContainer>
                     <TblHead />
-                    <TableBody>
-                        {
-                            recordsAfterPagingAndSorting().map(item =>
-                                (<TableRow key={item.id}>
-                                    <TableCell>{item.MdName}</TableCell>
-                                    <TableCell>{item.MnName}</TableCell>
-                                    <TableCell>{item.mobile}</TableCell>
-                                    <TableCell>{item.statusId}</TableCell>
-                                    <TableCell>
-                                        <Controls.ActionButton
-                                            color="primary"
-                                            onClick={() => { openInPopup(item) }}>
-                                            <EditOutlinedIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                        <Controls.ActionButton
-                                            color="secondary">
-                                            <CloseIcon fontSize="small" />
-                                        </Controls.ActionButton>
-                                    </TableCell>
-                                </TableRow>)
-                            )
-                        }
-                    </TableBody>
+                    
                 </TblContainer>
-                    <TblPagination />
+                  
             </Paper>
             <Popup
                 title="New Model"

@@ -42,7 +42,7 @@ export default function IForm() {
     const handleSubmit = e => {
         e.preventDefault()
         if (validate()){
-            Servicedata.insertEmployee(values)
+            
             resetForm()
         }
     }
@@ -54,7 +54,7 @@ export default function IForm() {
                    <Grid item xs={7}>
                    <Controls.Input
                            name="fullName"
-                           label="Block"
+                           label="Model Name"
                            value={values.fullName}
                            onChange={handleInputChange}
                            error={errors.fullName}
