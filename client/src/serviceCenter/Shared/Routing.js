@@ -7,4 +7,4 @@ function Routing() {
   );
 }
 
-export default Routing;
+export {Routing};
