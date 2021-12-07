@@ -4,6 +4,16 @@ import { Routing as CustomerRouting } from "./Customer/Shared/Routing";
 
 
 import './App.css';
+
+// import BreakdownRequestsList from './serviceCenter/BreakdownRequestsList';
+// import BreakdownDetails from './serviceCenter/BreakdownDetails';
+// import BreakdownStatus from './serviceCenter/BreakdownStatus';
+// import BuyAccessoriesList from './serviceCenter/BuyAccessoriesList';
+// import Demo from './serviceCenter/Demo';
+// import BreakdownStatusList from './serviceCenter/BreakdownStatusList'; 
+import {Routing as ServiceCentreRouting} from './serviceCenter/Shared/Routing';
+// import BreakdownStatus from './serviceCenter/BreakdownStatus';
+
 import {BrowserRouter} from 'react-router-dom'
 
 // Factory Admin Routing
@@ -16,27 +26,38 @@ import {Routing as SuperAdminRouting}  from './superAdmin/Shared/Routing';
 import {Routing as OutletRouting} from './Outlet/Shared/Routing';
 
 import {Routing as FactoryWorkerRouting} from './FactoryWorker/Shared/Routing';
+
 //import {BrowserRouter} from 'react-router-dom'
+
+
 
 
 function App() 
 {
   return (
 
+
+    
+
+
+
   <div>
 
     
     <BrowserRouter>
-      <SuperAdminRouting/>
-      {/* <OutletRouting /> */}
+      
+      {/* <OutletRouting /> 
+      </* SuperAdminRouting/ */}
 
       {/* <CustomerRouting /> */}
       {/* <FactoryAdminRouting /> */}
+      {/*  <ServiceCentreRouting /> */}
 
-      {/* <FactoryWorkerRouting/> */}
+       <FactoryWorkerRouting/> 
         
 
     </BrowserRouter>
+
     </div>
 
   );
