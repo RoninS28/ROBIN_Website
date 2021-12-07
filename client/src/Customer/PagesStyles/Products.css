@@ -1,0 +1,27 @@
+div.productsViewScreen div.productDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 45;
+}
+
+div.productsViewScreen div.productText{
+    font-size: 35px;
+    margin-top: 15px;
+    /* color: #353535d8; */
+    color: rgba(0, 0, 0, 0.7    01);
+    font-family: 'Secular One', sans-serif;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.50);
+
+}
+
+div.productsViewScreen div.heading{
+    
+        color: #2196F3;
+        margin-top: '20px';
+        text-align: "center";
+        font-size: '26px';
+        text-shadow: '1px 1px 4px rgba(0, 0, 0, 0.21)'
+     
+}
