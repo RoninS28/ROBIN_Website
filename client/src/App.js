@@ -6,7 +6,7 @@ import './App.css';
 // import BuyAccessoriesList from './serviceCenter/BuyAccessoriesList';
 // import Demo from './serviceCenter/Demo';
 // import BreakdownStatusList from './serviceCenter/BreakdownStatusList'; 
-import Routing from './serviceCenter/Shared/Routing';
+import {Routing as ServiceCentreRouting} from './serviceCenter/Shared/Routing';
 // import BreakdownStatus from './serviceCenter/BreakdownStatus';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
        {/* <Demo/> */}
         {/* <BreakdownStatusList/> */}
 
-       <Routing />
+       <ServiceCentreRouting />
     </div>
   );
 }
