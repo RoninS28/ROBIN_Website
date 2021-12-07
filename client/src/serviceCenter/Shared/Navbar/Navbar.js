@@ -153,7 +153,148 @@ const Navbar = (props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-              <Link to="/Serviceman/breakdown-details" style={{ textDecoration: 'none' }}>
+{/* Service Center Module */}
+    
+             <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary="Customers List" />
+              </ListItem>
+            </Link>
+            <Link to="/customer-details" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Customer Details" />
+                </ListItem>
+              </Link>
+              <Link to="/servicemenlist" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Servicemen List" />
+                </ListItem>
+              </Link>
+              
+               <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Serviceman Details" />
+                </ListItem>
+              </Link>
+              <Link to="/servicing" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Servicing" />
+                </ListItem>
+              </Link>
+              <Link to="/breakdown-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Requests" />
+                </ListItem>
+              </Link>
+              <Link to="/breakdown-detail" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Request detail" />
+                </ListItem>
+              </Link>
+              <Link to="/breakdown-status-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Status List" />
+                </ListItem>
+              </Link>
+              <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Request Status" />
+                </ListItem>
+              </Link>
+              <Link to="/buy-accessories" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Buy" />
+                </ListItem>
+              </Link>
+              <Link to="/buy-category" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Buy Category" />
+                </ListItem>
+              </Link>
+          <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon/>
+                  </ListItemIcon>
+                  <ListItemText primary="Item Details" />
+                </ListItem>
+              </Link>
+            <Link to="/billing" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                <ListItemIcon>
+                  <MailIcon />
+                </ListItemIcon>
+                <ListItemText primary="Billing" />
+              </ListItem>
+            </Link>
+          <Link to="/customer-complaint-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="C Complaints List" />
+                </ListItem>
+              </Link> 
+              <Link to="/customer-complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="C Complaint Details" />
+                </ListItem>
+              </Link> 
+              <Link to="/serviceman-complaint-list" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="S Complaints List" />
+                </ListItem>
+              </Link> 
+              <Link to="/serviceman-complaint" style={{ textDecoration: 'none' }}>
+                <ListItem button>
+                  <ListItemIcon>
+                    <MailIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="S Complaint Details" />
+                </ListItem>
+              </Link>  
+
+{/* Serviceman module */}
+              {/* <Link to="/Serviceman/breakdown-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
@@ -205,7 +346,7 @@ const Navbar = (props) => {
                   </ListItemIcon>
                   <ListItemText primary="SM Complaint" />
                 </ListItem>
-              </Link> 
+              </Link>  */}
 
           <Link to="/demo" style={{ textDecoration: 'none' }}>
                 <ListItem button>
@@ -344,7 +485,6 @@ const Navbar = (props) => {
                 </div>
             </main>
         </Router>
-
     )
 }
 
