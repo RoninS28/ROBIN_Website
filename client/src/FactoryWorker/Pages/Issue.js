@@ -1,82 +1,30 @@
-import React, { useState } from 'react'
-import { withStyles } from "@material-ui/core/styles";
+import React from 'react'
+import IForm from "./Iform";
+import PageHeader from "./PageHeader";
+import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import { Paper,makeStyles } from '@material-ui/core';
 
-
-import TextField from '@material-ui/core/TextField';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
-
-const styles = theme => ({ 
-    wrapperDiv: {
-        width: "100%",
-        [theme.breakpoints.up("sm")]: {
-            display: "grid",
-            gap: "1rem",
-            gridTemplateColumns: "1fr 1fr",
-        },
-    },
-    generalInfoWrapper: {
-        marginLeft: "1rem"
-    },
-    managerInfoWrapper: {
-        marginLeft: "1rem"
-    },
-    inputTextWrapper: {
-        [theme.breakpoints.up("sm")]: {
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-        },
-
-        [theme.breakpoints.down("sm")]: {
-            display: "grid",
-            gridTemplateColumns: "1fr",
-        }
-    },
-    inputText: {
-        marginBottom: "1rem !important",
-        [theme.breakpoints.up("sm")]: {
-            minWidth: "320px !important",
-            marginRight: "1rem !important"
-        },
-        [theme.breakpoints.down("sm")]: {
-            width: "210px !important",
-        }
-    },
-
-    inputSelect: {
-        [theme.breakpoints.up("sm")]: {
-            width: "320px !important",
-        },
-        [theme.breakpoints.down("sm")]: {
-            width: "210px !important",
-        }
-    },
-    btnContainer: {
-        [theme.breakpoints.up("sm")]: { 
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-        }
-    },
-    btn: {
-        [theme.breakpoints.up("sm")]: { 
-            marginLeft: "1rem",
-            marginBottom: "1rem"
-        },
-        [theme.breakpoints.down("sm")]: { 
-            marginLeft: "1rem",
-            marginTop: "1rem", 
-            marginBottom: "1rem"
-        }
+const useStyles = makeStyles(theme => ({
+    pageContent: {
+        margin: theme.spacing(5),
+        padding: theme.spacing(3)
     }
-})
+}))
 
+export default function Page() {
 
-function Issue()
-{
-    return(
-        <div>
-            <h1>In Issue</h1>
-        </div>
-    );
+    const classes = useStyles();
+
+    return (
+        <>
+            <PageHeader
+                title="Issues"
+                subTitle="In factory"
+                icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
+            />
+            <Paper className={classes.pageContent}>
+                <IForm />
+            </Paper>
+        </>
+    )
 }
-export default Issue;
