@@ -46,14 +46,14 @@ function App()
     
     <BrowserRouter>
       
-      {/* <OutletRouting /> 
-      </* SuperAdminRouting/ */}
+      {/* <OutletRouting /> */}
+      < SuperAdminRouting/>
 
       {/* <CustomerRouting /> */}
       {/* <FactoryAdminRouting /> */}
-      {/*  <ServiceCentreRouting /> */}
+       {/* <ServiceCentreRouting /> */}
 
-       <FactoryWorkerRouting/> 
+       {/* <FactoryWorkerRouting/>  */}
         
 
     </BrowserRouter>
