@@ -29,13 +29,13 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-const Layout = ({ children }) => {
+const Layout = ({ children, setLoggedIn }) => {
     const classes = useStyles()
 
     return (
         <div className={classes.root}>
             {/* appbar */}
-            <Navbar style={{ position: "fixed" }}></Navbar>
+            <Navbar style={{ position: "fixed" }} setLoggedIn={setLoggedIn}></Navbar>
 
 
             {/* side drawer */}

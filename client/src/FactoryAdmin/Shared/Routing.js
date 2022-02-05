@@ -5,10 +5,18 @@ import Footer from "./Footer/Footer";
 import './Background/StarryNight.css';
 import WorkerList from "../Pages/WorkerList";
 import WorkerListDetails from "../Pages/WorkerListDetails";
+import { useState, useEffect } from "react";
 
-function Routing() {
+function Routing(props) {
+  const { loggedIn, setLoggedIn } = props;
+
+  useEffect(() => {
+    console.log("factory admin routing file");
+    setLoggedIn("true");
+    localStorage.setItem("userLoggedIn", "factory-admin");
+  })
   return (
-       <Navbar style={{position:"fixed"}}></Navbar> 
+       <Navbar style={{position:"fixed"}} setLoggedIn={setLoggedIn}></Navbar> 
   );
 }
 

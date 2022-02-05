@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from '@mui/material/AppBar';
@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import '../Background/StarryNight.css';
@@ -39,7 +39,12 @@ const styles = theme => ({
 });
 
 const Navbar = (props) => {
-  const { classes, theme } = props;
+  const { classes, theme, setLoggedIn } = props;
+
+  const history = useHistory();
+  useEffect(() => {
+      history.push("/");
+  })
 
   // Appbar related states
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,6 +65,10 @@ const Navbar = (props) => {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+
+  const handleLogout = () => {
+    setLoggedIn(null);
+  }
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -83,7 +92,7 @@ const Navbar = (props) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -197,7 +206,7 @@ const Navbar = (props) => {
           </ListItem>
         </Link>
 
-        <Link to='/dashboard' style={{ textDecoration: 'none' }}>
+        <Link to='/' style={{ textDecoration: 'none' }}>
           <ListItem button>
             <ListItemIcon>
               <MailIcon />
@@ -319,7 +328,7 @@ const Navbar = (props) => {
             <Route path='/complaints/:id' exact component={ComplaintDetail}></Route>
             <Route path='/workerList' exact component={WorkerList}></Route>
             <Route path='/workerList/:id' exact component={WorkerListDetails}></Route>
-            <Route path='/dashboard' exact component={Dashboard}></Route>
+            <Route path='/' exact component={Dashboard}></Route>
             <Route path='/stocks' exact component={GenericStockList}></Route>
           </Switch>
         </div>

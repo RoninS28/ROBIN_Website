@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from '@mui/material/AppBar';
@@ -17,30 +17,19 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import EVModelList from "../../Pages/EVModelList"
 import '../Background/StarryNight.css';
-import EVModelDetail from "../../Pages/EVModelDetail";
-import GenericDetail from "../../Pages/GenericDetail";
-import GenericList from "../../Pages/GenericList";
-import GenericOverview from "../../Pages/GenericOverview";
-import AccessoryOrderReceipt from "../../Pages/AccessoryOrderReceipt";
-import CustomerComplaint from "../../Pages/CustomerComplaint";
-import Dashboard from "../../Pages/Dashboard";
-import GenericStockList from "../../Pages/GenericStockList";
-import GenericSalesList from "../../Pages/GenericSalesList";
+
+
 
 const styles = theme => ({
 });
 
 const Navbar = (props) => {
-    const { classes, theme, setLoggedIn } = props;
-    const history = useHistory();
-    useEffect(() => {
-        history.push("/");
-    })
+    const { classes, theme, loggedIn, setLoggedIn } = props;
+    console.log("In login navbar: ", loggedIn);
 
     // Appbar related states
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -61,10 +50,6 @@ const Navbar = (props) => {
         setAnchorEl(null);
         handleMobileMenuClose();
     };
-
-    const handleLogout = () => {
-        setLoggedIn(null);
-    }
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
@@ -88,7 +73,7 @@ const Navbar = (props) => {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
 
@@ -148,68 +133,15 @@ const Navbar = (props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <Link to="/models" style={{ textDecoration: 'none' }}>
+                {/* <Link to="/models" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <MailIcon />
                         </ListItemIcon>
                         <ListItemText primary="EV Models" />
                     </ListItem>
-                </Link>
+                </Link> */}
 
-                <Link to="/factories" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Factories" />
-                    </ListItem>
-                </Link>
-
-                <Link to="/outlets" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Outlets" />
-                    </ListItem>
-                </Link>
-
-                <Link to="/service-centers" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Service Centers" />
-                    </ListItem>
-                </Link>
-
-                <Link to="/accessory-orders" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Accessory List" />
-                    </ListItem>
-                </Link>
-
-                <Link to="/complaints" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Complaints" />
-                    </ListItem>
-                </Link>
-
-                <Link to="/" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard" />
-                    </ListItem>
-                </Link>
             </List>
         </Box>
     );
@@ -300,38 +232,7 @@ const Navbar = (props) => {
 
                 {/* Routes for various components */}
                 <div className='back'>
-                    <Switch>
-                        <Route path='/models' exact component={EVModelList} ></Route>
-                        <Route path='/models/:id' exact component={EVModelDetail} ></Route>
 
-                        <Route path='/factories/add' exact component={GenericDetail}></Route>
-                        <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
-                        <Route path='/factories' exact component={GenericList}></Route>
-                        <Route path='/factories/:id' exact component={GenericOverview}></Route>
-                        <Route path='/factories/:id/stocks' exact component={GenericStockList}></Route>
-
-                        <Route path='/outlets/add' exact component={GenericDetail}></Route>
-                        <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
-                        <Route path='/outlets' exact component={GenericList}></Route>
-                        <Route path='/outlets/sales' exact component={GenericSalesList}></Route>
-                        <Route path='/outlets/:id' exact component={GenericOverview}></Route>
-                        <Route path='/outlets/:id/stocks' exact component={GenericStockList}></Route>
-                        
-
-                        <Route path='/service-centers/add' exact component={GenericDetail}></Route>
-                        <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
-                        <Route path='/service-centers' exact component={GenericList}></Route>
-                        <Route path='/service-centers/:id' exact component={GenericOverview}></Route>
-                        <Route path='/service-centers/:id/stocks' exact component={GenericStockList}></Route>
-
-                        <Route path='/accessory-orders/:id' exact component={AccessoryOrderReceipt}></Route>
-                        <Route path='/accessory-orders' exact component={GenericList}></Route>
-
-                        <Route path='/complaints' exact component={GenericList}></Route>
-                        <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
-
-                        <Route path='/' exact component={Dashboard}></Route>
-                    </Switch>
                 </div>
             </main>
         </Router>

@@ -18,7 +18,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -136,7 +136,13 @@ const styles = theme => ({
 });
 
 const Navbar = (props) => {
-  const { classes, theme } = props;
+  const { classes, theme, setLoggedIn } = props;
+
+  const history = useHistory();
+  useEffect(() => {
+      history.push("/");
+  })
+
   const [open, setOpen] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -165,6 +171,10 @@ const Navbar = (props) => {
   const handleClose = () => {
     setAnchorEl(null)
   };
+
+  const handleLogout = () => {
+    setLoggedIn(null);
+  }
 
   return (
     <div className={classes.root}>
@@ -236,7 +246,7 @@ const Navbar = (props) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
             </div>
           </Toolbar>
