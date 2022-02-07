@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { blue } from "@material-ui/core/colors";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import v2 from "../Assets/v2.jpeg";
 import { Grid } from "@material-ui/core";
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
@@ -165,14 +165,38 @@ const BookingsStage = () => {
     const ongoingStyle = { border: '2px solid #FF9B04 ', borderWidth: '1px', marginRight: '20px', boxShadow: "2px 2px 2px #FF9B04", borderRadius: "75px", zIndex: 1, alignSelf: "center", alignItems: 'center', fontSize: '60px', color: 'rgba(0,0,0,0.7)' }
     const pendingStyle = { border: '2px solid rgba(0,0,0,0.2) ', borderWidth: '1px', marginRight: '20px', boxShadow: "2px 2px 2px rgba(0,0,0,0.2)", borderRadius: "75px", zIndex: 1, alignSelf: "center", alignItems: 'center', fontSize: '60px', color: 'rgba(0,0,0,0.7)' }
 
+    const [desc, setDesc] = useState("")
+    const GetData = async (e) => {
+        // e.preventDefault()
+
+        const res = await fetch("/bookingsStage/61fc0d24430fe6834c6d39bd", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        });
+
+
+        const data = await res.json();
+        const description = data.description
+        setDesc(description)
+        console.log(`STAGE ID NO IS ${data.description}`)
+
+    }
+
+    useEffect(() => {
+        GetData();
+    }, []);
 
 
 
     return (
         <div className="bookingsStageScreen">
+
             {/* client\src\Customer\Assets\v2.jpeg */}
             <div className={classes.heading}>
-                {vehicleInfo.model}
+                {vehicleInfo.model} || {desc}
             </div>
             <div className={classes.image} >
                 <img src={v2} alt="Image" style={{
