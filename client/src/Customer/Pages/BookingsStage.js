@@ -9,7 +9,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import '../PagesStyles/BookingsStage.css'
 // import ' PagesStyles/BookingsStage.css';
 import CheckIcon from '@mui/icons-material/Check';
-
+import axios from 'axios'
 const useStyles = makeStyles((theme) => {
     return {
         root: {
@@ -169,24 +169,31 @@ const BookingsStage = () => {
     const GetData = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch("/bookingsStage/61fc0d24430fe6834c6d39bd", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
+        // const res = await fetch("/bookingsStage/61fc0d24430fe6834c6d39bd", {
+        //     method: "GET",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
 
-        });
+        // });
+
+        // const res = await axios.get("/bookingsStage/61fc0d24430fe6834c6d39bd").then((response) => {
+        //     console.log(response.data)
+        // })
 
 
-        const data = await res.json();
-        const description = data.description
-        setDesc(description)
-        console.log(`STAGE ID NO IS ${data.description}`)
+        // const data = await res.json();
+        // const description = data.description
+        // setDesc(description)
+        // console.log(`STAGE ID NO IS ${data.description}`)
 
     }
 
     useEffect(() => {
-        GetData();
+        axios.get("/bookingsStage/61fc0d24430fe6834c6d39bd").then((response) => {
+            console.log(response.data)
+            console.log('hello')
+        })
     }, []);
 
 
