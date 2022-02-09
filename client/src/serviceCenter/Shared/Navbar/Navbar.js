@@ -18,7 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 
-import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, useHistory, useLocation } from "react-router-dom";
 import BreakdownRequestsList from "../../BreakdownRequestsList";
 import BreakdownDetails from "../../BreakdownDetails";
 import BreakdownStatus from "../../BreakdownStatus";
@@ -50,10 +50,14 @@ const styles = theme => ({
 
 const Navbar = (props) => {
     const { classes, theme, setLoggedIn } = props;
-
     const history = useHistory();
+    const location = useLocation();
     useEffect(() => {
-        history.push("/");
+        console.log();
+        if(location.pathname == '/service-center') {
+            console.log("pushing / to URL");
+            history.push("/");
+        }
     })
 
     // Appbar related states

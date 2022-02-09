@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from "react-router-dom";
 import Home from "../Pages/Home";
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
@@ -24,11 +24,16 @@ import { useEffect } from "react";
 function Routing(props) {
   const { loggedIn, setLoggedIn } = props;
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     setLoggedIn("true");
     localStorage.setItem("userLoggedIn", "customer");
-    history.push("/");
+
+    if(location.pathname == '/customer') {
+      console.log("pushing / to URL");
+      history.push("/");
+  }
   })
 
   return (

@@ -18,7 +18,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -139,8 +139,13 @@ const Navbar = (props) => {
   const { classes, theme, setLoggedIn } = props;
 
   const history = useHistory();
+  const location = useLocation();
   useEffect(() => {
-      history.push("/");
+      console.log();
+      if(location.pathname == '/factory-worker') {
+          console.log("pushing / to URL");
+          history.push("/");
+      }
   })
 
   const [open, setOpen] = useState(true);
