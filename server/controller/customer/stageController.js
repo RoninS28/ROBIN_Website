@@ -1,5 +1,5 @@
 const express = require('express');
-const stageSchema = require('../models/stageSchema');
+const stageSchema = require('../../models/customer/stageSchema');
 
 const stagesGet = async (req, res) => {
     try {
