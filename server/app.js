@@ -12,13 +12,14 @@ app.use(express.json());
 
 // app.use(require('./routes/stage'));
 
-app.use('/bookingsStage', require('./routes/customer/stage'));
+// app.use('/bookingsStage', require('./routes/customer/stage'));
 
 
 app.use('/factories', require('./routes/factory/factory'));
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
 app.use('/services', require('./routes/service-center/services'));
+app.use('/test-drives', require('./routes/outlet/testDrive'));
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
