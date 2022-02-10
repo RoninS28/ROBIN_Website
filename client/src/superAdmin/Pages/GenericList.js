@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search'
+import SearchIcon from '@material-ui/icons/Search';
+
+import axios from 'axios';
 
 
 import { factoryList } from '../Data/FactoryList'
@@ -47,48 +49,28 @@ const styles = theme => ({
 })
 
 // Fetching Factory Data
-function createFactoryData(id, name, state, city, contact, status) {
+function createFactoryData(id, name, state, city, contact, active) {
+    let status = "closed";
+    if(active == true)
+        status = "open";
     return { id, name, state, city, contact, status };
 }
-
-function getAllFactories() {
-    const allFactories = [];
-    factoryList.map(factory => {
-        console.log(factory);
-        allFactories.push(createFactoryData(factory.id, factory.name, factory.address.state, factory.address.city, factory.email, factory.status))
-    })
-    return allFactories
-}
-
 
 // Fetching Outlet Data
-function createOutletData(id, name, state, city, contact, status) {
+function createOutletData(id, name, state, city, contact, active) {
+    let status = "closed";
+    if(active == true)
+        status = "open";
     return { id, name, state, city, contact, status };
 }
-
-function getAllOutlets() {
-    const allOutlets = [];
-    outletList.map(outlet => {
-        console.log(outlet);
-        allOutlets.push(createOutletData(outlet.id, outlet.name, outlet.address.state, outlet.address.city, outlet.email, outlet.status))
-    })
-    return allOutlets
-}
-
 
 // Fetching Service Center Data
-function createServiceCenterData(id, name, state, city, contact, status) {
+function createServiceCenterData(id, name, state, city, contact, active) {
+    let status = "closed";
+    if(active == true)
+        status = "open";
     return { id, name, state, city, contact, status };
 }
-
-function getAllServiceCenters() {
-    const allServiceCenters = [];
-    serviceCenterList.map(serviceCenter => {
-        allServiceCenters.push(createServiceCenterData(serviceCenter.id, serviceCenter.name, serviceCenter.address.state, serviceCenter.address.city, serviceCenter.email, serviceCenter.status))
-    })
-    return allServiceCenters
-}
-
 
 // Fetching Accessory Order List
 function createAccessoryOrderData(orderId, factoryName, dateOfOrder, status) {
@@ -132,6 +114,60 @@ function getComplaintsList() {
 // Actual Function
 const GenericList = (props) => {
 
+
+    const getAllFactories = () => {
+        const allFactories = [];
+    
+        axios.get('/factories')
+            .then(res => {
+                let factoryArr = res.data;
+                console.log(factoryArr);
+                factoryArr.map(factory => {
+                    allFactories.push(createFactoryData(factory._id, factory.name, factory.state, factory.city, factory.email, factory.active));
+                });
+                console.log("all factories ", allFactories)
+                setRows(allFactories);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    const getAllOutlets = () => {
+        const allOutlets = [];
+        axios.get('/outlets')
+            .then(res => {
+                let outletArr = res.data;
+                console.log(outletArr);
+                outletArr.map(outlet => {
+                    allOutlets.push(createOutletData(outlet._id, outlet.name, outlet.state, outlet.city, outlet.email, outlet.active));
+                });
+                console.log("all outlets ", allOutlets)
+                setRows(allOutlets);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    const getAllServiceCenters = () => {
+        const allServiceCenters = [];
+        axios.get('/service-centers')
+            .then(res => {
+                let serviceCenterArr = res.data;
+                console.log(serviceCenterArr);
+                serviceCenterArr.map(serviceCenter => {
+                    allServiceCenters.push(createServiceCenterData(serviceCenter._id, serviceCenter.name, serviceCenter.state, serviceCenter.city, serviceCenter.email, serviceCenter.active));
+                });
+                console.log("all serviceCenters ", allServiceCenters)
+                setRows(allServiceCenters);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+
     const { classes, theme } = props;
 
 
@@ -141,38 +177,47 @@ const GenericList = (props) => {
 
     // Extracting the last keyword from URL and deciding which component to load...(Factory / Outlet / Service Center)
     const location = useLocation();
-    const componentName = location.pathname.substring(1);
+    // const componentName = location.pathname.substring(1);
     console.log(location);
-    let componentNameSingular = '';
+    // let componentNameSingular = '';
 
-    let rows = []
-    let labels = []
-    if (componentName == 'factories') {
-        componentNameSingular = 'Factory'
-        rows = getAllFactories();
-        labels = ["name", "state", "city", "contact", "status", "actions"];
+    const [componentName, setComponentName] = useState('');
+    const [componentNameSingular, setComponentNameSingular] = useState('');
+    const [rows, setRows] = useState([]);
+    const [labels, setLabels] = useState([]);
 
-        // id, name, state, city, contact, status
-    }
-    else if (componentName == 'outlets') {
-        componentNameSingular = 'Outlet'
-        rows = getAllOutlets();
-        labels = ["name", "state", "city", "contact", "status", "actions"];
-    }
-    else if (componentName == 'service-centers') {
-        componentNameSingular = 'Service Center'
-        rows = getAllServiceCenters();
-        labels = ["name", "state", "city", "contact", "status", "actions"];
-    }
-    else if (componentName == 'accessory-orders') {
+    useEffect(() => {
+        setComponentName(location.pathname.substring(1));
+        console.log("again in useeffect");
+        console.log("component name: ", componentName);
+        if (componentName == 'factories') {
+            setComponentNameSingular('Factory');
+            getAllFactories();
+            setLabels(["name", "state", "city", "contact", "status", "actions"]);    
+            // id, name, state, city, contact, status
+        }
+        else if (componentName == 'outlets') {
+            setComponentNameSingular('Outlet');
+            getAllOutlets();
+            setLabels(["name", "state", "city", "contact", "status", "actions"]);
+        }
+        else if (componentName == 'service-centers') {
+            setComponentNameSingular('Service Center');
+            getAllServiceCenters();
+            setLabels(["name", "state", "city", "contact", "status", "actions"]);
+        }
+    }, [componentName, location, componentNameSingular]);
+
+    if (componentName == 'accessory-orders') {
         componentNameSingular = 'Accessory Orders';
         rows = getAccessoryOrderList();
-        labels = ["orderId", "factoryName", "dateOfOrder", "status", "actions"];
+        setLabels(["orderId", "factoryName", "dateOfOrder", "status", "actions"]);
+        // labels = ["orderId", "factoryName", "dateOfOrder", "status", "actions"];
     }
     else if (componentName == 'complaints') {
         componentNameSingular = 'Complaints';
         rows = getComplaintsList();
-        labels = ["complaintId", "customerName", "complaintType", "dateOfOrder", "status", "actions"];
+        setLabels(["complaintId", "customerName", "complaintType", "dateOfOrder", "status", "actions"]);
     }
 
 
