@@ -17,7 +17,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import '../Background/StarryNight.css';
@@ -42,8 +42,13 @@ const Navbar = (props) => {
   const { classes, theme, setLoggedIn } = props;
 
   const history = useHistory();
+  const location = useLocation();
   useEffect(() => {
-      history.push("/");
+      console.log();
+      if(location.pathname == '/outlet') {
+          console.log("pushing / to URL");
+          history.push("/");
+      }
   })
 
   // Appbar related states
