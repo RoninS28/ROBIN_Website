@@ -20,6 +20,10 @@ app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
 app.use('/services', require('./routes/service-center/services'));
 app.use('/test-drives', require('./routes/outlet/testDrive'));
+app.use('/employees', require('./routes/common/employee'));
+app.use('/complaints', require('./routes/common/complaints'));
+app.use('/complaintType', require('./routes/common/complaintType'));
+app.use('/leaves', require('./routes/common/leaves'));
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
