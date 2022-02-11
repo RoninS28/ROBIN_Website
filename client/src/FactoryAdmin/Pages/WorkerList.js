@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Container from "@material-ui/core/Container";
 import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
@@ -13,6 +13,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import workers from "../Data/Workers.js";
 import GenericTable from "./GenericTable";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -121,6 +122,8 @@ function getAllModels() {
   return allModels;
 }
 
+
+
 const rows = getAllModels();
 
 const labels = [
@@ -129,13 +132,47 @@ const labels = [
   "phone",
   "email",
   "position",
-  "address",
+  "dateOfJoin",
   "salary",
   "actions",
 ];
 
 function WorkerList(props) {
   const { classes, theme } = props;
+
+  const [rows,setRows]=useState([]);
+
+  const [labels,setLabels]=useState(["name","contact","emailID","position","actions",]);
+
+  const getAllWorkers = () => {
+
+      const allWorkers=[];
+
+    axios.get('/employees')
+        .then(res => {
+            let workerArr = res.data;
+            console.log(workerArr);
+            workerArr.map(worker => {
+                allWorkers.push(worker);
+            });
+            console.log("all workers ", allWorkers)
+            setRows(allWorkers);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+  }
+
+
+
+  useEffect(()=>{
+    console.log("In useEffect");
+    getAllWorkers();
+
+  },[]);
+
+  
+
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
