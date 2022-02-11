@@ -209,13 +209,13 @@ const GenericList = (props) => {
     }, [componentName, location, componentNameSingular]);
 
     if (componentName == 'accessory-orders') {
-        componentNameSingular = 'Accessory Orders';
+        setComponentNameSingular('Accessory Orders');
         rows = getAccessoryOrderList();
         setLabels(["orderId", "factoryName", "dateOfOrder", "status", "actions"]);
         // labels = ["orderId", "factoryName", "dateOfOrder", "status", "actions"];
     }
     else if (componentName == 'complaints') {
-        componentNameSingular = 'Complaints';
+        setComponentNameSingular('Complaints');
         rows = getComplaintsList();
         setLabels(["complaintId", "customerName", "complaintType", "dateOfOrder", "status", "actions"]);
     }
@@ -477,11 +477,11 @@ const GenericList = (props) => {
                     {(() => {
                         switch (componentNameSingular) {
                             case 'Factory':
-                                return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
+                                return <GenericTable rows={rows} labels={labels} view="/factories/" />;
                             case 'Outlet':
-                                return <GenericTable rows={rows} labels={labels} view="/outlets/1" />;
+                                return <GenericTable rows={rows} labels={labels} view="/outlets/" />;
                             case 'Service Center':
-                                return <GenericTable rows={rows} labels={labels} view="/service-centers/1" />;
+                                return <GenericTable rows={rows} labels={labels} view="/service-centers/" />;
                             case 'Accessory Orders':
                                 return <GenericTable rows={rows} labels={labels} view="/accessory-orders/:id" />;
                             case 'Complaints':

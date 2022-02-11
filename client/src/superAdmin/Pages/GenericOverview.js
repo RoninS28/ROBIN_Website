@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +11,7 @@ import LineChart from './LineChart';
 import GenericTable from './GenericTable';
 import { useHistory, useLocation } from 'react-router';
 import GenericStatCard from './GenericStatCard';
+import axios from 'axios';
 
 
 const styles = theme => ({
@@ -103,36 +104,73 @@ const GenericOverview = (props) => {
     const { classes, theme } = props;
 
     const history = useHistory();
-
-
     const location = useLocation();
-    const arrList = location.pathname.split('/');
-    // ['', 'service-centers', '1']
 
-    const componentName = arrList[1];
+    const [arrList, setArrList] = useState('');
+    const [componentName, setComponentName] = useState('');
+    const [componentNameSingular, setComponentNameSingular] = useState('');
+    const [editBtnUrl, setEditBtnUrl] = useState('');
+    const [sampleTitle, setSampleTitle] = useState('');
+    const [entityId, setEntityId] = useState('');
+    const [entityData, setEntityData] = useState({});
 
-    let componentNameSingular = '';
-    let editBtnUrl = ''
-    let sampleTitle = ''
-    let sampleSubtitle = ''
-
-    let obj = {}
-    if (componentName == 'factories') {
-        componentNameSingular = 'Factory'
-        editBtnUrl = '/factories/1/edit'
-        sampleTitle = 'Factory Name'
-        sampleSubtitle = 'Noga Factory'
-    } else if (componentName == 'outlets') {
-        componentNameSingular = 'Outlet'
-        editBtnUrl = '/outlets/1/edit'
-        sampleTitle = 'Outlet Name'
-        sampleSubtitle = 'Ishanya Outlet'
-    } else if (componentName == 'service-centers') {
-        componentNameSingular = 'Service Center'
-        editBtnUrl = '/service-centers/1/edit'
-        sampleTitle = 'Service Center Name'
-        sampleSubtitle = 'Ishanya Service Center'
+    const getFactory = (id) => {
+        axios.get(`/factories/${id}`)
+            .then(res => {
+                setEntityData(res.data);
+                console.log("factory details: ", res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
+
+    const getOutlet = (id) => {
+        axios.get(`/outlets/${id}`)
+            .then(res => {
+                setEntityData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    const getServiceCenter = (id) => {
+        axios.get(`/service-centers/${id}`)
+            .then(res => {
+                setEntityData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        console.log("use effect called!!");
+        setArrList(location.pathname.split('/'));
+        // ['', 'service-centers', '1']
+        setComponentName(arrList[1]);
+        setEntityId(arrList[2]);
+        console.log(entityId);
+
+        if (componentName == 'factories') {
+            setComponentNameSingular('Factory');
+            setEditBtnUrl(`/factories/${entityId}/edit`);
+            setSampleTitle('Factory Name');
+            getFactory(entityId);
+        } else if (componentName == 'outlets') {
+            setComponentNameSingular('Outlet');
+            setEditBtnUrl(`/outlets/${entityId}/edit`);
+            setSampleTitle('Outlet Name');
+            getOutlet(entityId);
+        } else if (componentName == 'service-centers') {
+            setComponentNameSingular('Service Center');
+            setEditBtnUrl(`/service-centers/${entityId}/edit`);
+            setSampleTitle('Service Center Name');
+            getServiceCenter(entityId);
+        }
+
+    }, [componentName]);
 
     return (
         <Box sx={{ flexGrow: 1 }} m={2}>
@@ -145,7 +183,7 @@ const GenericOverview = (props) => {
                         <Grid item xs={12} sm={12} md={12} lg={6}>
                             <GenericStatCard
                                 title={sampleTitle}
-                                subtitle={sampleSubtitle}
+                                subtitle={entityData.name}
                                 editBtnUrl={editBtnUrl}
                             />
                         </Grid>
