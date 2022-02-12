@@ -331,6 +331,12 @@ class MiniDrawer extends React.Component {
                 <Link to="/notifications" className={classes.link}>
                   Notifications
                 </Link>
+                <Link to="/login" className={classes.link}>
+                  Login
+                </Link>
+                <Link to="/signup" className={classes.link}>
+                  Signup
+                </Link>
 
               </div>
             </Typography>

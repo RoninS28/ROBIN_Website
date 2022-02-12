@@ -17,6 +17,8 @@ import TestDriveBooking from "../Pages/TestDriveBooking";
 import TestDriveOutlet from "../Pages/TestDriveOutlet";
 import NotificationsRoom from "../Pages/NotificationsChat";
 import ProductsSelection from "../Pages/ProductsSelection";
+import Login from "../Pages/Login";
+import Signup from "../Pages/Signup";
 import { useEffect } from "react";
 
 
@@ -60,6 +62,8 @@ function Routing(props) {
           <Route path='/notifications' exact component={NotificationsRoom} ></Route>
           <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
           <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
+          <Route path='/login' exact component={Login} ></Route>
+          <Route path='/signup' exact component={Signup} ></Route>
         </Switch>
       </Layout>
       {/* </div> */}
