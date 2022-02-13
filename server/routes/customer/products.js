@@ -24,9 +24,10 @@ router.post('/post', (req, res) => {
 
 // fetch all the products
 
-router.get('/', (req, res) => {
-    Model.find().sort({ createdAt: -1 })
+router.get('/', (req, res, next) => {
+    Model.find({})
         .then((result) => {
+            console.log(result)
             res.send(result)
         })
         .catch(next)

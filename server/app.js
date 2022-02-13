@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
+const custAuthRoutes = require('./routes/authRoutes/customerAuthRoutes')
+const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddleware')
 
 dotenv.config({ path: './config.env' });
 const PORT = process.env.PORT;
@@ -14,7 +16,7 @@ app.use(express.json());
 
 // app.use('/bookingsStage', require('./routes/customer/stage'));
 
-
+app.get('*', checkCustUser)
 app.use('/factories', require('./routes/factory/factory'));
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
@@ -25,7 +27,8 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
-app.use('/products', require('./routes/customer/products'));
+app.use('/products', requireCustAuth, require('./routes/customer/products'));
+app.use(custAuthRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);

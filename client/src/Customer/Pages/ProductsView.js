@@ -142,7 +142,7 @@ const ProductsView = (props) => {
         history.push("/testdrive/" + e.id)
     }
     const handleBookNow = (e) => {
-        history.push("/productsSelection/" + e.id)
+        history.push("/products/" + e.id + "/selection")
     }
     const handleChatbot = () => {
         history.push("/chatbot")

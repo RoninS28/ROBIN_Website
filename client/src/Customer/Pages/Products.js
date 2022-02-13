@@ -11,6 +11,8 @@ import v6 from '../Assets/v6.png'
 import v7 from '../Assets/v7.png'
 import '../PagesStyles/Products.css'
 import { useHistory } from "react-router";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => {
@@ -34,6 +36,7 @@ export default function Products() {
   const handleProduct = (e) => {
     history.push('/products/' + e.id)
   }
+
 
 
   const modelList = [
@@ -141,6 +144,37 @@ export default function Products() {
     },
   ]
 
+  const [models, setModels] = useState([])
+
+  const getProducts = () => {
+
+    const tempprods = []
+
+    axios.get("/products").then((response) => {
+      console.log(`RESPONSE IS ${response.data}`)
+      let productArr = response.data
+      console.log(productArr[0])
+      console.log(`TYPEOF IS ${productArr}`)
+      productArr.map(item => {
+
+        tempprods.push(item)
+        // tempprods.push(JSON.stringify(item))
+      })
+
+      console.log(tempprods)
+      setModels(tempprods)
+      console.log(models)
+
+
+    })
+  }
+
+  useEffect(() => {
+    // defa
+    getProducts()
+    console.log('rerender')
+  }, []);
+
 
   return (
     <div className="productsViewScreen">
@@ -151,15 +185,15 @@ export default function Products() {
       </div>
       {/* <ImageCarousel/> */}
       <Grid container spacing={3}>
-        {modelList.map(model => (
+        {models.map(model => (
           // <Grid container item>
           <Grid item spacing={3} key={model.id} xs={12} md={6} lg={4} xl={4} onClick={(e) => handleProduct(model)}>
             <div className="productDisplay">
               <div className="image">
-                <img src={model.image} alt="image" width="300" height="300" />
+                <img src={modelList[0].image} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
-                {model.model}
+                {model["modelID"]}
               </div>
 
             </div>
@@ -171,6 +205,34 @@ export default function Products() {
 
 
       </Grid>
+
+      {/* <div>
+        {models[0]?.modelID}
+      </div> */}
+
+      xxxxxxxxxxxxxxxx
+      {/* <Grid container spacing={3}>
+        {models.map(model => (
+          // <Grid container item>
+          <Grid item spacing={3} key={model.id} xs={12} md={6} lg={4} xl={4}>
+            <div className="productDisplay">
+
+              <div className="productText">
+                {model.modelName}
+              </div>
+              <div>
+                {model.price}
+              </div>
+
+            </div>
+
+          </Grid>
+
+          // </Grid>
+        ))}
+
+
+      </Grid> */}
     </div>
   );
 }
