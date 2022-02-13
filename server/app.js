@@ -16,7 +16,6 @@ app.use(express.json());
 
 // app.use('/bookingsStage', require('./routes/customer/stage'));
 
-app.get('*', checkCustUser)
 app.use('/factories', require('./routes/factory/factory'));
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
@@ -28,6 +27,7 @@ app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
 app.use('/products', requireCustAuth, require('./routes/customer/products'));
+app.get('*', checkCustUser)
 app.use(custAuthRoutes)
 
 app.listen(PORT, () => {

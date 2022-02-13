@@ -31,6 +31,7 @@ import CustomerComplaint from "../../Pages/CustomerComplaint";
 import Dashboard from "../../Pages/Dashboard";
 import GenericStockList from "../../Pages/GenericStockList";
 import GenericSalesList from "../../Pages/GenericSalesList";
+import GenericAdd from "../../Pages/GenericAdd";
 
 const styles = theme => ({
 });
@@ -309,13 +310,13 @@ const Navbar = (props) => {
                         <Route path='/models' exact component={EVModelList} ></Route>
                         <Route path='/models/:id' exact component={EVModelDetail} ></Route>
 
-                        <Route path='/factories/add' exact component={GenericDetail}></Route>
+                        <Route path='/factories/add' exact component={GenericAdd}></Route>
                         <Route path='/factories/:id/edit' exact component={GenericDetail}></Route>
                         <Route path='/factories' exact component={GenericList}></Route>
                         <Route path='/factories/:id' exact component={GenericOverview}></Route>
                         <Route path='/factories/:id/stocks' exact component={GenericStockList}></Route>
 
-                        <Route path='/outlets/add' exact component={GenericDetail}></Route>
+                        <Route path='/outlets/add' exact component={GenericAdd}></Route>
                         <Route path='/outlets/:id/edit' exact component={GenericDetail}></Route>
                         <Route path='/outlets' exact component={GenericList}></Route>
                         <Route path='/outlets/sales' exact component={GenericSalesList}></Route>
@@ -323,7 +324,7 @@ const Navbar = (props) => {
                         <Route path='/outlets/:id/stocks' exact component={GenericStockList}></Route>
                         
 
-                        <Route path='/service-centers/add' exact component={GenericDetail}></Route>
+                        <Route path='/service-centers/add' exact component={GenericAdd}></Route>
                         <Route path='/service-centers/:id/edit' exact component={GenericDetail}></Route>
                         <Route path='/service-centers' exact component={GenericList}></Route>
                         <Route path='/service-centers/:id' exact component={GenericOverview}></Route>

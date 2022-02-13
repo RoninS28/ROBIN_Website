@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { withStyles } from "@material-ui/core/styles";
 
-import { factoryList } from '../Data/FactoryList';
-import { outletList } from '../Data/OutletList';
-import { serviceCenterList } from '../Data/ServiceCenterList';
 import TextField from '@mui/material/TextField';
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { useLocation } from 'react-router';
 import axios from 'axios';
-import AlertDialog from './AlertDialog';
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 
 const styles = theme => ({
@@ -73,7 +72,7 @@ const styles = theme => ({
     }
 })
 
-const GenericDetail = (props) => {
+const GenericAdd = (props) => {
 
     // This page will be common to factory, outlet, service center DETAIL INFO 
 
@@ -84,7 +83,6 @@ const GenericDetail = (props) => {
     const [arrList, setArrList] = useState('');
     const [componentName, setComponentName] = useState('');
     const [componentNameSingular, setComponentNameSingular] = useState('');
-    const [entityId, setEntityId] = useState('');
     const [entityData, setEntityData] = useState({});
 
     const handleInputChange = (e) => {
@@ -98,62 +96,19 @@ const GenericDetail = (props) => {
         });
     };
 
-
-    const getFactory = (
-        id) => {
-        axios.get(`/factories/${id}`)
-            .then(res => {
-                setEntityData(res.data);
-                console.log("factory details: ", res.data);
-                console.log("checked: ", res.data.active);
-                setChecked(res.data.active);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-    const getOutlet = (
-        id) => {
-        axios.get(`/outlets/${id}`)
-            .then(res => {
-                setEntityData(res.data);
-                console.log("details: ", res.data);
-                setChecked(res.data.active);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
-    const getServiceCenter = (
-        id) => {
-        axios.get(`/service-centers/${id}`)
-            .then(res => {
-                setEntityData(res.data);
-                console.log("details: ", res.data);
-                setChecked(res.data.active);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }
     useEffect(() => {
         console.log("use effect");
         setArrList(location.pathname.split('/'));
         setComponentName(arrList[1]);
-        // ['', 'factories', '1', 'edit']
-        // ['', 'factories', '1']
-        setEntityId(arrList[2]);
+        // ['', 'factories', 'add']
 
         if (componentName == 'factories') {
             console.log("Herererer")
             setComponentNameSingular('Factory');
-            getFactory(entityId);
         } else if (componentName == 'outlets') {
             setComponentNameSingular('Outlet');
-            getOutlet(entityId);
         } else if (componentName == 'service-centers') {
             setComponentNameSingular('Service Center');
-            getServiceCenter(entityId);
         }
 
     }, [componentName]);
@@ -173,19 +128,15 @@ const GenericDetail = (props) => {
         });
 
         if(flag) {
-            // send PUT request to backend
-            axios.put(`/${componentName}/${entityId}`, entityData)
+            // send POST request to backend
+
+            axios.post(`/${componentName}`, entityData)
             .then((res) => {
                 console.log(res.data)
             }).catch((error) => {
                 console.log(error)
             });
         }
-    }
-
-    const deleteData = () => {
-        axios.delete(`/${componentName}/${entityId}`)
-        .then(() => this.setState({ status: 'Delete successful' }));
     }
 
 
@@ -219,6 +170,7 @@ const GenericDetail = (props) => {
         active: event.target.checked,
     });
     };
+  
 
     return (
         <Box sx={{ flexGrow: 1 }} m={2}>
@@ -387,11 +339,6 @@ const GenericDetail = (props) => {
                         <Button
                             className={classes.btn}
                             variant="contained" 
-                            color="error"
-                            onClick={deleteData}>Delete Factory</Button>
-                        <Button
-                            className={classes.btn}
-                            variant="contained" 
                             color="primary"
                             onClick={validateData}>Save Details</Button>
                     </div>
@@ -401,4 +348,4 @@ const GenericDetail = (props) => {
     )
 }
 
-export default withStyles(styles, { withTheme: true })(GenericDetail);
+export default withStyles(styles, { withTheme: true })(GenericAdd);
