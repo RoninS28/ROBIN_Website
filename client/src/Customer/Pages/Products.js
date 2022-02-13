@@ -32,7 +32,7 @@ export default function Products() {
 
 
   const handleProduct = (e) => {
-    history.push('/productsView/' + e.id)
+    history.push('/products/' + e.id)
   }
 
 

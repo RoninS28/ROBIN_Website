@@ -32,10 +32,10 @@ function Routing(props) {
     setLoggedIn("true");
     localStorage.setItem("userLoggedIn", "customer");
 
-    if(location.pathname == '/customer') {
+    if (location.pathname == '/customer') {
       console.log("pushing / to URL");
       history.push("/");
-  }
+    }
   })
 
   return (
@@ -49,8 +49,8 @@ function Routing(props) {
 
           <Route path='/' exact component={Home} ></Route>
           <Route path='/products' exact component={Products} ></Route>
-          <Route path='/productsView/:id' exact component={ProductsView} ></Route>
-          <Route path='/productsSelection/:id' exact component={ProductsSelection} ></Route>
+          <Route path='/products/:id' exact component={ProductsView} ></Route>
+          <Route path='/products/:id/selection' exact component={ProductsSelection} ></Route>
           <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
           <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>

@@ -25,6 +25,7 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
+app.use('/products', require('./routes/customer/products'));
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);

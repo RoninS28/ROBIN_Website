@@ -2,7 +2,8 @@ import { Avatar, Button, Grid } from "@material-ui/core";
 import { yellow, blue, orange, green } from "@material-ui/core/colors";
 import { AvatarGroup } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router";
 import v1 from '../Assets/v1.png'
@@ -135,6 +136,7 @@ const ProductsView = (props) => {
     const history = useHistory()
     const id = props.match.params.id;
     const model = modelList.find(item => item.id == id)
+    const [modelDB, setModelDB] = useState("")
 
     const handleTestDrive = (e) => {
         history.push("/testdrive/" + e.id)
@@ -148,10 +150,20 @@ const ProductsView = (props) => {
     // const model = model1.
     console.log(model)
     // modelList.
+
+    useEffect(() => {
+
+        axios.get("/products/" + id).then((response) => {
+            console.log(response.data)
+            setModelDB(response.data)
+            console.log(`MY DB MODELL IS ${modelDB}`)
+            // modelDB = response.data
+        })
+    }, []);
     return (
         <div className={classes.root, "productsViewScreen"}>
             <div className="heading">
-                {model.model}
+                {modelDB.modelName} ({modelDB.modelID})
             </div>
             <Grid container style={{ marginTop: '30px' }}>
 
