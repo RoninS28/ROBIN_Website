@@ -14,36 +14,32 @@ export default function Signup() {
     const handleSignup = async (e) => {
         e.preventDefault()
 
-        setEmailError("")
-        setPasswordError("")
-
-
-        try {
-            const res = await axios.post('/signup', {
+        const res = await fetch('/signup', {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
                 email, password
             })
-            console.log(`res IS ${res}`)
-            const data = await res.json()
-            console.log(`DATA IS ${data}`)
-            if (data.errors) {
-                console.log(data.errors.email)
-                console.log(data.errors.password)
-                setEmailError(data.errors.email)
-                setPasswordError(data.errors.password)
-            }
-            if (data.user) {
-                history.push('/')
-            }
-        }
-        catch (err) {
-            console.log(err.errors)
-        }
+        });
 
+        const data = await res.json();
 
+        if(!data || res.status === 400) {
+            console.log(data.errors.email)
+            console.log(data.errors.password)
+            setEmailError(data.errors.email)
+            setPasswordError(data.errors.password)
+        }
+        else {
+            console.log(data);
+            history.push('/')
+        }
     }
 
     return (
-        <form method="POST" action="/signup" style={{
+        <form method="POST" style={{
             width: '360px', margin: '0 auto', padding: '30px', boxShadow: '1px 2px 3px rgba(0,0,0,0.1)',
             borderRadius: '10px', background: 'white'
         }}>
@@ -53,13 +49,17 @@ export default function Signup() {
 
             <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter Email" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
 
-            <div class="email error" name="emailError" value={emailError} style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}></div>
+            <div class="email error" name="emailError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
+                {emailError}
+            </div>
 
             <label for="password" style={{ display: 'block', margin: '20px 0 10px' }}>Password</label>
 
             <input type="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
 
-            <div class="password error" name="passwordError" value={passwordError} style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}></div>
+            <div class="password error" name="passwordError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
+                {passwordError}
+            </div>
 
             <button
 
