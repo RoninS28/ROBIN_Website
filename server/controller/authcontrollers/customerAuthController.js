@@ -71,7 +71,7 @@ module.exports.signup_post = async (req, res) => {
 
         const errors = handleErrors(err)
         console.log('NODEJS ERROR IS ', errors)
-        res.status(400).json({ errors })
+        res.json({ errors })
     }
 }
 
