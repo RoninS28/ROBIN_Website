@@ -73,22 +73,10 @@ function createServiceCenterData(id, name, state, city, contact, active) {
 }
 
 // Fetching Accessory Order List
-function createAccessoryOrderData(orderId, factoryName, dateOfOrder, status) {
-    return { orderId, factoryName, dateOfOrder, status };
+function createAccessoryOrderData(id, sourceType, entityName, date, status) {
+    return {id, sourceType, entityName, date, status};
 }
 
-function getAccessoryOrderList() {
-    const rows = [
-        createAccessoryOrderData('C2K5464', 'Noga Factory', '10 Oct 2021', 'Pending'),
-        createAccessoryOrderData('C2K5463', 'Noga Factory', '10 Oct 2020', 'Completed'),
-        createAccessoryOrderData('C2K5465', 'Alpha Factory', '10 Sept 2021', 'Completed'),
-        createAccessoryOrderData('C2K5466', 'Alpha Factory', '20 Sept 2021', 'Pending'),
-        createAccessoryOrderData('C2K5467', 'Noga Factory', '10 Aug 2021', 'Completed'),
-        createAccessoryOrderData('C2K5468', 'Beta Factory', '1 Oct 2021', 'Pending'),
-        createAccessoryOrderData('C2K5469', 'Beta Factory', '11 Sept 2021', 'Completed'),
-    ];
-    return rows;
-}
 
 // fetching Complaints Data
 function createComplaintsData(complaintId, customerName, complaintType, dateOfOrder, status) {
@@ -167,6 +155,62 @@ const GenericList = (props) => {
             });
     }
 
+    const getAccessoryOrderList = () => {
+        setRows([]);
+        axios.get('/stock-requests')
+            .then(res => {
+                let stockRequestsArr = res.data;
+                console.log(stockRequestsArr);
+                stockRequestsArr.map(stockRequest => {
+
+                    switch (stockRequest.sourceType) {
+                        case "factory":
+                            axios.get(`/factories/${stockRequest.sourceId}`)
+                            .then(res => {
+                                let entityName = res.data.name;
+                                console.log("entity name: ", entityName);
+                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
+                                setRows(rows => [...rows, obj]);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                            break;
+                        case "outlet":
+                            axios.get(`/outlets/${stockRequest.sourceId}`)
+                            .then(res => {
+                                let entityName = res.data.name;
+                                console.log("entity name: ", entityName);
+                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
+                                setRows(rows => [...rows, obj]);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                            break;
+                        
+                        case "service-center":
+                            axios.get(`/service-centers/${stockRequest.sourceId}`)
+                            .then(res => {
+                                let entityName = res.data.name;
+                                console.log("entity name: ", entityName);
+                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
+                                setRows(rows => [...rows, obj])
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
 
     const { classes, theme } = props;
 
@@ -187,6 +231,7 @@ const GenericList = (props) => {
     const [labels, setLabels] = useState([]);
 
     useEffect(() => {
+        setRows([]);
         setComponentName(location.pathname.substring(1));
         console.log("again in useeffect");
         console.log("component name: ", componentName);
@@ -206,15 +251,14 @@ const GenericList = (props) => {
             getAllServiceCenters();
             setLabels(["name", "state", "city", "contact", "status", "actions"]);
         }
+        if (componentName == 'accessory-orders') {
+            setComponentNameSingular('Accessory Orders');
+            getAccessoryOrderList();
+            setLabels(["sourceType", "entityName", "date", "status", "actions"]);
+        }
     }, [componentName, location, componentNameSingular]);
 
-    if (componentName == 'accessory-orders') {
-        setComponentNameSingular('Accessory Orders');
-        rows = getAccessoryOrderList();
-        setLabels(["orderId", "factoryName", "dateOfOrder", "status", "actions"]);
-        // labels = ["orderId", "factoryName", "dateOfOrder", "status", "actions"];
-    }
-    else if (componentName == 'complaints') {
+    if (componentName == 'complaints') {
         setComponentNameSingular('Complaints');
         rows = getComplaintsList();
         setLabels(["complaintId", "customerName", "complaintType", "dateOfOrder", "status", "actions"]);
@@ -483,7 +527,7 @@ const GenericList = (props) => {
                             case 'Service Center':
                                 return <GenericTable rows={rows} labels={labels} view="/service-centers/" />;
                             case 'Accessory Orders':
-                                return <GenericTable rows={rows} labels={labels} view="/accessory-orders/:id" />;
+                                return <GenericTable rows={rows} labels={labels} view="/accessory-orders/" />;
                             case 'Complaints':
                                 return <GenericTable rows={rows} labels={labels} view='/complaints/1' />;
                             default:

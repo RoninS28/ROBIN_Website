@@ -144,6 +144,7 @@ function WorkerList(props) {
 
   const [labels,setLabels]=useState(["name","contact","emailID","position","actions",]);
 
+
   const getAllWorkers = () => {
 
       const allWorkers=[];
@@ -207,7 +208,7 @@ function WorkerList(props) {
         maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
         className={classes.listWrapper}
       >
-        <GenericTable rows={rows} labels={labels} view="/workers/1" />
+        <GenericTable rows={rows} labels={labels} view="/workers/" />
       </Container>
     </div>
   );

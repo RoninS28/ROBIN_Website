@@ -66,12 +66,12 @@ module.exports.signup_post = async (req, res) => {
         const user = await User.create({ email, password })
         const token = createToken(user._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge })
-        res.status(201).json({ user: user._id })
+        return res.status(201).json({ user: user._id })
     } catch (err) {
 
         const errors = handleErrors(err)
-        console.log('NODEJS ERROR IS ', errors)
-        res.json({ errors })
+        console.log('NODEJS ERROR ISS ', errors)
+        return res.status(400).json({ errors })
     }
 }
 
@@ -82,11 +82,11 @@ module.exports.login_post = async (req, res) => {
         const user = await User.login(email, password)
         const token = createToken(user._id)
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge })
-        res.status(200).json({ user: user._id })
+        return res.status(200).json({ user: user._id })
 
     } catch (err) {
         const errors = handleErrors(err)
-        res.status(400).json({ errors })
+        return res.status(400).json({ errors })
     }
 }
 

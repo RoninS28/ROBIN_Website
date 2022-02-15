@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const workdone = require('../customer/WorkDone')
 
-
 const servicingSchema = new mongoose.Schema({
     serviceID: {
         type: String,
@@ -11,7 +10,7 @@ const servicingSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    workDone: [
+    workDone: [ 
         workdone
     ],
     totalAmount: {
@@ -26,6 +25,7 @@ const servicingSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+   
 })
 
 module.exports = mongoose.model('ServicingSchema', servicingSchema)

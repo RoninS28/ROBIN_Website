@@ -26,7 +26,6 @@ const stockRequestSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        required: true
     },
     status: {   //pending, active
         type: String,

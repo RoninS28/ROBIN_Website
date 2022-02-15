@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -30,6 +30,7 @@ import Box from '@material-ui/core/Box';
 
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core//TablePagination';
+import GenericTable from '../../FactoryAdmin/Pages/GenericTable';
 
 
 import IconButton from '@material-ui/core/IconButton';
@@ -39,6 +40,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import workers from '../Data/Workers.js';
 import { useHistory } from 'react-router';
+import axios from 'axios';
 
 
 const styles = makeStyles((theme) => ({
@@ -137,6 +139,38 @@ const rows = getAllModels();
 
 function WorkerList(props) {
 
+    const [rows,setRows]=useState([]);
+
+    const [labels,setLabels]=useState(["name","contact","emailID","position","actions",]);
+
+    const getAllWorkers = () => {
+
+        const allWorkers=[];
+  
+      axios.get('/employees')
+          .then(res => {
+              let workerArr = res.data;
+              console.log(workerArr);
+              workerArr.map(worker => {
+                  allWorkers.push(worker);
+              });
+              console.log("all workers ", allWorkers)
+              setRows(allWorkers);
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    }
+
+    useEffect(()=>{
+        console.log("In useEffect");
+        getAllWorkers();
+    
+      },[]);
+    
+
+
+
     const { classes, theme } = props;
     const xs=useMediaQuery(theme.breakpoints.down('xs'));
     const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
@@ -170,85 +204,8 @@ function WorkerList(props) {
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
-                <TableContainer component={Paper}>
-                    <Table  aria-label="custom pagination table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>ID</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>NAME</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>PHONE</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>EMAIL</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>POSITION</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>ADDRESS</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>SALARY</h3></TableCell>
-                            <TableCell  align="center" className={classes.rowHeader}><h3>VIEW</h3></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {(rowsPerPage > 0
-                            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            : rows
-                        ).map((row) => (
-                            
-                            // individual row
-                            <TableRow>
-                                <TableCell  align="center">
-                                    {row.id}
-                                    </TableCell>
-                                <TableCell  align="center">
-                                    {row.name}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.phone}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.email}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.position}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.address}
-                                </TableCell>
-                                <TableCell  align="center">
-                                    {row.salary}
-                                </TableCell>
-                                <TableCell align="center">
-                                <Button onClick={()=>history.push('/workerList/1')} variant="contained" color="primary" >View</Button>
-                                </TableCell>
-                            </TableRow>
-
-                        ))}
-
-                        {emptyRows > 0 && (
-                            <TableRow style={{ height: 53 * emptyRows }}>
-                                <TableCell colSpan={6} />
-                            </TableRow>
-                        )}
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TablePagination
-                                rowsPerPageOptions={[3,5, 10, 25, { label: 'All', value: -1 }]}
-                                colSpan={3}
-                                count={rows.length}
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                SelectProps={{
-                                    inputProps: {
-                                        'aria-label': 'rows per page',
-                                    },
-                                    native: true,
-                                }}
-                                onPageChange={handleChangePage}
-                                onRowsPerPageChange={handleChangeRowsPerPage}
-                                ActionsComponent={TablePaginationActions}
-                            />
-                        </TableRow>
-                    </TableFooter>
-                    </Table>
-    </TableContainer>
-</Container>
+                 <GenericTable rows={rows} labels={labels} view="/workers/1" />
+        </Container>
     </div>
     )
    

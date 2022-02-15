@@ -171,7 +171,7 @@ export default function GenericTable(props) {
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
+          ).map((row,index) => (
             <TableRow key={row.name} style={{ height: "2em" }}>
               {labels.map((label) => (
                 <TableCell style={{ width: 160 }} align="center">
@@ -179,7 +179,7 @@ export default function GenericTable(props) {
                   {(() => {
                     switch (label) {
                       case "actions":
-                        return <Button onClick={()=>history.push(props.view)} variant="contained" color="primary"> View </Button>;
+                        return <Button onClick={()=>history.push(props.view+index)} variant="contained" color="primary"> View </Button>;
                       case "img":
                         return <img style={{ height: "90px", width: "80px" }} src={row[label]}/>;
 
