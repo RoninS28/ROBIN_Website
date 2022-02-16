@@ -3,7 +3,7 @@ const custauthController = require('../../controller/authcontrollers/customerAut
 
 const router = Router()
 
-router.get('/signup', custauthController.signup_get)
+// router.get('/signup', custauthController.signup_get)
 router.post('/signup', custauthController.signup_post)
 router.get('/login', custauthController.login_get)
 router.post('/login', custauthController.login_post)

@@ -4,12 +4,15 @@ const app = express();
 const custAuthRoutes = require('./routes/authRoutes/customerAuthRoutes')
 const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddleware')
 
+const cookieParser = require("cookie-parser");
+
 dotenv.config({ path: './config.env' });
 const PORT = process.env.PORT;
 
 require('./db/conn');
 app.use(express.json());
 
+app.use(cookieParser());
 // const User = require('./models/S');
 
 // app.use(require('./routes/stage'));

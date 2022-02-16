@@ -51,12 +51,12 @@ const createToken = (id) => {
 }
 
 
-module.exports.signup_get = (req, res) => {
-    res.render('signup')
-}
+// module.exports.signup_get = (req, res) => {
+//     res.render('signup')
+// }
 
 module.exports.login_get = (req, res) => {
-    res.render('login')
+    return res.status(201).json({hello:"hello"})
 }
 
 module.exports.signup_post = async (req, res) => {
