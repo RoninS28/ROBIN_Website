@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const workdone = require('../customer/WorkDone')
+// const mongoose = require('mongoose');
+const workdoneObj = require('../customer/WorkDone')
 
-const servicingSchema = new mongoose.Schema({
+const servicingObj = {
     serviceID: {
         type: String,
         required: true
@@ -10,8 +10,12 @@ const servicingSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    workDone: [ 
-        workdone
+    workDone: [
+        workdoneObj
+        // {
+        //     type: String,
+        //     required: true
+        // }
     ],
     totalAmount: {
         type: Number,
@@ -25,7 +29,7 @@ const servicingSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-   
-})
 
-module.exports = mongoose.model('ServicingSchema', servicingSchema)
+}
+
+module.exports = servicingObj

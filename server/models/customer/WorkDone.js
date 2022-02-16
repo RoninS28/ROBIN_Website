@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const workDone = new mongoose.Schema({
+const workDoneObj = {
     workID: {
         type: String,
         required: true
@@ -26,6 +26,6 @@ const workDone = new mongoose.Schema({
         required: true
     },
 
-})
+}
 
-module.exports = mongoose.model('WorkDone', workDone)
+module.exports = workDoneObj

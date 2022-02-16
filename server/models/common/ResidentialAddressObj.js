@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const address = new mongoose.Schema({
+const addressObj = {
     flatNo: {
         type: String,
         required: true
@@ -33,6 +33,6 @@ const address = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+}
 
-module.exports = mongoose.model('ResidentialAddress', address)
+module.exports = addressObj
