@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 // handle errors
 const handleErrors = (err) => {
     let errors = { email: '', password: '' }
-
+    console.log(err.message)
     // FOR LOGIN
     // incorrect email
     if (err.message === 'Incorrect email') {
@@ -30,7 +30,7 @@ const handleErrors = (err) => {
     }
 
     // validation errors
-    if (err._message.includes('User validation failed')) {
+    if (err.message.includes('User validation failed')) {
         console.log("into uvf")
         Object.values(err.errors).forEach(({ properties }) => {//the object includes a properties attribute in which the message is mentioned. here we are tapping onto the properties attribute directly
             errors[properties.path] = properties.message // properties.path includes the path like email or password
@@ -86,6 +86,7 @@ module.exports.login_post = async (req, res) => {
 
     } catch (err) {
         const errors = handleErrors(err)
+        console.log(errors)
         return res.status(400).json({ errors })
     }
 }

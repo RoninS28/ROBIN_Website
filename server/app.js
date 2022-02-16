@@ -27,7 +27,7 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
-app.use('/products', requireCustAuth, require('./routes/customer/products'));
+app.use('/products', require('./routes/customer/products'));
 app.get('*', checkCustUser)
 app.use(custAuthRoutes)
 
