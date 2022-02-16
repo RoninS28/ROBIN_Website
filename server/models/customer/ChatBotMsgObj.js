@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const chatbotSchema = new mongoose.Schema({
+const chatbotObj = {
     msgID: {
         type: String,
         required: true
@@ -19,12 +19,12 @@ const chatbotSchema = new mongoose.Schema({
     },
     msgCategories: [
         {
-            // todo make it as messagecategory schema if needed
+            // todo make it as messagecategory Obj if needed
             type: String,
             required: true
 
         }
     ]
-})
+}
 
-module.exports = mongoose.model('ChatbotMsg', chatbotSchema)
+module.exports = chatbotObj

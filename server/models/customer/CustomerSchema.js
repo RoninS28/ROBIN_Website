@@ -1,11 +1,12 @@
-const mongoose = require('mongoose');
-const address = require('../common/ResidentialAddressSchema')
-const myvehicle = require('../customer/VehicleSchema')
-const serviceCentreMsg = require('../common/ServiceCentreChatMsgSchema')
-const feedbackMsg = require('../common/FeedbackChatMsg')
-const chatbotMsg = require('../customer/ChatBotMsgSchema')
+// const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const addressObj = require('../common/ResidentialAddressObj')//d
+const myvehicleObj = require('../customer/VehicleObj')//d
+const serviceCentreMsgObj = require('../common/ServiceCentreChatMsgObj')//d
+const feedbackMsgObj = require('../common/FeedbackChatMsgObj')//d
+const chatbotMsgObj = require('./ChatBotMsgObj')//d
 
-const customerSchema = new mongooose.Schema({
+const customerSchema = new mongoose.Schema({
     custID: {
         type: String,
         required: true
@@ -31,21 +32,26 @@ const customerSchema = new mongooose.Schema({
         required: true
     },
     DOB: {
-        type: Date
+        type: Date,
+        required: true
     },
-    address: address,
+    // address: {
+    //     type: String,
+    //     required: true
+    // },
+    address: addressObj,
 
     ownedEVs: [
-        myvehicle
+        myvehicleObj
     ],
     serviceCentreChat: [
-        serviceCentreMsg
+        serviceCentreMsgObj
     ],
     feedbackChat: [
-        feedbackMsg
+        feedbackMsgObj
     ],
     chatbotChat: [
-        chatbotMsg
+        chatbotMsgObj
     ],
 
 })

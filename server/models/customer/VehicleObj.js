@@ -1,9 +1,8 @@
-const mongoose = require('mongoose');
-const servicingInfo = require('../customer/ServicingSchema')
-const stage = require('../customer/StageSchema')
-const accessory = require('../customer/AccessoriesSchema')
+const servicingInfoObj = require('../customer/ServicingSchema')
+const stageObj = require('../customer/StageSchema')
+const accessoryObj = require('../customer/AccessoriesSchema')
 
-const vehicle = new mongoose.Schema({
+const vehicleObj = {
     ticketID: {
         type: String,
         required: true
@@ -49,14 +48,14 @@ const vehicle = new mongoose.Schema({
         required: true
     },
     servicing: [
-        servicingInfo
+        servicingInfoObj
     ],
     stages: [
-        stage
+        stageObj
     ],
     accessories: [
-        accessory
+        accessoryObj
     ],
-})
+}
 
-module.exports = mongoose.model('MyVehicle', vehicle)
+module.exports = vehicleObj

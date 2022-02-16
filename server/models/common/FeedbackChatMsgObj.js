@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const scentreChatMsgSchema = new mongoose.Schema({
+const feedbackMsgObj = {
     msgID: {
         type: String,
         required: true
@@ -17,7 +17,7 @@ const scentreChatMsgSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    scentrereadToggle: {//true if read by service centre
+    adminreadToggle: {//true if read by the admin checking the feedback msgs
         type: Boolean,
         required: true
     },
@@ -25,6 +25,6 @@ const scentreChatMsgSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-})
+}
 
-module.exports = mongoose.model('ServiceCentreChatMsg', scentreChatMsgSchema)
+module.exports = feedbackMsgObj

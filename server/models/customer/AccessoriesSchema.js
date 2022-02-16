@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const accessorySchema = new mongoose.model({
+const accessoryObj = {
     accessoryID: {
         type: String,
         required: true
@@ -21,4 +21,6 @@ const accessorySchema = new mongoose.model({
         type: Number,
         required: true
     }
-}) 
+}
+
+module.exports = accessoryObj
