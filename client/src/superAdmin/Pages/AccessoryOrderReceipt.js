@@ -55,7 +55,7 @@ function createRowService(id, name, quantity, pricePerUnit, price) {
 
 function subtotal(items) {
     console.log("subtotal: ", items);
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+    return items.map((item) => calculateTotalPrice(item.quantity, item.price_per_item)).reduce((sum, i) => sum + i, 0);
 }
 
 function calculateTotalPrice(quantity, pricePerUnit) {
@@ -113,18 +113,6 @@ const AccessoryOrderReceipt = (props) => {
         let result = await Promise.all(promises);
         console.log("source type name: ", result);
         data['sourceName'] = result[0];
-
-        const invoiceSubtotal = subtotal(data.products);
-        const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-        const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-
-        console.log(invoiceSubtotal, invoiceTaxes, invoiceTotal);
-
-
-        data['invoiceSubtotal'] = invoiceSubtotal;
-        data['invoiceTaxes'] = invoiceTaxes;
-        data['invoiceTotal'] = invoiceTotal;
-
         setEntityData(data);
     }
 
@@ -132,6 +120,36 @@ const AccessoryOrderReceipt = (props) => {
         console.log("use effect called!!");
         getStockRequest(location.pathname.split('/')[2]);
     }, []);
+
+    const approveStockRequest = async () => {
+
+        const entityId = location.pathname.split('/')[2];
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'approved' })
+        };
+        const res = await fetch(`/stock-requests/${entityId}`, requestOptions)
+        const data = await res.json();
+        console.log(data);
+    }
+
+    const denyStockRequest = async () => {
+
+        const entityId = location.pathname.split('/')[2];
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'denied' })
+        };
+        const res = await fetch(`/stock-requests/${entityId}`, requestOptions)
+        const data = await res.json();
+        console.log(data);
+    }
 
 
     return (
@@ -238,17 +256,8 @@ const AccessoryOrderReceipt = (props) => {
                                         <TableRow>
                                             <TableCell rowSpan={3} />
                                             <TableCell colSpan={2}><b>Subtotal</b></TableCell>
-                                            <TableCell align="right">{entityData.invoiceSubtotal}</TableCell>
+                                            <TableCell align="right">{ccyFormat(subtotal(entityData.products))}</TableCell>
                                         </TableRow>
-                                        {/* <TableRow>
-                                            <TableCell><b>Tax</b></TableCell>
-                                            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                                            <TableCell align="right">{ccyFormat(entityData.invoiceTaxes)}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell colSpan={2}><b>Total</b></TableCell>
-                                            <TableCell align="right">{ccyFormat(entityData.invoiceTotal)}</TableCell>
-                                        </TableRow> */}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -257,8 +266,8 @@ const AccessoryOrderReceipt = (props) => {
                 </Grid>
             </Grid>
             <div className={classes.btnContainer}>
-                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary">Deny</Button>
-                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary">Approve</Button>
+                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary" onClick={denyStockRequest}>Deny</Button>
+                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary" onClick={approveStockRequest}>Approve</Button>
             </div>
         </div>
     )
