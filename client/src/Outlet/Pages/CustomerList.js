@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -40,6 +40,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import customerList from "../Data/customerList";
 import GenericTable from "./GenericTable";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -168,6 +169,11 @@ function getStyles(name, personName, theme) {
 }
 
 function CustomerList(props) {
+
+  const [rows,setRows]=useState([]);
+  const [labels,setLabel]=useState([ "fname","lname", "contact", "emailID", "actions"]);
+  const [custId,setcustId]=useState([]);
+
   const { classes, theme } = props;
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
@@ -197,6 +203,33 @@ function CustomerList(props) {
     setPage(0);
   };
 
+  const getCustomerList=()=>{
+
+    const allCustomers=[];
+    const allCustomerId=[];
+  
+    axios.get('/customers')
+        .then(res => {
+            let custArr = res.data;
+            console.log(custArr);
+            custArr.map(customer => {
+                allCustomers.push(customer);
+                allCustomerId.push(customer._id);
+            });
+           // console.log("all workers ", allWorkers)
+            setRows(allCustomers);
+            setcustId(allCustomerId);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+  }
+
+  useEffect(()=>{
+    getCustomerList();
+  },[])
+
   const theme2 = useTheme();
   const [personName, setPersonName] = React.useState([]);
 
@@ -214,7 +247,8 @@ function CustomerList(props) {
     <Box sx={{ flexGrow: 1 }} m={2}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <GenericTable rows={rows} labels={labels} view='/customers/1' />
+
+          <GenericTable rows={rows} labels={labels} ids={custId} view="/customers/" />
         </Grid>
         <Grid item xs={12}>
           <div style={{

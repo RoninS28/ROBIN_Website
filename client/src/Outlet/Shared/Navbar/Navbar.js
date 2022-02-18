@@ -202,7 +202,7 @@ const Navbar = (props) => {
           </ListItem>
         </Link>
 
-        <Link to='/workerList/1' style={{ textDecoration: 'none' }}>
+        <Link to='/workerList' style={{ textDecoration: 'none' }}>
           <ListItem button>
             <ListItemIcon>
               <MailIcon />

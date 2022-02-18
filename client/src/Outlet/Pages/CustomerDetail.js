@@ -1,5 +1,4 @@
-import React from "react";
-
+import React,{useState,useEffect} from "react";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
 import Table from "@material-ui/core/Table";
@@ -28,6 +27,8 @@ import { useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Grid from "@mui/material/Grid";
 import GenericTable from "./GenericTable";
+import { useLocation } from "react-router";
+import axios from 'axios';
 
 const styles = (theme) => ({
   mainContainer: {
@@ -169,6 +170,13 @@ const servicesRows = getAllModels3();
 const servicesLabels = ["id", "date", "vehicle", "cost", "actions"];
 
 function CustomerDetail(props) {
+
+  const location=useLocation();
+  const [name,setName]=useState('');
+  const [contact,setContact]=useState('');
+  const [email,setEmail]=useState('');
+  const [address,setAddress]=useState('');
+
   const { classes, theme } = props;
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
@@ -181,6 +189,39 @@ function CustomerDetail(props) {
     theme.breakpoints.up("md") && theme.breakpoints.down("lg")
   );
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const getCustomerDetail=()=>{
+
+     location.pathname=location.pathname.replace('/customers/','');
+     console.log("In customer Detail");
+
+     axios.get(`/customers/${location.pathname}`)
+        .then(res => {
+            let customer = res.data;
+    
+           setName(customer["fname"]+""+customer['lname']);
+
+           setEmail(customer["emailID"]);
+           setContact(customer["contact"]);
+           setAddress(customer["address"].flatNo
+           +","+customer['address'].buildingName+" "+
+           customer['address'].streetName+" "+
+           customer['address'].landmark+" "+customer['address'].area+','+customer['address'].city+","+customer['address'].state);
+          
+          console.log("here");
+           
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+  }
+
+  useEffect(()=>{
+    console.log("In use Effect of customer detail");
+    getCustomerDetail();
+    
+  },[])
 
   return (
     <div style={{ paddingLeft: "2", paddingRight: "2" }}>
@@ -214,10 +255,10 @@ function CustomerDetail(props) {
                   </h3>
                 </div>
                 <div>
-                  <h3> Sandesh Mahajan</h3>
-                  <h3> +91 9999999999 </h3>
-                  <h3> sandeshmahajan@gmail.com </h3>
-                  <h3> 12,Gloria Villa Shanti Nagar Pune </h3>
+                  <h3> {name}</h3>
+                  <h3> +91 {contact} </h3>
+                  <h3> {email}</h3>
+                  <h3> {address} </h3>
                 </div>
               </div>
 

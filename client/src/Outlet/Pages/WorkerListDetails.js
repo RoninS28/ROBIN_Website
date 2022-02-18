@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import Box from "@material-ui/core/Box";
 import Card from "@material-ui/core/Card";
@@ -41,6 +41,8 @@ import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import LineChart from "./LineChart";
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const styles = makeStyles((theme) => ({
   container: {},
@@ -76,6 +78,46 @@ const state = {
 
 function WorkerListDetails(props) {
   const { classes, theme } = props;
+
+  const [name,setName]=useState('');
+  const [email,setEmail]=useState('');
+  const [position,setPosition]=useState('');
+  const [salary,setSalary]=useState(0);
+  const [contact,setContact]=useState(0);
+
+  const location=useLocation();
+
+  const getWorkerDetail=()=>{
+
+    axios.get(`/employees/${location.pathname}`)
+        .then(res => {
+            let worker = res.data;
+    
+           setName(worker["name"]);
+           setEmail(worker["emailID"]);
+           setPosition(worker["position"]);
+           setSalary(worker["salary"]);
+           setContact(worker['contact']);
+ 
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+  }
+
+  useEffect(()=>{
+
+    console.log(location.pathname);
+
+    location.pathname=location.pathname.replace('/workerList/','');
+
+ 
+
+    getWorkerDetail();
+
+  })
+
 
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
 
@@ -117,7 +159,7 @@ function WorkerListDetails(props) {
                 </div>
 
                 <div>
-                  <h3>Kamlesh Raut</h3>
+                  <h3>{name}</h3>
                 </div>
 
                 <div
@@ -128,7 +170,7 @@ function WorkerListDetails(props) {
                   }}
                 >
                   <CallIcon />
-                  <span style={{ marginLeft: "1vw" }}>9999999999</span>
+                  <span style={{ marginLeft: "1vw" }}>{contact}</span>
                 </div>
 
                 <div
@@ -140,7 +182,7 @@ function WorkerListDetails(props) {
                 >
                   <EmailIcon marginLeft="5vw" />
                   <span style={{ marginLeft: "1vw" }}>
-                    kameshraut@gmail.com
+                    {email}
                   </span>
                 </div>
 
@@ -166,7 +208,7 @@ function WorkerListDetails(props) {
                   }}
                 >
                   <Work />
-                  <span>Position: Jr. Mechanic</span>
+                  <span>Position: {position}</span>
                 </div>
 
                 <div
@@ -176,7 +218,7 @@ function WorkerListDetails(props) {
                     marginTop: "1vh",
                   }}
                 >
-                  <span>Salary: Rs.40000</span>
+                  <span>Salary: Rs.{salary}</span>
                 </div>
 
                 <div

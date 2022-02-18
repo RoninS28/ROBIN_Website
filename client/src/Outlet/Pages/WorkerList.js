@@ -143,9 +143,12 @@ function WorkerList(props) {
 
     const [labels,setLabels]=useState(["name","contact","emailID","position","actions",]);
 
+    const [workerId,setworkerId]=useState([]);
+
     const getAllWorkers = () => {
 
         const allWorkers=[];
+        const allWorkersId=[];
   
       axios.get('/employees')
           .then(res => {
@@ -153,9 +156,13 @@ function WorkerList(props) {
               console.log(workerArr);
               workerArr.map(worker => {
                   allWorkers.push(worker);
+                  allWorkersId.push(worker._id);
               });
-              console.log("all workers ", allWorkers)
+                console.log("all workers ", allWorkers);
+                console.log("all workers ids",allWorkersId);
               setRows(allWorkers);
+              setworkerId(allWorkersId);
+            
           })
           .catch((err) => {
               console.log(err);
@@ -163,7 +170,7 @@ function WorkerList(props) {
     }
 
     useEffect(()=>{
-        console.log("In useEffect");
+       // console.log("In useEffect");
         getAllWorkers();
     
       },[]);
@@ -204,7 +211,7 @@ function WorkerList(props) {
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
-                 <GenericTable rows={rows} labels={labels} view="/workers/1" />
+                 <GenericTable rows={rows} labels={labels} ids={workerId} view="/workerList/" />
         </Container>
     </div>
     )
