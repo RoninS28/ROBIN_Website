@@ -20,7 +20,7 @@ app.use(cookieParser());
 // app.use('/bookingsStage', require('./routes/customer/stage'));
 
 app.use('/factories', require('./routes/factory/factory'));
-//app.use('/customers', require('./routes/customer/customer'));
+app.use('/customers', require('./routes/customer/customer'));
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
 app.use('/services', require('./routes/service-center/services'));
