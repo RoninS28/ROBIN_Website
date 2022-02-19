@@ -13,6 +13,16 @@ require('./db/conn');
 app.use(express.json());
 
 app.use(cookieParser());
+const mongoose = require('mongoose')
+// const cust = mongoose.model("customer")
+// mongoose.connection.deleteModel('CustomerProfile')
+// const mongoose = require('mongoose')
+// console.log(mongoose.model('Customer'))
+// const Customer = require('../server/models/customer/CustomerSchema')
+// // delete mongoose.models.customer
+// delete mongoose.models.Customer
+
+
 // const User = require('./models/S');
 
 // app.use(require('./routes/stage'));
@@ -20,7 +30,7 @@ app.use(cookieParser());
 // app.use('/bookingsStage', require('./routes/customer/stage'));
 
 app.use('/factories', require('./routes/factory/factory'));
-app.use('/customers', require('./routes/customer/customer'));
+// app.use('/customers', require('./routes/customer/customer'));
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/service-centers', require('./routes/service-center/serviceCenter'));
 app.use('/services', require('./routes/service-center/services'));
@@ -30,7 +40,7 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
-app.use('/products', requireCustAuth, require('./routes/customer/products'));
+app.use('/products', require('./routes/customer/products'));
 app.use('/testing', require('./routes/customer/customer'))
 // app.get('*', checkCustUser)
 app.use(custAuthRoutes)

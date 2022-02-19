@@ -39,6 +39,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', async (req, res) => {
     console.log(req.params.id)
+    console.log("hello bunty")
 
     const model = await Model.findOne({ modelID: req.params.id })
     if (model) {
@@ -47,6 +48,7 @@ router.get('/:id', async (req, res) => {
         res.send(model)
     }
     else {
+        console.log('out of th go')
         res.status(404).redirect('/products')
     }
 })

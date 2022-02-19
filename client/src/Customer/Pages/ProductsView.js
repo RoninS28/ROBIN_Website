@@ -42,7 +42,7 @@ const modelList = [
     },
     {
         model: "CITY 2",
-        id: "M002",
+        id: "M1250",
         image: v2,
         colors: [
             yellow[500],
@@ -59,7 +59,7 @@ const modelList = [
     },
     {
         model: "CITY 3",
-        id: "M003",
+        id: "M1278",
         image: v3,
         colors: [
             yellow[500],
@@ -88,7 +88,9 @@ const featureList1 = [
         feature: "Li-on\nBattery",
         img: i3
     }
+
 ]
+
 const featureList2 = [
 
     {
@@ -134,9 +136,12 @@ const useStyles = makeStyles((theme) =>
 const ProductsView = (props) => {
     const classes = useStyles(props)
     const history = useHistory()
+    console.log(`PARAMS IS ${props.match.params.id}`)
     const id = props.match.params.id;
     const model = modelList.find(item => item.id == id)
     const [modelDB, setModelDB] = useState("")
+    const [imagetodisplay, setImagetodisplay] = useState("")
+    const [currentColor, setCurrentColor] = useState(0)// to get the current selected color
 
     const handleTestDrive = (e) => {
         history.push("/testdrive/" + e.id)
@@ -148,15 +153,39 @@ const ProductsView = (props) => {
         history.push("/chatbot")
     }
     // const model = model1.
-    console.log(model)
+    // console.log(model)
     // modelList.
 
-    useEffect(() => {
+    const selectedColorStyle = {
+        border: '3px solid rgba(0, 0, 0, 0.3)'
+    }
+    const unselectedColorStyle = {
+        border: '1px solid rgba(0, 0, 0, 0.3)'
+    }
+    // todo add this to that avatar icon
+    const changeImageColor = (item, index) => { //item is an obhect of color, image
+        setCurrentColor(index)
+        setImagetodisplay(item.image)
+    }
 
-        axios.get("/products/" + id).then((response) => {
+
+
+    // const getProduct = () => {
+
+
+
+    // }
+
+    useEffect(() => {
+        console.log("into use effect")
+        const id1 = props.match.params.id;
+        axios.get("/products/" + id1).then((response) => {
+            console.log('into the bunty')
             console.log(response.data)
             setModelDB(response.data)
             console.log(`MY DB MODELL IS ${modelDB}`)
+            setImagetodisplay(modelDB.image)
+
             // modelDB = response.data
         })
     }, []);
@@ -169,10 +198,10 @@ const ProductsView = (props) => {
 
                 <Grid item sm={12} md={4} lg={4} xl={4} className={classes.features && "featureAvatars1"}>
                     <div className="features f1" >
-                        {featureList1.map(feature => (
+                        {featureList2.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
+                                <Avatar src={feature.image} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
                         ))}
@@ -184,13 +213,19 @@ const ProductsView = (props) => {
                     <div className="imgNcolors" >
 
                         <div className="image">
-                            <img src={model.image} alt="image" width="350" height="350" />
+                            <img src={imagetodisplay} alt="image" width="350" height="350" />
                         </div>
                         <div className="colors">
-                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            {
+                                modelDB.colors.forEach((item, index) => (
+                                    <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+
+                                ))
+                            }
+                            {/* <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
                             <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
                             <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar> */}
                         </div>
                     </div>
                 </Grid>
@@ -214,8 +249,28 @@ const ProductsView = (props) => {
 
                 <Grid container spacing={3} justifyContent="space-around">
 
+                    {
+                        modelDB.highlights.map((item) => (
+                            <Grid item >
+                                <div className="uniqueFeatureCol">
+                                    <div className="highlightUniqueFeature">
+                                        {item.quantity}
+                                        <div className="unithighlight" >
+                                            {item.unit}
+                                        </div>
+                                    </div>
+                                    <div className="descUniqueFeature">
+                                        {item.highlight}
+                                    </div>
+                                    {/* <div className="descUniqueFeature">
+                                REMV. BATTERY
+                            </div> */}
+                                </div>
+                            </Grid>
+                        ))
+                    }
 
-                    <Grid item >
+                    {/* <Grid item >
                         <div className="uniqueFeatureCol">
                             <div className="highlightUniqueFeature">
                                 {model.battery}
@@ -290,7 +345,7 @@ const ProductsView = (props) => {
                                 CLEARANCE
                             </div>
                         </div>
-                    </Grid>
+                    </Grid> */}
 
                 </Grid>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>

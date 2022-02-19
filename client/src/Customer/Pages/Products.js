@@ -34,7 +34,8 @@ export default function Products() {
 
 
   const handleProduct = (e) => {
-    history.push('/products/' + e.id)
+    console.log(`E IS ${e.modelID}`)
+    history.push('/products/' + e.modelID)
   }
 
 
@@ -153,7 +154,7 @@ export default function Products() {
     axios.get("/products").then((response) => {
       console.log(`RESPONSE IS ${response.data}`)
 
-      if(response.data == "You must be logged in to view this page") {
+      if (response.data == "You must be logged in to view this page") {
         history.push('/signup');
       }
       else {
@@ -161,11 +162,11 @@ export default function Products() {
         console.log(productArr[0])
         console.log(`TYPEOF IS ${productArr}`)
         productArr.map(item => {
-  
+
           tempprods.push(item)
           // tempprods.push(JSON.stringify(item))
         })
-  
+
         console.log(tempprods)
         setModels(tempprods)
         console.log(models)
@@ -194,7 +195,7 @@ export default function Products() {
           <Grid item spacing={3} key={model.id} xs={12} md={6} lg={4} xl={4} onClick={(e) => handleProduct(model)}>
             <div className="productDisplay">
               <div className="image">
-                <img src={modelList[0].image} alt="image" width="300" height="300" />
+                <img src={model.image} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
                 {model["modelID"]}

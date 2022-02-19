@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
 
-const discount = new mongoose.Schema({
+const discount = {
     discountID: {
         type: String,
         required: true
@@ -30,6 +29,6 @@ const discount = new mongoose.Schema({
         type: Number,
         required: true
     }
-})
+}
 
-module.exports = mongoose.model('Discount', discount)
+module.exports = discount

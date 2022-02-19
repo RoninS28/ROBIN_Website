@@ -1,16 +1,24 @@
-// const mongoose = require('mongoose');
 const mongoose = require('mongoose')
+// delete mongoose.models['customer'];
+
+
+// const mongoose = require('mongoose');
 const addressObj = require('../common/ResidentialAddressObj')//d
 const myvehicleObj = require('../customer/VehicleObj')//d
 const serviceCentreMsgObj = require('../common/ServiceCentreChatMsgObj')//d
 const feedbackMsgObj = require('../common/FeedbackChatMsgObj')//d
 const chatbotMsgObj = require('./ChatBotMsgObj')//d
-
-const customerSchema = new mongoose.Schema({
-    custID: {
-        type: String,
-        required: true
-    },
+// mongoose.models = {};
+// mongoose.modelSchemas = {};
+// if (mongoose.models.Customer) {
+//     delete mongoose.models.Customer
+//     console.log('deleted')
+// }
+const customer = new mongoose.Schema({
+    // custID: {
+    //     type: String,
+    //     required: true
+    // },
     fname: {
         type: String,
         required: true
@@ -45,15 +53,18 @@ const customerSchema = new mongoose.Schema({
         myvehicleObj
     ],
     serviceCentreChat: [
-        serviceCentreMsgObj
+        {
+            type: mongoose.Schema.Types.ObjectId
+        }
     ],
-    feedbackChat: [
-        feedbackMsgObj
-    ],
+    feedbackChat: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
+    },
     chatbotChat: [
         chatbotMsgObj
     ],
 
 })
 
-module.exports = mongoose.model('Customer', customerSchema)
+module.exports = mongoose.models.Customer || mongoose.model('Customer', customer) 
