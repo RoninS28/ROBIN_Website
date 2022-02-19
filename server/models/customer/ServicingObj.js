@@ -1,5 +1,5 @@
 // const mongoose = require('mongoose');
-const workdoneObj = require('../customer/WorkDone')
+const workdoneObj = require('./WorkDoneObj')
 
 const servicingObj = {
     serviceID: {

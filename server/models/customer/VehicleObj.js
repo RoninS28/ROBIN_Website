@@ -1,6 +1,6 @@
-const servicingInfoObj = require('../customer/ServicingSchema')
-const stageObj = require('../customer/StageSchema')
-const accessoryObj = require('../customer/AccessoriesSchema')
+const servicingInfoObj = require('./ServicingObj')
+const stageObj = require('./StageObj')
+const accessoryObj = require('./AccessoriesObj')
 
 const vehicleObj = {
     ticketID: {
