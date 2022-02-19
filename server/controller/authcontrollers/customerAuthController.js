@@ -51,9 +51,10 @@ const createToken = (id) => {
 }
 
 
-// module.exports.signup_get = (req, res) => {
-//     res.render('signup')
-// }
+module.exports.signup_get = (req, res) => {
+    console.log("signup get request!!");
+    res.render('signup')
+}
 
 module.exports.login_get = (req, res) => {
     return res.status(201).json({hello:"hello"})
@@ -65,7 +66,7 @@ module.exports.signup_post = async (req, res) => {
     try {
         const user = await User.create({ email, password })
         const token = createToken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge })
+        res.cookie('jwttoken', token, { httpOnly: true, maxAge: maxAge })
         return res.status(201).json({ user: user._id })
     } catch (err) {
 
@@ -81,7 +82,7 @@ module.exports.login_post = async (req, res) => {
     try {
         const user = await User.login(email, password)
         const token = createToken(user._id)
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge })
+        res.cookie('jwttoken', token, { httpOnly: true, maxAge: maxAge })
         return res.status(200).json({ user: user._id })
 
     } catch (err) {
@@ -95,6 +96,6 @@ module.exports.login_post = async (req, res) => {
 module.exports.logout_get = (req, res) => {
     // you cannot directly delete a cookie. instead we create a new cookie with the same name
     // in that case, it replaces the preious cookie and we set the expiry very short
-    res.cookie('jwt', '', { maxAge: 1 })
+    res.cookie('jwttoken', '', { maxAge: 1 })
     res.redirect('/')
 }

@@ -152,20 +152,24 @@ export default function Products() {
 
     axios.get("/products").then((response) => {
       console.log(`RESPONSE IS ${response.data}`)
-      let productArr = response.data
-      console.log(productArr[0])
-      console.log(`TYPEOF IS ${productArr}`)
-      productArr.map(item => {
 
-        tempprods.push(item)
-        // tempprods.push(JSON.stringify(item))
-      })
-
-      console.log(tempprods)
-      setModels(tempprods)
-      console.log(models)
-
-
+      if(response.data == "You must be logged in to view this page") {
+        history.push('/signup');
+      }
+      else {
+        let productArr = response.data
+        console.log(productArr[0])
+        console.log(`TYPEOF IS ${productArr}`)
+        productArr.map(item => {
+  
+          tempprods.push(item)
+          // tempprods.push(JSON.stringify(item))
+        })
+  
+        console.log(tempprods)
+        setModels(tempprods)
+        console.log(models)
+      }
     })
   }
 

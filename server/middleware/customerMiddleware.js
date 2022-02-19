@@ -3,27 +3,30 @@ const cookieParser = require("cookie-parser");
 
 const requireCustAuth = (req, res, next) => {
 
-    const token = req.cookies.jwt
+    const token = req.cookies.jwttoken
     console.log(token)
 
     // check json web token exists and is verified
-    if(!token)
-    {
-        console.log("Not token")
-        res.redirect('http://localhost:3000/login')
-    }
+    // if(!token)
+    // {
+    //     console.log("Not token")
+    //     res.redirect('http://localhost:3000/login')
+    // }
     if (token) {
         jwt.verify(token, 'robinsecretsignature', (err, decodedToken) => {
             if (err) { //signatures dont match
-                res.redirect('/signup')
+                console.log(err);
+                res.send("You must be logged in to view this page");
             }
             else {
-                next()
+                console.log("valid");
+                next();
             }
         })
     }
     else {
-        res.redirect('/signup')
+        console.log("in else")
+        res.send("You must be logged in to view this page");
     }
 
 
