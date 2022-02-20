@@ -1,7 +1,7 @@
-import { Avatar, Grid, makeStyles } from "@material-ui/core";
-import React from "react";
+import { Avatar, Grid, makeStyles, IconButton } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 import { useHistory } from "react-router";
-import { useState } from "react";
 import Select from "react-select";
 
 import v1 from '../Assets/v1.png'
@@ -17,88 +17,7 @@ import { blue, green, orange, yellow } from "@material-ui/core/colors";
 import '../PagesStyles/ProductsSelection.css'
 
 
-const modelList = [
-    {
-        model: "CITY 1",
-        id: "M001",
-        image: v3,
-        colors: [
-            yellow[500],
-            blue[500],
-            green[500],
-            orange[500]
-        ],
-        battery: "1.8",
-        range: "80",
-        voltage: "72",
-        chargingTime: "3-4",
-        groundClearance: "170",
-        price: 20000
-    },
-    {
-        model: "CITY 2",
-        id: "M002",
-        image: v2,
-        colors: [
-            yellow[500],
-            blue[500],
-            green[500],
-            orange[500]
-        ],
-        battery: "1.9",
-        range: "85",
-        voltage: "72",
-        chargingTime: "3-4",
-        groundClearance: "172",
-        price: 20500
-    },
-    {
-        model: "CITY 3",
-        id: "M003",
-        image: v3,
-        colors: [
-            yellow[500],
-            blue[500],
-            green[500],
-            orange[500]
-        ],
-        battery: "1.9",
-        range: "90",
-        voltage: "72",
-        chargingTime: "3-4",
-        groundClearance: "165",
-        price: 21000
-    },
-]
-const featureList1 = [
-    {
-        feature: "3 Modes Drive",
-        img: i1
-    },
-    {
-        feature: "Thief Alert",
-        img: i2
-    },
-    {
-        feature: "Li-on\nBattery",
-        img: i3
-    }
-]
-const featureList2 = [
 
-    {
-        feature: "Key Less\nDrive",
-        img: i4
-    },
-    {
-        feature: "Tubeless Tyre",
-        img: i5
-    },
-    {
-        feature: "Dual Disc",
-        img: i6
-    },
-]
 const useStyles = makeStyles((theme) =>
 ({
     root: {
@@ -124,13 +43,94 @@ const useStyles = makeStyles((theme) =>
 
 })
 )
+const getMyImage = (source) => {
+    const x = source.replace('../Assets/', '')
+    const img = x.substring(0, 2)
+    switch (img) {
+        case 'v2':
+            return v2
+        case 'v3':
+            return v3
+        case 'v4':
+            return v4
+        case 'v5':
+            return v5
+        case 'v6':
+            return v6
+        case 'v7':
+            return v7
+
+
+    }
+}
+const getMyIcon = (source) => {
+    // const x = source.replace('../Assets/', '')
+    // const img = x.substring(0, 2)
+    console.log(`SORCE IS ${source}`)
+    switch (source) {
+        case 'i1':
+            return i1
+        case 'i2':
+            return i2
+        case 'i3':
+            return i3
+        case 'i4':
+            return i4
+        case 'i5':
+            return i5
+        case 'i6':
+            return i6
+
+    }
+}
 
 const ProductsSelection = (props) => {
 
     const classes = useStyles(props)
     const history = useHistory()
     const id = props.match.params.id;
-    const model = modelList.find(item => item.id == id)
+    // const model = modelList.find(item => item.id == id)
+    const [modelDB, setModelDB] = useState()
+    const [imagetodisplay, setImagetodisplay] = useState()
+    const [currentColor, setCurrentColor] = useState(0)// to get the current selected color
+
+    const [featureList1, setFeatureList1] = useState([])
+    const [featureList2, setFeatureList2] = useState([])
+
+    const selectedColorStyle = {
+        border: '3px solid rgba(255, 255, 0, 0.3)'
+    }
+    const unselectedColorStyle = {
+        border: '1px solid rgba(0, 0, 0, 0.3)'
+    }
+    // todo add this to that avatar icon
+    const changeImageColor = (item, index) => { //item is an obhect of color, image
+        console.log(`INDEX IS ${index}`)
+        setCurrentColor(index)
+        setImagetodisplay(getMyImage(item.image))
+        return true
+    }
+
+
+    const getProduct = () => {
+        console.log("into use effect")
+        const id1 = props.match.params.id;
+        axios.get('/products/' + id1 + '/book').then((response) => {
+            console.log('into the bunty')
+            console.log(response.data)
+            setModelDB(response.data)
+            console.log(`MY DB MODELL IS ${modelDB}`)
+            const img = getMyImage(response.data.image)
+            setImagetodisplay(img)
+            setFeatureList2(response.data.featureList.splice(3, 6))
+            setFeatureList1(response.data.featureList.splice(0, 3))
+            console.log(`SPLICE 1 IS ${response.data.featureList.splice(0, 3)}`)
+            console.log(`SPLICE 2 IS ${response.data.featureList.splice(3, -1)}`)
+
+            // modelDB = response.data
+        })
+
+    }
 
     const discounts = [
         {
@@ -174,14 +174,18 @@ const ProductsSelection = (props) => {
 
         </div>
 
+    useEffect(() => {
+        // setImagetodisplay(getMyImage(modelDB.image))
+        getProduct()
+    }, []);
 
 
 
-    return (
+    return modelDB ? (
 
         <div className={classes.root, "productsSelectionScreen"}>
             <div className="heading">
-                {model.model}
+                {modelDB.modelName}
             </div>
             <Grid container style={{ marginTop: '30px' }}>
 
@@ -190,7 +194,7 @@ const ProductsSelection = (props) => {
                         {featureList1.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
+                                <Avatar src={getMyIcon(feature.image)} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
                         ))}
@@ -202,13 +206,24 @@ const ProductsSelection = (props) => {
                     <div className="imgNcolors" >
 
                         <div className="image">
-                            <img src={model.image} alt="image" width="350" height="350" />
+                            {
+                                imagetodisplay ? (<img src={imagetodisplay} alt="image" width="350" height="350" />) : <img src={v3} alt="image" width="350" height="350" />
+                            }
                         </div>
                         <div className="colors">
-                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            {
+                                modelDB.colors.map((item, index) => (
+                                    <IconButton
+                                        color="blue"
+                                        onClick={(e) => changeImageColor(item, index)}
+                                    >
+
+                                        <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }} onClick> </Avatar>
+                                    </IconButton>
+
+                                    // <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                                ))
+                            }
                         </div>
                     </div>
                 </Grid>
@@ -219,7 +234,7 @@ const ProductsSelection = (props) => {
                         {featureList2.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
+                                <Avatar src={getMyIcon(feature.image)} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
 
@@ -230,7 +245,7 @@ const ProductsSelection = (props) => {
             </Grid>
             <div id="deliveryTimeDiv">
                 <p>DELIVERY TIME</p>
-                <p>20 WORKING DAYS</p>
+                <p>{modelDB.waitingPeriod} WORKING DAYS</p>
 
             </div>
 
@@ -272,7 +287,7 @@ const ProductsSelection = (props) => {
             </Grid>
             <div className="pricingDiv">
                 <p style={{ fontSize: '40px', color: 'rgba(0, 0, 0, 0.60)', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>ROUGH PRICE</p>
-                <p style={{ fontSize: '90px', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>₹ 20,000/-</p>
+                <p style={{ fontSize: '90px', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>₹ {modelDB.price}/-</p>
                 <p style={{ fontSize: '30px', color: 'rgba(0, 0, 0, 0.60)', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>*Including 18% GST</p>
             </div>
 
@@ -286,6 +301,10 @@ const ProductsSelection = (props) => {
             <br /><br /><br />
         </div>
 
+    ) : (
+        <div>
+            loading
+        </div>
     );
 }
 

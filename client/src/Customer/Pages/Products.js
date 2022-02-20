@@ -16,6 +16,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'
 
 const getMyImage = (source) => {
+  console.log(`SOURCE IS ${source}`)
   const x = source.replace('../Assets/', '')
   const img = x.substring(0, 2)
   switch (img) {
@@ -203,7 +204,7 @@ export default function Products() {
   }, []);
 
 
-  return (
+  return models ? (
     <div className="productsViewScreen">
 
 
@@ -237,7 +238,6 @@ export default function Products() {
         {models[0]?.modelID}
       </div> */}
 
-      xxxxxxxxxxxxxxxx
       {/* <Grid container spacing={3}>
         {models.map(model => (
           // <Grid container item>
@@ -260,6 +260,10 @@ export default function Products() {
 
 
       </Grid> */}
+    </div>
+  ) : (
+    <div>
+      loading
     </div>
   );
 }

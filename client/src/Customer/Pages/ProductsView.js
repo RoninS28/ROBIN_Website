@@ -1,4 +1,4 @@
-import { Avatar, Button, Grid } from "@material-ui/core";
+import { Avatar, Button, Grid, IconButton } from "@material-ui/core";
 import { yellow, blue, orange, green } from "@material-ui/core/colors";
 import { AvatarGroup } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -225,6 +225,28 @@ const getMyImage = (source) => {
 
     }
 }
+const getMyIcon = (source) => {
+    // const x = source.replace('../Assets/', '')
+    // const img = x.substring(0, 2)
+    console.log(`SORCE IS ${source}`)
+    switch (source) {
+        case 'i1':
+            return i1
+        case 'i2':
+            return i2
+        case 'i3':
+            return i3
+        case 'i4':
+            return i4
+        case 'i5':
+            return i5
+        case 'i6':
+            return i6
+
+
+
+    }
+}
 // !==============================================================================================================
 const useStyles = makeStyles((theme) =>
 ({
@@ -262,11 +284,13 @@ const ProductsView = (props) => {
     const [imagetodisplay, setImagetodisplay] = useState()
     const [currentColor, setCurrentColor] = useState(0)// to get the current selected color
 
+    const [featureList1, setFeatureList1] = useState([])
+    const [featureList2, setFeatureList2] = useState([])
     const handleTestDrive = (e) => {
         history.push("/testdrive/" + e.id)
     }
     const handleBookNow = (e) => {
-        history.push("/products/" + e.id + "/selection")
+        history.push("/products/" + e.modelID + "/book")
     }
     const handleChatbot = () => {
         history.push("/chatbot")
@@ -276,15 +300,17 @@ const ProductsView = (props) => {
     // modelList.
 
     const selectedColorStyle = {
-        border: '3px solid rgba(0, 0, 0, 0.3)'
+        border: '3px solid rgba(255, 255, 0, 0.3)'
     }
     const unselectedColorStyle = {
         border: '1px solid rgba(0, 0, 0, 0.3)'
     }
     // todo add this to that avatar icon
     const changeImageColor = (item, index) => { //item is an obhect of color, image
+        console.log(`INDEX IS ${index}`)
         setCurrentColor(index)
         setImagetodisplay(getMyImage(item.image))
+        return true
     }
 
 
@@ -299,6 +325,10 @@ const ProductsView = (props) => {
             console.log(`MY DB MODELL IS ${modelDB}`)
             const img = getMyImage(response.data.image)
             setImagetodisplay(img)
+            setFeatureList2(response.data.featureList.splice(3, 6))
+            setFeatureList1(response.data.featureList.splice(0, 3))
+            console.log(`SPLICE 1 IS ${response.data.featureList.splice(0, 3)}`)
+            console.log(`SPLICE 2 IS ${response.data.featureList.splice(3, -1)}`)
 
             // modelDB = response.data
         })
@@ -320,15 +350,16 @@ const ProductsView = (props) => {
 
                 <Grid item sm={12} md={4} lg={4} xl={4} className={classes.features && "featureAvatars1"}>
                     <div className="features f1" >
-                        {featureList2.map(feature => (
+                        {featureList1.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.image} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
+                                <Avatar src={getMyIcon(feature.image)} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
                         ))}
                     </div>
                 </Grid>
+
 
 
                 <Grid item sm={12} md={4} lg={4} xl={4} className="imageGrid">
@@ -342,16 +373,22 @@ const ProductsView = (props) => {
                             {/* <img src={imagetodisplay} alt="image" width="350" height="350" /> */}
                         </div>
                         <div className="colors">
-                            {/* {
-                                modelDB.colors.forEach((item, index) => (
-                                    <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            {
+                                modelDB.colors.map((item, index) => (
+                                    <IconButton
+                                        color="blue"
+                                        onClick={(e) => changeImageColor(item, index)}
+                                    >
 
+                                        <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }} onClick> </Avatar>
+                                    </IconButton>
+
+                                    // <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
                                 ))
-                            } */}
-                            <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            }
+                            {/* <Avatar style={{ backgroundColor: "grey", border: '3px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
                             <Avatar style={{ backgroundColor: "yellowgreen", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
-                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>
+                            <Avatar style={{ backgroundColor: "red", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar> */}
                         </div>
                     </div>
                 </Grid>
@@ -362,7 +399,7 @@ const ProductsView = (props) => {
                         {featureList2.map(feature => (
                             <div className="featureColumn">
 
-                                <Avatar src={feature.img} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
+                                <Avatar src={getMyIcon(feature.image)} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
                                 <p>{feature.feature}</p>
                             </div>
 
@@ -491,7 +528,7 @@ const ProductsView = (props) => {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 
                 <div className="bookNowButtonDiv" >
-                    <button onClick={() => handleBookNow(model)}>BOOK NOW</button>
+                    <button onClick={() => handleBookNow(modelDB)}>BOOK NOW</button>
 
                 </div>
             </div>
@@ -502,7 +539,7 @@ const ProductsView = (props) => {
                     Would you like a test drive? Take one now for free!!
                 </div>
                 <div className="takeTestDriveButtonDiv" >
-                    <button onClick={() => handleTestDrive(model)}>TAKE TEST DRIVE</button>
+                    <button onClick={() => handleTestDrive(modelDB)}>TAKE TEST DRIVE</button>
                 </div>
             </div>
 

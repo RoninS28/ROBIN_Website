@@ -50,7 +50,7 @@ function Routing(props) {
           <Route path='/' exact component={Home} ></Route>
           <Route path='/products' exact component={Products} ></Route>
           <Route path='/products/:id' exact component={ProductsView} ></Route>
-          <Route path='/products/:id/selection' exact component={ProductsSelection} ></Route>
+          <Route path='/products/:id/book' exact component={ProductsSelection} ></Route>
           <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
           <Route path='/testdrive' exact component={TestDrive} ></Route>
           <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>

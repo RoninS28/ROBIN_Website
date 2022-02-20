@@ -14,6 +14,12 @@ const Model = require('../../models/common/ModelSchema')
 router.get('/', customerController.customersGet)
 router.post('/', customerController.customerPost)
 
+router.get('/update', (req, res) => {
+    Model.updateMany({ 'highlights.unit': 'KWH' }, { '$set': { 'highlights.$.highlight': 'LITHIUM-ION' } }).then((result) => {
+        console.log('updated')
+        res.send('updated')
+    })
+})
 
 // ! test
 // router.get('/testtest', (req, res) => {
