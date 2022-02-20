@@ -9,10 +9,32 @@ import v4 from '../Assets/v4.png'
 import v5 from '../Assets/v5.png'
 import v6 from '../Assets/v6.png'
 import v7 from '../Assets/v7.png'
+// import v7 from '../Assets/'
 import '../PagesStyles/Products.css'
 import { useHistory } from "react-router";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+
+const getMyImage = (source) => {
+  const x = source.replace('../Assets/', '')
+  const img = x.substring(0, 2)
+  switch (img) {
+    case 'v2':
+      return v2
+    case 'v3':
+      return v3
+    case 'v4':
+      return v4
+    case 'v5':
+      return v5
+    case 'v6':
+      return v6
+    case 'v7':
+      return v7
+
+
+  }
+}
 
 
 const useStyles = makeStyles((theme) => {
@@ -195,7 +217,7 @@ export default function Products() {
           <Grid item spacing={3} key={model.id} xs={12} md={6} lg={4} xl={4} onClick={(e) => handleProduct(model)}>
             <div className="productDisplay">
               <div className="image">
-                <img src={model.image} alt="image" width="300" height="300" />
+                <img src={getMyImage(model.image)} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
                 {model["modelID"]}
