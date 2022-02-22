@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const chatbotObj = {
-    msgID: {
+    // msgID: {
+    //     type: String,
+    //     required: true
+    // },
+    sender : {
         type: String,
         required: true
     },
@@ -13,10 +17,10 @@ const chatbotObj = {
         type: Date,
         required: true
     },
-    custreadToggle: {//true if read by customer
-        type: Boolean,
-        required: true
-    },
+    // custreadToggle: {//true if read by customer
+    //     type: Boolean,
+    //     required: true
+    // },
     msgCategories: [
         {
             // todo make it as messagecategory Obj if needed
