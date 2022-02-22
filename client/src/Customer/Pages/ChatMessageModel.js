@@ -7,11 +7,11 @@ const ChatMessage = (props) => {
     return (
         <div className={`messageCol`}>
             <div className={`message ${messageClass}`}>
-                <p>{msg.text}</p>
+                <p>{msg.message}</p>
             </div>
             <div className={` ${trailerClass}`}>
                 {msg.sender === 'user' && <p className="timestamp"> {msg.timestamp} </p>}
-                {msg.trailers && msg.trailers.map((e) => (
+                {msg.msgCategories && msg.msgCategories.map((e) => (
 
                     <p>{e}</p>
                 ))}
