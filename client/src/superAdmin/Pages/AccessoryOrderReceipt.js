@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PrintIcon from '@material-ui/icons/Print';
 import { Grid, IconButton } from '@mui/material';
 // import { SaveAlt } from '@material-ui/icons';
@@ -13,6 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
 import { withStyles } from "@material-ui/core/styles";
+import { useLocation } from 'react-router';
 
 const styles = theme => ({
     btnContainer: {
@@ -53,22 +54,103 @@ function createRowService(id, name, quantity, pricePerUnit, price) {
 }
 
 function subtotal(items) {
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+    console.log("subtotal: ", items);
+    return items.map((item) => calculateTotalPrice(item.quantity, item.price_per_item)).reduce((sum, i) => sum + i, 0);
 }
 
-const rowService = [
-    createRowService(1, 'PU Leather Seat', 10, 3200, 32000),
-    createRowService(2, 'PU Leather Seat', 100, 3200, 320000),
-    createRowService(3, 'PU Leather Seat', 10, 3200, 32000),
-];
-
-const invoiceSubtotal = subtotal(rowService);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+function calculateTotalPrice(quantity, pricePerUnit) {
+    console.log("calculateTotalPrice: ", quantity, pricePerUnit);
+    return parseFloat(quantity) * parseFloat(pricePerUnit);
+}
 
 const AccessoryOrderReceipt = (props) => {
 
     const { classes, theme } = props;
+    const location = useLocation();
+
+    const [arrList, setArrList] = useState('');
+    const [entityId, setEntityId] = useState('');
+    const [entityData, setEntityData] = useState({products: []});
+    
+    const getFactoryName = async (entityId) => {
+        const res2 = await fetch(`/factories/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getOutletName = async (entityId) => {
+        const res2 = await fetch(`/outlets/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getServiceCenterName = async (entityId) => {
+        const res2 = await fetch(`/service-centers/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getStockRequest = async (entityId) => {
+        console.log("getStockRequest: ", entityId);
+        const res = await fetch(`/stock-requests/${entityId}`);
+        const data = await res.json();
+
+        let promises = []
+
+        switch(data.sourceType) {
+            case "factory":
+                promises.push(getFactoryName(data.sourceId));
+                break;
+            case "outlet":
+                promises.push(getOutletName(data.sourceId));
+                break;
+            case "service-center":
+                promises.push(getServiceCenterName(data.sourceId));
+                break;
+            default:
+                break;
+        }
+        let result = await Promise.all(promises);
+        console.log("source type name: ", result);
+        data['sourceName'] = result[0];
+        setEntityData(data);
+    }
+
+    useEffect(() => {
+        console.log("use effect called!!");
+        getStockRequest(location.pathname.split('/')[2]);
+    }, []);
+
+    const approveStockRequest = async () => {
+
+        const entityId = location.pathname.split('/')[2];
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'approved' })
+        };
+        const res = await fetch(`/stock-requests/${entityId}`, requestOptions)
+        const data = await res.json();
+        console.log(data);
+    }
+
+    const denyStockRequest = async () => {
+
+        const entityId = location.pathname.split('/')[2];
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ status: 'denied' })
+        };
+        const res = await fetch(`/stock-requests/${entityId}`, requestOptions)
+        const data = await res.json();
+        console.log(data);
+    }
+
 
     return (
         <div>
@@ -98,17 +180,46 @@ const AccessoryOrderReceipt = (props) => {
                             <TableContainer >
                                 <Table aria-label="Details">
                                     <TableBody>
-                                        {rows.map((row) => (
-                                            <TableRow
-                                                key={row.property}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                            >
-                                                <TableCell component="th" scope="row" align="center"><b>
-                                                    {row.property} </b>
-                                                </TableCell>
-                                                <TableCell align="center">{row.data}</TableCell>
-                                            </TableRow>
-                                        ))}
+                                        <TableRow
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center"><b>
+                                                ORDER ID </b>
+                                            </TableCell>
+                                            <TableCell align="center">{entityData._id}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center"><b>
+                                                SOURCE TYPE </b>
+                                            </TableCell>
+                                            <TableCell align="center">{entityData.sourceType}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center"><b>
+                                                SOURCE NAME </b>
+                                            </TableCell>
+                                            <TableCell align="center">{entityData.sourceName}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center"><b>
+                                                STATUS </b>
+                                            </TableCell>
+                                            <TableCell align="center">{entityData.status}</TableCell>
+                                        </TableRow>
+                                        <TableRow
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row" align="center"><b>
+                                                DATE OF ORDER </b>
+                                            </TableCell>
+                                            <TableCell align="center">{entityData.date}</TableCell>
+                                        </TableRow>
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -133,28 +244,19 @@ const AccessoryOrderReceipt = (props) => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {rowService.map((rowService) => (
-                                            <TableRow key={rowService.id}>
+                                        {entityData.products.map((rowService) => (
+                                            <TableRow key={rowService._id}>
                                                 <TableCell>{rowService.name}</TableCell>
                                                 <TableCell align="right">{rowService.quantity}</TableCell>
-                                                <TableCell align="right">{rowService.pricePerUnit}</TableCell>
-                                                <TableCell align="right">{ccyFormat(rowService.price)}</TableCell>
+                                                <TableCell align="right">{rowService.price_per_item}</TableCell>
+                                                <TableCell align="right">{ccyFormat(calculateTotalPrice(rowService.quantity, rowService.price_per_item))}</TableCell>
                                             </TableRow>
                                         ))}
 
                                         <TableRow>
                                             <TableCell rowSpan={3} />
                                             <TableCell colSpan={2}><b>Subtotal</b></TableCell>
-                                            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell><b>Tax</b></TableCell>
-                                            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-                                            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-                                        </TableRow>
-                                        <TableRow>
-                                            <TableCell colSpan={2}><b>Total</b></TableCell>
-                                            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+                                            <TableCell align="right">{ccyFormat(subtotal(entityData.products))}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
@@ -164,8 +266,8 @@ const AccessoryOrderReceipt = (props) => {
                 </Grid>
             </Grid>
             <div className={classes.btnContainer}>
-                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary">Deny</Button>
-                    <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary">Approve</Button>
+                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="secondary" onClick={denyStockRequest}>Deny</Button>
+                <Button className={classes.btn} variant="contained" style={{ marginTop: "3rem", marginBottom: "1rem" }} color="primary" onClick={approveStockRequest}>Approve</Button>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import '../PagesStyles/Chatbot.css'
 import ChatMessage from "./ChatMessageModel";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -21,6 +21,8 @@ import i3 from '../Assets/i3.jpg'
 import i4 from '../Assets/i4.jpg'
 import i5 from '../Assets/i5.jpg'
 import i6 from '../Assets/i6.jpg'
+
+import axios from 'axios'
 
 const styles = (theme) => ({
     typography: {
@@ -144,6 +146,43 @@ const ChatRoom = ({ classes }) => {
         e.preventDefault();
     }
 
+    const [ChatMsgs, setChatMsgs] = useState([])
+
+    const getChatMsgs = () => {
+
+        const tempChats = []
+
+        //static cust id given, extract it from token(cookie)
+        const id = "620ca024239ba21fd81992a1";
+        axios.get("/chatbot/"+id).then((response) => {
+          console.log(`RESPONSE IS ${response.data}`)
+    
+          if (response.data == "You must be logged in to view this page") {
+            history.push('/signup');
+          }
+          else {
+            let msgArr = response.data
+            
+            msgArr.map(item => {
+    
+              tempChats.push(item)
+              
+            })
+    
+            console.log(tempChats)
+            setChatMsgs(tempChats)
+            console.log(ChatMsgs)
+          }
+        })
+      }
+
+      useEffect(() => {
+        
+        getChatMsgs()
+        console.log('rerender')
+      }, []);
+
+
     return (
         <div id="chatbotScreen">
 
@@ -154,7 +193,7 @@ const ChatRoom = ({ classes }) => {
 
             <div className="main">
 
-                {messages && messages.map(msg => <ChatMessage key={msg.id} msg={msg} />)}
+                {ChatMsgs && ChatMsgs.map(msg => <ChatMessage key={msg.id} msg={msg} />)}
                 <div ref={dummy}></div>
 
 

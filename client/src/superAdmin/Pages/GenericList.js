@@ -155,61 +155,58 @@ const GenericList = (props) => {
             });
     }
 
-    const getAccessoryOrderList = () => {
-        setRows([]);
-        axios.get('/stock-requests')
-            .then(res => {
-                let stockRequestsArr = res.data;
-                console.log(stockRequestsArr);
-                stockRequestsArr.map(stockRequest => {
-
-                    switch (stockRequest.sourceType) {
-                        case "factory":
-                            axios.get(`/factories/${stockRequest.sourceId}`)
-                            .then(res => {
-                                let entityName = res.data.name;
-                                console.log("entity name: ", entityName);
-                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
-                                setRows(rows => [...rows, obj]);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                            break;
-                        case "outlet":
-                            axios.get(`/outlets/${stockRequest.sourceId}`)
-                            .then(res => {
-                                let entityName = res.data.name;
-                                console.log("entity name: ", entityName);
-                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
-                                setRows(rows => [...rows, obj]);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                            break;
-                        
-                        case "service-center":
-                            axios.get(`/service-centers/${stockRequest.sourceId}`)
-                            .then(res => {
-                                let entityName = res.data.name;
-                                console.log("entity name: ", entityName);
-                                let obj = createAccessoryOrderData(stockRequest._id, stockRequest.sourceType, entityName, stockRequest.date, stockRequest.status);
-                                setRows(rows => [...rows, obj])
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                            break;
-                        default:
-                            break;
-                    }
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+    const getFactoryName = async (entityId) => {
+        const res2 = await fetch(`/factories/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
     }
+
+    const getOutletName = async (entityId) => {
+        const res2 = await fetch(`/outlets/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getServiceCenterName = async (entityId) => {
+        const res2 = await fetch(`/service-centers/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getAllStockRequests = async () => {
+        let allStocks = [];
+        let promises = [];
+
+        const res = await fetch("/stock-requests");
+        const data = await res.json();
+
+        data.map(stock => {
+            const entityId = stock.sourceId;
+            switch (stock.sourceType) {
+                case "factory":
+                    promises.push(getFactoryName(entityId));
+                    break;
+                case "outlet":
+                    promises.push(getOutletName(entityId));
+                    break;
+                case "service-center":
+                    promises.push(getServiceCenterName(entityId));
+                    break;
+                default:
+                    break;
+            }
+        });
+        let result = await Promise.all(promises);
+        let idx = 0;
+        data.map(stock => {
+            console.log("entity id: ", stock._id);
+            allStocks.push(createAccessoryOrderData(stock._id, stock.sourceType, result[idx++], 
+                                                                stock.date, stock.status));
+        })
+        console.log(allStocks);
+        setRows(allStocks)
+    }
+
 
 
     const { classes, theme } = props;
@@ -253,7 +250,7 @@ const GenericList = (props) => {
         }
         if (componentName == 'accessory-orders') {
             setComponentNameSingular('Accessory Orders');
-            getAccessoryOrderList();
+            getAllStockRequests();
             setLabels(["sourceType", "entityName", "date", "status", "actions"]);
         }
     }, [componentName, location, componentNameSingular]);
