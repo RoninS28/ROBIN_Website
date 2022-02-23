@@ -334,7 +334,7 @@ const Navbar = (props) => {
                         <Route path='/accessory-orders' exact component={GenericList}></Route>
 
                         <Route path='/complaints' exact component={GenericList}></Route>
-                        <Route path='/complaints/1' exact component={CustomerComplaint}></Route>
+                        <Route path='/complaints/:id' exact component={CustomerComplaint}></Route>
 
                         <Route path='/' exact component={Dashboard}></Route>
                     </Switch>
