@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    ticketID: {
-        type: String,
-        required: true
-    },
+    // ticketID: {
+    //     type: String,
+    //     required: true
+    // },
     purchaseDate: {
         type: Date,
         required: true
@@ -62,7 +62,7 @@ const orderSchema = new mongoose.Schema({
     },
     faultMsg: {
         type: String,
-        required: true
+        required: false
     },
 
 
