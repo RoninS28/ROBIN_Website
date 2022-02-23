@@ -30,7 +30,7 @@ import Box from '@material-ui/core/Box';
 
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core//TablePagination';
-import GenericTable from '../../FactoryAdmin/Pages/GenericTable';
+import GenericTable from './GenericTable';
 
 
 import IconButton from '@material-ui/core/IconButton';
@@ -148,7 +148,7 @@ function WorkerList(props) {
     const getAllWorkers = () => {
 
         const allWorkers=[];
-        const allWorkersId=[];
+       const allWorkersId=[];
   
       axios.get('/employees')
           .then(res => {
@@ -161,7 +161,7 @@ function WorkerList(props) {
                 console.log("all workers ", allWorkers);
                 console.log("all workers ids",allWorkersId);
               setRows(allWorkers);
-              setworkerId(allWorkersId);
+             // setworkerId(allWorkersId);
             
           })
           .catch((err) => {
@@ -211,7 +211,7 @@ function WorkerList(props) {
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
-                 <GenericTable rows={rows} labels={labels} ids={workerId} view="/workerList/" />
+                 <GenericTable rows={rows} labels={labels}  view="/workerList/" />
         </Container>
     </div>
     )
