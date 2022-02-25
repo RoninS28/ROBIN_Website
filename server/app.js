@@ -48,7 +48,7 @@ app.use('/stock-requests', require('./routes/common/stockRequest'));
 app.use(custAuthRoutes)
 app.use('/products', requireCustAuth, require('./routes/customer/products'));
 app.use('/servicing', requireCustAuth, require('./routes/customer/servicing'));
-app.use('/chatbot', require('./routes/customer/chatbotMsg'));
+app.use('/chatbot', requireCustAuth, require('./routes/customer/chatbotMsg'));
 
 
 

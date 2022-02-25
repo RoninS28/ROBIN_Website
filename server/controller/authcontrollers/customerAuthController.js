@@ -42,7 +42,7 @@ const handleErrors = (err) => {
 
 }
 
-const maxAge = 3 * 24 * 60 * 60 //3 days
+const maxAge = 60 * 1000 * 10 //10 minutes
 
 const createToken = (id) => {
     return jwt.sign({ id }, 'robinsecretsignature', {//todo add this to env
