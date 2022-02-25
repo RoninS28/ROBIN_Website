@@ -183,46 +183,46 @@ function TestDrive(props) {
 
   
 
-  // const getTestDrives=()=>{
+  const getTestDrives=()=>{
 
-  //   const testDrives=[];
+    const testDrives=[];
 
-  //   axios.get('/test-drives')
-  //     .then((res)=>{
+    axios.get('/test-drives')
+      .then((res)=>{
 
-  //       const resData=res.data;
-  //       resData.map(data=>{
-  //         testDrives.push(data);
-  //       });
+        const resData=res.data;
+        resData.map(data=>{
+          testDrives.push(data);
+        });
 
 
-  //     }).then(()=>{
+      }).then(()=>{
 
-  //       testDrives.map(testDrive=>{
+        testDrives.map(testDrive=>{
 
-  //         axios.get(`/customers+${testDrive['customer']}`)
-  //           .then((res)=>{
-  //             const customer=res.data;
-  //             testDrive['name']=customer['name'];
-  //           }).catch(err=>{
-  //             console.log(err);
-  //           })
+          axios.get(`/customers+${testDrive['customer']}`)
+            .then((res)=>{
+              const customer=res.data;
+              testDrive['name']=customer['name'];
+            }).catch(err=>{
+              console.log(err);
+            })
 
-  //       })
+        })
 
-  //     }).then(()=>{
+      }).then(()=>{
 
-  //       testDrives.map(testDrives=>{
+        testDrives.map(testDrives=>{
 
-  //         axios.get('/')
+          axios.get('/')
 
-  //       })
+        })
 
-  //     })
+      })
       
     
 
-  // }
+  }
 
   useEffect(()=>{
 
