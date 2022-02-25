@@ -26,6 +26,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import { useHistory } from "react-router";
+import { useState, useEffect } from "react";
 
 import GenericTable from "./GenericTable";
 import DoughNut from "../../Outlet/Pages/DoughNut";
@@ -86,6 +87,11 @@ const state2 = {
     },
   ],
 };
+
+// fetching Complaints Data
+function createComplaintsData(id, sourceType, from, complaintType, date, status) {
+  return { id, sourceType, from, complaintType, date, status };
+}
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -169,8 +175,8 @@ function getAllModels() {
   return allModels;
 }
 
-const rows = getAllModels();
-const labels = ["id", "type", "status", "actions"];
+// const rows = getAllModels();
+// const labels = ["id", "type", "status", "actions"];
 
 function Complaints(props) {
   const [type, setType] = React.useState("");
@@ -199,8 +205,61 @@ function Complaints(props) {
   );
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
+  const getEmployeeName = async (entityId) => {
+    const res2 = await fetch(`/employees/${entityId}`);
+    const data2 = await res2.json();
+    return data2.name;
+  }
+
+  const getCustomerName = async (entityId) => {
+      const res2 = await fetch(`/customers/${entityId}`);
+      const data2 = await res2.json();
+      return data2.name;
+  }
+
+  const getAllComplaints = async () => {
+    let allComplaints = [];
+    let promises = [];
+
+    const res = await fetch("/complaints");
+    const data = await res.json();
+
+    console.log(data);
+    data.map(complaint => {
+        switch (complaint.sourceType) {
+            case "Employee":
+                let entityId = complaint.employeeId;
+                promises.push(getEmployeeName(entityId));
+                break;
+            case "Customer":
+                entityId = complaint.customerId;
+                promises.push(getCustomerName(entityId));
+                break;
+            default:
+                break;
+        }
+    });
+    let result = await Promise.all(promises);
+    let idx = 0;
+    data.map(complaint => {
+        console.log("entity id: ", complaint._id);
+        allComplaints.push(createComplaintsData(complaint._id, complaint.sourceType, result[idx++], complaint.complaintType,
+                                                            complaint.date, complaint.status));
+    })
+    console.log("allComplaints", allComplaints);
+    setRows(allComplaints);
+  }
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(3);
+
+  const [rows, setRows] = useState([]);
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    getAllComplaints();
+    setLabels(["sourceType", "from", "complaintType", "date", "status", "actions"]);
+  }, []);
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -269,7 +328,7 @@ function Complaints(props) {
           <Container
             maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
           >
-            <GenericTable rows={rows} labels={labels} view="/complaints/1" />
+            <GenericTable rows={rows} labels={labels} view="/complaints/" />
           </Container>
         </Grid>
 

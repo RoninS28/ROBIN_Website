@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import '../PagesStyles/Chatbot.css'
 import ChatMessage from "./ChatMessageModel";
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
@@ -33,12 +34,15 @@ const styles = (theme) => ({
 })
 
 
+
 const ChatRoom = ({ classes }) => {
     const dummy = useRef()
     const popupState = usePopupState({
         variant: 'popover',
         popupId: 'demoPopover',
     })
+
+    const history = useHistory();
 
     const [badgeCount, setBadgeCount] = useState(0)
 
@@ -154,11 +158,11 @@ const ChatRoom = ({ classes }) => {
 
         //static cust id given, extract it from token(cookie)
         const id = "620ca024239ba21fd81992a1";
-        axios.get("/chatbot/"+id).then((response) => {
+        axios.get("/chatbot/conv").then((response) => {
           console.log(`RESPONSE IS ${response.data}`)
     
           if (response.data == "You must be logged in to view this page") {
-            history.push('/signup');
+            history.push('/login');
           }
           else {
             let msgArr = response.data

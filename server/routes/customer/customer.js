@@ -10,6 +10,11 @@ const feedbackMsg = require('../../models/common/FeedbackChatMsgObj')
 const chatbotMsg = require('../../models/customer/ChatBotMsgObj')
 const Customer = require('../../models/customer/CustomerSchema')
 const Model = require('../../models/common/ModelSchema')
+const Employee = require('../../models/common/employeeSchema')
+const Factory = require('../../models/factory/factorySchema')
+const Order = require('../../models/factory/OrderSchema')
+const myvehicleObj = require('../../models/customer/VehicleObj');//d
+// const { ticketID } = require('../../models/customer/VehicleObj');
 
 router.get('/', customerController.customersGet)
 router.post('/', customerController.customerPost)
@@ -69,6 +74,8 @@ router.get('/update', (req, res) => {
 //     })
 
 // })
+
+
 
 router.get('/addcustomer', (req, res) => {
     console.log('into new customer')
@@ -205,6 +212,77 @@ router.get('/addmodel', (req, res) => {
     })
     newmodel.save().then((result) => console.log('created'))
     res.send('saved')
+})
+
+router.get('/placeorder', (req, res) => {
+    Factory.findOne({ 'name': "Alpha Industries" }).then((factresult) => {
+        Employee.findOne({ 'name': 'Akhilesh Yadav' }).then((empresult) => {
+            Customer.findOne({ 'fname': 'Sandesh' }).then((custresult) => {
+                console.log("fact id is " + factresult._id)
+                const newOrder = new Order({
+                    purchaseDate: Date.now(),
+                    custID: custresult._id,
+                    factoryID: factresult._id,
+                    factoryManagerID: empresult._id,
+                    modelID: 'M1321',
+                    modelName: 'PEGASUS',
+                    color: '#ffeb3b',
+                    active: true,
+                    expectedDeliveryDate: Date.parse('2022-02-10'),
+                    variant: 'TOP END MODEL',
+                    fault: false,
+                    stages: [
+                        { stage1: 'Completed' },
+                        { stage2: 'Completed' },
+                        { stage3: 'Completed' },
+                        { stage4: 'Completed' },
+                        { stage5: 'Completed' },
+                        { stage6: 'Completed' },
+                        { stage7: 'Completed' },
+                        { stage8: 'Completed' },
+                        { stage9: 'Completed' },
+                    ]
+                })
+
+
+                newOrder.save().then((result) => {
+                    const myvehicle = {
+                        ticketID: result._id,
+                        status: true,
+                        factoryID: factresult._id,
+                        factoryManagerID: empresult._id,
+                        modelID: 'M1321',
+                        modelName: 'PEGASUS',
+                        color: '#ffeb3b',
+                        deliveryDate: Date.parse('2022-02-10'),
+                        variant: 'TOP END MODEL',
+                        stages: [
+                            { stage1: 'Completed' },
+                            { stage2: 'Completed' },
+                            { stage3: 'Completed' },
+                            { stage4: 'Completed' },
+                            { stage5: 'Completed' },
+                            { stage6: 'Completed' },
+                            { stage7: 'Completed' },
+                            { stage8: 'Completed' },
+                            { stage9: 'Completed' },
+                        ],
+                        vehicleNumber: 'MH12 NV 5606',
+                        chassisNumber: '1GNCS18Z3M0115561',
+
+
+                    }
+
+                    Customer.findOneAndUpdate({ '_id': custresult._id }, { $push: { ownedEVs: myvehicle } }).then((pp) => {
+                        res.send('cust saved too')
+                        console.log('cust saved too')
+                    })
+
+                })
+
+            })
+        })
+    })
 })
 
 router.get('/:id', customerController.customerGet)

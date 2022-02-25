@@ -1,17 +1,30 @@
 const servicingInfoObj = require('./ServicingObj')
 const stageObj = require('./StageObj')
 const accessoryObj = require('./AccessoriesObj')
+const mongoose = require('mongoose');
 
 const vehicleObj = {
     ticketID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     status: {//delivered - true or manufacturing - false
         type: Boolean,
         required: true
     },
+    factoryID: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    factoryManagerID: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
     modelID: {
+        type: String,
+        required: true
+    },
+    modelName: {
         type: String,
         required: true
     },
@@ -19,11 +32,7 @@ const vehicleObj = {
         type: String,
         required: true
     },
-    vehicleNumber: {
-        type: String,
-        required: true
-    },
-    chassisNumber: {
+    color: {
         type: String,
         required: true
     },
@@ -31,19 +40,19 @@ const vehicleObj = {
         type: Date,
         required: true
     },
+    expectedDeliveryDate: {
+        type: String,
+        required: false
+    },
     deliveryDate: {
         type: String,
         required: false
     },
-    color: {
+    vehicleNumber: {
         type: String,
         required: true
     },
-    dealerID: {
-        type: String,
-        required: true
-    },
-    dealerName: {
+    chassisNumber: {
         type: String,
         required: true
     },

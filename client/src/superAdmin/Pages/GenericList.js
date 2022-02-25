@@ -79,8 +79,8 @@ function createAccessoryOrderData(id, sourceType, entityName, date, status) {
 
 
 // fetching Complaints Data
-function createComplaintsData(complaintId, customerName, complaintType, dateOfOrder, status) {
-    return { complaintId, customerName, complaintType, dateOfOrder, status };
+function createComplaintsData(id, sourceType, from, complaintType, date, status) {
+    return { id, sourceType, from, complaintType, date, status };
 }
 
 function getComplaintsList() {
@@ -173,6 +173,18 @@ const GenericList = (props) => {
         return data2.name;
     }
 
+    const getEmployeeName = async (entityId) => {
+        const res2 = await fetch(`/employees/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
+    const getCustomerName = async (entityId) => {
+        const res2 = await fetch(`/customers/${entityId}`);
+        const data2 = await res2.json();
+        return data2.name;
+    }
+
     const getAllStockRequests = async () => {
         let allStocks = [];
         let promises = [];
@@ -205,6 +217,39 @@ const GenericList = (props) => {
         })
         console.log(allStocks);
         setRows(allStocks)
+    }
+
+    const getAllComplaints = async () => {
+        let allComplaints = [];
+        let promises = [];
+
+        const res = await fetch("/complaints");
+        const data = await res.json();
+
+        console.log(data);
+        data.map(complaint => {
+            switch (complaint.sourceType) {
+                case "Employee":
+                    let entityId = complaint.employeeId;
+                    promises.push(getEmployeeName(entityId));
+                    break;
+                case "Customer":
+                    entityId = complaint.customerId;
+                    promises.push(getCustomerName(entityId));
+                    break;
+                default:
+                    break;
+            }
+        });
+        let result = await Promise.all(promises);
+        let idx = 0;
+        data.map(complaint => {
+            console.log("entity id: ", complaint._id);
+            allComplaints.push(createComplaintsData(complaint._id, complaint.sourceType, result[idx++], complaint.complaintType,
+                                                                complaint.date, complaint.status));
+        })
+        console.log("allComplaints", allComplaints);
+        setRows(allComplaints);
     }
 
 
@@ -248,18 +293,17 @@ const GenericList = (props) => {
             getAllServiceCenters();
             setLabels(["name", "state", "city", "contact", "status", "actions"]);
         }
-        if (componentName == 'accessory-orders') {
+        else if (componentName == 'accessory-orders') {
             setComponentNameSingular('Accessory Orders');
             getAllStockRequests();
             setLabels(["sourceType", "entityName", "date", "status", "actions"]);
         }
+        else if (componentName == 'complaints') {
+            setComponentNameSingular('Complaints');
+            getAllComplaints();
+            setLabels(["sourceType", "from", "complaintType", "date", "status", "actions"]);
+        }
     }, [componentName, location, componentNameSingular]);
-
-    if (componentName == 'complaints') {
-        setComponentNameSingular('Complaints');
-        rows = getComplaintsList();
-        setLabels(["complaintId", "customerName", "complaintType", "dateOfOrder", "status", "actions"]);
-    }
 
 
     // accessory order list states / complaints
@@ -526,7 +570,7 @@ const GenericList = (props) => {
                             case 'Accessory Orders':
                                 return <GenericTable rows={rows} labels={labels} view="/accessory-orders/" />;
                             case 'Complaints':
-                                return <GenericTable rows={rows} labels={labels} view='/complaints/1' />;
+                                return <GenericTable rows={rows} labels={labels} view='/complaints/' />;
                             default:
                                 return <GenericTable rows={rows} labels={labels} view="/factories/1" />;
                         }
