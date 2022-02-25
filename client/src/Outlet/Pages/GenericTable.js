@@ -141,8 +141,8 @@ export default function GenericTable(props) {
   //const [ids,setIds]=useState([]);
 
   useEffect(()=>{
-    console.log("In UseEffect of Generic Table");
-    console.log(props);
+    //console.log("In UseEffect of Generic Table");
+    console.log(props.rows,"rows");
   },[]);
 
   // Avoid a layout jump when reaching the last page with empty rows.

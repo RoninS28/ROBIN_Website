@@ -149,8 +149,8 @@ function getAllModels() {
   return allModels;
 }
 
-const rows = getAllModels();
-const labels = ["id", "name", "model", "where", "date", "actions"];
+//const rows = getAllModels();
+//const labels = ["id", "name", "model", "where", "date", "actions"];
 
 //Dropdown
 const ITEM_HEIGHT = 48;
@@ -178,8 +178,8 @@ function getStyles(name, personName, theme) {
 function TestDrive(props) {
   const { classes, theme } = props;
 
-  // const [rows,setRows]=useState([]);
-  // const [labels,setLabels]=useState([ "name", "model", "location", "date", "actions"]);
+   const [rows,setRows]=useState([]);
+   const [labels,setLabels]=useState([ "name", "modelname", "location", "status", "actions"]);
 
   
 
@@ -195,29 +195,51 @@ function TestDrive(props) {
           testDrives.push(data);
         });
 
+        //console.log(testDrives,'only testdrive')
 
       }).then(()=>{
 
         testDrives.map(testDrive=>{
 
-          axios.get(`/customers+${testDrive['customer']}`)
+          axios.get(`/testing/${testDrive['customer']}`)
             .then((res)=>{
               const customer=res.data;
-              testDrive['name']=customer['name'];
+              testDrive['name']=customer['fname']+" "+customer['lname'];
+            //  console.log(customer['fname']);
             }).catch(err=>{
               console.log(err);
             })
 
         })
 
+     //   console.log(testDrives,'customer name taken');
+
+
       }).then(()=>{
 
-        testDrives.map(testDrives=>{
+        testDrives.map(testDrive=>{
 
-          axios.get('/')
+          axios.get(`/model/${testDrive['model']}`)
+          .then((res)=>{
+            const model=res.data;
+            testDrive['modelname']=model['modelName'];
+         //   console.log(model['modelName']);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
 
         })
 
+//        console.log(testDrives);
+
+      }).then(()=>{
+
+        //console.log(testDrives,'final');
+        setRows(testDrives);
+
+      }).catch(err=>{
+        console.log(err);
       })
       
     
@@ -226,7 +248,7 @@ function TestDrive(props) {
 
   useEffect(()=>{
 
-   // getTestDrives();
+   getTestDrives();
 
   },[]);
 

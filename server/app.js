@@ -42,6 +42,7 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
+app.use('/model',require('./routes/common/model'));
 // app.use('/customers', require('./routes/customer/customer'));
 
 // ! CUSTOMER ROUTER
