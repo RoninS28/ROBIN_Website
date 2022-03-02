@@ -190,11 +190,13 @@ const ProductsSelection = (props) => {
     const ColorOptionsComponent = () => <Select theme={(theme) => ({
         ...theme,
         borderRadius: 0,
+
         colors: {
             ...theme.colors,
             text: 'orangered',
             primary25: 'hotpink',
             primary: 'black',
+
         },
     })} style={{ marginTop: '30px', marginBottom: '20px', width: '100px', backgroundColor: 'red', color: 'blue' }} onChange={(e) => { setColorOptionsValue(e.value) }} options={coloroptions} value={coloroptions.filter(function (option) {
         return option.value === ColorOptionsValue;
