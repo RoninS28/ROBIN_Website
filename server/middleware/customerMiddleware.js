@@ -57,4 +57,32 @@ const checkCustUser = (req, res, next) => {
     }
 }
 
-module.exports = { requireCustAuth, checkCustUser }
+const getUserID = (req) => {
+    const token = req.cookies.jwttoken
+    console.log("token "+token)
+    
+    if (token) {
+        jwt.verify(token, 'robinsecretsignature', async (err, decodedToken) => {
+            if (err) { //signatures dont match
+                console.log("error "+err)
+                return "null";
+
+            }
+            else {
+                // User.findById(decodedToken.id).then((result)=>{
+                //     return result;
+                // })
+                console.log(decodedToken.id)
+                return ""+decodedToken.id;
+                //res.locals.user = user //this locals prop makes it available to te views
+                //return user;
+            }
+        })
+    }
+    else {
+        console.log("in else")
+        return "null1";
+    }
+}
+
+module.exports = { requireCustAuth, checkCustUser, getUserID }

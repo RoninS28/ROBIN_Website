@@ -141,8 +141,8 @@ export default function GenericTable(props) {
   //const [ids,setIds]=useState([]);
 
   useEffect(()=>{
-    console.log("In UseEffect of Generic Table");
-    console.log(props);
+    //console.log("In UseEffect of Generic Table");
+    console.log(props.rows,"rows");
   },[]);
 
   // Avoid a layout jump when reaching the last page with empty rows.
@@ -175,7 +175,7 @@ export default function GenericTable(props) {
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
           ).map((row,index) => (
-            <TableRow key={row.name} style={{ height: "2em" }}>
+            <TableRow key={row._id} style={{ height: "2em" }}>
               {labels.map((label) => (
                 <TableCell style={{ width: 160 }} align="center">
 

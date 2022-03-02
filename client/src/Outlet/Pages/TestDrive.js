@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -42,6 +42,7 @@ import Select from "@material-ui/core/Select";
 import GenericTable from "./GenericTable";
 import GenericStatCard from "./GenericStatCard";
 import Grid from "@material-ui/core/Grid";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -148,8 +149,8 @@ function getAllModels() {
   return allModels;
 }
 
-const rows = getAllModels();
-const labels = ["id", "name", "model", "where", "date", "actions"];
+//const rows = getAllModels();
+//const labels = ["id", "name", "model", "where", "date", "actions"];
 
 //Dropdown
 const ITEM_HEIGHT = 48;
@@ -176,6 +177,81 @@ function getStyles(name, personName, theme) {
 
 function TestDrive(props) {
   const { classes, theme } = props;
+
+   const [rows,setRows]=useState([]);
+   const [labels,setLabels]=useState([ "name", "modelname", "location", "status", "actions"]);
+
+  
+
+  const getTestDrives=()=>{
+
+    const testDrives=[];
+
+    axios.get('/test-drives')
+      .then((res)=>{
+
+        const resData=res.data;
+        resData.map(data=>{
+          testDrives.push(data);
+        });
+
+        //console.log(testDrives,'only testdrive')
+
+      }).then(()=>{
+
+        testDrives.map(testDrive=>{
+
+          axios.get(`/testing/${testDrive['customer']}`)
+            .then((res)=>{
+              const customer=res.data;
+              testDrive['name']=customer['fname']+" "+customer['lname'];
+            //  console.log(customer['fname']);
+            }).catch(err=>{
+              console.log(err);
+            })
+
+        })
+
+     //   console.log(testDrives,'customer name taken');
+
+
+      }).then(()=>{
+
+        testDrives.map(testDrive=>{
+
+          axios.get(`/model/${testDrive['model']}`)
+          .then((res)=>{
+            const model=res.data;
+            testDrive['modelname']=model['modelName'];
+         //   console.log(model['modelName']);
+          })
+          .catch(err=>{
+            console.log(err);
+          })
+
+        })
+
+//        console.log(testDrives);
+
+      }).then(()=>{
+
+        //console.log(testDrives,'final');
+        setRows(testDrives);
+
+      }).catch(err=>{
+        console.log(err);
+      })
+      
+    
+
+  }
+
+  useEffect(()=>{
+
+   getTestDrives();
+
+  },[]);
+
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
@@ -271,7 +347,7 @@ function TestDrive(props) {
               </FormControl>
             </div>
 
-            <GenericTable rows={rows} labels={labels} view="/testDrive/1" />
+            <GenericTable rows={rows} labels={labels} view="/testDrive/" />
           </Container>
         </Grid>
 

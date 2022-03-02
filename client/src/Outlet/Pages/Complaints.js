@@ -34,6 +34,7 @@ import LineChart from "./LineChart";
 import DoughNut from "./DoughNut";
 import { Doughnut } from "react-chartjs-2";
 import { Card } from "@material-ui/core";
+import { useState, useEffect } from "react";
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -89,6 +90,11 @@ const state2 = {
     },
   ],
 };
+
+// fetching Complaints Data
+function createComplaintsData(id, sourceType, from, complaintType, date, status) {
+  return { id, sourceType, from, complaintType, date, status };
+}
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -172,9 +178,6 @@ function getAllModels() {
   return allModels;
 }
 
-const rows = getAllModels();
-const labels = ["id", "type", "status", "actions"];
-
 function Complaints(props) {
   const [type, setType] = React.useState("");
 
@@ -190,6 +193,60 @@ function Complaints(props) {
 
   const history = useHistory();
   const { classes, theme } = props;
+
+  const getEmployeeName = async (entityId) => {
+    const res2 = await fetch(`/employees/${entityId}`);
+    const data2 = await res2.json();
+    return data2.name;
+  }
+
+  const getCustomerName = async (entityId) => {
+      const res2 = await fetch(`/customers/${entityId}`);
+      const data2 = await res2.json();
+      return data2.name;
+  }
+
+  const getAllComplaints = async () => {
+    let allComplaints = [];
+    let promises = [];
+
+    const res = await fetch("/complaints");
+    const data = await res.json();
+
+    console.log(data);
+    data.map(complaint => {
+        switch (complaint.sourceType) {
+            case "Employee":
+                let entityId = complaint.employeeId;
+                promises.push(getEmployeeName(entityId));
+                break;
+            case "Customer":
+                entityId = complaint.customerId;
+                promises.push(getCustomerName(entityId));
+                break;
+            default:
+                break;
+        }
+    });
+    let result = await Promise.all(promises);
+    let idx = 0;
+    data.map(complaint => {
+        console.log("entity id: ", complaint._id);
+        allComplaints.push(createComplaintsData(complaint._id, complaint.sourceType, result[idx++], complaint.complaintType,
+                                                            complaint.date, complaint.status));
+    })
+    console.log("allComplaints", allComplaints);
+    setRows(allComplaints);
+  }
+
+  const [rows, setRows] = useState([]);
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    getAllComplaints();
+    setLabels(["sourceType", "from", "complaintType", "date", "status", "actions"]);
+  }, []);
+
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
@@ -256,7 +313,7 @@ function Complaints(props) {
           <Container
             maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
           >
-            <GenericTable rows={rows} labels={labels} view="/complaints/1" />
+            <GenericTable rows={rows} labels={labels} view="/complaints/" />
           </Container>
         </Grid>
 
