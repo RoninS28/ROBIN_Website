@@ -116,6 +116,17 @@ const model = new mongoose.Schema({
             image: String //src to the image / avatar
         }
 
+    ],
+    modelTypes: [
+        {
+            modelTypeName: String,
+            modelTypeFeatures: [
+                {
+                    modelTypeFeature: String,
+                    value: String
+                }
+            ]
+        }
     ]
 
 

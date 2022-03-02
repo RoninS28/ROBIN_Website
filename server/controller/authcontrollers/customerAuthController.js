@@ -1,5 +1,6 @@
-const User = require('../../models/auth/CustomerUser')
+const User = require('../../models/auth/User')
 const jwt = require('jsonwebtoken')
+const Customer = require('../../models/customer/CustomerSchema')
 
 // handle errors
 const handleErrors = (err) => {
@@ -57,17 +58,57 @@ module.exports.signup_get = (req, res) => {
 }
 
 module.exports.login_get = (req, res) => {
-    return res.status(201).json({hello:"hello"})
+    return res.status(201).json({ hello: "hello" })
 }
 
 module.exports.signup_post = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const user = await User.create({ email, password })
-        const token = createToken(user._id)
-        res.cookie('jwttoken', token, { httpOnly: true, maxAge: maxAge })
-        return res.status(201).json({ user: user._id })
+        const role = "customer"
+        console.log("into try block")
+        // const user = await User.create({ email, password, role })
+        User.create({ email, password, role }).then((result) => {
+            console.log("result is " + result._id)
+            const token = createToken(result._id)
+            res.cookie('jwttoken', token, { httpOnly: true, maxAge: maxAge })
+            const address1 = {
+                flatNo: 'A-302',
+                buildingName: 'Hari',
+                residencyName: 'Ramnagar',
+                streetName: 'Pashan',
+                landmark: 'DSK Raanwara',
+                area: 'Pashan',
+                city: 'Pune',
+                state: 'Maharashtra'
+            }
+            const newcust = new Customer({
+                _id: result._id,
+                fname: 'Saudagar',
+                mname: 'Rajesh',
+                lname: 'Londhe',
+                emailID: email,
+                contact: 9767880733,
+
+                DOB: Date.parse("2000-08-16"),
+                address: address1,
+                ownedEVs: [
+
+                ],
+                serviceCentreChat: [
+
+                ],
+                chatbotChat: [
+
+                ]
+            })
+            newcust.save().then((result2) => {
+                console.log("new cust saved")
+                return res.status(201).json({ user: result._id })
+
+            })
+
+        })
     } catch (err) {
 
         const errors = handleErrors(err)

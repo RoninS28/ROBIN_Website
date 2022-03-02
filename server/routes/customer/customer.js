@@ -214,6 +214,66 @@ router.get('/addmodel', (req, res) => {
     res.send('saved')
 })
 
+router.get('/updatemodels', (req, res) => {
+    mymodelTypes = [
+        {
+            modelTypeName: 'TOP END MODEL',
+            modelTypeFeatures: [
+                {
+                    modelTypeFeature: 'Braking System',
+                    value: 'ABS'
+                },
+                {
+                    modelTypeFeature: 'HeadLight system',
+                    value: 'LED'
+                }
+            ]
+        },
+        {
+            modelTypeName: 'VTRX MODEL',
+            modelTypeFeatures: [
+                {
+                    modelTypeFeature: 'Braking System',
+                    value: 'ABS'
+                },
+                {
+                    modelTypeFeature: 'HeadLight system',
+                    value: 'Halogen'
+                }
+            ]
+        },
+        {
+            modelTypeName: 'AVG MODEL',
+            modelTypeFeatures: [
+                {
+                    modelTypeFeature: 'Braking System',
+                    value: 'DRUM'
+                },
+                {
+                    modelTypeFeature: 'HeadLight system',
+                    value: 'LED'
+                }
+            ]
+        },
+        {
+            modelTypeName: 'BASIC MODEL',
+            modelTypeFeatures: [
+                {
+                    modelTypeFeature: 'Braking System',
+                    value: 'DRUM'
+                },
+                {
+                    modelTypeFeature: 'HeadLight system',
+                    value: 'Halogen'
+                }
+            ]
+        },
+    ]
+    Model.updateMany({}, { modelTypes: mymodelTypes }).then((result) => {
+        res.send('updated')
+    })
+})
+
 router.get('/placeorder', (req, res) => {
     Factory.findOne({ 'name': "Alpha Industries" }).then((factresult) => {
         Employee.findOne({ 'name': 'Akhilesh Yadav' }).then((empresult) => {

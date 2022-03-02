@@ -111,6 +111,8 @@ const ProductsSelection = (props) => {
         return true
     }
 
+    const [modelTypeoptions, setModelTypeoptions] = useState([])
+    const [coloroptions, setColoroptions] = useState([])
 
     const getProduct = () => {
         console.log("into use effect")
@@ -126,6 +128,29 @@ const ProductsSelection = (props) => {
             setFeatureList1(response.data.featureList.splice(0, 3))
             console.log(`SPLICE 1 IS ${response.data.featureList.splice(0, 3)}`)
             console.log(`SPLICE 2 IS ${response.data.featureList.splice(3, -1)}`)
+            const typesarray = []
+            const modeltypes = response.data.modelTypes
+            for (var i = 0; i < modeltypes.length; i++) {
+                console.log(`i is {i}`)
+                typesarray.push({
+                    label: modeltypes[i].modelTypeName,
+                    value: i + 1
+                })
+            }
+
+            setModelTypeoptions(typesarray)
+
+            const colorsarray = []
+            const colors = response.data.colors
+            for (var i = 0; i < colors.length; i++) {
+                console.log(`i is {i}`)
+                colorsarray.push({
+                    label: colors[i].color,
+                    value: i + 1
+                })
+            }
+
+            setColoroptions(colorsarray)
 
             // modelDB = response.data
         })
@@ -148,16 +173,31 @@ const ProductsSelection = (props) => {
     ]
 
 
-    const ModelTypeoptions = [
-        { label: "TOP END MODEL", value: "1" },
-        { label: "VTR MODEL", value: "2" },
-        { label: "BASIC MODEL", value: "3" },
-    ];
+    // const ModelTypeoptions = [
+    //     { label: "TOP END MODEL", value: "1" },
+    //     { label: "VTR MODEL", value: "2" },
+    //     { label: "BASIC MODEL", value: "3" },
+    // ];
 
     const [ModelTypeValue, setModelTypeValue] = useState('');
 
-    const ModelTypeComponent = () => <Select style={{ marginTop: '30px', marginBottom: '20px', width: '100px' }} onChange={(e) => { setModelTypeValue(e.value) }} options={ModelTypeoptions} value={ModelTypeoptions.filter(function (option) {
+    const ModelTypeComponent = () => <Select style={{ marginTop: '30px', marginBottom: '20px', width: '100px' }} onChange={(e) => { setModelTypeValue(e.value) }} options={modelTypeoptions} value={modelTypeoptions.filter(function (option) {
         return option.value === ModelTypeValue;
+    })} />;
+
+    const [ColorOptionsValue, setColorOptionsValue] = useState('');
+
+    const ColorOptionsComponent = () => <Select theme={(theme) => ({
+        ...theme,
+        borderRadius: 0,
+        colors: {
+            ...theme.colors,
+            text: 'orangered',
+            primary25: 'hotpink',
+            primary: 'black',
+        },
+    })} style={{ marginTop: '30px', marginBottom: '20px', width: '100px', backgroundColor: 'red', color: 'blue' }} onChange={(e) => { setColorOptionsValue(e.value) }} options={coloroptions} value={coloroptions.filter(function (option) {
+        return option.value === ColorOptionsValue;
     })} />;
 
     const DiscountComponent = (discount) =>
@@ -256,7 +296,7 @@ const ProductsSelection = (props) => {
                         <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Model Type</p>
                         <ModelTypeComponent sx={{ marginTop: '30px' }} />
                         <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Color</p>
-                        <ModelTypeComponent sx={{ marginTop: '30px' }} />
+                        <ColorOptionsComponent sx={{ marginTop: '30px' }} />
                         <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Selected: Red</p>
 
 

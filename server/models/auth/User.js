@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter a password'],
         minlength: [6, 'Minimum password length is 6 characters']
     },
+    role: {
+        type: String, //admin / customer / factory wroker / sevieman / service centre / hr
+        required: true
+    }
 
 })
 
@@ -47,5 +51,5 @@ userSchema.statics.login = async function (email, password) {
 }
 
 
-const CustUser = mongoose.model('CustUser', userSchema)
-module.exports = CustUser
+const User = mongoose.model('User', userSchema)
+module.exports = User
