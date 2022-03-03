@@ -6,6 +6,8 @@ import { color, display } from "@mui/system";
 import v2 from '../Assets/v2.jpeg'
 import '../PagesStyles/Bookings.css';
 import { useHistory } from "react-router";
+import { useState,useEffect } from "react";
+import axios from 'axios'
 
 
 
@@ -76,7 +78,7 @@ const useStyles = makeStyles((theme) => {
 
 const Bookings = () => {
     const classes = useStyles()
-    const myBookingsList = [
+    const MyOrdersList = [
         {
             id: 1,
             imagesrc: "v2",
@@ -106,8 +108,45 @@ const Bookings = () => {
 
 
     const handleProduct = (e) => {
-        history.push('/bookingsStage/' + e.id)
+        history.push('/bookingsStage/' + e.ticketID)
     }
+
+
+
+    const [MyOrders, setMyOrders] = useState([])
+
+    const getMyOrders = () => {
+
+        const tempOrders = []
+
+        axios.get("/myBooking/myEVs").then((response) => {
+          console.log(`RESPONSE IS ${response.data}`)
+    
+          if (response.data == "You must be logged in to view this page") {
+            history.push('/login');
+          }
+          else {
+            let myOrderArr = response.data
+            
+            myOrderArr.map(item => {
+    
+              tempOrders.push(item)
+              
+            })
+    
+            console.log(tempOrders)
+            setMyOrders(tempOrders)
+            console.log(MyOrders)
+          }
+        })
+      }
+
+      useEffect(() => {
+        
+        getMyOrders()
+        console.log('rerender')
+      }, []);
+
     return (
         <div className="bookingScreen">
             <div className={classes.heading}>
@@ -131,7 +170,7 @@ const Bookings = () => {
 
 
                 <Grid container spacing={3} justifyContent="space-evenly" className={classes.bookingrow}>
-                    {myBookingsList.map(item => (
+                    {MyOrders.map(item => (
                         // <div className={classes.bookingrow}>
 
                         //     <br />
@@ -150,13 +189,16 @@ const Bookings = () => {
                             <Grid item spacing={3} key={item.plateNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo} onClick={(e) => handleProduct(item)}>
                                 <div className="bookingrowInfo">
                                     <div>
-                                        {item.model}
+                                        {item.modelName}
                                     </div>
                                     <div>
-                                        {item.plateNumber}
+                                        {item.vehicleNumber}
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         Purchased on {item.purchaseDate}
+                                    </div> */}
+                                    <div>
+                                        {item.chassisNumber}
                                     </div>
 
 

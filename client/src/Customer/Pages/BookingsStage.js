@@ -10,6 +10,7 @@ import '../PagesStyles/BookingsStage.css'
 // import ' PagesStyles/BookingsStage.css';
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios'
+import { useParams } from "react-router";
 const useStyles = makeStyles((theme) => {
     return {
         root: {
@@ -189,11 +190,27 @@ const BookingsStage = () => {
 
     }
 
-    useEffect(() => {
-        axios.get("/bookingsStage/61fc0d24430fe6834c6d39bd").then((response) => {
+    const {id} =useParams();
+    const [stages,setStages]=useState([]);
+    const getStages = () =>{
+        axios.get("/myBooking/myEVs").then((response) => {
             console.log(response.data)
+            for(var i in response.data)
+            {
+                if(i.ticketid==id)
+                {
+                    setStages(i.stages);
+                }
+            }
             console.log('hello')
+            console.log(stages)
         })
+    }
+
+    useEffect(() => {
+        getStages();
+        console.log(stages);
+        console.log('rerender')
     }, []);
 
 
@@ -217,7 +234,8 @@ const BookingsStage = () => {
                 }} />
             </div>
             <div className={classes.ticketid} style={{ marginBottom: "50px" }}>
-                Ticket Id: {vehicleInfo.ticketid}
+                {/* Ticket Id: {vehicleInfo.ticketid} */}
+                Ticket Id: {id}
             </div>
 
 

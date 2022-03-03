@@ -50,6 +50,7 @@ app.use(custAuthRoutes)
 app.use('/products', requireCustAuth, require('./routes/customer/products'));
 app.use('/servicing', requireCustAuth, require('./routes/customer/servicing'));
 app.use('/chatbot', requireCustAuth, require('./routes/customer/chatbotMsg'));
+app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
 
 
 
