@@ -1,75 +1,96 @@
-import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from "react-router-dom";
-import Home from "../Pages/Home";
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
-import './Background/StarryNight.css';
-import Products from "../Pages/Products";
-import TestDrive from "../Pages/TestDrive";
-import Layout from "./Layout/Layout"
-import Bookings from "../Pages/Bookings";
-import BookingsStage from "../Pages/BookingsStage";
-import ProductsView from "../Pages/ProductsView";
-import ServicingConfirm from "../Pages/ServicingConfirm";
-import Servicing from "../Pages/Servicing";
-import ServicingBook from "../Pages/ServicingBook";
-import Chatbot from "../Pages/Chatbot";
-import TestDriveBooking from "../Pages/TestDriveBooking";
-import TestDriveOutlet from "../Pages/TestDriveOutlet";
-import NotificationsRoom from "../Pages/NotificationsChat";
-import ProductsSelection from "../Pages/ProductsSelection";
-import Login from "../Pages/Login";
-import Signup from "../Pages/Signup";
-import { useEffect } from "react";
+// import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from "react-router-dom";
+// import Home from "../Pages/Home";
+// import Navbar from "./Navbar/Navbar";
+// import Footer from "./Footer/Footer";
+// import './Background/StarryNight.css';
+// import Products from "../Pages/Products";
+// import TestDrive from "../Pages/TestDrive";
+// import Layout from "./Layout/Layout"
+// import Bookings from "../Pages/Bookings";
+// import BookingsStage from "../Pages/BookingsStage";
+// import ProductsView from "../Pages/ProductsView";
+// import ServicingConfirm from "../Pages/ServicingConfirm";
+// import Servicing from "../Pages/Servicing";
+// import ServicingBook from "../Pages/ServicingBook";
+// import Chatbot from "../Pages/Chatbot";
+// import TestDriveBooking from "../Pages/TestDriveBooking";
+// import TestDriveOutlet from "../Pages/TestDriveOutlet";
+// import NotificationsRoom from "../Pages/NotificationsChat";
+// import ProductsSelection from "../Pages/ProductsSelection";
+// import Login from "../Pages/Login";
+// import Signup from "../Pages/Signup";
+// import { useEffect } from "react";
 
+
+
+// function Routing(props) {
+//   const { loggedIn, setLoggedIn } = props;
+//   const history = useHistory();
+//   const location = useLocation();
+
+//   useEffect(() => {
+//     setLoggedIn("true");
+//     localStorage.setItem("userLoggedIn", "customer");
+
+//     if (location.pathname == '/customer') {
+//       console.log("pushing / to URL");
+//       history.push("/");
+//     }
+//   })
+
+//   return (
+//     <Router>
+//       {/* <Navbar style={{position:"fixed"}}></Navbar> */}
+
+//       {/* <div className = 'back'> */}
+//       <Layout setLoggedIn={setLoggedIn}>
+
+//         <Switch>
+
+//           <Route path='/' exact component={Home} ></Route>
+//           <Route path='/products' exact component={Products} ></Route>
+//           <Route path='/products/:id' exact component={ProductsView} ></Route>
+//           <Route path='/products/:id/book' exact component={ProductsSelection} ></Route>
+//           <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
+//           <Route path='/testdrive' exact component={TestDrive} ></Route>
+//           <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>
+//           <Route path='/TestDriveOutlet' exact component={TestDriveOutlet} ></Route>
+//           <Route path='/bookings' exact component={Bookings} ></Route>
+//           <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
+//           <Route path='/servicing' exact component={Servicing} ></Route>
+//           <Route path='/chatbot' exact component={Chatbot} ></Route>
+//           <Route path='/notifications' exact component={NotificationsRoom} ></Route>
+//           <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
+//           <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
+//           <Route path='/login' exact component={Login} ></Route>
+//           <Route path='/signup' exact component={Signup} ></Route>
+//         </Switch>
+//       </Layout>
+//       {/* </div> */}
+//       {/* <Footer/> */}
+//     </Router>
+//   );
+// }
+
+// export { Routing };
+
+
+
+import { useState, useEffect } from "react";
+import Navbar from "./Navbar/Navbar";
 
 
 function Routing(props) {
   const { loggedIn, setLoggedIn } = props;
-  const history = useHistory();
-  const location = useLocation();
 
   useEffect(() => {
     setLoggedIn("true");
     localStorage.setItem("userLoggedIn", "customer");
-
-    if (location.pathname == '/customer') {
-      console.log("pushing / to URL");
-      history.push("/");
-    }
   })
-
-  return (
-    <Router>
-      {/* <Navbar style={{position:"fixed"}}></Navbar> */}
-
-      {/* <div className = 'back'> */}
-      <Layout setLoggedIn={setLoggedIn}>
-
-        <Switch>
-
-          <Route path='/' exact component={Home} ></Route>
-          <Route path='/products' exact component={Products} ></Route>
-          <Route path='/products/:id' exact component={ProductsView} ></Route>
-          <Route path='/products/:id/book' exact component={ProductsSelection} ></Route>
-          <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
-          <Route path='/testdrive' exact component={TestDrive} ></Route>
-          <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>
-          <Route path='/TestDriveOutlet' exact component={TestDriveOutlet} ></Route>
-          <Route path='/bookings' exact component={Bookings} ></Route>
-          <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
-          <Route path='/servicing' exact component={Servicing} ></Route>
-          <Route path='/chatbot' exact component={Chatbot} ></Route>
-          <Route path='/notifications' exact component={NotificationsRoom} ></Route>
-          <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
-          <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
-          <Route path='/login' exact component={Login} ></Route>
-          <Route path='/signup' exact component={Signup} ></Route>
-        </Switch>
-      </Layout>
-      {/* </div> */}
-      {/* <Footer/> */}
-    </Router>
+  return ( 
+      <Navbar style={{position:"fixed"}} setLoggedIn={setLoggedIn}></Navbar>
+    
   );
 }
 
-export { Routing };
+export {Routing};

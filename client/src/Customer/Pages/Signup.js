@@ -1,4 +1,3 @@
-// import "../PagesStyles/LoginSignUp.css"
 import axios from 'axios'
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
@@ -41,11 +40,11 @@ export default function Signup() {
     return (
         <form method="POST" style={{
             width: '360px', margin: '0 auto', padding: '30px', boxShadow: '1px 2px 3px rgba(0,0,0,0.1)',
-            borderRadius: '10px', background: 'white'
+            borderRadius: '10px', background: 'white', justifyContent:'center'
         }}>
             <h2 style={{ fontSize: '2.4em', fontWeight: '750', marginBottom: '40px' }}>Sign up</h2>
 
-            <label for="email" style={{ display: 'block', margin: '20px 0 10px' }}>Email</label>
+            <label for="email" >Email</label>
 
             <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter Email" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
 
@@ -77,6 +76,8 @@ export default function Signup() {
                 }}
                 onClick={handleSignup}
             >Sign up</button>
+
+            <div>Already have an Account?<a href="/login">Login</a></div>
         </form>
 
     );

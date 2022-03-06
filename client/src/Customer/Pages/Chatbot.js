@@ -23,7 +23,28 @@ import i4 from '../Assets/i4.jpg'
 import i5 from '../Assets/i5.jpg'
 import i6 from '../Assets/i6.jpg'
 
+// import Chatbot from "react-chatbot-kit";
+import Chatbot from 'react-simple-chatbot'
+// import config from "./configs/chatbotConfig";
+// import MessageParser from "./chatbot/MessageParser";
+// import ActionProvider from "./chatbot/ActionProvider";
 import axios from 'axios'
+
+const BotRedirect = ({ url, message }) => {
+    return (
+      <div>
+        <a href={url} target="_blank">
+          {message}
+        </a>
+      </div>
+    );
+  };
+
+  const config ={
+    width: "400px",
+    height: "500px",
+    floating: true,
+  };
 
 const styles = (theme) => ({
     typography: {
@@ -186,10 +207,78 @@ const ChatRoom = ({ classes }) => {
         console.log('rerender')
       }, []);
 
+      const steps = [
+        {
+          id: "1",
+          message: "Hello!",
+          trigger: "2"
+        },
+        {
+          id: "2",
+          message: "How can I help you?",
+          trigger: "3"
+        },
+        {
+          id: "3",
+          options: [
+            { value: 1, label: "Dead Battery", trigger: "4" },
+            { value: 2, label: "Tyre damage", trigger: "5" }
+          ]
+        },
+        {
+            id: "4",
+            message: "Where are you?",
+            trigger: "5"
+        },
+        {
+            id: "5",
+            message: "Please share your location, we will use it to put you in touch with nearest provider.",
+            trigger: "6"
+        },
+        {
+            id: "6",
+            user: true,
+            trigger: "7"
+        },
+        {
+            id: "7",
+            message: "We will reach you. :)",
+            trigger: "2"
+        }
+        // {
+        //   id: "4",
+        //   component: (
+        //     <BotRedirect
+        //       message="See all examples in this page"
+        //       url="<https://lucasbassetti.com.br/react-simple-chatbot/#/docs/previous-value>"
+        //     />
+        //   ),
+        //   trigger: "2"
+        // },
+        // {
+        //   id: "5",
+        //   component: (
+        //     <BotRedirect
+        //       message="See chatbot API here"
+        //       url="<https://lucasbassetti.com.br/react-simple-chatbot/#/docs/chatbot>"
+        //     />
+        //   ),
+        //   trigger: "2"
+        // }
+      ];
+    
 
     return (
         <div id="chatbotScreen">
-
+            <Chatbot
+        // config={config}
+        // messageParser={MessageParser}
+        // actionProvider={ActionProvider}
+        headerTitle="Speech Synthesis"
+  speechSynthesis={{ enable: true, lang: 'en' }}
+        steps={steps}
+        {...config}
+      />
             <div className="header" id="chatbotHeader" >
                 SMART CHATBOT
             </div>
