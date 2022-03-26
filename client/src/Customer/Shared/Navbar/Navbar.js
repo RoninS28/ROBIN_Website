@@ -565,7 +565,7 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/servicingConfirm" style={{ textDecoration: 'none' }}>
+                <Link to="/servicing" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <BuildIcon />
@@ -739,10 +739,10 @@ const Navbar = (props) => {
                         <Route path='/bookings' exact component={Bookings} ></Route>
                         <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
                         <Route path='/servicing' exact component={Servicing} ></Route>
-                        <Route path='/chatbot' exact component={Chatbot} ></Route>
-                        <Route path='/notifications' exact component={NotificationsRoom} ></Route>
                         <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
                         <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
+                        <Route path='/chatbot' exact component={Chatbot} ></Route>
+                        <Route path='/notifications' exact component={NotificationsRoom} ></Route>
                         <Route path='/login' exact component={Login} ></Route>
                         <Route path='/signup' exact component={Signup} ></Route>
                     </Switch>

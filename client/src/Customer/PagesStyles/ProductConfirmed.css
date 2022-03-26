@@ -1,0 +1,27 @@
+div.productConfirmedScreen{
+    display:flex; 
+    justify-content: center;
+}
+
+
+div.productConfirmedScreen div.contents{
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    margin-top: 100px 
+    
+}
+div.productConfirmedScreen div.iconDiv{
+    margin-bottom: 50px; 
+    display: flex; 
+    justify-content: center; 
+
+}
+div.productConfirmedScreen div.textDiv{
+    font-size: 30px; 
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+
+}

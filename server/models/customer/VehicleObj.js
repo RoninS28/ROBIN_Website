@@ -12,6 +12,10 @@ const vehicleObj = {
         type: Boolean,
         required: true
     },
+    image: {
+        type: String,
+        required: true
+    },
     factoryID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
@@ -59,6 +63,10 @@ const vehicleObj = {
     servicing: [
         servicingInfoObj
     ],
+    currentStage: {
+        type: Number,
+        required: true
+    },
     stages: [
         stageObj
     ],

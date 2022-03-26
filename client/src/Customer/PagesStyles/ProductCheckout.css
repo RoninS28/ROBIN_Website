@@ -22,6 +22,9 @@ div.productCheckoutScreen div.orderConfirmationTitle{
     font-size: '35px';
     margin-top: '30px';
 
+}
 
-
+div.productCheckoutScreen div.image{
+    display: flex;
+    justify-content: center;
 }

@@ -3,9 +3,17 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { color, display } from "@mui/system";
-import v2 from '../Assets/v2.jpeg'
+import v1 from '../Assets/v1.png'
+import v2 from '../Assets/v2uncropped.jpeg'
+import v3 from '../Assets/v3.jpeg'
+import v4 from '../Assets/v4.png'
+import v5 from '../Assets/v5.png'
+import v6 from '../Assets/v6.png'
+import v7 from '../Assets/v7.png'
 import '../PagesStyles/Servicing.css';
 import { useHistory } from "react-router";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => (
     {
@@ -73,6 +81,28 @@ const useStyles = makeStyles((theme) => (
     }
 ))
 
+const getMyImage = (source) => {
+    console.log(`SOURCE IS ${source}`)
+    const x = source.replace('../Assets/', '')
+    const img = x.substring(0, 2)
+    switch (img) {
+        case 'v2':
+            return v2
+        case 'v3':
+            return v3
+        case 'v4':
+            return v4
+        case 'v5':
+            return v5
+        case 'v6':
+            return v6
+        case 'v7':
+            return v7
+
+
+    }
+}
+
 
 const Servicing = () => {
     const classes = useStyles()
@@ -81,6 +111,39 @@ const Servicing = () => {
         history.push('/servicingBook/' + e.id)
     }
 
+    const [MyOrders, setMyOrders] = useState([])
+
+    const getMyOrders = () => {
+
+        const tempOrders = []
+
+        axios.get("/myBooking/myEVs").then((response) => {
+            console.log(`RESPONSE IS ${response.data}`)
+
+            if (response.data == "You must be logged in to view this page") {
+                history.push('/login');
+            }
+            else {
+                let myOrderArr = response.data
+
+                myOrderArr.map(item => {
+                    if (item.status == false) {
+                        tempOrders.push(item)
+                    }
+                })
+
+                console.log(tempOrders)
+                setMyOrders(tempOrders)
+                console.log(MyOrders)
+            }
+        })
+    }
+
+    useEffect(() => {
+
+        getMyOrders()
+        console.log('rerender')
+    }, []);
 
 
     const myVehicleList = [
@@ -88,7 +151,7 @@ const Servicing = () => {
             id: 1,
             imagesrc: "v2",
             model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "MH 12 FP 9602",
+            vehicleNumber: "MH 12 FP 9602",
             purchaseDate: "28/05/2021",
             status: "Up to Date",
             stage: "10",
@@ -101,7 +164,7 @@ const Servicing = () => {
             id: 2,
             imagesrc: "v2",
             model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "MH 12 SG 5488",
+            vehicleNumber: "MH 12 SG 5488",
             purchaseDate: "08/09/2021",
             status: "Past Due",
             stage: "3",
@@ -150,7 +213,7 @@ const Servicing = () => {
 
 
                 <Grid container spacing={3} justifyContent="space-evenly" className={classes.bookingrow}>
-                    {myVehicleList.map(item => (
+                    {MyOrders.map(item => (
                         // <div className={classes.bookingrow}>
 
                         //     <br />
@@ -158,30 +221,28 @@ const Servicing = () => {
                         // <div>
                         <Grid container item xs={12} md={12} lg={12} xl={12} >
 
-                            <Grid item spacing={3} key={item.plateNumber} xs={3} md={3} lg={3} xl={3} className={classes.image} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={3} md={3} lg={3} xl={3} className={classes.image} >
 
                                 <div className="image">
 
-                                    <img src={v2} alt="image" height="200px" width="260px" />
+                                    <img src={getMyImage(item.image)} alt="image" height="200px" width="260px" />
                                 </div>
 
                             </Grid>
-                            <Grid item spacing={3} key={item.plateNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo} >
                                 <div className="bookingrowInfo">
                                     <div>
-                                        {item.model}
+                                        {item.modelName}
                                     </div>
                                     <div>
-                                        {item.plateNumber}
+                                        {item.vehicleNumber}
                                     </div>
-                                    <div>
-                                        Purchased on {item.purchaseDate}
-                                    </div>
+
 
 
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.plateNumber} xs={4} md={3} lg={3} xl={3} className={classes.statusColumn} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={4} md={3} lg={3} xl={3} className={classes.statusColumn} >
                                 <div className="statusColumn">
 
                                     <div style={item.status == 'Past Due' ? pastDueStyle : upToDateStyle}>
@@ -195,7 +256,7 @@ const Servicing = () => {
                                     </div>
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.plateNumber} xs={4} md={2} lg={2} xl={2} className={classes.statusColumn} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={4} md={2} lg={2} xl={2} className={classes.statusColumn} >
                                 <div className="statusColumn">
                                     <div className="bookServicingButtonDiv" >
                                         <button onClick={() => handleProduct(item)}>BOOK </button>
