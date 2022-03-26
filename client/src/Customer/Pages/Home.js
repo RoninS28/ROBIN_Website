@@ -7,6 +7,8 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import { Grid } from "@material-ui/core";
 import ImageSlider from "../Shared/ImageSlider/ImageSlider.js";
 
+import Chatbot from 'react-simple-chatbot'
+
 export default function Home() {
   const props = {
     image1: img1,
@@ -23,8 +25,59 @@ export default function Home() {
     history.push('/testdrive');
   }
 
+  const steps = [
+    {
+      id: "1",
+      message: "Hello!",
+      trigger: "2"
+    },
+    {
+      id: "2",
+      message: "How can I help you?",
+      trigger: "3"
+    },
+    {
+      id: "3",
+      options: [
+        { value: 1, label: "Dead Battery", trigger: "4" },
+        { value: 2, label: "Tyre damage", trigger: "5" }
+      ]
+    },
+    {
+        id: "4",
+        message: "Where are you?",
+        trigger: "5"
+    },
+    {
+        id: "5",
+        message: "Please share your location, we will use it to put you in touch with nearest provider.",
+        trigger: "6"
+    },
+    {
+        id: "6",
+        user: true,
+        trigger: "7"
+    },
+    {
+        id: "7",
+        message: "We will reach you. :)",
+        trigger: "2"
+    }];
+
+    const config ={
+      width: "400px",
+      height: "500px",
+      floating: true,
+    };
+
   return (
     <div>
+      <Chatbot
+        headerTitle="Speech Synthesis"
+  speechSynthesis={{ enable: true, lang: 'en' }}
+        steps={steps}
+        {...config}
+      />
       <div style={{ backgroundColor: "black", paddingBottom: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: "white", textShadow: "2px 2px blue", fontSize: "40px" }}>
           <center>WE BUILD THE VEHICLES FOR FUTURE.</center>
