@@ -1,6 +1,9 @@
 div.servicingBookScreen{
     font-family: 'Secular One', sans-serif;
 }
+div.servicingBookScreen label:after{
+    display: none;
+}
 div.servicingBookScreen div.allDetails{
     font-family: 'Secular One', sans-serif;
     font-size: 35px;

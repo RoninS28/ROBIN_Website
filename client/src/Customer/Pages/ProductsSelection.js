@@ -117,14 +117,16 @@ const ProductsSelection = (props) => {
 
     const [modelTypeoptions, setModelTypeoptions] = useState([])
     const [coloroptions, setColoroptions] = useState([])
+    const [mycolors, setMycolors] = useState([])
 
     const handleCheckout = () => {
-        const userColor = coloroptions[ColorOptionsValue - 1].label;
+        const userColor = mycolors[ColorOptionsValue - 1];
         const userVariant = modelTypeoptions[ModelTypeValue - 1].label;
 
-        // console.log(`current color is ${coloroptions[ColorOptionsValue - 1].label}`)
-        // console.log(`current color is ${modelTypeoptions[ModelTypeValue - 1].label}`)
-        history.push({ pathname: "/products/" + modelDB.modelID + "/checkout", state: { color: userColor, variant: userVariant, model: modelDB } });
+        console.log(`current color is ${mycolors[ColorOptionsValue - 1]}`)
+        console.log(`current color is ${modelTypeoptions[ModelTypeValue - 1].label}`)
+        history.push({ pathname: "/products/" + modelDB.modelID + "/checkout", state: { color: userColor, variant: userVariant, model: modelDB } })
+        // history.push({ pathname: "/products/" + modelDB.modelID + "/checkout", state: { color: userColor, variant: userVariant, model: modelDB } });
     }
 
 
@@ -155,9 +157,11 @@ const ProductsSelection = (props) => {
             setModelTypeoptions(typesarray)
 
             const colorsarray = []
+            const mycolorsarray = []
             const colors = response.data.colors
             for (var i = 0; i < colors.length; i++) {
                 console.log(`i is {i}`)
+                mycolorsarray.push(colors[i].color)
                 colorsarray.push({
                     label: <div style={{ width: '80px', height: '30px', backgroundColor: colors[i].color }}></div>,
                     value: i + 1
@@ -165,6 +169,7 @@ const ProductsSelection = (props) => {
             }
 
             setColoroptions(colorsarray)
+            setMycolors(mycolorsarray)
 
             // modelDB = response.data
         })

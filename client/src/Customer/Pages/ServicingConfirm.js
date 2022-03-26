@@ -6,6 +6,7 @@ import { color, display } from "@mui/system";
 import v2 from '../Assets/v2.jpeg'
 import '../PagesStyles/Bookings.css'
 import Select from "react-select";
+import '../PagesStyles/ServicingConfirm.css'
 import { useState } from "react";
 
 
@@ -113,7 +114,7 @@ const ServicingConfirm = () => {
 
 
 
-            <div className={classes.grids}>
+            <div className={classes.grids, "servicingConfirmScreen"} >
 
 
                 <Grid container spacing={3} justifyContent="space-evenly" className={classes.bookingrow}>
@@ -169,6 +170,8 @@ const ServicingConfirm = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
                                         htmlFor="grid-password"
+                                        style={{ width: 'max-content' }}
+
 
                                     >
                                         Select Appointment Date:
@@ -188,6 +191,8 @@ const ServicingConfirm = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
                                         htmlFor="grid-password"
+                                        style={{ width: 'max-content' }}
+
                                     >
                                         Select Time Slot:
                                     </label>
@@ -204,6 +209,8 @@ const ServicingConfirm = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
                                         htmlFor="grid-password"
+                                        style={{ width: 'max-content' }}
+
                                     >
                                         Pickup and Drop:
                                     </label>
@@ -220,6 +227,8 @@ const ServicingConfirm = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
                                         htmlFor="grid-password"
+                                        style={{ width: 'max-content' }}
+
                                     >
                                         Personal Notes:
                                     </label>

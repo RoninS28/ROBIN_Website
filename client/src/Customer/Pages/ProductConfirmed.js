@@ -14,6 +14,7 @@ import '../PagesStyles/ProductConfirmed.css'
 const ProductConfirmed = (props) => {
 
     const [orderID, setOrderID] = useState()
+    const history = useHistory()
 
 
     useEffect(() => {
@@ -23,6 +24,10 @@ const ProductConfirmed = (props) => {
 
 
     }, []);
+
+    const goBackToHomescreen = () => {
+        history.push('/')
+    }
 
     return orderID ? (
         <div className="productConfirmedScreen" >
@@ -36,8 +41,8 @@ const ProductConfirmed = (props) => {
                     <div> [{orderID}]</div>
 
 
-                    <div>
-                        go back to homescreen
+                    <div style={{ marginTop: '80px' }} onClick={goBackToHomescreen}>
+                        Go Back to Homescreen
                     </div>
 
                 </div>

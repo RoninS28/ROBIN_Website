@@ -81,6 +81,14 @@ const useStyles = makeStyles((theme) => {
         }
     }
 })
+
+const convertISOtoStringDate = (dateISO) => {
+    const temp = new Date(dateISO)
+    const stringDate = temp.getDate() + '/' + temp.getMonth() + '/' + temp.getFullYear()
+    return stringDate
+
+}
+
 const getMyImage = (source) => {
     console.log(`SOURCE IS ${source}`)
     const x = source.replace('../Assets/', '')
@@ -239,7 +247,7 @@ const Bookings = () => {
                                         {item.status == true ? 'Pending' : 'Delivered'}
                                     </div>
                                     <div>
-                                        {item.status == true ? 'Stage : ' + item.currentStage : item.deliveryDate}
+                                        {item.status == true ? 'Stage : ' + item.currentStage : convertISOtoStringDate(item.deliveryDate)}
                                     </div>
                                 </div>
                             </Grid>

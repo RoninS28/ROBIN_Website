@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
+import '../PagesStyles/Signup.css'
 export default function Signup() {
 
     const [email, setEmail] = useState('');
@@ -38,7 +39,7 @@ export default function Signup() {
     }
 
     return (
-        <div>
+        <div className='signupScreen'>
 
             <form method="POST" style={{
                 width: '360px', margin: '0 auto', padding: '30px', boxShadow: '1px 2px 3px rgba(0,0,0,0.1)',
@@ -62,24 +63,27 @@ export default function Signup() {
                     {passwordError}
                 </div>
 
-                <button
+                <center>
 
-                    style={{
-                        marginTop: '30px',
-                        borderRadius: '36px',
-                        background: '#FEE996',
-                        border: '0',
-                        textTransform: 'uppercase',
-                        fontWeight: '700',
-                        fontSize: '0.8em',
-                        display: 'block',
-                        padding: '10px 16px',
-                        letterSpacing: '2px'
-                    }}
-                    onClick={handleSignup}
-                >Sign up</button>
+                    <button
 
-                <div>Already have an Account?<a href="/login">Login</a></div>
+                        style={{
+                            marginTop: '30px',
+                            borderRadius: '36px',
+                            background: '#FEE996',
+                            border: '0',
+                            textTransform: 'uppercase',
+                            fontWeight: '700',
+                            fontSize: '0.8em',
+                            display: 'block',
+                            padding: '10px 16px',
+                            letterSpacing: '2px'
+                        }}
+                        onClick={handleSignup}
+                    >Sign up</button>
+                    <div style={{ marginTop: '30px' }}>Already have an Account?<a href="/login" style={{ marginLeft: '10px', color: 'blue', textDecoration: 'underline' }}>Login</a></div>
+                </center>
+
             </form>
         </div>
 

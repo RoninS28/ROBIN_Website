@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
+import '../PagesStyles/Login.css'
 
 export default function Login() {
 
@@ -39,7 +40,7 @@ export default function Login() {
     }
 
     return (
-        <div className="header">
+        <div className="header loginScreen">
 
             <form method="POST" style={{
                 width: '360px', margin: '0 auto', padding: '30px', boxShadow: '1px 2px 3px rgba(0,0,0,0.1)',
@@ -62,20 +63,25 @@ export default function Login() {
                 <div class="password error" name="passwordError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
                     {passwordError}
                 </div>
+                <center>
 
-                <button style={{
-                    marginTop: '30px',
-                    borderRadius: '36px',
-                    background: '#FEE996',
-                    border: '0',
-                    textTransform: 'uppercase',
-                    fontWeight: '700',
-                    fontSize: '0.8em',
-                    display: 'block',
-                    padding: '10px 16px',
-                    letterSpacing: '2px'
-                }}
-                    onClick={handleLogin}>login</button>
+                    <button style={{
+                        marginTop: '30px',
+                        borderRadius: '36px',
+                        background: '#FEE996',
+                        border: '0',
+                        textTransform: 'uppercase',
+                        fontWeight: '700',
+                        fontSize: '0.8em',
+                        display: 'block',
+                        padding: '10px 16px',
+                        letterSpacing: '2px'
+                    }}
+                        onClick={handleLogin}>Login</button>
+                    <div style={{ marginTop: '30px' }}>New User?<a href="/signup" style={{ marginLeft: '10px', color: 'blue', textDecoration: 'underline' }}>Signup!</a></div>
+                </center>
+
+
             </form>
         </div>
     );
