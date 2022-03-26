@@ -84,6 +84,7 @@ const getMyIcon = (source) => {
     }
 }
 
+
 const ProductsSelection = (props) => {
 
     const classes = useStyles(props)
@@ -113,6 +114,16 @@ const ProductsSelection = (props) => {
 
     const [modelTypeoptions, setModelTypeoptions] = useState([])
     const [coloroptions, setColoroptions] = useState([])
+
+    const handleCheckout = () => {
+        const userColor = coloroptions[ColorOptionsValue - 1].label;
+        const userVariant = modelTypeoptions[ModelTypeValue - 1].label;
+
+        // console.log(`current color is ${coloroptions[ColorOptionsValue - 1].label}`)
+        // console.log(`current color is ${modelTypeoptions[ModelTypeValue - 1].label}`)
+        history.push({ pathname: "/products/" + modelDB.modelID + "/checkout", state: { color: userColor, variant: userVariant, model: modelDB } });
+    }
+
 
     const getProduct = () => {
         console.log("into use effect")
@@ -182,6 +193,7 @@ const ProductsSelection = (props) => {
     const [ModelTypeValue, setModelTypeValue] = useState('');
 
     const ModelTypeComponent = () => <Select style={{ marginTop: '30px', marginBottom: '20px', width: '100px' }} onChange={(e) => { setModelTypeValue(e.value) }} options={modelTypeoptions} value={modelTypeoptions.filter(function (option) {
+
         return option.value === ModelTypeValue;
     })} />;
 
@@ -336,7 +348,7 @@ const ProductsSelection = (props) => {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
 
                 <div className="proceedToCheckoutButtonDiv" >
-                    <button >PROCEED TO CHECKOUT</button>
+                    <button onClick={handleCheckout}>PROCEED TO CHECKOUT</button>
 
                 </div>
             </div>

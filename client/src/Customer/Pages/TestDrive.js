@@ -15,7 +15,7 @@ import TestDriveOutlet from "./TestDriveOutlet";
 
 export default function TestDrive() {
 
-  const home=true;
+  const home = true;
 
   const Timeslotoptions = [
     { label: "6am-12pm", value: "1" },
@@ -47,7 +47,7 @@ export default function TestDrive() {
 
   const handleTestDriveBooking = () => {
     history.push('/TestDriveBooking')
-                  
+
   }
 
   const handleTestDrive = () => {
@@ -58,15 +58,17 @@ export default function TestDrive() {
     history.push('/TestDriveOutlet')
   }
 
-    const useStyles1 = makeStyles((theme) => {
+  const useStyles1 = makeStyles((theme) => {
     return {
       display: "block",
-    }})
+    }
+  })
 
-    const useStyles2 = makeStyles((theme) => {
+  const useStyles2 = makeStyles((theme) => {
     return {
       display: "none",
-    }})
+    }
+  })
 
   return (
     <>
@@ -74,7 +76,7 @@ export default function TestDrive() {
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-8/12 mt-10 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-600 shadow-lg rounded-lg bg-blueGray-200 border-0">
-              
+
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="btn-wrapper text-center">
                   {/* <ButtonGroup>
@@ -91,7 +93,7 @@ export default function TestDrive() {
                     className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
                     style={{ backgroundColor: "lightblue", borderWidth: "3px", borderColor: "#334756" }}
-                  onClick={handleTestDrive}
+                    onClick={handleTestDrive}
                   >
                     <center>At Home</center>
                   </button>
@@ -99,9 +101,9 @@ export default function TestDrive() {
                     className="lg:w-3/12 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
                     style={{ borderColor: "lightblue", borderWidth: "3px" }}
-                  onClick={handleTestDriveOutlet}
+                    onClick={handleTestDriveOutlet}
                   >
-                    <center>At Oulet</center>
+                    <center>At Outlet</center>
                   </button>
                 </div>
 
@@ -112,7 +114,7 @@ export default function TestDrive() {
                   <img src={require("../Assets/elescooter.jpg").default} />
                 </div></center>
                 <hr className="mt-6 border-b-1 border-blueGray-300 mb-5" />
-                
+
                 <form>
                   <div className="flex flex-wrap">
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">

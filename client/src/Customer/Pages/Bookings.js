@@ -3,10 +3,16 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { Grid } from "@material-ui/core";
 import { color, display } from "@mui/system";
-import v2 from '../Assets/v2.jpeg'
+import v1 from '../Assets/v1.png'
+import v2 from '../Assets/v2uncropped.jpeg'
+import v3 from '../Assets/v3.jpeg'
+import v4 from '../Assets/v4.png'
+import v5 from '../Assets/v5.png'
+import v6 from '../Assets/v6.png'
+import v7 from '../Assets/v7.png'
 import '../PagesStyles/Bookings.css';
 import { useHistory } from "react-router";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from 'axios'
 
 
@@ -75,6 +81,27 @@ const useStyles = makeStyles((theme) => {
         }
     }
 })
+const getMyImage = (source) => {
+    console.log(`SOURCE IS ${source}`)
+    const x = source.replace('../Assets/', '')
+    const img = x.substring(0, 2)
+    switch (img) {
+        case 'v2':
+            return v2
+        case 'v3':
+            return v3
+        case 'v4':
+            return v4
+        case 'v5':
+            return v5
+        case 'v6':
+            return v6
+        case 'v7':
+            return v7
+
+
+    }
+}
 
 const Bookings = () => {
     const classes = useStyles()
@@ -104,6 +131,7 @@ const Bookings = () => {
 
     ]
 
+
     const history = useHistory()
 
 
@@ -120,32 +148,32 @@ const Bookings = () => {
         const tempOrders = []
 
         axios.get("/myBooking/myEVs").then((response) => {
-          console.log(`RESPONSE IS ${response.data}`)
-    
-          if (response.data == "You must be logged in to view this page") {
-            history.push('/login');
-          }
-          else {
-            let myOrderArr = response.data
-            
-            myOrderArr.map(item => {
-    
-              tempOrders.push(item)
-              
-            })
-    
-            console.log(tempOrders)
-            setMyOrders(tempOrders)
-            console.log(MyOrders)
-          }
-        })
-      }
+            console.log(`RESPONSE IS ${response.data}`)
 
-      useEffect(() => {
-        
+            if (response.data == "You must be logged in to view this page") {
+                history.push('/login');
+            }
+            else {
+                let myOrderArr = response.data
+
+                myOrderArr.map(item => {
+
+                    tempOrders.push(item)
+
+                })
+
+                console.log(tempOrders)
+                setMyOrders(tempOrders)
+                console.log(MyOrders)
+            }
+        })
+    }
+
+    useEffect(() => {
+
         getMyOrders()
         console.log('rerender')
-      }, []);
+    }, []);
 
     return (
         <div className="bookingScreen">
@@ -182,7 +210,7 @@ const Bookings = () => {
 
                                 <div className="image">
 
-                                    <img src={v2} alt="image" height="200px" width="260px" />
+                                    <img src={getMyImage(item.image)} alt="image" height="200px" width="260px" />
                                 </div>
 
                             </Grid>
@@ -208,10 +236,10 @@ const Bookings = () => {
                                 <div className="statusColumn">
 
                                     <div>
-                                        {item.status}
+                                        {item.status == true ? 'Pending' : 'Delivered'}
                                     </div>
                                     <div>
-                                        {item.status == 'Pending' ? item.stage : item.deliveryDate}
+                                        {item.status == true ? 'Stage : ' + item.currentStage : item.deliveryDate}
                                     </div>
                                 </div>
                             </Grid>

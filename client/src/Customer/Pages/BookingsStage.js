@@ -190,15 +190,13 @@ const BookingsStage = () => {
 
     }
 
-    const {id} =useParams();
-    const [stages,setStages]=useState([]);
-    const getStages = () =>{
+    const { id } = useParams();
+    const [stages, setStages] = useState([]);
+    const getStages = () => {
         axios.get("/myBooking/myEVs").then((response) => {
             console.log(response.data)
-            for(var i in response.data)
-            {
-                if(i.ticketid==id)
-                {
+            for (var i in response.data) {
+                if (i.ticketid == id) {
                     setStages(i.stages);
                 }
             }

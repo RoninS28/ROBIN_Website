@@ -135,7 +135,7 @@
 //     anchorEl: null
 //   };
 
-  
+
 
 //   handleDrawerOpen = () => {
 //     this.setState({ open: !this.state.open });
@@ -318,12 +318,12 @@
 //               </ListItem>
 //             ))}
 //           </List>
-          
+
 //         </Drawer>
 //         <main className={classes.content}>
 //           <div className={classes.toolbar} />
 
-          
+
 //         </main>
 //       </div>
 //     );
@@ -387,11 +387,14 @@ import Home from "../../Pages/Home";
 // import Footer from "./Footer/Footer";
 import '../Background/StarryNight.css'
 import Products from "../../Pages/Products";
+import ProductsView from "../../Pages/ProductsView";
+import ProductsSelection from "../../Pages/ProductsSelection";
+import ProductsCheckout from "../../Pages/ProductCheckout";
+import ProductsConfirmed from "../../Pages/ProductConfirmed";
 import TestDrive from "../../Pages/TestDrive";
 // import Layout from "./Layout/Layout"
 import Bookings from "../../Pages/Bookings";
 import BookingsStage from "../../Pages/BookingsStage";
-import ProductsView from "../../Pages/ProductsView";
 import ServicingConfirm from "../../Pages/ServicingConfirm";
 import Servicing from "../../Pages/Servicing";
 import ServicingBook from "../../Pages/ServicingBook";
@@ -399,7 +402,6 @@ import Chatbot from "../../Pages/Chatbot";
 import TestDriveBooking from "../../Pages/TestDriveBooking";
 import TestDriveOutlet from "../../Pages/TestDriveOutlet";
 import NotificationsRoom from "../../Pages/NotificationsChat";
-import ProductsSelection from "../../Pages/ProductsSelection";
 import Login from "../../Pages/Login";
 import Signup from "../../Pages/Signup";
 // import { useEffect } from "react";
@@ -415,7 +417,7 @@ const Navbar = (props) => {
     const location = useLocation();
     useEffect(() => {
         console.log();
-        if(location.pathname == '/customer') {
+        if (location.pathname == '/customer') {
             console.log("pushing / to URL");
             history.push("/");
         }
@@ -539,7 +541,7 @@ const Navbar = (props) => {
                 <Link to="/products" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
-                            <TwoWheelerIcon/>
+                            <TwoWheelerIcon />
                         </ListItemIcon>
                         <ListItemText primary="Products" />
                     </ListItem>
@@ -548,7 +550,7 @@ const Navbar = (props) => {
                 <Link to="/testdrive" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
-                            <SpeedIcon/>
+                            <SpeedIcon />
                         </ListItemIcon>
                         <ListItemText primary="TestDrive" />
                     </ListItem>
@@ -728,6 +730,8 @@ const Navbar = (props) => {
                         <Route path='/products' exact component={Products} ></Route>
                         <Route path='/products/:id' exact component={ProductsView} ></Route>
                         <Route path='/products/:id/book' exact component={ProductsSelection} ></Route>
+                        <Route path='/products/:id/checkout' exact component={ProductsCheckout} ></Route>
+                        <Route path='/products/:id/orderConfirmed' exact component={ProductsConfirmed} ></Route>
                         <Route path='/testdrive/:id' exact component={TestDrive} ></Route>
                         <Route path='/testdrive' exact component={TestDrive} ></Route>
                         <Route path='/testdrivebooking' exact component={TestDriveBooking} ></Route>
@@ -735,10 +739,10 @@ const Navbar = (props) => {
                         <Route path='/bookings' exact component={Bookings} ></Route>
                         <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
                         <Route path='/servicing' exact component={Servicing} ></Route>
-                        <Route path='/chatbot' exact component={Chatbot} ></Route>
-                        <Route path='/notifications' exact component={NotificationsRoom} ></Route>
                         <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
                         <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
+                        <Route path='/chatbot' exact component={Chatbot} ></Route>
+                        <Route path='/notifications' exact component={NotificationsRoom} ></Route>
                         <Route path='/login' exact component={Login} ></Route>
                         <Route path='/signup' exact component={Signup} ></Route>
                     </Switch>
