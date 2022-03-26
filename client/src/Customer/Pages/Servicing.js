@@ -14,6 +14,7 @@ import '../PagesStyles/Servicing.css';
 import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+// import { Date } from '@date-io/date-fns'
 
 const useStyles = makeStyles((theme) => (
     {
@@ -81,6 +82,13 @@ const useStyles = makeStyles((theme) => (
     }
 ))
 
+const convertISOtoStringDate = (dateISO) => {
+    const temp = new Date(dateISO)
+    const stringDate = temp.getDate() + '/' + temp.getMonth() + '/' + temp.getFullYear()
+    return stringDate
+
+}
+
 const getMyImage = (source) => {
     console.log(`SOURCE IS ${source}`)
     const x = source.replace('../Assets/', '')
@@ -108,7 +116,8 @@ const Servicing = () => {
     const classes = useStyles()
 
     const handleProduct = (e) => {
-        history.push('/servicingBook/' + e.id)
+
+        history.push('/servicingBook/' + e.chassisNumber)
     }
 
     const [MyOrders, setMyOrders] = useState([])
@@ -186,7 +195,7 @@ const Servicing = () => {
     }
 
 
-    return (
+    return MyOrders ? (
         <div className="servicingScreen">
 
 
@@ -252,14 +261,14 @@ const Servicing = () => {
                                         {item.status == 'Past Due' ? "Ex-servicing date:" : "Next servicing:"}
                                     </div>
                                     <div style={{ color: '#F49F20' }}>
-                                        {item.status == 'Past Due' ? item.exServicingDate : item.nextServicingDate}
+                                        {item.status == 'Past Due' ? convertISOtoStringDate(item.exServicingDate) : convertISOtoStringDate(item.nextServicingDate)}
                                     </div>
                                 </div>
                             </Grid>
                             <Grid item spacing={3} key={item.vehicleNumber} xs={4} md={2} lg={2} xl={2} className={classes.statusColumn} >
                                 <div className="statusColumn">
                                     <div className="bookServicingButtonDiv" >
-                                        <button onClick={() => handleProduct(item)}>BOOK </button>
+                                        <button onClick={() => handleProduct(item)}>VIEW</button>
                                     </div>
 
                                     {/* <div>
@@ -281,7 +290,11 @@ const Servicing = () => {
 
 
         </div>
-    );
+    ) :
+        <div>
+            Loading
+        </div>
+        ;
 }
 
 export default Servicing;

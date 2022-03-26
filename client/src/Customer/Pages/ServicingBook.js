@@ -56,7 +56,7 @@ const ServicingBook = (props) => {
 
         },
         {
-            id: 2,
+            id: '8D7320C1AC.004',
             imagesrc: v2,
             model: "CITY - 1 ELECTRIC SCOOTER",
             plateNumber: "MH 12 SG 5488",

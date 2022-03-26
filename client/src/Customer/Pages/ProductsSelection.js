@@ -156,7 +156,7 @@ const ProductsSelection = (props) => {
             for (var i = 0; i < colors.length; i++) {
                 console.log(`i is {i}`)
                 colorsarray.push({
-                    label: colors[i].color,
+                    label: <div style={{ width: '80px', height: '30px', backgroundColor: colors[i].color }}></div>,
                     value: i + 1
                 })
             }
@@ -192,25 +192,25 @@ const ProductsSelection = (props) => {
 
     const [ModelTypeValue, setModelTypeValue] = useState('');
 
-    const ModelTypeComponent = () => <Select style={{ marginTop: '30px', marginBottom: '20px', width: '100px' }} onChange={(e) => { setModelTypeValue(e.value) }} options={modelTypeoptions} value={modelTypeoptions.filter(function (option) {
+    const ModelTypeComponent = () => <Select required style={{ marginTop: '30px', marginBottom: '20px', width: '100px' }} onChange={(e) => { setModelTypeValue(e.value) }} options={modelTypeoptions} value={modelTypeoptions.filter(function (option) {
 
         return option.value === ModelTypeValue;
     })} />;
 
     const [ColorOptionsValue, setColorOptionsValue] = useState('');
 
-    const ColorOptionsComponent = () => <Select theme={(theme) => ({
+    const ColorOptionsComponent = () => <Select required theme={(theme) => ({
         ...theme,
         borderRadius: 0,
 
         colors: {
             ...theme.colors,
             text: 'orangered',
-            primary25: 'hotpink',
-            primary: 'black',
+            // primary25: 'hotpink',
+            primary: 'grey',
 
         },
-    })} style={{ marginTop: '30px', marginBottom: '20px', width: '100px', backgroundColor: 'red', color: 'blue' }} onChange={(e) => { setColorOptionsValue(e.value) }} options={coloroptions} value={coloroptions.filter(function (option) {
+    })} style={{ marginTop: '30px', marginBottom: '20px', padding: 0, width: '100px', backgroundColor: 'red !important', color: 'blue' }} onChange={(e) => { setColorOptionsValue(e.value) }} options={coloroptions} value={coloroptions.filter(function (option) {
         return option.value === ColorOptionsValue;
     })} />;
 

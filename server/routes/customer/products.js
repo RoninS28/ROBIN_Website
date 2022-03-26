@@ -27,6 +27,11 @@ const Order = require('../../models/factory/OrderSchema')
 // })
 
 // fetch all the products
+const convertISOtoStringDate = (dateISO) => {
+    const stringDate = dateISO.getDate() + '/' + dateISO.getMonth() + '/' + dateISO.getFullYear()
+    return stringDate
+
+}
 
 router.get('/', (req, res, next) => {
     console.log('into get')
@@ -73,6 +78,8 @@ router.get('/:id/book', async (req, res) => {
     // }
 })
 
+
+
 // ! product checkout get
 router.get('/:id/checkout', async (req, res) => {
     console.log(req.params.id)
@@ -105,7 +112,8 @@ router.get('/:id/checkout', async (req, res) => {
                         factoryAddress: '22, Hingna Rd, Midc, Marol MIDC Industry Estate, Hingna',
                         factoryManager: 'Akhilesh Yadav',
                         customerName: customer.fname + ' ' + customer.lname + '',
-                        expectedDeliveryDate: expDelDate,
+                        expectedDeliveryDate: convertISOtoStringDate(expectedDeliveryDate),
+                        expectedDeliveryDateISO: expectedDeliveryDate,
                         totalAmount: model.price,
                         modelImg: model.image
                     }
@@ -120,7 +128,10 @@ router.get('/:id/checkout', async (req, res) => {
     })
 
 })
-
+const generateChassis = () => {
+    let n = (Math.random() * 0xfffff * 1000000).toString(16);
+    return n;
+};
 // ! checkout post
 router.post('/confirmOrder', async (req, res) => {
     console.log('into checkout post')
@@ -139,23 +150,28 @@ router.post('/confirmOrder', async (req, res) => {
                     modelName: req.body.modelName,
                     color: req.body.color,
                     active: true,
-                    expectedDeliveryDate: Date.parse('2022-02-10'),
+                    expectedDeliveryDate: req.body.expectedDeliveryDateISO,// Date.parse('2022-02-10'),
                     variant: req.body.variant,
                     fault: false,
 
                     stages: [
-                        { stage1: 'Completed' },
-                        { stage2: 'Completed' },
-                        { stage3: 'Completed' },
-                        { stage4: 'Completed' },
-                        { stage5: 'Completed' },
-                        { stage6: 'Completed' },
-                        { stage7: 'Completed' },
-                        { stage8: 'Completed' },
-                        { stage9: 'Completed' },
+                        { stage1: 'Pending' },
+                        { stage2: 'Pending' },
+                        { stage3: 'Pending' },
+                        { stage4: 'Pending' },
+                        { stage5: 'Pending' },
+                        { stage6: 'Pending' },
+                        { stage7: 'Pending' },
+                        { stage8: 'Pending' },
+                        { stage9: 'Pending' },
                     ]
                 })
+                var nextservDate = new Date()
+                // req.body.expectedDeliveryDateISO
+                const eddateISO = new Date(req.body.expectedDeliveryDateISO)
+                console.log(eddateISO.getDate())
 
+                nextservDate.setDate(eddateISO.getDate() + 200)//first servicing would be after 200 days from delivery date
 
                 newOrder.save().then((result) => {
                     const myvehicle = {
@@ -167,25 +183,27 @@ router.post('/confirmOrder', async (req, res) => {
                         modelName: req.body.modelName,
                         image: req.body.modelImage,
                         color: req.body.color,
-                        deliveryDate: req.body.expectedDeliveryDate,
+                        deliveryDate: req.body.expectedDeliveryDateISO,
                         variant: req.body.variant,
                         currentStage: 0,
+                        nextServicingDate: nextservDate,
                         stages: [
-                            { stage1: 'Completed' },
-                            { stage2: 'Completed' },
-                            { stage3: 'Completed' },
-                            { stage4: 'Completed' },
-                            { stage5: 'Completed' },
-                            { stage6: 'Completed' },
-                            { stage7: 'Completed' },
-                            { stage8: 'Completed' },
-                            { stage9: 'Completed' },
+                            { stage1: 'Pending' },
+                            { stage2: 'Pending' },
+                            { stage3: 'Pending' },
+                            { stage4: 'Pending' },
+                            { stage5: 'Pending' },
+                            { stage6: 'Pending' },
+                            { stage7: 'Pending' },
+                            { stage8: 'Pending' },
+                            { stage9: 'Pending' },
                         ],
                         // vehicleNumber: 'MH12 NV 5606',
-                        chassisNumber: '1GNCS18Z3M5480291',
+                        chassisNumber: generateChassis().toString().toUpperCase(),
 
 
                     }
+                    console.log(myvehicle)
 
                     Customer.findOneAndUpdate({ '_id': custresult._id }, { $push: { ownedEVs: myvehicle } }).then((pp) => {
                         res.send(result._id)

@@ -12,6 +12,7 @@ import { ButtonGroup, Button } from "@material-ui/core";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
 import TestDriveOutlet from "./TestDriveOutlet";
+import '../PagesStyles/TestDrive.css'
 
 export default function TestDrive() {
 
@@ -72,7 +73,7 @@ export default function TestDrive() {
 
   return (
     <>
-      <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "" }}>
+      <div className="container mx-auto px-4 h-full testDriveScreen" style={{ backgroundColor: "" }}>
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-8/12 mt-10 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-600 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -121,6 +122,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Name
                       </label>
@@ -131,9 +134,10 @@ export default function TestDrive() {
                       />
                     </div>
 
-                    <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                    <div className="relative  lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
+                        style={{ width: 'max-content' }}
                         htmlFor="grid-password"
                       >
                         Date of Birth
@@ -151,6 +155,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Pincode
                       </label>
@@ -165,6 +171,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Mobile No
                       </label>
@@ -181,6 +189,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Dl No
                       </label>
@@ -195,6 +205,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Address
                       </label>
@@ -213,6 +225,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Select Preferred Date
                       </label>
@@ -227,6 +241,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Select Time Slot
                       </label>
@@ -248,6 +264,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Enter OTP
                       </label>
@@ -262,6 +280,8 @@ export default function TestDrive() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         EV Model
                       </label>

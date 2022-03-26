@@ -49,7 +49,8 @@ const ProductCheckout = (props) => {
             modelName: data.modelName,
             modelImage: data.modelImg,
             custID: data.custID,
-            expectedDeliveryDate: data.expectedDeliveryDate
+            expectedDeliveryDate: data.expectedDeliveryDate,
+            expectedDeliveryDateISO: data.expectedDeliveryDateISO
         }).then((response) => {
             console.log(response.data)
             history.push({ pathname: '/products/' + model.modelID + '/orderConfirmed', state: { ticketid: response.data } });

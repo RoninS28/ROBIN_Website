@@ -49,7 +49,7 @@ const vehicleObj = {
         required: false
     },
     deliveryDate: {
-        type: String,
+        type: Date,
         required: false
     },
     vehicleNumber: {
@@ -58,6 +58,10 @@ const vehicleObj = {
     },
     chassisNumber: {
         type: String,
+        required: true
+    },
+    nextServicingDate: {
+        type: Date,
         required: true
     },
     servicing: [

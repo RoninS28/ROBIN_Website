@@ -1,71 +1,72 @@
 import Select from "react-select";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import '../PagesStyles/TestDrive.css'
 
 export default function TestDriveOutlet() {
-    const home=false;
-    const Timeslotoptions = [
-        { label: "6am-12pm", value: "1" },
-        { label: "12pm-8pm", value: "2" },
-        { label: "8pm-6am", value: "3" },
-      ];
-    
-      const [TimeslotValue, setTimeslotValue] = useState('');
-    
-      const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
-        return option.value === TimeslotValue;
-      })} />;
-    
-      const Modeloptions = [
-        { label: "Shine s1", value: "1" },
-        { label: "Glamour s2", value: "2" },
-        { label: "Hornet s3", value: "3" },
-      ];
-    
-      const [modelValue, setmodelValue] = useState('');
-    
-      const ModelComponent = () => <Select onChange={(e) => { setmodelValue(e.value) }} options={Modeloptions} value={Modeloptions.filter(function (option) {
-        return option.value === modelValue;
-      })} />;
+  const home = false;
+  const Timeslotoptions = [
+    { label: "6am-12pm", value: "1" },
+    { label: "12pm-8pm", value: "2" },
+    { label: "8pm-6am", value: "3" },
+  ];
+
+  const [TimeslotValue, setTimeslotValue] = useState('');
+
+  const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
+    return option.value === TimeslotValue;
+  })} />;
+
+  const Modeloptions = [
+    { label: "Shine s1", value: "1" },
+    { label: "Glamour s2", value: "2" },
+    { label: "Hornet s3", value: "3" },
+  ];
+
+  const [modelValue, setmodelValue] = useState('');
+
+  const ModelComponent = () => <Select onChange={(e) => { setmodelValue(e.value) }} options={Modeloptions} value={Modeloptions.filter(function (option) {
+    return option.value === modelValue;
+  })} />;
 
 
-      const Outletoptions = [
-        { label: "Katraj", value: "1" },
-        { label: "Pimpri", value: "2" },
-        { label: "Baner-Pashan", value: "3" },
-      ];
-    
-      const [OutletValue, setOutletValue] = useState('');
-    
-      const OutletComponent = () => <Select onChange={(e) => { setOutletValue(e.value) }} options={Outletoptions} value={Outletoptions.filter(function (option) {
-        return option.value === OutletValue;
-      })} />;
-    
-    
-      const history = useHistory()
-    
-    
-      const handleTestDriveBooking = () => {
-        history.push('/TestDriveBooking')
-                      
-      }
-    
-      const handleTestDrive = () => {
-        history.push('/TestDrive')
-      }
-    
-      const handleTestDriveOutlet = () => {
-        history.push('/TestDriveOutlet')
-      }
+  const Outletoptions = [
+    { label: "Katraj", value: "1" },
+    { label: "Pimpri", value: "2" },
+    { label: "Baner-Pashan", value: "3" },
+  ];
+
+  const [OutletValue, setOutletValue] = useState('');
+
+  const OutletComponent = () => <Select onChange={(e) => { setOutletValue(e.value) }} options={Outletoptions} value={Outletoptions.filter(function (option) {
+    return option.value === OutletValue;
+  })} />;
 
 
-    return (
-            <>
-                <div className="container mx-auto px-4 h-full" style={{ backgroundColor: "" }}>
+  const history = useHistory()
+
+
+  const handleTestDriveBooking = () => {
+    history.push('/TestDriveBooking')
+
+  }
+
+  const handleTestDrive = () => {
+    history.push('/TestDrive')
+  }
+
+  const handleTestDriveOutlet = () => {
+    history.push('/TestDriveOutlet')
+  }
+
+
+  return (
+    <>
+      <div className="container mx-auto px-4 h-full testDriveScreen" style={{ backgroundColor: "" }}>
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-8/12 mt-10 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-600 shadow-lg rounded-lg bg-blueGray-200 border-0">
-              
+
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="btn-wrapper text-center">
                   {/* <ButtonGroup>
@@ -81,18 +82,18 @@ export default function TestDriveOutlet() {
                   <button
                     className="lg:w-3/12 active:bg-blueGray-50 text-blueGray-700 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
-                    style={{ backgroundColor: "lightblue", borderWidth: "3px", borderColor: "#334756" }}
-                  onClick={handleTestDrive}
+                    style={{ borderColor: "lightblue", borderWidth: "3px" }}
+                    onClick={handleTestDrive}
                   >
                     <center>At Home</center>
                   </button>
                   <button
                     className="lg:w-3/12 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xl ease-linear transition-all duration-150"
                     type="button"
-                    style={{ borderColor: "lightblue", borderWidth: "3px" }}
-                  onClick={handleTestDriveOutlet}
+                    style={{ backgroundColor: "lightblue", borderWidth: "3px", borderColor: "#334756" }}
+                    onClick={handleTestDriveOutlet}
                   >
-                    <center>At Oulet</center>
+                    <center>At Outlet</center>
                   </button>
                 </div>
 
@@ -103,13 +104,15 @@ export default function TestDriveOutlet() {
                   <img src={require("../Assets/elescooter.jpg").default} />
                 </div></center>
                 <hr className="mt-6 border-b-1 border-blueGray-300 mb-5" />
-                
+
                 <form>
                   <div className="flex flex-wrap">
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Name
                       </label>
@@ -124,6 +127,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Date of Birth
                       </label>
@@ -140,6 +145,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Pincode
                       </label>
@@ -154,6 +161,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Mobile No
                       </label>
@@ -170,6 +179,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Dl No
                       </label>
@@ -184,6 +195,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Address
                       </label>
@@ -202,6 +215,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Select Preferred Date
                       </label>
@@ -216,6 +231,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Select Time Slot
                       </label>
@@ -237,6 +254,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Enter OTP
                       </label>
@@ -251,6 +270,8 @@ export default function TestDriveOutlet() {
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         EV Model
                       </label>
@@ -273,10 +294,12 @@ export default function TestDriveOutlet() {
 
 
                   <div id="wrapper">
-                  <center><div className="relative w-full lg:w-6/12 mb-12 px-2">
+                    <center><div className="relative w-full lg:w-6/12 mb-12 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
+                        style={{ width: 'max-content' }}
+
                       >
                         Select Outlet
                       </label>
@@ -308,7 +331,7 @@ export default function TestDriveOutlet() {
         </div>
       </div>
 
-            </>
+    </>
   );
 }
 

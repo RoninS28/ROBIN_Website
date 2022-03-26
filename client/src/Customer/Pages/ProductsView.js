@@ -354,7 +354,7 @@ const ProductsView = (props) => {
                             <div className="featureColumn">
 
                                 <Avatar src={getMyIcon(feature.image)} className="featureAvatar" style={{ height: '60px', width: '60px' }} />
-                                <p>{feature.feature}</p>
+                                <div>{feature.feature}</div>
                             </div>
                         ))}
                     </div>
@@ -408,7 +408,7 @@ const ProductsView = (props) => {
                 </Grid>
 
             </Grid>
-            <div style={{ marginTop: '30px', backgroundColor: 'black', borderRadius: '70px', color: "white", padding: '30px', paddingLeft: '10px', paddingRight: '10px', marginLeft: '180px', marginRight: '180px' }} >
+            <div className="highlightsDiv" style={{ marginTop: '40px', backgroundColor: 'black', borderRadius: '70px', color: "white", padding: '30px', paddingLeft: '10px', paddingRight: '10px' }} >
 
                 <Grid container spacing={3} justifyContent="space-around">
 
