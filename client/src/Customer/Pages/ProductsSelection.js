@@ -4,9 +4,12 @@ import axios from 'axios'
 import { useHistory } from "react-router";
 import Select from "react-select";
 
-import v1 from '../Assets/v1.png'
 import v2 from '../Assets/v2uncropped.jpeg'
 import v3 from '../Assets/v3.jpeg'
+import v4 from '../Assets/v4.png'
+import v5 from '../Assets/v5.png'
+import v6 from '../Assets/v6.png'
+import v7 from '../Assets/v7.png'
 import i1 from '../Assets/i1.jpg'
 import i2 from '../Assets/i2.jpg'
 import i3 from '../Assets/i3.jpg'
@@ -311,7 +314,7 @@ const ProductsSelection = (props) => {
                         <ModelTypeComponent sx={{ marginTop: '30px' }} />
                         <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Color</p>
                         <ColorOptionsComponent sx={{ marginTop: '30px' }} />
-                        <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Selected: Red</p>
+                        {/* <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Selected: Red</p> */}
 
 
 
