@@ -160,7 +160,7 @@ function BuyAccessories()
           <div>
            
             <Grid container spacing={2} className={classes.upcontainer} >
-              <Grid item lg={6} md={6} >
+              <Grid item lg={8} md={8} sm={7} xs={11} >
                     <SearchBar
                         placeholder="Search for Accessories and more ..."
                         autoFocus
@@ -168,30 +168,29 @@ function BuyAccessories()
                       />
               </Grid>
 
-              <Grid item lg={3} ml={3} className={classes.mycartbtn} >
+              <Grid item lg={3} md={3} sm={4} xs={8} ml={3} className={classes.mycartbtn} >
                   <Button variant="contained" size="large" 
                     startIcon={<ShoppingCartIcon />} 
                     >
                       My Cart
                   </Button>
                   
-              </Grid>
-            
+              </Grid>           
             </Grid>
           
           </div>
         
 
            <Grid container className={classes.containerdisp}>
-               <Grid item lg={11} md={10} sm={10} xs={10}>
+               <Grid item lg={12} md={11} sm={11} xs={11}>
                     <Card className={classes.card} style={{marginTop:"4vh"}}>
                        <CardContent>
 
                             <Grid container spacing={2} style={{display:"flex", marginBottom: "1vh"}}>
-                                      <Grid item lg={10} md={10} sm={10}>
+                                      <Grid item lg={10} md={9} sm={9} xs={10}>
                                           <Typography variant="h6">Tyre and Wheel</Typography>
                                       </Grid>
-                                      <Grid item lg={2} md={2} sm={2}>
+                                      <Grid item lg={2} md={3} sm={3} xs={7}>
                                             <Link to="/buycat" style={{ textDecoration: 'none' }} >
                                                 <Button variant="contained">VIEW ALL</Button> 
                                             </Link>
@@ -201,7 +200,7 @@ function BuyAccessories()
                             <Divider />
 
                             {/* <div > */}
-                                <ImageList style={{overflowX: 'scroll' }}  gap={20} style={flexContainer} >
+                                <ImageList style={{overflowX: 'scroll',width: 500, height: 450}}  gap={20} style={flexContainer} >
 
                                     {itemData.map((item) => (
                                         <ImageListItem key={item.img}>
@@ -210,9 +209,9 @@ function BuyAccessories()
                                             srcSet={`${item.img}`}
                                             alt={item.title}
                                             loading="lazy"
-                                            style={{
-                                              height:130,
-                                              width:'auto'}}
+                                            // style={{
+                                            //   height:130,
+                                            //   width:'auto'}}
                                             className={classes.MyImg}
                                            
                                         />
@@ -235,15 +234,15 @@ function BuyAccessories()
 
 
 
-               <Grid item lg={11} md={10} sm={10} xs={10}>
+               <Grid item lg={12} md={11} sm={11} xs={11}>
                     <Card className={classes.card} style={{marginTop:"4vh"}}>
                        <CardContent>
 
                             <Grid container spacing={2} style={{display:"flex", marginBottom: "1vh"}}>
-                                      <Grid item lg={10} md={10} sm={10}>
+                                      <Grid item lg={10} md={9} sm={9} xs={10}>
                                           <Typography variant="h6">Engines</Typography>
                                       </Grid>
-                                      <Grid item lg={2} md={2} sm={2}>
+                                      <Grid item lg={2} md={3} sm={3} xs={7}>
                                             <Link to="/buycat" style={{ textDecoration: 'none' }} >
                                                 <Button variant="contained">VIEW ALL</Button> 
                                             </Link>
@@ -253,7 +252,7 @@ function BuyAccessories()
                             <Divider />
 
                             {/* <div > */}
-                                <ImageList style={{overflowX: 'scroll' }}  gap={20} style={flexContainer} >
+                                <ImageList style={{overflowX: 'scroll',width: 500, height: 450 }}  gap={20} style={flexContainer} >
 
                                     {itemData.map((item) => (
                                         <ImageListItem key={item.img}>
@@ -262,9 +261,9 @@ function BuyAccessories()
                                             srcSet={`${item.img}`}
                                             alt={item.title}
                                             loading="lazy"
-                                            style={{
-                                              height:130,
-                                              width:'auto'}}
+                                            // style={{
+                                            //   height:130,
+                                            //   width:'auto'}}
                                             className={classes.MyImg}
                                            
                                         />
