@@ -46,6 +46,7 @@ div.servicingBookScreen div.bookServicingButtonDiv{
     margin-top: 50px;
     font-family: 'Secular One', sans-serif;
     font-size: 25px;
+    /* color: grey; */
     color: #B2E424;
     background-color: white;
     border-radius: 28px;

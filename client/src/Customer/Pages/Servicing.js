@@ -116,8 +116,9 @@ const Servicing = () => {
     const classes = useStyles()
 
     const handleProduct = (e) => {
-
-        history.push('/servicingBook/' + e.chassisNumber)
+        console.log("e is ")
+        console.log(e)
+        history.push({ pathname: '/servicingBook/' + e.chassisNumber, state: { vehicle: e } })
     }
 
     const [MyOrders, setMyOrders] = useState([])
@@ -138,6 +139,7 @@ const Servicing = () => {
                 myOrderArr.map(item => {
                     if (item.status == false) {
                         tempOrders.push(item)
+
                     }
                 })
 

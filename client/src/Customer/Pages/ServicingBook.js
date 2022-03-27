@@ -3,16 +3,49 @@ import { makeStyles } from "@material-ui/styles";
 import React from "react";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { color, display, textAlign } from "@mui/system";
-import v2 from '../Assets/v2.jpeg'
+import v1 from '../Assets/v1.png'
+import v2 from '../Assets/v2uncropped.jpeg'
+import v3 from '../Assets/v3.jpeg'
+import v4 from '../Assets/v4.png'
+import v5 from '../Assets/v5.png'
+import v6 from '../Assets/v6.png'
+import v7 from '../Assets/v7.png'
 import '../PagesStyles/ServicingBook.css'
 import Select from "react-select";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { useEffect } from "react";
+
+
+
+const getMyImage = (source) => {
+    console.log(`SOURCE IS ${source}`)
+    const x = source.replace('../Assets/', '')
+    const img = x.substring(0, 2)
+    switch (img) {
+        case 'v2':
+            return v2
+        case 'v3':
+            return v3
+        case 'v4':
+            return v4
+        case 'v5':
+            return v5
+        case 'v6':
+            return v6
+        case 'v7':
+            return v7
+
+
+    }
+}
 
 
 const ServicingBook = (props) => {
     const id = props.match.params.id;
     const history = useHistory()
+    const [vehicle, setVehicle] = useState()
+    const [servStatus, setServStatus] = useState()
     // const model = smodelList.find(item => item.id == id)
 
     const pastDueStyle = {
@@ -22,8 +55,58 @@ const ServicingBook = (props) => {
         color: '#B2E424',
     }
 
+    const enabledStyle = {
+        color: '#B2E424',
+        border: '4px solid #B2E424',
+    }
+    const disabledStyle = {
+        color: 'grey',
+        // border: '4px solid grey',
+        // backgroundColor: 'white',
+        // borderRadius: '28px',
+        // width: 'max-content',
+        // padding: ' 5px',
+        // paddingLeft: '20px',
+        // paddingRight: '20px',
+        /* padding-left: 18px; */
+        border: '4px solid grey',
+
+    }
+
     const handleClick = (e) => {
         history.push('/servicingConfirm/' + e.id)
+    }
+
+    // const getServicingInfo = () => {
+    //     axios.get('/servicing/')
+    // }
+    const checkservStatus = () => {
+        setVehicle(props.location.state.vehicle)
+        console.log(`vehicle info is ${props.location.state.vehicle.nextServicingDate}`)
+        const servDate = new Date(props.location.state.vehicle.nextServicingDate)
+        const today = new Date()
+        if (servDate > today) { // servicing is in the future
+            setServStatus('NOTDUE')
+        }
+        else {
+            setServStatus('DUE')
+        }
+    }
+
+    useEffect(() => {
+        setVehicle("props.location.state.vehicle")
+        setVehicle(props.location.state.vehicle)
+        checkservStatus()
+        // getServicingInfo()
+        console.log(vehicle)
+        // console.log(props.match.params.chassisNumber)
+    }, []);
+
+    const convertISOtoStringDate = (dateISO) => {
+        const temp = new Date(dateISO)
+        const stringDate = temp.getDate() + '/' + temp.getMonth() + '/' + temp.getFullYear()
+        return stringDate
+
     }
 
 
@@ -41,7 +124,7 @@ const ServicingBook = (props) => {
 
     const myVehicleList = [
         {
-            id: 1,
+            id: 'D6FB6873C4.04D',
             imagesrc: v2,
             model: "CITY - 1 ELECTRIC SCOOTER",
             plateNumber: "MH 12 FP 9602",
@@ -114,33 +197,32 @@ const ServicingBook = (props) => {
     const model = myVehicleList.find(item => item.id == id)
 
 
-    return (
+    return vehicle ? (
+
 
         <div className="servicingBookScreen">
 
             <Grid container style={{ marginTop: '50px' }}>
                 <Grid item spacing={3} xs={12} md={5} lg={5} xl={5} >
                     <div className="image">
-                        <img src={model.image} alt="image" width="350" height="300" />
+                        <img src={getMyImage(vehicle.image)} alt="image" width="350" height="300" />
                     </div>
                 </Grid>
                 <Grid item spacing={3} xs={12} md={7} lg={7} xl={7}>
 
                     <div className="allDetails">
+
                         <div className="allDetailsText">
-                            Owner Name: {model.ownerName}
+
+                            Model: {vehicle.modelName}
                         </div>
                         <div className="allDetailsText">
 
-                            Model: {model.model}
+                            Vehicle No: {vehicle.vehicleNumber}
                         </div>
                         <div className="allDetailsText">
 
-                            Vehicle No: {model.plateNumber}
-                        </div>
-                        <div className="allDetailsText">
-
-                            Chassis: {model.chasis}
+                            Chassis: {vehicle.chassisNumber}
                         </div>
                     </div>
                 </Grid>
@@ -222,8 +304,7 @@ const ServicingBook = (props) => {
             </div> */}
 
             {/* ! ========================================================================================== */}
-
-            <TableContainer >
+            {vehicle.servicing.length > 0 ? (<TableContainer >
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -251,29 +332,30 @@ const ServicingBook = (props) => {
                                 <TableCell align="center" className="servicingdata">{row.servicingDate}</TableCell>
                                 <TableCell align="center" className="servicingdata">{row.centre}</TableCell>
                                 <TableCell align="center" className="servicingdata">{row.inspectedBy}</TableCell>
-                                <TableCell align="center" className="servicingdata">{row.details}</TableCell>
+                                <TableCell align="center" className="servicingdata"><a href="#">Receipt</a></TableCell>
                                 <TableCell align="center" className="servicingdata">{row.total}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer>) : (<div style={{ fontSize: '35px' }}><center>No data of servicing</center>  </div>)}
+
 
             <div className="furtherAction">
                 <div className="text" style={{ marginBottom: '20px' }}>
                     Next Servicing:
                 </div>
 
-                <div className="date" style={model.status == "Pending" ? pastDueStyle : upToDateStyle}>
+                <div className="date" style={servStatus == "DUE" ? pastDueStyle : upToDateStyle}>
                     {model.exServicingDate}
                 </div>
 
-                <div className="status" style={model.status == "Pending" ? pastDueStyle : upToDateStyle}>
-                    [{model.status}]
+                <div className="status" style={servStatus == "DUE" ? pastDueStyle : upToDateStyle}>
+                    [{servStatus == "DUE" ? "Servicing is Due" : "Up To Date"}]
                 </div>
                 <div className="statusColumn">
-                    <div className="bookServicingButtonDiv" >
-                        <button onClick={() => handleClick(model)}>BOOK APPOINTMENT</button>
+                    <div className="bookServicingButtonDiv" style={servStatus == "DUE" ? enabledStyle : disabledStyle}>
+                        <button onClick={() => handleClick(model)} disabled={servStatus == "NOTDUE"} style={{ color: servStatus == "DUE" ? '#B2E424' : 'grey' }} >BOOK APPOINTMENT</button>
                     </div>
 
                     {/* <div>
@@ -287,7 +369,7 @@ const ServicingBook = (props) => {
             </div>
             <br /><br />
         </div>
-    );
+    ) : (<div> Loading</div>);
 }
 
 export default ServicingBook;
