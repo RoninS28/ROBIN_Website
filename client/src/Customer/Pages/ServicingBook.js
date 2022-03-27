@@ -115,12 +115,13 @@ const ServicingBook = (props) => {
 
 
     return (
+
         <div className="servicingBookScreen">
 
             <Grid container style={{ marginTop: '50px' }}>
                 <Grid item spacing={3} xs={12} md={5} lg={5} xl={5} >
                     <div className="image">
-                        <img src={model.imagesrc} alt="image" width="350" height="300" />
+                        <img src={model.image} alt="image" width="350" height="300" />
                     </div>
                 </Grid>
                 <Grid item spacing={3} xs={12} md={7} lg={7} xl={7}>

@@ -9,33 +9,49 @@ export default function Signup() {
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
 
+    const [fname, setFname] = useState('');
+    const [mname, setMname] = useState('');
+    const [lname, setLname] = useState('');
+    const [contact, setContact] = useState('');
+    const [contactError, setContactError] = useState('');
+    const [address, setAddress] = useState('');
+    const [dob, setDob] = useState('');
 
     const history = useHistory()
     const handleSignup = async (e) => {
         e.preventDefault()
-
-        const res = await fetch('/signup', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, password
-            })
-        });
-
-        const data = await res.json();
-
-        if (!data || res.status === 400) {
-            console.log(data.errors.email)
-            console.log(data.errors.password)
-            setEmailError(data.errors.email)
-            setPasswordError(data.errors.password)
+        setContactError('')
+        var phoneno = /^\d{10}$/;
+        if (!(contact.match(phoneno))) {// phone number is not valid
+            setContactError('Invalid Contact Info')
         }
         else {
-            console.log(data);
-            history.push('/')
+
+            const res = await fetch('/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email, password, fname, mname, lname, contact
+                })
+            });
+
+            const data = await res.json();
+
+            if (!data || res.status === 400) {
+                console.log(data.errors.email)
+                console.log(data.errors.password)
+                setEmailError(data.errors.email)
+                setPasswordError(data.errors.password)
+                setContactError(data.errors.contact)
+            }
+            else {
+                console.log(data);
+                history.push('/')
+            }
         }
+
     }
 
     return (
@@ -62,6 +78,30 @@ export default function Signup() {
                 <div class="password error" name="passwordError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
                     {passwordError}
                 </div>
+
+
+                <label for="fname" style={{ display: 'block', margin: '20px 0 10px' }}>First Name</label>
+                <input type="text" name="fname" value={fname} onChange={(e) => setFname(e.target.value)} placeholder="Enter First Name" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
+
+                <label for="mname" style={{ display: 'block', margin: '20px 0 10px' }}>Middle Name</label>
+                <input type="text" name="mname" value={mname} onChange={(e) => setMname(e.target.value)} placeholder="Enter Middle Name" style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
+
+                <label for="lname" style={{ display: 'block', margin: '20px 0 10px' }}>Last Name</label>
+                <input type="text" name="lname" value={lname} onChange={(e) => setLname(e.target.value)} placeholder="Enter Last Name" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
+
+                <label for="contact" style={{ display: 'block', margin: '20px 0 10px' }}>Contact No</label>
+                <input type="text" name="contact" value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Enter Contact No" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} />
+                <div class="contact error" name="contactError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
+                    {contactError}
+                </div>
+                {/* 
+                <label for="dob" style={{ display: 'block', margin: '20px 0 10px' }}>Date of Birth</label>
+                <input type="date" name="dob" value={dob} onChange={(e) => setDob(e.target.value)} placeholder="Enter Date of Birth" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} /> */}
+
+                {/* <label for="address" style={{ display: 'block', margin: '20px 0 10px' }}>Address</label>
+                <textarea cols={50} type="text" name="address" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter Residential Address" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} /> */}
+
+
 
                 <center>
 

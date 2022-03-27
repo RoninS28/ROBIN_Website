@@ -22,6 +22,7 @@ const handleErrors = (err) => {
 
     // FOR SIGNUP
 
+    console.log(`ERROR CODE IS ${err.code}`)
     // duplicate error code
     if (err.code === 11000) {
         console.log("11000")
@@ -63,6 +64,7 @@ module.exports.login_get = (req, res) => {
 
 module.exports.signup_post = async (req, res) => {
     const { email, password } = req.body
+    // console.l
 
     try {
         const role = "customer"
@@ -74,7 +76,7 @@ module.exports.signup_post = async (req, res) => {
             res.cookie('jwttoken', token, { httpOnly: true, maxAge: maxAge })
             const address1 = {
                 flatNo: 'A-302',
-                buildingName: 'Hari',
+                buildingName: 'Durvaankur',
                 residencyName: 'Ramnagar',
                 streetName: 'Pashan',
                 landmark: 'DSK Raanwara',
@@ -84,11 +86,11 @@ module.exports.signup_post = async (req, res) => {
             }
             const newcust = new Customer({
                 _id: result._id,
-                fname: 'Saudagar',
-                mname: 'Rajesh',
-                lname: 'Londhe',
+                fname: req.body.fname,
+                mname: req.body.mname,
+                lname: req.body.lname,
                 emailID: email,
-                contact: 9767880733,
+                contact: req.body.contact,
 
                 DOB: Date.parse("2000-08-16"),
                 address: address1,
@@ -110,6 +112,7 @@ module.exports.signup_post = async (req, res) => {
 
         })
     } catch (err) {
+        console.log("into error block")
 
         const errors = handleErrors(err)
         console.log('NODEJS ERROR ISS ', errors)
@@ -127,6 +130,7 @@ module.exports.login_post = async (req, res) => {
         return res.status(200).json({ user: user._id })
 
     } catch (err) {
+        console.log("into error block")
         const errors = handleErrors(err)
         console.log(errors)
         return res.status(400).json({ errors })
