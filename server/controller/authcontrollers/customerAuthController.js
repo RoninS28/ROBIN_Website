@@ -47,7 +47,7 @@ const handleErrors = (err) => {
 const maxAge = 60 * 1000 * 10 //10 minutes
 
 const createToken = (id) => {
-    return jwt.sign({ id }, 'robinsecretsignature', {//todo add this to env
+    return jwt.sign({ id }, process.env.SECRET_KEY, {//todo add this to env
         expiresIn: maxAge
     })
 }

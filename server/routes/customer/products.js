@@ -89,7 +89,7 @@ router.get('/:id/checkout', async (req, res) => {
     if (!token) {
         console.log("No token")
     }
-    jwt.verify(token, 'robinsecretsignature', async (err, decodedToken) => {
+    jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
         if (err) { //signatures dont match
             console.log("error " + err)
             res.send("You must be logged in to view this page")

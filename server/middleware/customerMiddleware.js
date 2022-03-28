@@ -13,7 +13,7 @@ const requireCustAuth = (req, res, next) => {
     //     res.redirect('http://localhost:3000/login')
     // }
     if (token) {
-        jwt.verify(token, 'robinsecretsignature', (err, decodedToken) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, decodedToken) => {
             if (err) { //signatures dont match
                 console.log(err);
                 res.send("You must be logged in to view this page");
@@ -37,7 +37,7 @@ const checkCustUser = (req, res, next) => {
     const token = req.cookies.jwt
 
     if (token) {
-        jwt.verify(token, 'robinsecretsignature', async (err, decodedToken) => {
+        jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
             if (err) { //signatures dont match
                 res.locals.user = null //this locals prop makes it available to te views
 
@@ -62,7 +62,7 @@ const getUserID = (req) => {
     console.log("token "+token)
     
     if (token) {
-        jwt.verify(token, 'robinsecretsignature', async (err, decodedToken) => {
+        jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
             if (err) { //signatures dont match
                 console.log("error "+err)
                 return "null";
