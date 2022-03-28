@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 const express = require('express');
 const app = express();
 const custAuthRoutes = require('./routes/authRoutes/customerAuthRoutes')
-const { requireCustAuth, checkCustUser } = require('../middleware/customerMiddlewaree')
+const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddleware')
 
 const cookieParser = require("cookie-parser");
 
