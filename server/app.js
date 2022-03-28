@@ -7,13 +7,16 @@ const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddlew
 const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: './config.env' });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 require('./db/conn');
 app.use(express.json());
 
 app.use(cookieParser());
 const mongoose = require('mongoose')
+
+
+
 // const cust = mongoose.model("customer")
 // mongoose.connection.deleteModel('CustomerProfile')
 // const mongoose = require('mongoose')
@@ -57,6 +60,15 @@ app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
 // ! TESTING ROUTES
 app.use('/testing', require('./routes/customer/customer'))
 // app.get('*', checkCustUser)
+
+if(process.env.NODE_ENV=="production")
+{
+    app.use(express.static("client/build"));
+    const path=require("path");
+    app.get("*",(req,res)=>{
+        res.sendFile(path.resolve(__dirname,"client","build","index.html"));
+    })
+}
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
