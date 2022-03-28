@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node app.js",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false&nbsp;npm&nbsp;install&nbsp;--prefix&nbsp;client&nbsp;&amp;&amp;&nbsp;npm&nbsp;run&nbsp;build&nbsp;--prefix&nbsp;client"
+    "start": "node app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false&nbsp;npm&nbsp;install&nbsp;--prefix&nbsp;client&nbsp;&amp;&amp;&nbsp;npm&nbsp;run&nbsp;build&nbsp;--prefix&nbsp;client"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.15",
     "validator": "^13.7.0"
-  }
+  },
+  "engines": {
+    "node": "14.18.2"
+    }
 }
