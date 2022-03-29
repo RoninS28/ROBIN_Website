@@ -1,4 +1,4 @@
-const customerSchema = require('../../models/customer/customerSchema');
+const customerSchema = require('../../models/customer/CustomerSchema');
 
 
 
