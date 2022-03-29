@@ -64,14 +64,13 @@ app.use('/testing', require('./routes/customer/customer'))
 
 const path = require("path")
 
-// ... other app.use middleware 
-app.use(express.static(path.join(__dirname, "client", "build")))
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static( 'client/build' ));
 
-// ...
-// Right before your app.listen(), add this:
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
