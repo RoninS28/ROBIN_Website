@@ -31,7 +31,8 @@ function App() {
   }
   return (
     <div>
-      <BrowserRouter>
+      <h1>Client Page</h1>
+      {/* <BrowserRouter>
         {(loggedIn == null || loggedIn == "null") ? (
           <>
             <div>
@@ -93,7 +94,7 @@ function App() {
           <Route path='/service-center' exact component={() => (<ServiceCentreRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/outlet' exact component={() => (<OutletRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
         </Switch>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
 
   );
