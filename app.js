@@ -61,6 +61,12 @@ app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
 app.use('/testing', require('./routes/customer/customer'))
 // app.get('*', checkCustUser)
 
+app.use('/', async (req, res) => {
+
+    return res.send("Successful");
+       
+});
+
 
 const path = require("path")
 
@@ -75,3 +81,4 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
 })
+
