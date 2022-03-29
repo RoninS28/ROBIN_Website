@@ -46,26 +46,21 @@ app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
 app.use('/model',require('./routes/common/model'));
-// app.use('/customers', require('./routes/customer/customer'));
+app.use('/customers', require('./routes/customer/customer'));
 
 // ! CUSTOMER ROUTER
-app.use(custAuthRoutes)
-app.use('/products', requireCustAuth, require('./routes/customer/products'));
-app.use('/servicing', requireCustAuth, require('./routes/customer/servicing'));
-app.use('/chatbot', requireCustAuth, require('./routes/customer/chatbotMsg'));
-app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
+// app.use(custAuthRoutes)
+// app.use('/products', requireCustAuth, require('./routes/customer/products'));
+// app.use('/servicing', requireCustAuth, require('./routes/customer/servicing'));
+// app.use('/chatbot', requireCustAuth, require('./routes/customer/chatbotMsg'));
+// app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
 
 
 
 // ! TESTING ROUTES
-app.use('/testing', require('./routes/customer/customer'))
-// app.get('*', checkCustUser)
+// app.use('/testing', require('./routes/customer/customer'))
+app.get('*', checkCustUser)
 
-app.use('/', async (req, res) => {
-
-    return res.send("Successful");
-       
-});
 
 
 const path = require("path")
