@@ -128,7 +128,7 @@ export default function GenericTable(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      {labels ? (<Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow style={{ height: "2em" }}>
 
@@ -220,7 +220,7 @@ export default function GenericTable(props) {
             />
           </TableRow>
         </TableFooter>
-      </Table>
+      </Table>) : <p>Loading...</p>}
     </TableContainer>
   );
 }
