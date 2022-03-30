@@ -11,7 +11,11 @@ Not only customers, but also the servicemen and factory workers are benefited fr
 1.  Run
 
 - `git clone https://github.com/RoninS28/ROBIN_Website.git`
-- `cd ROBIN_Website\client`
-- `npm install`
-
-2.  Run `npm start`
+- Client folder contains the react application `cd ROBIN_Website\client`
+- Install required packages in client folder `npm install`
+- Now navigate to server folder `cd ROBIN_Website\server`
+- Install required packages in server `npm install`
+- Install nodemon additionally for automatic reload `npm install -g nodemon`
+- Start the server using: `nodemon app.js` or `node app.js`
+- Navigate into client folder in another terminal and run `npm start`
+- Server will run on port 5000 and client on 3000. You can navigate to port 3000 to use the application
