@@ -24,4 +24,14 @@ div.bookingScreen div.statusColumn{
     align-items: center;
     
 }
+@media (max-width: 600px){
+    div.bookingScreen div.statusColumn{
+        font-size: 20px;
+        
+    }
+    div.bookingScreen div.bookingrowInfo{
+        font-size: 22px;
+    }
 
+
+}

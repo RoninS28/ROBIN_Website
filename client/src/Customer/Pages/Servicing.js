@@ -240,8 +240,8 @@ const Servicing = () => {
                                 </div>
 
                             </Grid>
-                            <Grid item spacing={3} key={item.vehicleNumber} xs={5} md={4} lg={4} xl={4} className={classes.bookingrowInfo} >
-                                <div className="bookingrowInfo">
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={2} md={4} lg={4} xl={4} className={classes.bookingrowInfo} >
+                                <div className="bookingrowInfo statusTitle">
                                     <div>
                                         {item.modelName}
                                     </div>
@@ -253,23 +253,29 @@ const Servicing = () => {
 
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.vehicleNumber} xs={4} md={3} lg={3} xl={3} className={classes.statusColumn} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={3} md={3} lg={3} xl={3} className={classes.statusColumn} >
                                 <div className="statusColumn">
 
                                     <div style={item.status == 'Past Due' ? pastDueStyle : upToDateStyle}>
-                                        {item.status}
+                                        <center>
+
+                                            {item.status}
+                                        </center>
                                     </div>
-                                    <div style={{ color: 'rgba(0,0,0,0.5)' }}>
-                                        {item.status == 'Past Due' ? "Ex-servicing date:" : "Next servicing:"}
+                                    <div class="statusTitle" style={{ color: 'rgba(0,0,0,0.5)' }}>
+                                        <center>
+
+                                            {item.status == 'Past Due' ? "Ex-servicing date:" : "Next servicing:"}
+                                        </center>
                                     </div>
-                                    <div style={{ color: '#F49F20' }}>
+                                    <div class="statusTitle" style={{ color: '#F49F20' }}>
                                         {item.status == 'Past Due' ? convertISOtoStringDate(item.exServicingDate) : convertISOtoStringDate(item.nextServicingDate)}
                                     </div>
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.vehicleNumber} xs={4} md={2} lg={2} xl={2} className={classes.statusColumn} >
+                            <Grid item spacing={3} key={item.vehicleNumber} xs={3} md={2} lg={2} xl={2} className={classes.statusColumn} >
                                 <div className="statusColumn">
-                                    <div className="bookServicingButtonDiv" >
+                                    <div className="bookServicingButtonDiv statusTitle" >
                                         <button onClick={() => handleProduct(item)}>VIEW</button>
                                     </div>
 
