@@ -126,17 +126,6 @@ function createData(id,name, phone, email,position,address,salary) {
     return { id, name,phone,email, position,address,salary};
 }
 
-function getAllModels() {
-    const allModels = [];
-    workers.map(model => {
-        console.log(model);
-        allModels.push(createData(model.id, model.name, model.phone, model.email, model.position,model.address,model.salary))
-    })
-    return allModels
-}
-
-const rows = getAllModels();
-
 function WorkerList(props) {
 
     const [rows,setRows]=useState([]);
@@ -211,7 +200,7 @@ function WorkerList(props) {
         <Container 
             maxWidth={xs ? 'xs' : (sm ? 'sm' : (md ? 'md' : lg ? 'lg' : xl))} 
             className={classes.listWrapper}>
-                 <GenericTable rows={rows} labels={labels}  view="/workerList/" />
+                <GenericTable rows={rows} labels={labels}  view="/workerList/" />
         </Container>
     </div>
     )
