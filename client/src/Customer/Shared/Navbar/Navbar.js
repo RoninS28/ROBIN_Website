@@ -446,6 +446,9 @@ const Navbar = (props) => {
 
     const handleLogout = () => {
         setLoggedIn(null);
+        axios.get('/logout').then(() => {
+            history.push('/');
+        })
     }
 
     const handleMobileMenuOpen = (event) => {

@@ -73,6 +73,7 @@ const Navbar = (props) => {
 
   const handleLogout = () => {
     setLoggedIn(null);
+    history.push('/');
   }
 
   const handleMobileMenuOpen = (event) => {
