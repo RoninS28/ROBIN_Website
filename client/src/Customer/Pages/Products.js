@@ -178,7 +178,7 @@ export default function Products() {
       console.log(`RESPONSE IS ${response.data}`)
 
       if (response.data == "You must be logged in to view this page") {
-        history.push('/signup');
+        history.push('/login');
       }
       else {
         let productArr = response.data
@@ -263,7 +263,7 @@ export default function Products() {
     </div>
   ) : (
     <div>
-      loading
+      Loading
     </div>
   );
 }

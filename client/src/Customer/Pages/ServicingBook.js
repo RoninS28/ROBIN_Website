@@ -338,7 +338,7 @@ const ServicingBook = (props) => {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>) : (<div style={{ fontSize: '35px' }}><center>No data of servicing</center>  </div>)}
+            </TableContainer>) : (<div id="noDataOfServicing" ><center>-- No data of servicing found --</center>  </div>)}
 
 
             <div className="furtherAction">

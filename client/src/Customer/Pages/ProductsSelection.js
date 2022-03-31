@@ -312,20 +312,26 @@ const ProductsSelection = (props) => {
             </div>
 
             <Grid container className="variantNdiscountsGrid" >
-                <Grid item sm={12} md={6} lg={6} xl={6}>
-                    <div className="variantsChoiceDiv">
-                        <p className="variantNdiscountsTitle">VARIANT CHOICE</p>
-                        <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Model Type</p>
-                        <ModelTypeComponent sx={{ marginTop: '30px' }} />
-                        <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Color</p>
-                        <ColorOptionsComponent sx={{ marginTop: '30px' }} />
-                        {/* <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Selected: Red</p> */}
+                <Grid item sm={12} md={12} lg={6} xl={6}>
+                    {/* <center> */}
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
 
+                        <div className="variantsChoiceDiv" >
 
-
+                            <p className="variantNdiscountsTitle bigText">VARIANT CHOICE</p>
+                            <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Model Type</p>
+                            <ModelTypeComponent sx={{ marginTop: '30px' }} />
+                            <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Select Color</p>
+                            <ColorOptionsComponent sx={{ marginTop: '30px' }} />
+                            {/* <p style={{ fontSize: '25px', color: 'rgba(0, 0, 0, 0.70)', marginTop: '30px' }}>Selected: Red</p> */}
+                        </div>
                     </div>
+                    {/* </center> */}
+
+
+
                 </Grid>
-                <Grid item sm={12} md={6} lg={6} xl={6}>
+                <Grid item sm={12} md={12} lg={6} xl={6}>
                     <div className="discountsDiv">
                         <p className="variantNdiscountsTitle">DISCOUNTS</p>
 
@@ -347,9 +353,9 @@ const ProductsSelection = (props) => {
                     </div>
                 </Grid>
             </Grid>
-            <div className="pricingDiv">
+            <div className="pricingDiv bigText">
                 <p style={{ fontSize: '40px', color: 'rgba(0, 0, 0, 0.60)', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>ROUGH PRICE</p>
-                <p style={{ fontSize: '90px', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>₹ {modelDB.price}/-</p>
+                <p id="priceTag" >₹ {modelDB.price}/-</p>
                 <p style={{ fontSize: '30px', color: 'rgba(0, 0, 0, 0.60)', textShadow: '0px 2px 4px rgba(0, 0, 0, 0.25) ' }}>*Including 18% GST</p>
             </div>
 

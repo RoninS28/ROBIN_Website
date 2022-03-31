@@ -7,11 +7,20 @@ div.servicingBookScreen label:after{
 div.servicingBookScreen div.allDetails{
     font-family: 'Secular One', sans-serif;
     font-size: 35px;
+    margin-bottom: 80px;
+    
 }
 div.servicingBookScreen div.allDetailsText{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+div.servicingBookScreen #noDataOfServicing{
+    font-size: 35px;
+    color: rgba(0, 0, 0, 0.5);
+
+}
+
 
 div.servicingBookScreen .formFilling{
     margin-top: 80px;
@@ -64,4 +73,25 @@ div.servicingBookScreen div.bookServicingButtonDiv button{
     background-color: white;
     border: none;
     color: #B2E424;
+}
+
+@media (max-width: 600px){
+
+    div.servicingBookScreen div.allDetails{
+        /* font-family: 'Secular One', sans-serif; */
+        font-size: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+
+    div.servicingBookScreen #noDataOfServicing{
+        font-size: 23px;
+        /* color: rgba(0, 0, 0, 0.5); */
+    
+    }
+    
+
+
 }

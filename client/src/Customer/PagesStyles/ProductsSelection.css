@@ -74,7 +74,10 @@ div.productsSelectionScreen div.variantsChoiceDiv{
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0 auto;
     margin-top: 45px;
+    justify-content: center;
+    /* align-items: center; */
 }
 
 div.productsSelectionScreen div.discountsDiv{
@@ -89,6 +92,8 @@ div.productsSelectionScreen .variantNdiscountsGrid p.variantNdiscountsTitle{
     font-size: 40px;
     color: rgba(0, 0, 0, 0.70);
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
     /* text-align: center; */
 
 }
@@ -105,7 +110,8 @@ div.productsSelectionScreen div.proceedToCheckoutButtonDiv{
     justify-content: center;
     margin-top: 100px;
     text-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
-
+    margin-left: 10px;
+    margin-right: 10px;
     font-family: 'Secular One', sans-serif;
     font-size: 40px;
     color: #FF9B04;
@@ -117,8 +123,14 @@ div.productsSelectionScreen div.proceedToCheckoutButtonDiv{
     border: 4px solid #FF9B04;
 }
 
+div.productsSelectionScreen p#priceTag{
+    font-size: 90px;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25)
+}
 
-
+/* div.productsSelectionScreen .bigText{
+    font-size: 20px;
+} */
 
 
 /* ! MEDIA QUERY */
@@ -157,4 +169,16 @@ div.productsSelectionScreen div.proceedToCheckoutButtonDiv{
         text-align: center;
 
     }
+
+    div.productsSelectionScreen .bigText{
+        font-size: 25px !important;
+    }
+
+    div.productsSelectionScreen p#priceTag{
+        font-size: 50px;
+    }
+    div.productsSelectionScreen div.proceedToCheckoutButtonDiv{
+        font-size: 30px;
+    }
+
 }

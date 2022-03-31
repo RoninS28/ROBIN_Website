@@ -536,7 +536,10 @@ const ProductsView = (props) => {
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '100px' }}>
 
                 <div className="buttonPara">
-                    Would you like a test drive? Take one now for free!!
+                    <center>
+
+                        Would you like a test drive? Take one now for free!!
+                    </center>
                 </div>
                 <div className="takeTestDriveButtonDiv" >
                     <button onClick={() => handleTestDrive(modelDB)}>TAKE TEST DRIVE</button>
@@ -545,7 +548,9 @@ const ProductsView = (props) => {
 
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', marginTop: '100px' }}>
                 <div className="buttonPara">
-                    Would you like a test drive? Take one now for free!!
+                    <center>
+                        Have issues? Check out our Chatbot and have them clarified!
+                    </center>
                 </div>
 
                 <div className="chatBotButtonDiv" >

@@ -403,6 +403,7 @@ import TestDriveBooking from "../../Pages/TestDriveBooking";
 import TestDriveOutlet from "../../Pages/TestDriveOutlet";
 import NotificationsRoom from "../../Pages/NotificationsChat";
 import Login from "../../Pages/Login";
+import Logout from "../../Pages/Logout";
 import Signup from "../../Pages/Signup";
 // import { useEffect } from "react";
 
@@ -601,12 +602,12 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/signup" style={{ textDecoration: 'none' }}>
+                <Link to="/logout" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <AccountCircle />
                         </ListItemIcon>
-                        <ListItemText primary="SignUp" />
+                        <ListItemText primary="Logout" />
                     </ListItem>
                 </Link>
 
@@ -745,6 +746,7 @@ const Navbar = (props) => {
                         <Route path='/notifications' exact component={NotificationsRoom} ></Route>
                         <Route path='/login' exact component={Login} ></Route>
                         <Route path='/signup' exact component={Signup} ></Route>
+                        <Route path='/logout' exact component={Logout} ></Route>
                     </Switch>
                 </div>
             </main>

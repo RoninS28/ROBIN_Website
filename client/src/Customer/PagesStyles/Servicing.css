@@ -52,3 +52,15 @@ div.servicingScreen div.bookServicingButtonDiv button{
     border: none;
     color: #FF9B04;
 }
+
+@media (max-width: 600px){
+    div.servicingScreen .statusTitle{
+        font-size: 18px;
+    }
+    div.servicingScreen div.bookServicingButtonDiv button{
+        font-size: 15px !important;
+       
+    }
+
+
+}
