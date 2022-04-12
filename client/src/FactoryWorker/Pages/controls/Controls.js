@@ -1,15 +1,15 @@
 import Input from "./input";
 import DatePicker from "./DatePicker";
 import Select from "./Select";
-import Button from './Button';
+import Button from "./Button";
 import ActionButton from "./ActionButton";
 
 const Controls = {
-    Input,    
-    DatePicker,
-    Select,
-    Button,
-    ActionButton
-}
+  Input,
+  DatePicker,
+  Select,
+  Button,
+  ActionButton,
+};
 
 export default Controls;
