@@ -11,6 +11,9 @@ import '../PagesStyles/BookingsStage.css'
 import CheckIcon from '@mui/icons-material/Check';
 import axios from 'axios'
 import { useParams } from "react-router";
+import "react-step-progress-bar/styles.css";
+import { ProgressBar, Step } from "react-step-progress-bar";
+
 const useStyles = makeStyles((theme) => {
     return {
         root: {
@@ -212,6 +215,33 @@ const BookingsStage = () => {
     }, []);
 
 
+    const steps = [
+        {
+          status: "Deformation"
+        },
+        {
+          status: "Casting"
+        },
+        {
+          status: "Polymer Process"
+        },
+        {
+          status: "Machining"
+        },
+        {
+          status: "Finishing"
+        }
+      ];
+
+      const transfer = {
+        status: "Polymer Process" // change transfer status to progress bar
+      };
+    
+      const getStepPosition = (transferStatus) => {
+        return steps.findIndex(({ status }) => status === transferStatus);
+      };
+    
+
 
     return (
         <div className="bookingsStageScreen">
@@ -237,7 +267,7 @@ const BookingsStage = () => {
             </div>
 
 
-            <div>
+            {/* <div>
                 <Grid container spacing={3} justifyContent="space-evenly" className={classes.bookingrow}>
                     {processList.map(item => (
 
@@ -262,11 +292,11 @@ const BookingsStage = () => {
 
                                 </div>
                             </Grid>
-                            <Grid item spacing={3} key={item.id} xs={3} md={3} lg={3} xl={3} className={classes.statusColumn} >
+                            <Grid item spacing={3} key={item.id} xs={3} md={3} lg={3} xl={3} className={classes.statusColumn} > 
                                 <center><div className="statusColumn" >
 
                                     <div>
-                                        {/* {item.status} */}
+                                        {item.status}
                                     </div>
                                     <div>
                                         {item.status === 'completed' ? <CheckIcon style={{ color: "#8FFF00", fontSize: "100px" }} /> : item.status == 'ongoing' ? <ApartmentIcon style={{ color: "#FF9B04", fontSize: "100px" }} /> : <AccessTimeIcon style={{ color: "rgba(0,0,0,0.2)", fontSize: "100px" }} />}
@@ -274,12 +304,57 @@ const BookingsStage = () => {
                                 </div></center>
                             </Grid>
 
+                            
+
                         </Grid>
 
 
                     ))}
                 </Grid>
-            </div>
+            </div> */}
+
+            <div style={{ margin: 50 ,display: 'flex', justifyContent: 'center'}}>
+                    <ProgressBar
+                    width={500}
+                    percent={
+                        100 *
+                        ((getStepPosition(transfer.status) + 1) / (steps.length - 1)) -
+                        1
+                    }
+                    filledBackground="linear-gradient(to right, #41ad49, #41ad49)"
+                    >
+                    {steps.map((step, index, arr) => {
+                        return (
+                        <Step
+                            // position={100 * (index / arr.length)}
+                            transition="scale"
+                            children={({ accomplished }) => (
+                            <div
+                                style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                borderRadius: "50%",
+                                width: 20,
+                                height: 20,
+                                color: "black",
+                                backgroundColor: accomplished ? "green" : "gray"
+                                }}
+                            >
+                                <br />
+                                <br />
+                                <br />
+                                {step.status}
+                            </div>
+                            )}
+                        />
+                        );
+                    })}
+                    </ProgressBar>
+                </div>
+                <br />
+
+
         </div >
     );
 }
