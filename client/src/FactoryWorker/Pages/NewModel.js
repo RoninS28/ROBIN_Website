@@ -45,8 +45,14 @@ export default function NewModel(props) {
     { id: "3", title: "Stage 4" },
   ];
 
-  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
-    useForm(initialFValues, true, validate);
+  const {
+    values,
+    setValues,
+    errors,
+    setErrors,
+    handleInputChange,
+    resetForm,
+  } = useForm(initialFValues, true, validate);
 
   const postAModel = async (modelData) => {
     // const {} = modelData;
@@ -54,7 +60,7 @@ export default function NewModel(props) {
 
     if (type === "new") {
       axios
-        .post("http://localhost:8080/api/factory-worker", { ...modelData })
+        .post("http://localhost:5000/api/factory-worker", { ...modelData })
         .then((data) => {
           console.log({ data });
         })
@@ -69,7 +75,7 @@ export default function NewModel(props) {
     } else {
       console.log("update operation");
       axios
-        .put(`http://localhost:8080/api/factory-worker/${modelData._id}`, {
+        .put(`http://localhost:5000/api/factory-worker/${modelData._id}`, {
           ...modelData,
         })
         .then((data) => {

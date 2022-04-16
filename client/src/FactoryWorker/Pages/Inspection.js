@@ -51,7 +51,7 @@ export default function Inspection() {
 
   const getModels = () => {
     axios
-      .get("http://localhost:8080/api/factory-worker")
+      .get("http://localhost:5000/api/factory-worker")
       .then(({ data }) => {
         console.log({ data });
         setModels(data.models);
@@ -99,8 +99,12 @@ export default function Inspection() {
     subTitle: "",
   });
 
-  const { TblContainer, TblHead, TblPagination, recordsAfterPagingAndSorting } =
-    useTable(headCells, filterFn);
+  const {
+    TblContainer,
+    TblHead,
+    TblPagination,
+    recordsAfterPagingAndSorting,
+  } = useTable(headCells, filterFn);
 
   const handleSearch = (e) => {
     let target = e.target;
@@ -132,7 +136,7 @@ export default function Inspection() {
     });
 
     axios
-      .delete(`http://localhost:8080/api/factory-worker/${id}`)
+      .delete(`http://localhost:5000/api/factory-worker/${id}`)
       .then((data) => {
         console.log({ data });
       })

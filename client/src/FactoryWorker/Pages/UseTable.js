@@ -34,7 +34,7 @@ export default function useTable(headCells, filterFn) {
 
   const getModels = () => {
     axios
-      .get("http://localhost:8080/api/factory-worker")
+      .get("http://localhost:5000/api/factory-worker")
       .then(({ data }) => {
         console.log({ data });
         setModels(data.models);
