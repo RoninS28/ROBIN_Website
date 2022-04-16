@@ -355,7 +355,7 @@ const ServicingBook = (props) => {
                 </div>
                 <div className="statusColumn">
                     <div className="bookServicingButtonDiv" style={servStatus == "DUE" ? enabledStyle : disabledStyle}>
-                        <button onClick={() => handleClick(model)} disabled={servStatus == "NOTDUE"} style={{ color: servStatus == "DUE" ? '#B2E424' : 'grey' }} >BOOK APPOINTMENT</button>
+                        <button onClick={() => handleClick(model)} disabled={servStatus == "NOTDUEFFFFF"} style={{ color: servStatus == "DUE" ? '#B2E424' : 'grey' }} >BOOK APPOINTMENT</button>
                     </div>
 
                     {/* <div>

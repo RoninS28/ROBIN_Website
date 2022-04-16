@@ -8,6 +8,10 @@ import '../PagesStyles/Bookings.css'
 import Select from "react-select";
 import '../PagesStyles/ServicingConfirm.css'
 import { useState } from "react";
+import TextField from '@material-ui/core/TextField';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 
 
@@ -94,9 +98,9 @@ const ServicingConfirm = () => {
         }
     ]
     const Timeslotoptions = [
-        { label: "6am-12pm", value: "1" },
-        { label: "12pm-8pm", value: "2" },
-        { label: "8pm-6am", value: "3" },
+        { label: "8am-12pm", value: "1" },
+        { label: "12pm-4pm", value: "2" },
+        { label: "4pm-8pm", value: "3" },
     ];
 
     const [TimeslotValue, setTimeslotValue] = useState('');
@@ -104,6 +108,14 @@ const ServicingConfirm = () => {
     const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
         return option.value === TimeslotValue;
     })} />;
+
+
+    const [startDate, setStartDate] = useState(new Date()) //todo here we are going to retrieve the next servicing date available
+    const [selectedDate, setSelectedDate] = useState(new Date())
+
+
+
+
     return (
         <div>
 
@@ -174,15 +186,60 @@ const ServicingConfirm = () => {
 
 
                                     >
+                                        Select Service Centre:
+                                    </label>
+                                </div>
+                                <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                                    <div className="w-full self-center">
+                                        <TimeslotComponent />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xl font-bold mb-2 py-2"
+                                        htmlFor="grid-password"
+                                        style={{ width: 'max-content' }}
+
+
+                                    >
                                         Select Appointment Date:
                                     </label>
                                 </div>
                                 <div className="relative w-full lg:w-6/12 mb-3 px-2">
-                                    <input
+                                    <DatePicker
+                                        // selected={this.state.startDate}
+                                        // onChange={this.handleChange}
+                                        selected={selectedDate}
+                                        onChange={(date) => setSelectedDate(date)}
+                                        minDate={startDate}
+                                        placeholderText="Select a day"
+                                        dateFormat="dd/MMM/yy"
+                                    />
+                                    {/* <div style={{
+                                        margin: 'auto',
+                                        display: 'block',
+                                        width: 'fit-content'
+                                    }}>
+
+                                        <TextField
+                                            id="date"
+
+                                            label="Choose your birthdate"
+                                            type="date"
+                                            defaultValue="2017-05-24"
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </div> */}
+                                    {/* <input
                                         type="date"
+
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder=""
-                                    />
+                                    /> */}
                                 </div>
                             </div>
 
