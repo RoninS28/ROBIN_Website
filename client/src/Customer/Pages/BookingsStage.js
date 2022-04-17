@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => {
     }
 })
 
-const BookingsStage = () => {
+const BookingsStage = (props) => {
     const vehicleInfo = {
         imagesrc: "../Assets/v2.jpeg",
         model: "CITY - 1 ELECTRIC SCOOTER",
@@ -195,21 +195,26 @@ const BookingsStage = () => {
 
     const { id } = useParams();
     const [stages, setStages] = useState([]);
-    const getStages = () => {
-        axios.get("/myBooking/myEVs").then((response) => {
-            console.log(response.data)
-            for (var i in response.data) {
-                if (i.ticketid == id) {
-                    setStages(i.stages);
-                }
-            }
-            console.log('hello')
-            console.log(stages)
-        })
-    }
+    // const getStages = () => {
+    //     axios.get("/myBooking/myEVs").then((response) => {
+    //         console.log(response.data)
+    //         for (var i in response.data) {
+    //             if (i.ticketid == id) {
+    //                 setStages(i.stages);
+    //             }
+    //         }
+    //         console.log('hello')
+    //         console.log(stages)
+    //     })
+    // }
+
+    const [vehicle, setVehicle] = useState();
 
     useEffect(() => {
-        getStages();
+        //getStages();
+        //getVehicle();
+        setVehicle(props.location.state.vehicle);
+        console.log(vehicle);
         console.log(stages);
         console.log('rerender')
     }, []);
@@ -217,19 +222,24 @@ const BookingsStage = () => {
 
     const steps = [
         {
-          status: "Deformation"
+          status: "Deformation",
+          label: 1
         },
         {
-          status: "Casting"
+          status: "Casting",
+          label: 2
         },
         {
-          status: "Polymer Process"
+          status: "Polymer Process",
+          label: 3
         },
         {
-          status: "Machining"
+          status: "Machining",
+          label: 4
         },
         {
-          status: "Finishing"
+          status: "Finishing",
+          label: 5
         }
       ];
 
@@ -238,12 +248,19 @@ const BookingsStage = () => {
       };
     
       const getStepPosition = (transferStatus) => {
-        return steps.findIndex(({ status }) => status === transferStatus);
+        return steps.findIndex(({ label }) => label === vehicle.currentStage);
+      };
+
+      const transitionStyles = {
+        entering: { transform: "scale(1.5)" },
+        entered: { transform: "scale(1)" },
+        exiting: { transform: "scale(1.5)" },
+        exited: { transform: "scale(1)" }
       };
     
 
 
-    return (
+    return vehicle?(
         <div className="bookingsStageScreen">
 
             {/* client\src\Customer\Assets\v2.jpeg */}
@@ -264,6 +281,7 @@ const BookingsStage = () => {
             <div className={classes.ticketid} style={{ marginBottom: "50px" }}>
                 {/* Ticket Id: {vehicleInfo.ticketid} */}
                 Ticket Id: {id}
+                {/* stage: {vehicle.currentStage} */}
             </div>
 
 
@@ -322,15 +340,18 @@ const BookingsStage = () => {
                         1
                     }
                     filledBackground="linear-gradient(to right, #41ad49, #41ad49)"
+                    transition="1s ease"
+                    transitionDelay="0.5s"
                     >
                     {steps.map((step, index, arr) => {
                         return (
                         <Step
                             // position={100 * (index / arr.length)}
                             transition="scale"
-                            children={({ accomplished }) => (
+                            children={({ accomplished, transitionState, index  }) => (
                             <div
                                 style={{
+                                transitionStyles,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -356,7 +377,7 @@ const BookingsStage = () => {
 
 
         </div >
-    );
+    ):(<div>Loading...</div>);
 }
 
 export default BookingsStage;

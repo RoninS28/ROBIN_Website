@@ -72,12 +72,12 @@ export default function Home() {
 
   return (
     <div>
-      <Chatbot
+      {/* <Chatbot
         headerTitle="Speech Synthesis"
   speechSynthesis={{ enable: true, lang: 'en' }}
         steps={steps}
         {...config}
-      />
+      /> */}
       <div style={{ backgroundColor: "black", paddingBottom: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: "white", textShadow: "2px 2px blue", fontSize: "40px" }}>
           <center>WE BUILD THE VEHICLES FOR FUTURE.</center>

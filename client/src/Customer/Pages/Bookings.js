@@ -144,7 +144,10 @@ const Bookings = () => {
 
 
     const handleProduct = (e) => {
-        history.push('/bookingsStage/' + e.ticketID)
+        //history.push('/bookingsStage/' + e.ticketID)
+        console.log("about e: " + e);
+        console.log("about e: " + e.ticketID);
+        history.push({pathname:'/bookingsStage/' + e.ticketID , state:{vehicle: e}})
     }
 
 
