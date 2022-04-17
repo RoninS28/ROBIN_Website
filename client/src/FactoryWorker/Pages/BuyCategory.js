@@ -207,7 +207,7 @@ function BuyCategory()
       <div>
            
            <Grid container spacing={2} className={classes.upcontainer} >
-             <Grid item lg={6} md={6} >
+             <Grid item lg={8} md={8} sm={7} xs={11} >
                    <SearchBar
                        placeholder="Search for Accessories and more ..."
                        autoFocus
@@ -215,7 +215,7 @@ function BuyCategory()
                      />
              </Grid>
 
-             <Grid item lg={3} ml={3} className={classes.mycartbtn} >
+             <Grid item lg={3} md={3} sm={4} xs={8} ml={3} className={classes.mycartbtn} >
                  <Button variant="contained" size="large" 
                    startIcon={<ShoppingCartIcon />} 
                    >
@@ -229,17 +229,16 @@ function BuyCategory()
          </div>
     
     <Grid container className={classes.maincontainer}>
-       <Grid item lg={9} md={8} sm={11} xs={10} className={classes.firstPage}>
+       <Grid item lg={9} md={8} sm={12} xs={12} className={classes.firstPage}>
 
            <Paper style={{backgroundColor:'#2C528F1A'}}>
                  <Typography variant="h6" className={classes.headingname}>Tyre and Wheel</Typography>   
                  <Grid container>
-
                   
  
                      {itemCard.map((item) => (
 
-                        <Grid item lg={4} md={6} sm={8} xs={8} className={classes.gridcards} key={item.id}>
+                        <Grid item lg={4} md={6} sm={5} xs={7} className={classes.gridcards} key={item.id}>
 
                           <Link to="/buyitem" style={{ textDecoration: 'none' }} >
                             <Card className={classes.carddisplay}>
@@ -279,7 +278,7 @@ function BuyCategory()
            </Paper>
        </Grid>
 
-       <Grid item lg={3} md={4} sm={7} xs={7} className={classes.secondPage}>
+       <Grid item lg={3} md={4} sm={8} xs={9} className={classes.secondPage}>
           <Paper >
                 <Typography variant="h6" className={classes.headingname}>Filters</Typography> 
                   

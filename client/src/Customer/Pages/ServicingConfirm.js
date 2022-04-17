@@ -10,8 +10,10 @@ import '../PagesStyles/ServicingConfirm.css'
 import { useState } from "react";
 import TextField from '@material-ui/core/TextField';
 import DatePicker from "react-datepicker";
+import { useHistory } from "react-router";
 
 import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -83,6 +85,7 @@ const useStyles = makeStyles((theme) => {
 
 const ServicingConfirm = () => {
     const classes = useStyles()
+    const history = useHistory()
     const myBookingsList = [
         {
             imagesrc: "v2",
@@ -109,6 +112,10 @@ const ServicingConfirm = () => {
         return option.value === TimeslotValue;
     })} />;
 
+    const handleBookAppointment = () => {
+        history.push({ pathname: "/servicingConfirmed/" + "8D7320C1AC.004", state: { servicingID: 'S1234', serviceCentreID: "123", aptDate: "16/apr/2022", timeSlot: "12-8", pickupDrop: "drop", personalNotes: "routine servicing" } })
+
+    }
 
     const [startDate, setStartDate] = useState(new Date()) //todo here we are going to retrieve the next servicing date available
     const [selectedDate, setSelectedDate] = useState(new Date())
@@ -301,6 +308,7 @@ const ServicingConfirm = () => {
                                     className="w-full lg:w-6/12 text-black text-xl font-bold uppercase px-6 py-3  mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                     type="button"
                                     style={{ backgroundColor: "white", borderRadius: "15px", borderColor: "#FFD700", borderWidth: "5px" }}
+                                    onClick={handleBookAppointment}
                                 >
                                     Confirm Appointment
                                 </button>

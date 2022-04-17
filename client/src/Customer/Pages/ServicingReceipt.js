@@ -10,7 +10,7 @@ import v4 from '../Assets/v4.png'
 import v5 from '../Assets/v5.png'
 import v6 from '../Assets/v6.png'
 import v7 from '../Assets/v7.png'
-import '../PagesStyles/ServicingBook.css'
+import '../PagesStyles/ServicingReceipt.css'
 import Select from "react-select";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -48,12 +48,13 @@ const convertISOtoStringDate = (dateISO) => {
 
 }
 
-const ServicingBook = (props) => {
+const ServicingReceipt = (props) => {
     const id = props.match.params.id;
     const history = useHistory()
-    const [vehicle, setVehicle] = useState()
-    const [servStatus, setServStatus] = useState()
-    const [servicingInfo, setServicingInfo] = useState()
+    const [service, setService] = useState()
+    // const [vehicle, setVehicle] = useState()
+    // const [servStatus, setServStatus] = useState()
+    // const [servicingInfo, setServicingInfo] = useState()
     // const model = smodelList.find(item => item.id == id)
 
     const pastDueStyle = {
@@ -85,33 +86,12 @@ const ServicingBook = (props) => {
         history.push('/servicingConfirm/' + e.id)
     }
 
-    const getServicingInfo = (vehicle) => {
-        // axios.get('/servicing/')
-        const temp = []
-        vehicle.servicing.map(item => {
-            temp.push(item)
-        })
-        setServicingInfo(temp)
-    }
-    const checkservStatus = () => {
-        setVehicle(props.location.state.vehicle)
-        console.log(`vehicle info is ${props.location.state.vehicle.nextServicingDate}`)
-        const servDate = new Date(props.location.state.vehicle.nextServicingDate)
-        const today = new Date()
-        if (servDate > today) { // servicing is in the future
-            setServStatus('NOTDUE')
-        }
-        else {
-            setServStatus('DUE')
-        }
-    }
+
 
     useEffect(() => {
-        getServicingInfo(props.location.state.vehicle)
+        getService(props.location.state.service)
         // setVehicle("props.location.state.vehicle")
-        setVehicle(props.location.state.vehicle)
-        checkservStatus()
-        console.log(vehicle)
+
         // console.log(props.match.params.chassisNumber)
     }, []);
 
@@ -123,54 +103,7 @@ const ServicingBook = (props) => {
     }
 
 
-    const Timeslotoptions = [
-        { label: "6am-12pm", value: "1" },
-        { label: "12pm-8pm", value: "2" },
-        { label: "8pm-6am", value: "3" },
-    ];
 
-    const [TimeslotValue, setTimeslotValue] = useState('');
-
-    const TimeslotComponent = () => <Select onChange={(e) => { setTimeslotValue(e.value) }} options={Timeslotoptions} value={Timeslotoptions.filter(function (option) {
-        return option.value === TimeslotValue;
-    })} />;
-
-    const myVehicleList = [
-        {
-            id: 'D6FB6873C4.04D',
-            imagesrc: v2,
-            model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "MH 12 FP 9602",
-            purchaseDate: "28/05/2021",
-            status: "Up to Date",
-            stage: "10",
-            deliveryDate: "28/06/2021",
-            exServicingDate: "08/09/2021",
-            nextServicingDate: "28/11/2021",
-            ownerName: "Dhananjay Mahajan ",
-            chasis: "MA6MFBCIBBT"
-
-        },
-        {
-            id: '8D7320C1AC.004',
-            imagesrc: v2,
-            model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "MH 12 SG 5488",
-            purchaseDate: "08/09/2021",
-            status: "Pending",
-            stage: "3",
-            deliveryDate: "28/06/2021",
-            exServicingDate: "08/09/2021",
-            nextServicingDate: "28/11/2021",
-            ownerName: "Dhananjay Mahajan ",
-            chasis: "MA6MFBCIBBT"
-
-        }
-
-    ]
-    function createData(servicingNo, servicingDate, centre, inspectedBy, details, total) {
-        return { servicingNo, servicingDate, centre, inspectedBy, details, total };
-    }
 
     const columns = [
         {
@@ -204,21 +137,14 @@ const ServicingBook = (props) => {
 
     }
 
-    // const rows = [
-    //     createData('1', "08/08/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
-    //     createData('2', "08/09/2021", "KTHRUD", "Mohan Wagh", "Oil Change\nWheel alignment\n Wash", "50"),
-    //     createData('3', "08/10/2021", "KTHRUD", "Rohit Dhule", "Oil Change\nWheel alignment\n Wash", "50"),
-    //     createData('4', "08/11/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
 
-    // ];
     // !============================================================================================================
-    const model = myVehicleList.find(item => item.id == id)
 
 
-    return vehicle ? (
+    return service ? (
 
 
-        <div className="servicingBookScreen">
+        <div className="servicingReceiptScreen">
 
             <Grid container style={{ marginTop: '50px' }}>
                 <Grid item spacing={3} xs={12} md={5} lg={5} xl={5} >
@@ -247,81 +173,7 @@ const ServicingBook = (props) => {
 
             </Grid>
 
-            {/* ! ========================================================================================== */}
-            {/* <div className="formFilling" >
 
-                <Grid container className="infoGrid" spacing={8}>
-                    <Grid item xs={12} md={6} lg={6} xl={6} style={{ display: 'flex', alignItems: "center", justifyContent: 'flex-end' }} >
-                        <div style={{ marginRight: '20px' }}>
-
-                            Select Appointment Date
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <div>
-
-                            <input
-                                type="date"
-                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                placeholder=""
-                                style={{ width: '300px' }}
-                            />
-                        </div>
-                    </Grid>
-                </Grid>
-
-                <Grid container className="infoGrid" spacing={8}>
-                    <Grid item xs={12} md={6} lg={6} xl={6} style={{ display: 'flex', alignItems: "center", justifyContent: 'flex-end' }} >
-                        <div style={{ marginRight: '20px' }}>
-
-                            Select Preferred Time Slot
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <div>
-
-                            <div className="w-full self-center" style={{ width: '300px' }}>
-                                <TimeslotComponent placeholder="Select Time Slot" />
-                            </div>
-
-                        </div>
-                    </Grid>
-                </Grid>
-                <Grid container className="infoGrid" spacing={8}>
-                    <Grid item xs={12} md={6} lg={6} xl={6} style={{ display: 'flex', alignItems: "center", justifyContent: 'flex-end' }} >
-                        <div style={{ marginRight: '20px' }}>
-
-                            Pickup/Drop
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <div>
-
-                            <div className="w-full self-center" style={{ width: '300px' }}>
-                                <TimeslotComponent placeholder="Select Time Slot" />
-                            </div>
-
-                        </div>
-                    </Grid>
-                </Grid>
-                <Grid container className="infoGrid" spacing={8}>
-                    <Grid item xs={12} md={6} lg={6} xl={6} style={{ display: 'flex', alignItems: "start", justifyContent: 'flex-end' }} >
-                        <div style={{ marginRight: '20px' }}>
-
-                            Personal Notes
-                        </div>
-                    </Grid>
-                    <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <div>
-
-                            <textarea name="" id="" cols="30" rows="5" style={{ border: '1px solid rgba(0,0,0,0.3)' }}></textarea>
-
-                        </div>
-                    </Grid>
-                </Grid>
-            </div> */}
-
-            {/* ! ========================================================================================== */}
             {(vehicle.servicing.length > 0) ? (<TableContainer >
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
@@ -391,4 +243,4 @@ const ServicingBook = (props) => {
     ) : (<div> Loading</div>);
 }
 
-export default ServicingBook;
+export default ServicingReceipt;

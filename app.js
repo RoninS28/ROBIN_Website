@@ -33,6 +33,7 @@ const mongoose = require('mongoose')
 // app.use('/bookingsStage', require('./routes/customer/stage'));
 // ! FACTORY ROUTES
 app.use('/factories', require('./routes/factory/factory'));
+app.use('/factory', require('./routes/factory/auth'));//todo change it
 // ! OUTLET ROUTES
 app.use('/outlets', require('./routes/outlet/outlet'));
 app.use('/test-drives', require('./routes/outlet/testDrive'));
@@ -45,7 +46,7 @@ app.use('/complaints', require('./routes/common/complaints'));
 app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
-app.use('/model',require('./routes/common/model'));
+app.use('/model', require('./routes/common/model'));
 // app.use('/customers', require('./routes/customer/customer'));
 
 // ! CUSTOMER ROUTER
@@ -67,7 +68,7 @@ app.use('/testing', require('./routes/customer/customer'))
 const path = require("path")
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static( 'client/build' ));
+    app.use(express.static('client/build'));
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html')); // relative path
