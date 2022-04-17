@@ -11,9 +11,10 @@ import  {useState} from 'react'
 
 
 
+
 const Homepage=()=>{
     
-  const navigate = useNavigate();
+  const history = useHistory();
   const [email,setEmail] =useState('');
   const [password,setPassword]=useState('');
 
@@ -38,7 +39,7 @@ const loginUser = async (e) =>{
   else
   {
       window.alert("Login Success");
-      navigate("factory/manufacture");
+      history.push("factory/manufacture");
   }
 }
 
@@ -95,7 +96,7 @@ export default Homepage;
 // const Homepage=()=>{
 
 
-//   const navigate = useNavigate();
+//   const history.push = useHistory();
 //   const[user,setUser]= useState({
 //       name:"",email:"",password:"",age:""
 //   });
@@ -136,7 +137,7 @@ export default Homepage;
 //       window.alert("Registration Successful");
 //       console.log("successful registration");
 
-//       navigate("/manufacture");
+//       history.push("/manufacture");
 //      }
 //  }
    
@@ -196,7 +197,7 @@ export default Homepage;
     
 // function Homepage()
 // {
-//   const navigate = useNavigate();
+//   const history.push = useHistory();
 //   const [email,setEmail] =useState('');
 //   const [password,setPassword]=useState('');
   
@@ -222,7 +223,7 @@ export default Homepage;
 //     else
 //     {
 //         window.alert("Login Success");
-//         navigate("/manufacture");
+//         history.push("/manufacture");
 //     }
 //     }
 
