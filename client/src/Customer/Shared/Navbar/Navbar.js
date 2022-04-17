@@ -379,6 +379,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import SurroundSoundIcon from '@mui/icons-material/SurroundSound';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import UpdateIcon from '@mui/icons-material/Update';
 
 
 // import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from "react-router-dom";
@@ -405,6 +406,7 @@ import NotificationsRoom from "../../Pages/NotificationsChat";
 import Login from "../../Pages/Login";
 import Logout from "../../Pages/Logout";
 import Signup from "../../Pages/Signup";
+import Profile from "../../Pages/Profile"
 // import { useEffect } from "react";
 
 
@@ -614,6 +616,15 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
+                <Link to="/profile" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <UpdateIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="profile" />
+                    </ListItem>
+                </Link>
+
             </List>
         </Box>
     );
@@ -750,6 +761,7 @@ const Navbar = (props) => {
                         <Route path='/login' exact component={Login} ></Route>
                         <Route path='/signup' exact component={Signup} ></Route>
                         <Route path='/logout' exact component={Logout} ></Route>
+                        <Route path='/profile' exact component={Profile} ></Route>
                     </Switch>
                 </div>
             </main>
