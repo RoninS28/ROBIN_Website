@@ -6,7 +6,7 @@ import Link from '@material-ui/core/Link';
 import { useLocation, useHistory } from 'react-router-dom';
 import './login.css';
 // import React, {useState} from 'react'
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import  {useState} from 'react'
 
 
