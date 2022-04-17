@@ -114,6 +114,7 @@ function BuyItem()
               <TableContainer component={Card } style={{ height:'auto', width: "auto"}}>
                   <Table aria-label="Requests Details">
                     <TableBody>
+                    
                           {rows.map((row) => (
                           <TableRow
                               key={row.name}

@@ -18,6 +18,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import { Link } from "react-router-dom";
+import {useEffect, useState} from 'react'
+import { useNavigate  } from 'react-router-dom';
 
 
 
@@ -30,6 +32,46 @@ import ImageUpload from '../Shared/ImageUpload';
 import ebike from '../../images/ebike.jpeg';
 import ev3 from '../../images/ev3.png';
 import ev2 from '../../images/ev2.png';
+
+const toppings = [
+    {
+      name: "Capsicum",
+      price: 1.2,
+      BatchID: "B101"
+    },
+    {
+      name: "Paneer",
+      price: 2.0,
+      BatchID: "B102"
+    },
+    {
+      name: "Red Paprika",
+      price: 2.5,
+      BatchID: "B103"
+    },
+    {
+      name: "Onions",
+      price: 3.0,
+      BatchID: "B104"
+    },
+    {
+      name: "Extra Cheese",
+      price: 3.5,
+      BatchID: "B105"
+    },
+    {
+      name: "Baby Corns",
+      price: 3.0,
+      BatchID: "B106"
+    },
+    {
+      name: "Mushroom",
+      price: 2.0,
+      BatchID: "B107"
+    }
+  ];
+
+
 
 const ticketSet =[
     {id: "1", TicketId: 'B1015A'},
@@ -45,11 +87,15 @@ const ticketSet =[
     {id: "11", TicketId: 'B1015K'},
   ]
 
+
+  const getFormattedPrice = (price) => `$${price.toFixed(2)}`;
+
   const useStyles = makeStyles((theme) =>({
       Maindiv:{
         //backgroundColor:"#DBF3FA",
       },
 
+      
    headingname:{
     backgroundColor:theme.palette.info.dark,
     padding: theme.spacing(1),
@@ -65,13 +111,54 @@ const ticketSet =[
    imgicon:{
        paddingTop: theme.spacing(6),
    }
-   
-    
 
 }));
 
 function ManufactureSelect()
 {
+    var listArray = [];
+    const navigate = useNavigate();
+    const [userData, setUserData] = useState({});
+
+    const [myArray, updateMyArray] = useState([]);
+
+    // function func(){
+    //   console.log('hi');
+    //   console.log("arrays",listArray);
+    //   console.log('hi');
+    // }
+
+    const callAboutPage = async() => {
+        try{
+           const res = await fetch('/manufacture', {
+               method: "GET",
+               headers: {
+                   Accept: "application/json",
+                   "Content-Type": "application/json"
+               },
+               credentials: "include"
+           });
+
+           const data = await res.json();
+           console.log(data); //complete data in 'data'
+           setUserData(data);
+
+
+           if(!res.status === 200)
+           {
+               const error =new Error(res.error);
+               throw error;
+           }
+        }catch(err){
+            console.log(err);
+            navigate("/homepage");
+        }
+    }
+    useEffect(() =>{
+        callAboutPage();
+    }, []);
+
+
     const classes = useStyles();
     const [stage, setstage] = React.useState('');
 
@@ -89,17 +176,108 @@ function ManufactureSelect()
     if (mm < 10) {
         mm = '0' + mm;
     }
-    var today = dd + '/' + mm + '/' + yyyy;
+    var updateddate = dd + '/' + mm + '/' + yyyy;
+
+
+    const [checkedState, setCheckedState] = useState(
+    new Array(toppings.length).fill(false)
+  );
+
+   
+  const [total, setTotal] = useState(0);
+
+  const handleOnChange = (position) => {
+    const func=()=>
+    {
+      console.log("helloe",listArray);
+    }
+    const updatedCheckedState = checkedState.map((item, index) =>{
+        if(index === position)
+        {
+            listArray = listArray.filter(e => e !== toppings[index].BatchID);
+            updateMyArray(listArray);
+            // func(listArray);
+        // console.log(toppings[index].BatchID);
+            return !item;
+        }
+        else
+        {
+            return item;
+        }
+    }
+       
+    );
+
+    setCheckedState(updatedCheckedState);
+
+    const totalPrice = updatedCheckedState.reduce(
+      (sum, currentState, index) => {
+        if (currentState === true) {
+             listArray.push(toppings[index].BatchID);
+             updateMyArray(listArray);
+             console.log(listArray);
+          return sum + toppings[index].price;
+        }
+        return sum;
+      },
+      0
+    );
+
+    setTotal(totalPrice);
+  };
+
+
+//////////////////////////////////////////////
+
+    const [description,setdescription] =useState('');
+    const [stageno,setstageno]=useState('');
+
+    const sendUpdateData = async (e) =>{
+      e.preventDefault();
+      console.log(myArray);
+      // console.log("arrays",listArray);
+      // func();
+      // console.log("arrays",f);
+
+          const res = await fetch('/senddata',{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                description,stageno,myArray,updateddate
+            })
+        });
+
+        const data =await res.json();
+
+        if(res.status === 422 || !data)
+        {
+            window.alert("Updation failed");
+            console.log("Updation failed");
+        }
+        else
+        {
+         window.alert("Updation Successful");
+         console.log("successful Updation");
+ 
+         navigate("/manufacture");
+        }
+
+
+    }
+
+
     return(
         <div className={classes.Maindiv}>
 
              <Grid container justifyContent="center" pl={10}>
                     <Grid item display="flex">
                         <Typography variant="h6" style={{fontSize:'35px'}} className={classes.headingtitle} >
-                         UPDATE STAGES</Typography> 
+                         Welcome {userData.name}<br/> UPDATE STAGES</Typography> 
                        
                          <div className={classes.headingtitle} style={{alignItems:'right'}}>
-                         <Button variant="outlined" >TODAY's DATE: {today}</Button>
+                         <Button variant="outlined" >TODAY's DATE: {updateddate}</Button>
                          </div>
                     </Grid>
                     
@@ -129,25 +307,39 @@ function ManufactureSelect()
             <Table sx={{ minWidth: 650 }} lg={7} md={11} aria-label="simple table">
                 
                 <TableBody>
-                  {ticketSet.map((item) => (
+                  {/* {ticketSet.map((item) => ( */}
 
-                    <TableRow  key={item.id}>
+                  {toppings.map(({ name, price, BatchID }, index) => {
+
+                   return (
+                    <TableRow  key={index}>
                         <TableCell align="center">
-                          <Checkbox />
+                          {/* <Checkbox /> */}
+                          <input type="checkbox"  
+                                 id={`custom-checkbox-${index}`}
+                                 name={name}
+                                 value={name}
+                                checked={checkedState[index]}
+                                onChange={() => handleOnChange(index)}
+                          />
                           
                         </TableCell>
                         <TableCell align="right">
-                           <Typography  style={{fontWeight: 500, fontSize: 'h6.fontSize', paddingLeft: '40px'}}>{item.TicketId}</Typography>  
+                           <Typography  style={{fontWeight: 500, fontSize: 'h6.fontSize', paddingLeft: '40px'}}>{BatchID}</Typography>  
                            
                         </TableCell>
                         <TableCell align="right">
-                           <Link to="/manufacturehistory" style={{ textDecoration: 'none' }} >
+                           <Link to={`/manufacturehistory/${BatchID}`} style={{ textDecoration: 'none' }} >
+                           {/* <Link to='/manufacturehistory' style={{ textDecoration: 'none' }} > */}
                              <Button variant="contained" size="large" >Display History</Button>
                             </Link>
                         </TableCell>
                     </TableRow>
 
-                     ))}
+                    );
+
+                })}
+
 
                 </TableBody>
                 
@@ -198,11 +390,26 @@ function ManufactureSelect()
 
                         <Grid item lg={10}>
                             <Grid container direction='column'>
+                               
+                              <form method="POST">
                                 <Grid item style={{paddingLeft:'20px' }}>
-                                     <SelectStages/> 
+                                     {/* <SelectStages/>  */}
+                                     <select name="stageno" value={stageno}
+                                         onChange={(e)=> setstageno(e.target.value)}
+                                     >
+                                       <option value ="1">Stage I</option>
+                                       <option value ="2">Stage II</option>
+                                       <option value ="3">Stage III</option>
+                                       <option value ="4">Stage IV</option>
+                                       <option value ="5">Stage V</option>
+                                       <option value ="6">Stage VI</option>
+                                     </select>
                                 </Grid>
                                 <Grid item style={{paddingLeft:'20px' }}>
-                                    <br /> <textarea name="" id="" cols="30" rows="7" style={{ border: '1px solid rgba(0,0,0,0.3)'}}></textarea>
+                                    <br /> 
+                                    <textarea name="description" value={description} cols="30" rows="7" style={{ border: '1px solid rgba(0,0,0,0.3)'}} 
+                                         onChange={(e)=> setdescription(e.target.value)}
+                                    />
                                 </Grid>
 
                                 <Grid item style={{paddingLeft:'20px',paddingTop: '10px' }}>
@@ -210,8 +417,9 @@ function ManufactureSelect()
                                 </Grid>
 
                                 <Grid item style={{paddingLeft:'20px', paddingTop: '50px' }}>
-                                <Button variant="contained" size="large" style={{backgroundColor:'#ED6C02'}}>Update details</Button>
+                                  <Button variant="contained" onClick={sendUpdateData} size="large" style={{backgroundColor:'#ED6C02'}}>Update details</Button>
                                 </Grid>
+                              </form>
 
                             </Grid>
                         </Grid>

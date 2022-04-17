@@ -18,7 +18,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import HomeIcon from '@mui/icons-material/Home';
 import HandymanIcon from '@mui/icons-material/Handyman';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -42,6 +42,7 @@ import BuyCart from "../../Pages/BuyCart";
 
 import Inspection from "../../Pages/Inspection";
 import Issue from "../../Pages/Issue";
+
 
 
 
@@ -136,18 +137,7 @@ const styles = theme => ({
 });
 
 const Navbar = (props) => {
-  const { classes, theme, setLoggedIn } = props;
-
-  const history = useHistory();
-  const location = useLocation();
-  useEffect(() => {
-      console.log();
-      if(location.pathname == '/factory-worker') {
-          console.log("pushing / to URL");
-          history.push("/");
-      }
-  })
-
+  const { classes, theme } = props;
   const [open, setOpen] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -176,11 +166,6 @@ const Navbar = (props) => {
   const handleClose = () => {
     setAnchorEl(null)
   };
-
-  const handleLogout = () => {
-    setLoggedIn(null);
-    history.push('/');
-  }
 
   return (
     <div className={classes.root}>
@@ -252,7 +237,7 @@ const Navbar = (props) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
               </Menu>
             </div>
           </Toolbar>
@@ -340,7 +325,7 @@ const Navbar = (props) => {
         
         
           <div className = 'back'>
-            <Switch>
+            {/* <Switch> */}
               <Route path='/' exact component={Homepage} ></Route>
               <Route path='/manufacture' exact component={ManufactureSelect}></Route>
               <Route path='/manufacturehistory' exact component={ManufactureHistory}></Route>
@@ -358,7 +343,7 @@ const Navbar = (props) => {
               <Route path='/inspection' exact component={Inspection}></Route>
               <Route path='/issue' exact component={Issue}></Route>
               
-            </Switch>
+            {/* </Switch> */}
         </div>
         </main>
       </Router>
