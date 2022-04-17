@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 // import 'bootstrap/dist/css/bootstrap.css';
 
 // import '../App.css';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 // import { useState } from 'react';
 
 
 const InsertAccessory = () => {
 
 
-    const navigate = useNavigate();
+    const history = useHistory();
     const [user, setUser] = useState({
         accid: "", name: "", price: "", company: "", description: "", specifications: ""
     });
@@ -48,7 +48,7 @@ const InsertAccessory = () => {
             window.alert("Addes Successful");
             console.log("successful Added");
 
-            navigate("/factory");
+            history.push("/factory");
         }
     }
 

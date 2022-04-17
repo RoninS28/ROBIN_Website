@@ -1,11 +1,11 @@
 // import React from 'react'
 import React, { useEffect, useState } from 'react'
 
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 const Logout = () => {
 
-    const navigate = useNavigate();
+    const history = useHistory();
 
     useEffect(() => {
         fetch('factory/logout', {
@@ -16,7 +16,7 @@ const Logout = () => {
             },
             credentials: "include"
         }).then((res) => {
-            navigate("factory/homepage", { replace: true });
+            history.push("factory/homepage", { replace: true });
             if (res.status != 200) {
                 const error = new Error(res.error);
                 throw error;

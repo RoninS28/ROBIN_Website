@@ -37,7 +37,7 @@ function App() {
             <div>
               <ul>
                 <li><Link to="/customer">Customer</Link></li>
-                <li><Link to="/factory-worker">Factory Worker</Link></li>
+                <li><Link to="/factory">Factory Worker</Link></li>
                 <li><Link to="/super-admin">Super Admin</Link></li>
                 <li><Link to="/factory-admin">Factory Admin</Link></li>
                 <li><Link to="/service-center">Service Center</Link></li>
@@ -66,7 +66,7 @@ function App() {
                   return (
                     <CustomerRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />
                   )
-                case 'factory-worker':
+                case 'factory':
                   return (
                     <FactoryWorkerRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />
                   )
@@ -87,7 +87,7 @@ function App() {
 
         <Switch>
           <Route path='/customer' exact component={() => (<CustomerRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
-          <Route path='/factory-worker' exact component={() => (<FactoryWorkerRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
+          <Route path='/factory' exact component={() => (<FactoryWorkerRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/super-admin' exact component={() => (<SuperAdminRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/factory-admin' exact component={() => (<FactoryAdminRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/service-center' exact component={() => (<ServiceCentreRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>

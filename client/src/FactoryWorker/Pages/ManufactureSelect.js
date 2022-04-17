@@ -19,7 +19,7 @@ import Select from '@mui/material/Select';
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 
 
@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ManufactureSelect() {
   var listArray = [];
-  const navigate = useNavigate();
+  const history = useHistory();
   const [userData, setUserData] = useState({});
 
   const [myArray, updateMyArray] = useState([]);
@@ -149,7 +149,7 @@ function ManufactureSelect() {
       }
     } catch (err) {
       console.log(err);
-      navigate("factory/homepage");
+      history.push("factory/homepage");
     }
   }
   useEffect(() => {
@@ -254,7 +254,7 @@ function ManufactureSelect() {
       window.alert("Updation Successful");
       console.log("successful Updation");
 
-      navigate("factory/manufacture");
+      history.push("factory/manufacture");
     }
 
 
