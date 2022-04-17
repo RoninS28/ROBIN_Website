@@ -20,7 +20,7 @@ const Homepage=()=>{
 const loginUser = async (e) =>{
       e.preventDefault();
 
-  const res = await fetch('/homepage',{
+  const res = await fetch('factory/homepage',{
       method:"POST",
       headers: {
           "Content-Type": "application/json"
@@ -38,7 +38,7 @@ const loginUser = async (e) =>{
   else
   {
       window.alert("Login Success");
-      navigate("/manufacture");
+      navigate("factory/manufacture");
   }
 }
 

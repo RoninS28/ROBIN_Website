@@ -1,32 +1,31 @@
 // import React from 'react'
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const Logout=()=>{
+const Logout = () => {
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        fetch('/logout',{
-            method:"GET",
+    useEffect(() => {
+        fetch('factory/logout', {
+            method: "GET",
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json"
             },
             credentials: "include"
-        }).then((res)=>{
-            navigate("/homepage",{replace: true});
-            if(res.status != 200)
-            {
+        }).then((res) => {
+            navigate("factory/homepage", { replace: true });
+            if (res.status != 200) {
                 const error = new Error(res.error);
                 throw error;
             }
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         })
     })
-    return(
+    return (
         <div>
             <p className="pt-5">WELCOME</p>
             <h1>We are the Logout</h1>
