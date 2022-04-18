@@ -10,7 +10,7 @@ import v4 from '../Assets/v4.png'
 import v5 from '../Assets/v5.png'
 import v6 from '../Assets/v6.png'
 import v7 from '../Assets/v7.png'
-import '../PagesStyles/ServicingReceipt.css'
+// import '../PagesStyles/ServicingReceipt.css'
 import Select from "react-select";
 import { useState } from "react";
 import { useHistory } from "react-router";
@@ -82,14 +82,14 @@ const ServicingReceipt = (props) => {
 
     }
 
-    const handleClick = (e) => {
-        history.push('/servicingConfirm/' + e.id)
+    const handleGoBack = (e) => {
+        history.goBack()
     }
 
 
 
     useEffect(() => {
-        getService(props.location.state.service)
+        setService(props.location.state.service)
         // setVehicle("props.location.state.vehicle")
 
         // console.log(props.match.params.chassisNumber)
@@ -107,29 +107,25 @@ const ServicingReceipt = (props) => {
 
     const columns = [
         {
-            id: 'servicingNo',
-            label: 'Servicing No'
+            id: 'workid',
+            label: 'Work ID'
         },
         {
-            id: 'servicingDate',
-            label: 'Servicing Date'
+            id: 'workname',
+            label: 'Work Name'
         },
         {
-            id: 'centre',
-            label: 'Centre'
+            id: 'description',
+            label: 'Description'
         },
         {
-            id: 'inspectedBy',
-            label: 'Inspected By'
+            id: 'quantity',
+            label: 'Quantity'
         },
         {
-            id: 'details',
-            label: 'Details'
-        },
-        {
-            id: 'total',
-            label: 'Total'
-        },
+            id: 'totalamt',
+            label: 'Total Amount'
+        }
     ]
 
     const viewReceipt = (service) => {
@@ -145,36 +141,18 @@ const ServicingReceipt = (props) => {
 
 
         <div className="servicingReceiptScreen">
+            <div style={{ fontSize: '30px', fontWeight: '600' }}>
 
-            <Grid container style={{ marginTop: '50px' }}>
-                <Grid item spacing={3} xs={12} md={5} lg={5} xl={5} >
-                    <div className="image">
-                        <img src={getMyImage(vehicle.image)} alt="image" width="350" height="300" />
-                    </div>
-                </Grid>
-                <Grid item spacing={3} xs={12} md={7} lg={7} xl={7}>
+                <center>
 
-                    <div className="allDetails">
-
-                        <div className="allDetailsText">
-
-                            Model: {vehicle.modelName}
-                        </div>
-                        <div className="allDetailsText">
-
-                            Vehicle No: {vehicle.vehicleNumber}
-                        </div>
-                        <div className="allDetailsText">
-
-                            Chassis: {vehicle.chassisNumber}
-                        </div>
-                    </div>
-                </Grid>
-
-            </Grid>
+                    <h2>Receipt ID #{service.serviceID}</h2>
+                    <h2>Date of Service: {convertISOtoStringDate(service.dateOfService)}</h2>
+                </center>
+            </div>
 
 
-            {(vehicle.servicing.length > 0) ? (<TableContainer >
+
+            {(service.workDone.length > 0) ? (<TableContainer >
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -192,18 +170,17 @@ const ServicingReceipt = (props) => {
                     </TableHead>
                     <TableBody>
 
-                        {servicingInfo.map((row) => (
+                        {service.workDone.map((row) => (
                             <TableRow
-                                key={row.serviceID}
+                                key={row.workID}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" align="center" className="servicingdata">
-                                    {row.serviceID}
+                                    {row.workID}
                                 </TableCell>
-                                <TableCell align="center" className="servicingdata">{convertISOtoStringDate(row.dateOfService)}</TableCell>
-                                <TableCell align="center" className="servicingdata">{row.serviceCentre}</TableCell>
-                                <TableCell align="center" className="servicingdata">{row.personInCharge}</TableCell>
-                                <TableCell align="center" className="servicingdata" onClick={() => { viewReceipt(row) }}> <a href="#">Receipt</a></TableCell>
+                                <TableCell align="center" className="servicingdata">{row.workName}</TableCell>
+                                <TableCell align="center" className="servicingdata">{row.workDesc}</TableCell>
+                                <TableCell align="center" className="servicingdata">{row.quantity}</TableCell>
                                 <TableCell align="center" className="servicingdata">₹ {row.totalAmount}</TableCell>
                             </TableRow>
                         ))}
@@ -212,33 +189,22 @@ const ServicingReceipt = (props) => {
             </TableContainer>) : (<div id="noDataOfServicing" ><center>-- No data of servicing found --</center>  </div>)}
 
 
-            <div className="furtherAction">
-                <div className="text" style={{ marginBottom: '20px' }}>
-                    Next Servicing:
-                </div>
 
-                <div className="date" style={servStatus == "DUE" ? pastDueStyle : upToDateStyle}>
-                    {model.exServicingDate}
-                </div>
-
-                <div className="status" style={servStatus == "DUE" ? pastDueStyle : upToDateStyle}>
-                    [{servStatus == "DUE" ? "Servicing is Due" : "Up To Date"}]
-                </div>
-                <div className="statusColumn">
-                    <div className="bookServicingButtonDiv" style={servStatus == "DUE" ? enabledStyle : disabledStyle}>
-                        <button onClick={() => handleClick(model)} disabled={servStatus == "NOTDUEFFFFF"} style={{ color: servStatus == "DUE" ? '#B2E424' : 'grey' }} >BOOK APPOINTMENT</button>
-                    </div>
-
-                    {/* <div>
-                                        {item.status}
-                                    </div>
-                                    <div>
-                                        {item.status == 'Pending' ? item.stage : item.deliveryDate}
-                                    </div> */}
-                </div>
+            <br /><br />
+            <div style={{ fontSize: '25px', fontWeight: '600' }}>
+                <center>
+                    Total Amount: ₹ {service.totalAmount}
+                </center>
 
             </div>
-            <br /><br />
+            <br /><br /><br /><br />
+
+            <div style={{ fontSize: '22px', fontWeight: '600' }} onClick={handleGoBack}>
+                <center>
+
+                    Go Back to Servicing
+                </center>
+            </div>
         </div>
     ) : (<div> Loading</div>);
 }

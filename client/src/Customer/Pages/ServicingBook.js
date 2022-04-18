@@ -200,7 +200,7 @@ const ServicingBook = (props) => {
     ]
 
     const viewReceipt = (service) => {
-        history.push({ pathname: "servicing/viewReceipt/" + service.serviceID, state: { service: service } })
+        history.push({ pathname: "/servicing/viewReceipt/" + service.serviceID, state: { service: service } })
 
     }
 
@@ -351,7 +351,7 @@ const ServicingBook = (props) => {
                                 <TableCell align="center" className="servicingdata">{convertISOtoStringDate(row.dateOfService)}</TableCell>
                                 <TableCell align="center" className="servicingdata">{row.serviceCentre}</TableCell>
                                 <TableCell align="center" className="servicingdata">{row.personInCharge}</TableCell>
-                                <TableCell align="center" className="servicingdata" onClick={() => { viewReceipt(row) }}> <a href="#">Receipt</a></TableCell>
+                                <TableCell align="center" className="servicingdata" onClick={() => { viewReceipt(row) }}>Receipt</TableCell>
                                 <TableCell align="center" className="servicingdata">₹ {row.totalAmount}</TableCell>
                             </TableRow>
                         ))}

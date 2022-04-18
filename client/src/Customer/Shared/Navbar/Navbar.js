@@ -399,6 +399,7 @@ import BookingsStage from "../../Pages/BookingsStage";
 import ServicingConfirm from "../../Pages/ServicingConfirm";
 import ServicingConfirmed from "../../Pages/ServicingConfirmed";
 import Servicing from "../../Pages/Servicing";
+import ServicingReceipt from "../../Pages/ServicingReceipt";
 import ServicingBook from "../../Pages/ServicingBook";
 import Chatbot from "../../Pages/Chatbot";
 import TestDriveBooking from "../../Pages/TestDriveBooking";
@@ -745,6 +746,7 @@ const Navbar = (props) => {
                         <Route path='/bookings' exact component={Bookings} ></Route>
                         <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
                         <Route path='/servicing' exact component={Servicing} ></Route>
+                        <Route path='/servicing/viewReceipt/:id' exact component={ServicingReceipt} ></Route>
                         <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
                         <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
                         <Route path='/servicingConfirmed/:id' exact component={ServicingConfirmed} ></Route>
