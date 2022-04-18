@@ -451,6 +451,8 @@ router.get('/placeorder', (req, res) => {
     })
 })
 
+
+
 router.get('/:id', customerController.customerGet)
 router.put('/:id', customerController.customerPut)
 router.delete('/:id', customerController.customerDelete)
