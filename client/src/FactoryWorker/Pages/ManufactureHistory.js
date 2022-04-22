@@ -167,7 +167,7 @@ function ManufactureHistory() {
   const getDetails = () => {
     const temp = [];
 
-    axios.get('factory/manufacturehistory/' + id).then((response) => {
+    axios.get('/factory/manufacturehistory/' + id).then((response) => {
       let mydata = response.data;
 
       console.log('mydat', mydata);

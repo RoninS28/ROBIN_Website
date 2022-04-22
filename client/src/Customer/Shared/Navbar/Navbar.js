@@ -592,14 +592,14 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/" style={{ textDecoration: 'none' }}>
+                {/* <Link to="/" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <SurroundSoundIcon />
                         </ListItemIcon>
                         <ListItemText primary="Updates" />
                     </ListItem>
-                </Link>
+                </Link> */}
 
                 <Link to="/notifications" style={{ textDecoration: 'none' }}>
                     <ListItem button>
@@ -607,6 +607,15 @@ const Navbar = (props) => {
                             <NotificationsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Notifications" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/profile" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <UpdateIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="My Profile" />
                     </ListItem>
                 </Link>
 
@@ -619,14 +628,7 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/profile" style={{ textDecoration: 'none' }}>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <UpdateIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="profile" />
-                    </ListItem>
-                </Link>
+                
 
             </List>
         </Box>

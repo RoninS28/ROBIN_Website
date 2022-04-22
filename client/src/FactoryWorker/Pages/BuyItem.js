@@ -26,6 +26,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchBar from 'material-ui-search-bar';
 import {useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 const Img = styled('img')({
     margin: 'auto',
@@ -59,10 +61,88 @@ function BuyItem()
 {
     const classes = useStyles();
     const [feature, setFeature] = React.useState('');
+    // const [itemdetail, setUserData] = useState();
+    const [name, setname] = useState();
+    const [price, setprice] = useState();
+    const [company, setcompany] = useState();
+    const [description, setdescription] = useState();
+    const [specifications, setspecifications] = useState([]);
+    const [myimage, setimage] = useState([]);
 
     const handleChange = (event) => {
       setFeature(event.target.value);
     };
+
+
+    const {id} =useParams();
+    const getAccItem = () => {
+      // const temp=[];
+  
+
+      axios.get('/factory/buyitem/'+id).then( (response) => {
+           let mydata = response.data;
+  
+           console.log('mydateee',mydata);
+         
+           setname(mydata[0].name);
+           setprice(mydata[0].price);
+           setcompany(mydata[0].company);
+           setdescription(mydata[0].description);
+          // setimage(mydata[0].image);
+           //setspecifications(mydata[0].specifications);
+
+           const temp=mydata[0].specifications.split(",");
+           setspecifications(temp);
+
+          const myimg =[];
+          myimg.push(mydata[0].image);
+          setimage(myimg);
+  
+        })
+      }
+  
+      useEffect(() => {
+        getAccItem()
+        console.log('renders');
+        
+        
+      },[])
+
+
+      const AddData = async (e) =>{
+        // window.alert("Hoooo");
+        e.preventDefault();
+   
+        //const {accid,name,category,price,company,description,specifications} = user;
+        const accid = id;
+        const image = myimage[0];
+        const res = await fetch('/addtocart', {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              accid,name,price,company,image
+            })
+        });
+   
+        const data =await res.json();
+   
+        if(res.status === 422 || !data)
+        {
+            window.alert("Product already in cart");
+            console.log("Product already in cart");
+        }
+        else
+        {
+         window.alert("Added to cart");
+         console.log("successful Added");
+   
+        //  navigate("/");
+        }
+      }
+
+      
       return(
           <div style={{padding:'1rem'}}>
            
@@ -89,24 +169,26 @@ function BuyItem()
          <Paper sx={{ p: 2, margin: 'auto', flexGrow: 1 }} style={{ maxWidth: 'md', maxHeight:'auto',backgroundColor:'#2C528F1A'}}>
         <Grid container spacing={2}>
           <Grid item>
-              <Img alt="complex" src={seat} style={{height:400}}/>
+
+             {myimage.map((item) => (    
+                  <img  src={require('../Shared/img/'+item).default} alt={name} style={{height:400}}/>
+              ))}
+
           </Grid>
           <Grid item l={12} sm container>
             <Grid item l container direction="column" spacing={2}>
               <Grid item l>
                 <Typography gutterBottom variant="subtitle1" component="div" style={{fontSize:'20px'}}>
-                  <b>PU Leather Seat ( Flexible Design with Comfort) </b>
+                  <b>{name} </b>
                 </Typography>
                 <Typography gutterBottom variant="body2" style={{fontSize:'15px'}}  >
-                  AGM Brand
+                  {company}
                   </Typography>
               <Typography variant="subtitle1" component="div" style={{color:"green"}}>
-                  ₹ 3,200
+                  ₹ {price}
               </Typography>
                 <Typography variant="body2" color="text.secondary">
-                Description :  A child safety seat or child restraint system is
-                a restraint which is secured to the seat of an automobile equipped 
-                with safety harnesses or seat belts.
+                {description}
                 </Typography>
               </Grid>
               <Grid item>
@@ -115,13 +197,13 @@ function BuyItem()
                   <Table aria-label="Requests Details">
                     <TableBody>
                     
-                          {rows.map((row) => (
+                          {specifications.map((row) => (
                           <TableRow
-                              key={row.name}
+                              key={row}
                               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                           >
                              <TableCell component="th" scope="row" align="center">
-                              {row.property}
+                              {row}
                               </TableCell>
                               <TableCell align="center">{row.data}</TableCell>
                                           </TableRow>
@@ -137,7 +219,9 @@ function BuyItem()
               <Grid item xs={9} style={{alignContent:"center"}}>
 
                 <div >
-                <Button variant="contained" color="primary" size="large"startIcon={<ShoppingCartIcon />} >Add to Cart</Button>
+                   <Button variant="contained" color="primary" size="large" onClick={AddData} startIcon={<ShoppingCartIcon />} >
+                   Add to Cart
+                   </Button>
                 </div>
          
               </Grid>

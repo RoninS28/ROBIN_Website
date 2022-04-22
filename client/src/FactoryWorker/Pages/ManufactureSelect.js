@@ -234,7 +234,7 @@ function ManufactureSelect() {
     // func();
     // console.log("arrays",f);
 
-    const res = await fetch('factory/senddata', {
+    const res = await fetch('/factory/senddata', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -254,7 +254,7 @@ function ManufactureSelect() {
       window.alert("Updation Successful");
       console.log("successful Updation");
 
-      history.push("factory/manufacture");
+      history.push("/manufacture");
     }
 
 
