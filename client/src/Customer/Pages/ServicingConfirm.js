@@ -7,12 +7,13 @@ import v2 from '../Assets/v2.jpeg'
 import '../PagesStyles/Bookings.css'
 import Select from "react-select";
 import '../PagesStyles/ServicingConfirm.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextField from '@material-ui/core/TextField';
 import DatePicker from "react-datepicker";
 import { useHistory } from "react-router";
-
+import axios from 'axios'
 import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -100,6 +101,24 @@ const ServicingConfirm = () => {
 
         }
     ]
+
+    const fetchCentres = () => {
+        axios.get('/servicing/fetchCentres').then((response) => {
+            const data = response.data
+            const temp = []
+            let i = 0
+            data.map((item) => {
+                temp.push({
+                    label: item.name,
+                    value: i
+                })
+                i++
+                console.log(i)
+            })
+            setCentreoptions(temp)
+
+        })
+    }
     const Timeslotoptions = [
         { label: "8am-12pm", value: "1" },
         { label: "12pm-4pm", value: "2" },
@@ -112,6 +131,28 @@ const ServicingConfirm = () => {
         return option.value === TimeslotValue;
     })} />;
 
+    const PickupDropOptions = [
+        { label: "Pickup", value: "1" },
+        { label: "Drop", value: "2" }
+    ];
+
+    const [PickupDropValue, setPickupDropValue] = useState('');
+
+    const PickupDropComponent = () => <Select onChange={(e) => { setPickupDropValue(e.value) }} options={PickupDropOptions} value={PickupDropOptions.filter(function (option) {
+        return option.value === PickupDropValue;
+    })} />;
+
+    const [centres, setCentres] = useState('');
+    const [centreoptions, setCentreoptions] = useState('');
+
+    const CentreComponent = () => <Select onChange={(e) => { setCentres(e.value) }} options={centreoptions} value={centreoptions.filter(function (option) {
+        return option.value === centres;
+    })} />;
+
+
+
+
+
     const handleBookAppointment = () => {
         history.push({ pathname: "/servicingConfirmed/" + "8D7320C1AC.004", state: { servicingID: 'S1234', serviceCentreID: "123", aptDate: "16/apr/2022", timeSlot: "12-8", pickupDrop: "drop", personalNotes: "routine servicing" } })
 
@@ -122,8 +163,12 @@ const ServicingConfirm = () => {
 
 
 
+    useEffect(() => {
+        // defa
+        fetchCentres()
+    }, []);
 
-    return (
+    return centreoptions ? (
         <div>
 
 
@@ -198,7 +243,7 @@ const ServicingConfirm = () => {
                                 </div>
                                 <div className="relative w-full lg:w-6/12 mb-3 px-2">
                                     <div className="w-full self-center">
-                                        <TimeslotComponent />
+                                        <CentreComponent />
                                     </div>
                                 </div>
                             </div>
@@ -281,7 +326,7 @@ const ServicingConfirm = () => {
                                 </div>
                                 <div className="relative w-full lg:w-6/12 mb-3 px-2">
                                     <div className="w-full self-center">
-                                        <TimeslotComponent />
+                                        <PickupDropComponent />
                                     </div>
                                 </div>
                             </div>
@@ -398,7 +443,9 @@ const ServicingConfirm = () => {
 
 
         </div>
-    );
+    ) : (<div>
+        Loading
+    </div>);
 }
 
 export default ServicingConfirm;

@@ -75,6 +75,111 @@ router.get('/update', (req, res) => {
 
 // })
 
+router.get('/addservicing', (req, res) => {
+    console.log('into servicnig info add')
+    const workdoneObj1 = [
+        {
+            workID: "W1435",
+            workName: "Oiling",
+            workDesc: "Changing the oil on the chain",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "400"
+        },
+        {
+            workID: "W1585",
+            workName: "Washing",
+            workDesc: "Washing of vehicle",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "80"
+        },
+        {
+            workID: "W1586",
+            workName: "Soap",
+            workDesc: "Soap used while washing",
+            quantity: "1",
+            discountAmt: "30",
+            totalAmount: "150"
+        },
+        {
+            workID: "W2935",
+            workName: "Wheel alignment",
+            workDesc: "Correcting the handle and wheel alignment",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "100"
+        }
+    ]
+    const workdoneObj2 = [
+        {
+            workID: "W1435",
+            workName: "Oiling",
+            workDesc: "Changing the oil on the chain",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "400"
+        },
+        {
+            workID: "W3885",
+            workName: "Refuelling battery",
+            workDesc: "Putting distill water into battery",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "120"
+        },
+        {
+            workID: "W7886",
+            workName: "Tyre Change",
+            workDesc: "Change the tyres of the vehicle",
+            quantity: "2",
+            discountAmt: "30",
+            totalAmount: "3200"
+        },
+        {
+            workID: "W2935",
+            workName: "Wheel alignment",
+            workDesc: "Correcting the handle and wheel alignment",
+            quantity: "1",
+            discountAmt: "0",
+            totalAmount: "100"
+        }
+    ]
+    const servObj1 = {
+        serviceID: "S7531",
+        dateOfService: Date.parse("2021-06-01"),
+        workDone: workdoneObj1,
+        totalAmount: 730,
+        serviceCentreID: "6203df3298c55e52a80e88a1",//todo add service centre collection
+        personInCharge: "Amol Deshpande"
+    }
+    const servObj2 = {
+        serviceID: "S9431",
+        dateOfService: Date.parse("2021-12-01"),
+        workDone: workdoneObj2,
+        totalAmount: 3820,
+        serviceCentreID: "6203df3298c55e52a80e88a1",//todo add service centre collection
+        personInCharge: "Amol Deshpande"
+    }
+    Customer.findOne({ '_id': "623eff234bd6f036c0bf63b4" }).then((result, err) => {
+        // console.log(result)
+        console.log(err)
+    })
+    const arr = [
+        servObj1,
+        servObj2
+    ]
+    Customer.updateMany({ '_id': "623eff234bd6f036c0bf63b4" }, { '$set': { 'ownedEVs.2.servicing': arr } }, { "multi": true }).then((pp) => {
+        res.send('cust saved too')
+        console.log('cust saved too')
+    })
+
+    // Model.updateMany({ 'highlights.unit': 'KWH' }, { '$set': { 'highlights.$.highlight': 'LITHIUM-ION' } }).then((result) => {
+    //     console.log('updated')
+    //     res.send('updated')
+    // })
+
+})
 
 
 router.get('/addcustomer', (req, res) => {
@@ -338,12 +443,15 @@ router.get('/placeorder', (req, res) => {
                         console.log('cust saved too')
                     })
 
+
                 })
 
             })
         })
     })
 })
+
+
 
 router.get('/:id', customerController.customerGet)
 router.put('/:id', customerController.customerPut)

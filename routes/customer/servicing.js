@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 
 
 const Customer = require('../../models/customer/CustomerSchema')
+const ServiceCenter = require('../../models/service-center/serviceCenterSchema')
 
 router.get('/', (req, res, next) => {
     console.log('into get')
@@ -17,6 +18,12 @@ router.get('/', (req, res, next) => {
     //         res.send(result)
     //     })
     //     .catch(next)
+})
+
+router.get('/fetchCentres', (req, res) => {
+    ServiceCenter.find({}).then((result) => {
+        res.send(result)
+    })
 })
 
 

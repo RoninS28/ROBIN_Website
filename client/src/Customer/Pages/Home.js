@@ -80,7 +80,7 @@ export default function Home() {
       /> */}
       <div style={{ backgroundColor: "black", paddingBottom: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: "white", textShadow: "2px 2px blue", fontSize: "40px" }}>
-          <center>WE BUILD THE VEHICLES FOR FUTURE.</center>
+          <center>WE BUILD VEHICLES FOR THE FUTURE.</center>
         </div>
         {/* <div className="image">
           <img src={props.image1} />

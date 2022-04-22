@@ -15,6 +15,7 @@ import Select from "react-select";
 import { useState } from "react";
 import { useHistory } from "react-router";
 import { useEffect } from "react";
+import axios from 'axios'
 
 
 
@@ -40,12 +41,19 @@ const getMyImage = (source) => {
     }
 }
 
+const convertISOtoStringDate = (dateISO) => {
+    const temp = new Date(dateISO)
+    const stringDate = temp.getDate() + '/' + temp.getMonth() + '/' + temp.getFullYear()
+    return stringDate
+
+}
 
 const ServicingBook = (props) => {
     const id = props.match.params.id;
     const history = useHistory()
     const [vehicle, setVehicle] = useState()
     const [servStatus, setServStatus] = useState()
+    const [servicingInfo, setServicingInfo] = useState()
     // const model = smodelList.find(item => item.id == id)
 
     const pastDueStyle = {
@@ -77,9 +85,14 @@ const ServicingBook = (props) => {
         history.push('/servicingConfirm/' + e.id)
     }
 
-    // const getServicingInfo = () => {
-    //     axios.get('/servicing/')
-    // }
+    const getServicingInfo = (vehicle) => {
+        // axios.get('/servicing/')
+        const temp = []
+        vehicle.servicing.map(item => {
+            temp.push(item)
+        })
+        setServicingInfo(temp)
+    }
     const checkservStatus = () => {
         setVehicle(props.location.state.vehicle)
         console.log(`vehicle info is ${props.location.state.vehicle.nextServicingDate}`)
@@ -94,10 +107,10 @@ const ServicingBook = (props) => {
     }
 
     useEffect(() => {
-        setVehicle("props.location.state.vehicle")
+        getServicingInfo(props.location.state.vehicle)
+        // setVehicle("props.location.state.vehicle")
         setVehicle(props.location.state.vehicle)
         checkservStatus()
-        // getServicingInfo()
         console.log(vehicle)
         // console.log(props.match.params.chassisNumber)
     }, []);
@@ -186,13 +199,18 @@ const ServicingBook = (props) => {
         },
     ]
 
-    const rows = [
-        createData('1', "08/08/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
-        createData('2', "08/09/2021", "KTHRUD", "Mohan Wagh", "Oil Change\nWheel alignment\n Wash", "50"),
-        createData('3', "08/10/2021", "KTHRUD", "Rohit Dhule", "Oil Change\nWheel alignment\n Wash", "50"),
-        createData('4', "08/11/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
+    const viewReceipt = (service) => {
+        history.push({ pathname: "/servicing/viewReceipt/" + service.serviceID, state: { service: service } })
 
-    ];
+    }
+
+    // const rows = [
+    //     createData('1', "08/08/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
+    //     createData('2', "08/09/2021", "KTHRUD", "Mohan Wagh", "Oil Change\nWheel alignment\n Wash", "50"),
+    //     createData('3', "08/10/2021", "KTHRUD", "Rohit Dhule", "Oil Change\nWheel alignment\n Wash", "50"),
+    //     createData('4', "08/11/2021", "KTHRUD", "Pranav Shinde", "Oil Change\nWheel alignment\n Wash", "50"),
+
+    // ];
     // !============================================================================================================
     const model = myVehicleList.find(item => item.id == id)
 
@@ -304,7 +322,7 @@ const ServicingBook = (props) => {
             </div> */}
 
             {/* ! ========================================================================================== */}
-            {vehicle.servicing.length > 0 ? (<TableContainer >
+            {(vehicle.servicing.length > 0) ? (<TableContainer >
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
@@ -321,19 +339,20 @@ const ServicingBook = (props) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+
+                        {servicingInfo.map((row) => (
                             <TableRow
-                                key={row.servicingNo}
+                                key={row.serviceID}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row" align="center" className="servicingdata">
-                                    {row.servicingNo}
+                                    {row.serviceID}
                                 </TableCell>
-                                <TableCell align="center" className="servicingdata">{row.servicingDate}</TableCell>
-                                <TableCell align="center" className="servicingdata">{row.centre}</TableCell>
-                                <TableCell align="center" className="servicingdata">{row.inspectedBy}</TableCell>
-                                <TableCell align="center" className="servicingdata"><a href="#">Receipt</a></TableCell>
-                                <TableCell align="center" className="servicingdata">{row.total}</TableCell>
+                                <TableCell align="center" className="servicingdata">{convertISOtoStringDate(row.dateOfService)}</TableCell>
+                                <TableCell align="center" className="servicingdata">{row.serviceCentre}</TableCell>
+                                <TableCell align="center" className="servicingdata">{row.personInCharge}</TableCell>
+                                <TableCell align="center" className="servicingdata" onClick={() => { viewReceipt(row) }}>Receipt</TableCell>
+                                <TableCell align="center" className="servicingdata">₹ {row.totalAmount}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

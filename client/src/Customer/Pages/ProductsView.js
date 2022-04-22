@@ -380,7 +380,7 @@ const ProductsView = (props) => {
                                         onClick={(e) => changeImageColor(item, index)}
                                     >
 
-                                        <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }} onClick> </Avatar>
+                                        <Avatar style={{ backgroundColor: item.color, border: index === currentColor ? selectedColorStyle : unselectedColorStyle, height: '35px', width: '35px', margin: '15px' }} > </Avatar>
                                     </IconButton>
 
                                     // <Avatar style={{ backgroundColor: "dodgerblue", border: '1px solid rgba(0, 0, 0, 0.3)', height: '35px', width: '35px', margin: '15px' }}> </Avatar>

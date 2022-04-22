@@ -380,6 +380,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import SurroundSoundIcon from '@mui/icons-material/SurroundSound';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import UpdateIcon from '@mui/icons-material/Update';
 
 
 // import { BrowserRouter as Router, Switch, Route, useHistory, useLocation } from "react-router-dom";
@@ -399,6 +400,7 @@ import BookingsStage from "../../Pages/BookingsStage";
 import ServicingConfirm from "../../Pages/ServicingConfirm";
 import ServicingConfirmed from "../../Pages/ServicingConfirmed";
 import Servicing from "../../Pages/Servicing";
+import ServicingReceipt from "../../Pages/ServicingReceipt";
 import ServicingBook from "../../Pages/ServicingBook";
 import Chatbot from "../../Pages/Chatbot";
 import TestDriveBooking from "../../Pages/TestDriveBooking";
@@ -407,6 +409,7 @@ import NotificationsRoom from "../../Pages/NotificationsChat";
 import Login from "../../Pages/Login";
 import Logout from "../../Pages/Logout";
 import Signup from "../../Pages/Signup";
+import Profile from "../../Pages/Profile"
 // import { useEffect } from "react";
 
 
@@ -589,14 +592,14 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                <Link to="/" style={{ textDecoration: 'none' }}>
+                {/* <Link to="/" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <SurroundSoundIcon />
                         </ListItemIcon>
                         <ListItemText primary="Updates" />
                     </ListItem>
-                </Link>
+                </Link> */}
 
                 <Link to="/notifications" style={{ textDecoration: 'none' }}>
                     <ListItem button>
@@ -604,6 +607,15 @@ const Navbar = (props) => {
                             <NotificationsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Notifications" />
+                    </ListItem>
+                </Link>
+
+                <Link to="/profile" style={{ textDecoration: 'none' }}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <UpdateIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="My Profile" />
                     </ListItem>
                 </Link>
 
@@ -615,6 +627,8 @@ const Navbar = (props) => {
                         <ListItemText primary="Logout" />
                     </ListItem>
                 </Link>
+
+                
 
             </List>
         </Box>
@@ -745,6 +759,7 @@ const Navbar = (props) => {
                         <Route path='/bookings' exact component={Bookings} ></Route>
                         <Route path='/bookingsStage/:id' exact component={BookingsStage} ></Route>
                         <Route path='/servicing' exact component={Servicing} ></Route>
+                        <Route path='/servicing/viewReceipt/:id' exact component={ServicingReceipt} ></Route>
                         <Route path='/servicingBook/:id' exact component={ServicingBook} ></Route>
                         <Route path='/servicingConfirm/:id' exact component={ServicingConfirm} ></Route>
                         <Route path='/servicingConfirmed/:id' exact component={ServicingConfirmed} ></Route>
@@ -753,6 +768,7 @@ const Navbar = (props) => {
                         <Route path='/login' exact component={Login} ></Route>
                         <Route path='/signup' exact component={Signup} ></Route>
                         <Route path='/logout' exact component={Logout} ></Route>
+                        <Route path='/profile' exact component={Profile} ></Route>
                     </Switch>
                 </div>
             </main>
