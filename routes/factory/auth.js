@@ -14,6 +14,9 @@ const Worker = require('../../models/factory/userSchema');
 const Updatebatch = require('../../models/factory/updateBatchSchema');
 const Accessory = require('../../models/factory/addAccSchema');
 const Mycart = require('../../models/factory/addToCartSchema');
+const factoryworkerController = require("../../controller/factoryworker/factoryworkerController");
+
+
 
 router.post('/homepage',async(req,res)=>{
     try{
@@ -405,6 +408,13 @@ router.get('/logout',(req,res) => {
 //     }
 // });
 
+
+//====================================================================================================
+// siddhesh code
+router.get("/inspection", factoryworkerController.modelget);
+router.post("/inspection/", factoryworkerController.modelpost);
+router.put("/inspection/:id", factoryworkerController.modelput);
+router.delete("/inspection/:id", factoryworkerController.modeldelete);
 
 
 module.exports = router;
