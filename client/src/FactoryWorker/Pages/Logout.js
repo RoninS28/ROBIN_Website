@@ -8,7 +8,7 @@ const Logout = () => {
     const history = useHistory();
 
     useEffect(() => {
-        fetch('factory/logout', {
+        fetch('/factory/logout', {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -16,7 +16,7 @@ const Logout = () => {
             },
             credentials: "include"
         }).then((res) => {
-            history.push("factory/homepage", { replace: true });
+            history.push("/homepage", { replace: true });
             if (res.status != 200) {
                 const error = new Error(res.error);
                 throw error;

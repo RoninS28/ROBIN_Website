@@ -153,7 +153,7 @@ const flexContainer = {
 ]
 
 
-const useStyles =makeStyles((theme) => ({
+const buyAccessoriesuseStyles =makeStyles((theme) => ({
 
   upcontainer:{
           display:"flex",
@@ -188,7 +188,7 @@ const useStyles =makeStyles((theme) => ({
 function BuyAccessories() 
 {
 
-  const classes = useStyles();
+  const classes = buyAccessoriesuseStyles();
   const [userData, setUserData] = useState([]);
   const [catTyreandWheels, setst1] = useState([]);
   const [catSeats, setst2] = useState([]);
@@ -254,7 +254,7 @@ function BuyAccessories()
   let cat4='cat4';
   
   return (
-      <div>
+      <div >
         {/* <Router> */}
         {/* <main> */}
        
@@ -302,8 +302,9 @@ function BuyAccessories()
                             <Divider />
 
                             {/* <div > */}
-                                <ImageList style={{overflowX: 'scroll',width: 500, height: 450}}  gap={20} style={flexContainer} >
-
+                                {/* <ImageList style={Object.assign({},flexContainer,{overflowX: 'scroll',width: 500, height: 450})}  gap={20}  > */}
+                                {/* <ImageList style={[{overflowX: 'scroll',width: 500, height: 450} , flexContainer]}  gap={20}  > */}
+                                <ImageList style={{overflowX: 'scroll',width: 500, height: 450 }}  gap={20} style={flexContainer} >
                                     {catTyreandWheels.map((item) => (
                                         <ImageListItem key={item.accid}>
                                         <img

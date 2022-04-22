@@ -750,6 +750,8 @@ import BuyCart from "../../Pages/BuyCart";
 import Inspection from "../../Pages/Inspection";
 import Issue from "../../Pages/Issue";
 
+import Logout from "../../Pages/Logout";
+
 
 
 
@@ -1005,6 +1007,15 @@ const Navbar = (props) => {
                  </ListItem>
                </Link>
 
+               <Link to="/logout" style={{ textDecoration: 'none' }}>
+                 <ListItem button>
+                   <ListItemIcon>
+                      <HomeIcon />
+                   </ListItemIcon>
+                   <ListItemText primary="Logout" />
+                 </ListItem>
+               </Link>
+
            </List>
 
 
@@ -1162,6 +1173,7 @@ const Navbar = (props) => {
 
                <Route path='/inspection' exact component={Inspection}></Route>
                <Route path='/issue' exact component={Issue}></Route>
+               <Route path='/logout' exact component={Logout}></Route>
 
 
 

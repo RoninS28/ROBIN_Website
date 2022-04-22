@@ -39,12 +39,12 @@ const loginUser = async (e) =>{
   else
   {
       window.alert("Login Success");
-      history.push("factory/manufacture");
+      history.push("/manufacture");
   }
 }
 
   return(
-      <div>
+      <div className="userhomepage">
              <div className="center">
               <h1>Login</h1>
 

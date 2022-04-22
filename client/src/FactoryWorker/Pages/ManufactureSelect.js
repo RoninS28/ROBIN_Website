@@ -149,7 +149,7 @@ function ManufactureSelect() {
       }
     } catch (err) {
       console.log(err);
-      history.push("factory/homepage");
+      history.push("/homepage");
     }
   }
   useEffect(() => {

@@ -227,6 +227,7 @@ router.get('/buyaccessories', (req,res)=>{
 
 
 router.get('/addtocart', (req,res)=>{
+    console.log('Hello in addtocart');
     try{
     console.log('Hello in addtocart');
     // console.log(req.body);
