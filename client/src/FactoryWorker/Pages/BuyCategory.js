@@ -28,6 +28,8 @@ import TextField from '@mui/material/TextField';
 import BuyItem from './BuyItem';
 import CardActionArea from '@mui/material/CardActionArea';
 
+import axios from 'axios';
+import { useParams } from 'react-router';
 
 
 
@@ -193,6 +195,8 @@ function BuyCategory()
   const classes = useStyles();
   const [values,setValues] =useState(initialFValues);
 
+  const [usercat, setUserData] = useState([]);
+
   const minpriceinput = event =>{
     const {name, value} = event.target
     setValues({
@@ -200,7 +204,27 @@ function BuyCategory()
       [name]:value
     })
   } 
- 
+
+  const {id} =useParams();
+  const getAccCategory = () => {
+    const temp=[];
+    console.log("In buy category");
+    axios.get('/factory/buycat/'+id).then( (response) => {
+         let mydata = response.data;
+
+         console.log('mydat',mydata);
+         setUserData(mydata);
+         console.log("cat data",usercat);
+
+      })
+    }
+
+    useEffect(() => {
+      getAccCategory()
+      console.log('renders');
+      
+      
+    },[])
 
   return(
     <div>
@@ -236,20 +260,24 @@ function BuyCategory()
                  <Grid container>
                   
  
-                     {itemCard.map((item) => (
+                     {usercat.map((item) => (
 
                         <Grid item lg={4} md={6} sm={5} xs={7} className={classes.gridcards} key={item.id}>
 
-                          <Link to="/buyitem" style={{ textDecoration: 'none' }} >
+                          {/* <Link to="/buyitem" style={{ textDecoration: 'none' }} > */}
+                          <Link to={`/buyitem/${item.accid}`} style={{ textDecoration: 'none' }} >
                             <Card className={classes.carddisplay}>
                                   
                                      <CardMedia
                                         component="img"
                                         alt="Image"
-                                        height="130"
-                                        width="100"
-                                        src={`${item.img}`}
-                                        srcSet={`${item.img}`}
+                                        style={{
+                                              height:130,
+                                              width:200}}
+                                        // height="130"
+                                        // width="100"
+                                        src={require('../Shared/img/'+`${item.image}`).default}
+                                        // srcSet={`${tyre}`}
                                       />
                                       
                                   <CardContent>

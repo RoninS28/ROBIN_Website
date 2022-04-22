@@ -1,60 +1,84 @@
-// import Navbar from "./Navbar/Navbar";
-import SideNavbar from "./Navbar/SideNavbar";
-// import './Background/StarryNight.css';
-import { BrowserRouter as Router, Routes, Route,Switch } from 'react-router-dom';
+// // import Navbar from "./Navbar/Navbar";
+// import SideNavbar from "./Navbar/SideNavbar";
+// // import './Background/StarryNight.css';
+// import { BrowserRouter as Router, Routes, Route,Switch } from 'react-router-dom';
 
-import ManufactureSelect from "../Pages/ManufactureSelect";
-import Homepage from "../Pages/Homepage"
+// import ManufactureSelect from "../Pages/ManufactureSelect";
+// import Homepage from "../Pages/Homepage"
 
-import ManufactureHistory from "../Pages/ManufactureHistory";
+// import ManufactureHistory from "../Pages/ManufactureHistory";
 
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import BuyAccessories from "../Pages/BuyAccessories";
-import BuyCategory from "../Pages/BuyCategory";
-import BuyItem from "../Pages/BuyItem";
-import BuyCart from "../Pages/BuyCart";
+// import useMediaQuery from "@material-ui/core/useMediaQuery";
+// import BuyAccessories from "../Pages/BuyAccessories";
+// import BuyCategory from "../Pages/BuyCategory";
+// import BuyItem from "../Pages/BuyItem";
+// import BuyCart from "../Pages/BuyCart";
 
 
-import Inspection from "../Pages/Inspection";
-import Issue from "../Pages/Issue";
+// import Inspection from "../Pages/Inspection";
+// import Issue from "../Pages/Issue";
 
-import Logout from "../Pages/Logout";
+// import Logout from "../Pages/Logout";
 
-function Routing() {
-  return (
-    //  <Navbar style={{position:"fixed"}}></Navbar> 
-    // <Router>
-    <>
+// function Routing() {
+//   return (
+//     //  <Navbar style={{position:"fixed"}}></Navbar> 
+//     // <Router>
+//     <>
        
 
 
-      <SideNavbar />
-      <Switch>
-        {/* <Route exact path="/" element={<Home />} /> */}
-        <Route path="/factory/homepage" element={<Homepage />} />
-        <Route path="/factory/manufacture" element={<ManufactureSelect />} />
-        <Route path="/factory/manufacturehistory/:id" element={<ManufactureHistory />} />
-        <Route path="/factory/buyaccessories" element={<BuyAccessories />} />
-        <Route path="/factory/buycat" element={<BuyCategory />} />
+//       <SideNavbar />
+//       <Router>
+//       <Switch>
+//         {/* <Route exact path="/" element={<Home />} /> */}
+//         <Route path="/homepage" element={<Homepage />} />
+//         <Route path="/manufacture" element={<ManufactureSelect />} />
+//         <Route path="/manufacturehistory/:id" element={<ManufactureHistory />} />
+//         <Route path="/buyaccessories" element={<BuyAccessories />} />
+//         <Route path="/buycat" element={<BuyCategory />} />
 
-        <Route path="/factory/buyitem" element={<BuyItem />} />
+//         <Route path="/buyitem" element={<BuyItem />} />
 
-        <Route path="/factory/buycart" element={<BuyCart />} />
+//         <Route path="/buycart" element={<BuyCart />} />
 
-        <Route path="/factory/inspection" element={<Inspection />} />
-        <Route path="/factory/issue" element={<Issue />} />
+//         <Route path="/inspection" element={<Inspection />} />
+//         <Route path="/issue" element={<Issue />} />
 
-        <Route path="/factory/logout" element={<Logout />} />
+//         <Route path="/logout" element={<Logout />} />
 
-        {/* <Route path='/manufacture' exact component={ManufactureSelect}></Route> */}
+//         {/* <Route path='/manufacture' exact component={ManufactureSelect}></Route> */}
 
-        {/* <Route path="/register" element={<Signup />} />
-          <Route path="/login" element={<Login />} />   
-          <Route path="/logout" element={<Logout />} />    */}
-      </Switch>
+//         {/* <Route path="/register" element={<Signup />} />
+//           <Route path="/login" element={<Login />} />   
+//           <Route path="/logout" element={<Logout />} />    */}
+//       </Switch>
+//       </Router>
 
-    </>
+//     </>
+//   );
+// }
+
+// export { Routing };
+
+
+
+
+import { useState, useEffect } from "react";
+import Navbar from "./Navbar/Navbar";
+
+
+function Routing(props) {
+  const { loggedIn, setLoggedIn } = props;
+
+  useEffect(() => {
+    setLoggedIn("true");
+    localStorage.setItem("userLoggedIn", "factory");
+  })
+  return ( 
+      <Navbar style={{position:"fixed"}} setLoggedIn={setLoggedIn}></Navbar>
+    
   );
 }
 
-export { Routing };
+export {Routing};
