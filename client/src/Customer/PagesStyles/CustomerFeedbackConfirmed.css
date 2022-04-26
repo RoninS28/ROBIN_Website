@@ -1,0 +1,38 @@
+div.customerFeedbackConfirmedScreen {
+    display: flex;
+    justify-content: center;
+}
+
+
+div.customerFeedbackConfirmedScreen div.contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px
+}
+
+div.customerFeedbackConfirmedScreen div.iconDiv {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+
+}
+
+div.customerFeedbackConfirmedScreen div.textDiv {
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+
+}
+
+
+div.customerFeedbackConfirmedScreen div.textDiv {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.444);
+    font-weight: 500;
+    font-style: italic;
+    margin: 70px 10px;
+    margin-top: 0;
+}

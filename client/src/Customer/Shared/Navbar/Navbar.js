@@ -407,6 +407,9 @@ import TestDriveBooking from "../../Pages/TestDriveBooking";
 import TestDriveOutlet from "../../Pages/TestDriveOutlet";
 import NotificationsRoom from "../../Pages/NotificationsChat";
 import Login from "../../Pages/Login";
+import CustomerFeedbackConfirmed from "../../Pages/CustomerFeedbackConfirmed";
+import ReviewAnalysis from "../../Pages/ReviewAnalysis";
+import CustomerFeedback from "../../Pages/CustomerFeedback";
 import Logout from "../../Pages/Logout";
 import Signup from "../../Pages/Signup";
 import Profile from "../../Pages/Profile"
@@ -601,12 +604,12 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link> */}
 
-                <Link to="/notifications" style={{ textDecoration: 'none' }}>
+                <Link to="/feedback" style={{ textDecoration: 'none' }}>
                     <ListItem button>
                         <ListItemIcon>
                             <NotificationsIcon />
                         </ListItemIcon>
-                        <ListItemText primary="Notifications" />
+                        <ListItemText primary="Feedback" />
                     </ListItem>
                 </Link>
 
@@ -628,7 +631,7 @@ const Navbar = (props) => {
                     </ListItem>
                 </Link>
 
-                
+
 
             </List>
         </Box>
@@ -769,6 +772,9 @@ const Navbar = (props) => {
                         <Route path='/signup' exact component={Signup} ></Route>
                         <Route path='/logout' exact component={Logout} ></Route>
                         <Route path='/profile' exact component={Profile} ></Route>
+                        <Route path='/feedback' exact component={CustomerFeedback} ></Route>
+                        <Route path='/feedbackConfirmed' exact component={CustomerFeedbackConfirmed} ></Route>
+                        <Route path='/reviewanalysis' exact component={ReviewAnalysis} ></Route>
                     </Switch>
                 </div>
             </main>
