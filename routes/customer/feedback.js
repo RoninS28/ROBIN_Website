@@ -43,7 +43,6 @@ router.get('/getall', (req, res) => {
             console.log(result)
             res.send(result)
         })
-        .catch(next)
 })
 
 

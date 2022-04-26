@@ -17,9 +17,23 @@ const ReviewAnalysis = (props) => {
 
     const getBarChartData = () => {
 
-        axios.get('/feedback/getall').then((response) => {
+        axios.get('http://localhost:5000/feedback/getall').then((response) => {
             console.log(response.data)
+            //setReviews(response.data)
 
+            const tempreviews = []
+            
+                let reviewArr = response.data
+                console.log(reviewArr[0])
+                console.log(`TYPEOF IS ${reviewArr}`)
+                reviewArr.map(item => {
+        
+                  tempreviews.push(item)
+                })
+                console.log(tempreviews)
+                setReviews(tempreviews)
+                console.log(reviews + "reviews")
+              
         })
 
         axios.post('/reviewAnalysis', {
@@ -70,16 +84,18 @@ const ReviewAnalysis = (props) => {
 
     }
     useEffect(() => {
+        //setReviews(props.location.state.reviews)
+        console.log(reviews)
         if (!options) {
             getBarChartData();
         }
     }, [options])
 
-    return (
+    return(
         <div  >
             <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                 <Typography variant="h5" component="div">
-                    Some graph
+                    Reviews Analysis
                 </Typography>
                 <CanvasJSChart options={options} />
             </Card>

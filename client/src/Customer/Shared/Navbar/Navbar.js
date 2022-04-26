@@ -409,6 +409,7 @@ import NotificationsRoom from "../../Pages/NotificationsChat";
 import Login from "../../Pages/Login";
 import CustomerFeedbackConfirmed from "../../Pages/CustomerFeedbackConfirmed";
 import ReviewAnalysis from "../../Pages/ReviewAnalysis";
+import ReviewAnalysisFetch from "../../Pages/ReviewAnalysisFetch";
 import CustomerFeedback from "../../Pages/CustomerFeedback";
 import Logout from "../../Pages/Logout";
 import Signup from "../../Pages/Signup";
@@ -775,6 +776,7 @@ const Navbar = (props) => {
                         <Route path='/feedback' exact component={CustomerFeedback} ></Route>
                         <Route path='/feedbackConfirmed' exact component={CustomerFeedbackConfirmed} ></Route>
                         <Route path='/reviewanalysis' exact component={ReviewAnalysis} ></Route>
+                        <Route path='/reviewanalysisfetch' exact component={ReviewAnalysisFetch} ></Route>
                     </Switch>
                 </div>
             </main>
