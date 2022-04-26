@@ -112,19 +112,31 @@ function BuyItem()
       const AddData = async (e) =>{
         // window.alert("Hoooo");
         e.preventDefault();
-   
+         window.alert("Hoooo");
         //const {accid,name,category,price,company,description,specifications} = user;
         const accid = id;
         const image = myimage[0];
-        const res = await fetch('/addtocart', {
-            method:"POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              accid,name,price,company,image
-            })
-        });
+        // const res = await fetch('/factory/addtocart', {
+        //     method:"POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //       accid,name,price,company,image
+        //     })
+        // });
+
+        const res = await fetch('factory/addtocart',{
+          method:"POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            accid,name,price,company,image
+          })
+      });
+
+
    
         const data =await res.json();
    

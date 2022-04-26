@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withStyles } from "@material-ui/core/styles";
 import { Box, Card, Grid, Typography } from '@material-ui/core';
 import GroupedBar from './GroupedBar';
@@ -8,6 +8,9 @@ import GenericTable from './GenericTable';
 import GenericStatCard from './GenericStatCard';
 import DoughNut from './DoughNut';
 import LineChart from './LineChart';
+import axios from 'axios';
+
+import {CanvasJSChart} from 'canvasjs-react-charts'
 
 const styles = theme => ({
 
@@ -69,7 +72,96 @@ const Dashboard = (props) => {
 
     const { classes, theme } = props;
     const [value, onChange] = useState(new Date());
-    console.log(value)
+    console.log(value);
+
+    const [options, setOptions] = useState(null);
+    // let options = {
+    //     animationEnabled: true,
+    //     exportEnabled: true,
+    //     theme: "light2", //"light1", "dark1", "dark2"
+    //     title:{
+    //         text: "Simple Column Chart with Index Labels"
+    //     },
+    //     axisY: {
+    //         includeZero: true
+    //     },
+    //     data: [{
+    //         type: "column", //change type to bar, line, area, pie, etc
+    //         //indexLabel: "{y}", //Shows y value on all Data Points
+    //         indexLabelFontColor: "#5A5757",
+    //         indexLabelPlacement: "outside",
+    //         dataPoints: [
+    //             { x: 10, y: 71 },
+    //             { x: 20, y: 55 },
+    //             { x: 30, y: 50 },
+    //             { x: 40, y: 65 },
+    //             { x: 50, y: 71 },
+    //             { x: 60, y: 68 },
+    //             { x: 70, y: 38 },
+    //             { x: 80, y: 92, indexLabel: "Highest" },
+    //             { x: 90, y: 54 },
+    //             { x: 100, y: 60 },
+    //             { x: 110, y: 21 },
+    //             { x: 120, y: 49 },
+    //             { x: 130, y: 36 }
+    //         ]
+    //     }]
+    // }
+
+    const getBarChartData = () => {
+
+        axios.post('/reviewAnalysis', {
+            "text": [
+                "Handle is not working properly",
+                "Handle is broken",
+                "charging points not available",
+                "Battery life is poor"
+            ]
+        })
+        .then((response) => {
+            console.log("res from backend ", response.data);
+
+            let obj = response.data.freq;
+            let dataPoints = [];
+            
+            let count = 0;
+            Object.keys(obj).forEach(key => {
+                count += obj[key];
+            });
+
+            Object.keys(obj).forEach(key => {
+                dataPoints.push(
+                    {label: key, y: (obj[key] / count) * 100}
+                );
+                console.log(key, obj[key]);
+            });
+
+            console.log("datapoints", dataPoints);
+
+            let tempObj = {
+                title: {
+                    text: "Basic Column Chart"
+                },
+                data: [
+                {
+                    // Change type to "doughnut", "line", "splineArea", etc.
+                    type: "column",
+                    dataPoints: dataPoints
+                }
+                ]
+            }
+            setOptions(tempObj);
+
+          }, (error) => {
+            console.log("error: ", error);
+        });
+
+    }
+    useEffect(()=>{
+        if(!options) {
+            getBarChartData();
+        }            
+    },[options])
 
 
     // Layout of Dashboard can change depending upon the situation
@@ -128,7 +220,7 @@ const Dashboard = (props) => {
                         <Typography variant="h5" component="div">
                             Some graph
                         </Typography>
-                        <GroupedBar />
+                        <CanvasJSChart options = {options}/>
                     </Card>
                 </Grid>
                 <Grid item lg={4} md={4} sm={12}>

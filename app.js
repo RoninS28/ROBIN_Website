@@ -57,6 +57,8 @@ app.use('/chatbot', requireCustAuth, require('./routes/customer/chatbotMsg'));
 app.use('/myBooking',requireCustAuth, require('./routes/customer/myBookings'));
 app.use('/myProfile',requireCustAuth, require('./routes/customer/myProfile'))
 
+// ML MODEL
+app.use('/reviewAnalysis', require('./routes/mlmodel/mlModelRoute'));
 
 
 // ! TESTING ROUTES
