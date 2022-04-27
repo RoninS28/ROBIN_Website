@@ -17,7 +17,7 @@ export default function ReviewAnalysisFetch() {
                 console.log(`TYPEOF IS ${reviewArr}`)
                 reviewArr.map(item => {
         
-                  tempreviews.push(item)
+                  tempreviews.push(item.feedbackMsg)
                 })
                 console.log(tempreviews)
                 //setReviews(tempreviews)
