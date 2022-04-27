@@ -7,9 +7,8 @@ import { useLocation, useHistory } from 'react-router-dom';
 import './login.css';
 // import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom';
-import  {useState} from 'react'
-
-
+import  {useState} from 'react';
+import bgimg from '../Shared/img/bgimg.jpg';
 
 
 const Homepage=()=>{
@@ -44,7 +43,7 @@ const loginUser = async (e) =>{
 }
 
   return(
-      <div className="userhomepage">
+      <div className="userhomepage" >
              <div className="center">
               <h1>Login</h1>
 
@@ -56,6 +55,8 @@ const loginUser = async (e) =>{
                   />
                   <span></span>
                   <label>Email</label>
+                  {/* <img src={bgimg} /> */}
+
                 </div>
 
                 <div className="txt_field">
@@ -69,7 +70,7 @@ const loginUser = async (e) =>{
 
                 {/* <div className="pass">Forgot Password?</div> */}
                 <input type="submit" name="uregister"
-                   onClick={loginUser} value="ulogin"
+                   onClick={loginUser} value="Login"
                     />
                 {/* <div className="signup_link">
                   Not a member? <a href="#">Signup</a>

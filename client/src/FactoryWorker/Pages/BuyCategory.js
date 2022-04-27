@@ -240,11 +240,13 @@ function BuyCategory()
              </Grid>
 
              <Grid item lg={3} md={3} sm={4} xs={8} ml={3} className={classes.mycartbtn} >
+             <Link to="/buycart" style={{ textDecoration: 'none' }} >
                  <Button variant="contained" size="large" 
                    startIcon={<ShoppingCartIcon />} 
                    >
                      My Cart
                  </Button>
+              </Link>
                  
              </Grid>
            
@@ -286,7 +288,7 @@ function BuyCategory()
                                       {item.name}
                                     </Typography>
                                     <Typography variant="button" component="div" color="text.secondary" align="center" className={classes.cardprice}>
-                                      {item.price}
+                                    ₹{item.price}
                                     </Typography>
                                     <Typography variant="body2" component="div" color="text.secondary" align="center">
                                       {item.company}

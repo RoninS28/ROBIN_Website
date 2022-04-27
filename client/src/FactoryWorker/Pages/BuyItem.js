@@ -112,7 +112,7 @@ function BuyItem()
       const AddData = async (e) =>{
         // window.alert("Hoooo");
         e.preventDefault();
-         window.alert("Hoooo");
+        //  window.alert("Hoooo");
         //const {accid,name,category,price,company,description,specifications} = user;
         const accid = id;
         const image = myimage[0];
@@ -126,7 +126,7 @@ function BuyItem()
         //     })
         // });
 
-        const res = await fetch('factory/addtocart',{
+        const res = await fetch('/factory/addtocart',{
           method:"POST",
           headers: {
               "Content-Type": "application/json"
@@ -144,6 +144,11 @@ function BuyItem()
         {
             window.alert("Product already in cart");
             console.log("Product already in cart");
+        }
+        else if(res.status == 500)
+        {
+          window.alert("Fail to add");
+          console.log("Fail to add");
         }
         else
         {
@@ -168,10 +173,12 @@ function BuyItem()
 
              <Grid item lg={3} ml={3} className={classes.mycartbtn} >
 
+          {/* <form method='POST'> */}
              <Link to="/buycart" style={{ textDecoration: 'none' }} >
                  <Button variant="contained" size="large" color="primary" startIcon={<ShoppingCartIcon />}>My Cart
                  </Button>
              </Link>
+          {/* </form> */}
                  
              </Grid>
            
