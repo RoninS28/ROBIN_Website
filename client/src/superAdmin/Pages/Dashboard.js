@@ -75,7 +75,7 @@ const Dashboard = (props) => {
     console.log(value);
 
     const [options, setOptions] = useState(null);
-    const [optionsPie, setOptionsPie] = useState(null);
+    const [optionsDoughnut,setOptionsDoughnut]=useState(null);
 
     const getBarChartData = () => {
 
@@ -164,11 +164,69 @@ const Dashboard = (props) => {
         });
 
     }
+
+    const getDoughnutData=()=>{
+
+        let vehicles={
+                "City Electric Scooter": 10,
+                "City-1 Electric Scooter": 20,
+                "City-2 Electric Scooter": 30
+        }
+
+        let obj=vehicles;
+        let total_cnt=0;
+        Object.keys(obj).forEach(key => {
+            total_cnt+=obj[key];
+        });
+
+        let datapoints=[];
+
+        Object.keys(obj).forEach(key => {
+            datapoints.push(
+                {name: key, y: (obj[key] / total_cnt) * 100}
+            )
+        });
+
+        let tempOptions = {
+			animationEnabled: true,
+			title: {
+				text: "Average EV Sales"
+			},
+			// subtitles: [{
+			// 	text: "71% Positive",
+			// 	verticalAlign: "center",
+			// 	fontSize: 24,
+			// 	dockInsidePlotArea: true
+			// }],
+			data: [{
+				type: "doughnut",
+				showInLegend: true,
+				indexLabel: "{name}: {y}",
+				yValueFormatString: "#,###'%'",
+				dataPoints: datapoints
+			}]
+		}
+
+        setOptionsDoughnut(tempOptions)
+
+
+    }
+
     useEffect(()=>{
         if(!options) {
+            //console.log("here");
             getBarChartData();
+        } 
+        if(!optionsDoughnut)
+        {
+            getDoughnutData();
         }           
-    },[options])
+    },[options,optionsDoughnut])
+    // useEffect(()=>{
+    //     if(!options) {
+    //         getBarChartData();
+    //     }           
+    // },[options])
 
 
     // Layout of Dashboard can change depending upon the situation
@@ -179,7 +237,7 @@ const Dashboard = (props) => {
     // some table
     // calendar --- some other table
 
-    return options ? (
+    return (options && optionsDoughnut) ? (
         <Box sx={{ flexGrow: 1 }} m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={3}>
@@ -219,7 +277,8 @@ const Dashboard = (props) => {
                         <Typography variant="h5" component="div">
                             Average EV Sales this month
                         </Typography>
-                        <DoughNut state={pieData} />
+                        {/* <DoughNut state={pieData} /> */}
+                        <CanvasJSChart options = {optionsDoughnut}/>
                     </Card>
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
