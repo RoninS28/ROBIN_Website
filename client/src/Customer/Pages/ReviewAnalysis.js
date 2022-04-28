@@ -13,8 +13,10 @@ import { CanvasJSChart } from 'canvasjs-react-charts'
 const ReviewAnalysis = (props) => {
 
     const [options, setOptions] = useState(null);
+    const [posOptions, setPosOptions] = useState(null);
     const [reviews, setReviews] = useState()
     const [totalCount, setTotalCount] = useState()
+    const [totalPosCount, setTotalPosCount] = useState()
 
     const getBarChartData = () => {
 
@@ -67,11 +69,29 @@ const ReviewAnalysis = (props) => {
                     console.log(key, obj[key]);
                 });
 
-                console.log("datapoints", dataPoints);
+                // for postive tweets analysis
+                let posobj = response.data.posfreq;
+                let posdataPoints = [];
+
+                let poscount = 0;
+                Object.keys(posobj).forEach(key => {
+                    poscount += posobj[key];
+                });
+
+                setTotalPosCount(poscount)
+                Object.keys(posobj).forEach(key => {
+                    posdataPoints.push(
+                        { label: key, y: (posobj[key] / poscount) * 100 }
+                    );
+                    console.log(key, posobj[key]);
+                });
+
+                console.log("posdatapoints", posdataPoints);
+
 
                 let tempObj = {
                     title: {
-                        text: "Basic Column Chart"
+                        text: "Negative Reviews Analysis Chart"
                     },
                     data: [
                         {
@@ -83,6 +103,22 @@ const ReviewAnalysis = (props) => {
                 }
                 setOptions(tempObj);
 
+
+
+                let postempObj = {
+                    title: {
+                        text: "Positive Reviews Analysis Chart"
+                    },
+                    data: [
+                        {
+                            // Change type to "doughnut", "line", "splineArea", etc.
+                            type: "column",
+                            dataPoints: posdataPoints
+                        }
+                    ]
+                }
+                setPosOptions(postempObj);
+
             }, (error) => {
                 console.log("error: ", error);
             });
@@ -92,22 +128,32 @@ const ReviewAnalysis = (props) => {
         console.log("revirs is " + props.location.state.reviews)
         setReviews(props.location.state.reviews)
         console.log(reviews)
-        if (!options) {
+        if (!options || !posOptions) {
             getBarChartData();
         }
-    }, [options])
+    }, [options,posOptions])
 
     return options?(
         <div  >
             <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
-                <Typography variant="h5" component="div">
+                <h2><Typography variant="h5" component="div">
                     Reviews Analysis
-                </Typography>
+                </Typography></h2>
                 <CanvasJSChart options={options} ylabel='percent' xlabel='labels'/>
             </Card>
-            <div>
+            <h2>
                 Total Negative Reviews : {totalCount}
-            </div>
+            </h2>
+            <br/>
+            <br/>
+
+            <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
+                
+                <CanvasJSChart options={posOptions} ylabel='percent' xlabel='labels'/>
+            </Card>
+            <h2>
+                Total Positive Reviews : {totalPosCount}
+            </h2>
 
         </div>
     ) : (<div>Loading</div>)
