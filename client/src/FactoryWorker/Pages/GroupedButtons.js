@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 class GroupedButtons extends React.Component {
-  state = { counter: 0 };
+  state = { counter: 1 };
 
   handleIncrement = () => {
     this.setState(state => ({ counter: state.counter + 1 }));
