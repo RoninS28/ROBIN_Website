@@ -75,38 +75,7 @@ const Dashboard = (props) => {
     console.log(value);
 
     const [options, setOptions] = useState(null);
-    // let options = {
-    //     animationEnabled: true,
-    //     exportEnabled: true,
-    //     theme: "light2", //"light1", "dark1", "dark2"
-    //     title:{
-    //         text: "Simple Column Chart with Index Labels"
-    //     },
-    //     axisY: {
-    //         includeZero: true
-    //     },
-    //     data: [{
-    //         type: "column", //change type to bar, line, area, pie, etc
-    //         //indexLabel: "{y}", //Shows y value on all Data Points
-    //         indexLabelFontColor: "#5A5757",
-    //         indexLabelPlacement: "outside",
-    //         dataPoints: [
-    //             { x: 10, y: 71 },
-    //             { x: 20, y: 55 },
-    //             { x: 30, y: 50 },
-    //             { x: 40, y: 65 },
-    //             { x: 50, y: 71 },
-    //             { x: 60, y: 68 },
-    //             { x: 70, y: 38 },
-    //             { x: 80, y: 92, indexLabel: "Highest" },
-    //             { x: 90, y: 54 },
-    //             { x: 100, y: 60 },
-    //             { x: 110, y: 21 },
-    //             { x: 120, y: 49 },
-    //             { x: 130, y: 36 }
-    //         ]
-    //     }]
-    // }
+    const [optionsDoughnut,setOptionsDoughnut]=useState(null);
 
     const getBarChartData = () => {
 
@@ -115,7 +84,8 @@ const Dashboard = (props) => {
                 "Handle is not working properly",
                 "Handle is broken",
                 "charging points not available",
-                "Battery life is poor"
+                "Battery life is poor",
+                "wheel quality is the best"
             ]
         })
         .then((response) => {
@@ -136,11 +106,22 @@ const Dashboard = (props) => {
                 console.log(key, obj[key]);
             });
 
+            let posCnt = 0, negCnt = 0;
+
+            console.log(response.data);
+            for(let item of response.data.prediction.sentiment) {
+                console.log("item ", item);
+                if(item == "Negative")
+                    negCnt++;
+                else    
+                    posCnt++;
+            }
+
             console.log("datapoints", dataPoints);
 
             let tempObj = {
                 title: {
-                    text: "Basic Column Chart"
+                    text: "Negative Reviews according to Labels"
                 },
                 data: [
                 {
@@ -150,18 +131,102 @@ const Dashboard = (props) => {
                 }
                 ]
             }
-            setOptions(tempObj);
 
+
+            // set options object for pie chart
+            let tempOptionsPie = {
+                exportEnabled: true,
+                animationEnabled: true,
+                title: {
+                    text: "Distribution of reviews"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 75,
+                    toolTipContent: "<b>{label}</b>: {y}%",
+                    showInLegend: "true",
+                    legendText: "{label}",
+                    indexLabelFontSize: 16,
+                    indexLabel: "{label} - {y}%",
+                    dataPoints: [
+                        { y: posCnt, label: "Positive" },
+                        { y: negCnt, label: "Negative" }
+                    ]
+                }]
+            }
+           
+    
+
+            setOptions({"barChartData": tempObj, "pieChartData": tempOptionsPie});
+        
           }, (error) => {
             console.log("error: ", error);
         });
 
     }
+
+    const getDoughnutData=()=>{
+
+        let vehicles={
+                "City Electric Scooter": 10,
+                "City-1 Electric Scooter": 20,
+                "City-2 Electric Scooter": 30
+        }
+
+        let obj=vehicles;
+        let total_cnt=0;
+        Object.keys(obj).forEach(key => {
+            total_cnt+=obj[key];
+        });
+
+        let datapoints=[];
+
+        Object.keys(obj).forEach(key => {
+            datapoints.push(
+                {name: key, y: (obj[key] / total_cnt) * 100}
+            )
+        });
+
+        let tempOptions = {
+			animationEnabled: true,
+			title: {
+				text: "Average EV Sales"
+			},
+			// subtitles: [{
+			// 	text: "71% Positive",
+			// 	verticalAlign: "center",
+			// 	fontSize: 24,
+			// 	dockInsidePlotArea: true
+			// }],
+			data: [{
+				type: "doughnut",
+				showInLegend: true,
+				indexLabel: "{name}: {y}",
+				yValueFormatString: "#,###'%'",
+				dataPoints: datapoints
+			}]
+		}
+
+        setOptionsDoughnut(tempOptions)
+
+
+    }
+
     useEffect(()=>{
         if(!options) {
+            //console.log("here");
             getBarChartData();
-        }            
-    },[options])
+        } 
+        if(!optionsDoughnut)
+        {
+            getDoughnutData();
+        }           
+    },[options,optionsDoughnut])
+    // useEffect(()=>{
+    //     if(!options) {
+    //         getBarChartData();
+    //     }           
+    // },[options])
 
 
     // Layout of Dashboard can change depending upon the situation
@@ -172,7 +237,7 @@ const Dashboard = (props) => {
     // some table
     // calendar --- some other table
 
-    return (
+    return (options && optionsDoughnut) ? (
         <Box sx={{ flexGrow: 1 }} m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={3}>
@@ -212,7 +277,8 @@ const Dashboard = (props) => {
                         <Typography variant="h5" component="div">
                             Average EV Sales this month
                         </Typography>
-                        <DoughNut state={pieData} />
+                        {/* <DoughNut state={pieData} /> */}
+                        <CanvasJSChart options = {optionsDoughnut}/>
                     </Card>
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
@@ -220,7 +286,7 @@ const Dashboard = (props) => {
                         <Typography variant="h5" component="div">
                             Some graph
                         </Typography>
-                        <CanvasJSChart options = {options}/>
+                        <CanvasJSChart options = {options["barChartData"]}/>
                     </Card>
                 </Grid>
                 <Grid item lg={4} md={4} sm={12}>
@@ -255,18 +321,20 @@ const Dashboard = (props) => {
                     <GenericTable rows={rows} labels={labels} />
                 </Grid>
                 <Grid item lg={4} md={4} sm={12} >
-                    <Calendar
+                    {/* <Calendar
                         onChange={onChange}
                         showWeekNumbers
                         value={value}
-                    />
+                    /> */}
+                    <CanvasJSChart options = {options["pieChartData"]}
+			        />
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
                     <GenericTable rows={rows} labels={labels} />
                 </Grid>
             </Grid>
         </Box>
-    )
+    ) : <div>Loading</div>
 }
 
 export default withStyles(styles, { withTheme: true })(Dashboard);
