@@ -5,39 +5,33 @@ import Select from "react-select";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons'
-import '../PagesStyles/ServicingConfirmed.css'
+import '../PagesStyles/CustomerFeedbackConfirmed.css'
 
 
 
 
-const ServicingConfirmed = (props) => {
+const CustomerFeedbackConfirmed = (props) => {
 
-    const [servicingID, setServicingID] = useState()
+
     const history = useHistory()
 
 
-    useEffect(() => {
-        setServicingID(props.location.state.servicingID)
-        console.log('into use effect')
-        // console.log(props.location.state.ticketid)
 
-
-    }, []);
 
     const goBackToHomescreen = () => {
         history.push('/')
     }
 
-    return servicingID ? (
-        <div className="servicingConfirmedScreen" >
+    return (
+        <div className="customerFeedbackConfirmedScreen" >
             <div className="contents" >
 
                 <div className="iconDiv" >
-                    <FontAwesomeIcon icon={faCircleCheck} fontSize='180px' color="lightgreen" />
+                    <FontAwesomeIcon icon={faCircleCheck} fontSize='180px' color="gold" />
                 </div>
                 <div className="textDiv">
-                    <div>Servicing Confirmed</div>
-                    <div> [{servicingID}]</div>
+                    <div>Feedback Posted!</div>
+                    <div id="caption"> We value your feedback and look forward to enhacne your experience</div>
 
 
                     <div style={{ marginTop: '80px' }} onClick={goBackToHomescreen}>
@@ -49,8 +43,8 @@ const ServicingConfirmed = (props) => {
             </div>
 
         </div>
-    ) : <div> Loading</div>
+    );
 }
 
 
-export default ServicingConfirmed;
+export default CustomerFeedbackConfirmed;

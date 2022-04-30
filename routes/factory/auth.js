@@ -14,6 +14,7 @@ const Worker = require('../../models/factory/userSchema');
 const Updatebatch = require('../../models/factory/updateBatchSchema');
 const Accessory = require('../../models/factory/addAccSchema');
 const Mycart = require('../../models/factory/addToCartSchema');
+const Buyaccessory = require('../../models/factory/buyAccSchema');
 const factoryworkerController = require("../../controller/factoryworker/factoryworkerController");
 
 
@@ -180,7 +181,7 @@ router.get('/buyitem/:id', (req,res)=>{
     try{
          console.log('Hello in buyitem');
         const bid=req.params.id;
-        console.log(bid);
+       // console.log(bid);
         // console.log("you want",catName);
         Accessory.find({'accid': bid}, function (err, docs) {
             if (err){
@@ -189,9 +190,9 @@ router.get('/buyitem/:id', (req,res)=>{
             }
             else
             {
-                console.log("success");
-                console.log(docs);
-                console.log("heello");
+                // console.log("success");
+                // console.log(docs);
+                // console.log("heello");
                 res.send(docs);
             }
          });
@@ -226,22 +227,23 @@ router.get('/buyaccessories', (req,res)=>{
 });
 
 
-router.get('/addtocart', (req,res)=>{
+router.post('/addtocart', async(req,res)=>{
     console.log('Hello in addtocart');
     try{
     console.log('Hello in addtocart');
-    // console.log(req.body);
+    console.log(req.body);
     // console.log(req.body.name);
-    // res.json({message: req.body});
+   
 
     //Comfort seat which can withstand in all the seasons complying to better attachment solutions
-    // const {accid,name,category,price,company,description,specifications} = req.body;
+    const {accid,name,price,company,image} = req.body;
+    const totalprice=price;
 
-    // if(!accid || !name || !category || !price || !company || !description || !specifications )
-    // {
-    //     console.log('err');
-    //     return res.status(422).json({error:"Plz fill all detils"});
-    // }
+    if(!accid || !name || !price || !company || !image )
+    {
+        console.log('err');
+        return res.status(422).json({error:"Plz fill all detils"});
+    }
 
     
 
@@ -249,16 +251,23 @@ router.get('/addtocart', (req,res)=>{
 
         // const acce = { 'stageno':stageno, 'description': description , 'updateddate': updateddate } ;
 
-        //  const acc = new Accessory({accid,name,category,price,company,description,specifications});
-        //  const accRegister = await acc.save();
-        // if(accRegister)
-        // {
-        //     res.status(201).json({message: "acc added successfull"});
-        // }
-        // else
-        // {
-        //     res.status(500).json({error: "Failed to add"});
-        // }
+        const productExist = await Mycart.findOne({accid});
+                if(productExist)
+                {
+                    return res.status(422).json({error: "Product already exist"});
+                }
+
+         const qty=1;
+         const addcart = new Mycart({accid,name,price,company,image,qty,totalprice});
+         const accRegister = await addcart.save();
+        if(accRegister)
+        {
+            res.status(201).json({message: "acc added successfull"});
+        }
+        else
+        {
+            res.status(500).json({error: "Failed to add"});
+        }
     }
     catch(err)
     {
@@ -266,7 +275,158 @@ router.get('/addtocart', (req,res)=>{
     }
 });
 
+router.get('/buycart', (req,res)=>{
+    console.log('Hello buycart');
+    try{
+        console.log('Hello');
+        Mycart.find({}, function (err, docs1) {
+            if (err){
+                console.log(err);
+                res.status(404).send();
+            }
+            else{
+                // console.log("successs");
+                // console.log(docs);
+                // console.log("heelloo");
+                res.send(docs1);
+            }
+        });
 
+    }catch(e){
+        console.log(e);
+        res.status(500).send(e);
+   }
+});
+
+
+router.post('/removecartdata', async(req,res)=>{
+    try{
+        console.log("In removecart data");
+        const mydata=req.body;
+        // console.log(mydata.accid);
+        const accid = mydata.accid;
+        Mycart.deleteOne({accid}, function (err, docs) {
+            if (err){
+                console.log(err);
+                res.status(404).send();
+            }
+            else{
+                // console.log("successs");
+                //  console.log(docs);
+                // console.log("heelloo");
+                res.status(201).json({message: "Item removed"});
+            }
+        });
+
+
+    }catch(e){
+        console.log(e);
+        res.status(500).send(e);
+   }
+});
+
+router.post('/buycartdata', async(req,res)=>{
+    // console.log('Hello');
+    try{
+        console.log('Hello in buycartdata');
+        // console.log("hello",req.body);
+        const mydata = req.body;
+        const cartarray=mydata.userData; 
+        // console.log("Hii",mydata.userData);
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < 3; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+         }
+         const orderid="O"+String(result);
+
+         var temp=0;
+
+         for (let i = 0; i < cartarray.length; i++) 
+         {
+             const filter = { 'orderid': orderid };
+             const update = {$push : {'buyitems': cartarray[i] }} ;
+     
+             Buyaccessory.findOneAndUpdate(filter, update, { upsert: true}, function(err,doc){
+                 if (err)
+                 {// return res.send(500, {error: err});
+                   console.log(err);
+                   temp=1;
+                 }
+                 else
+                 {
+                    //  console.log("success");
+                 }
+                // return res.send('Succesfully saved.');
+             });
+             if(temp === 1)
+             {
+                 break;
+             }
+         }
+         if(temp === 1)
+         {
+             //error
+             console.log("failed");
+             res.status(500).json({error: "Failed to registered"});
+         }
+         else
+         {
+             //success
+            //  res.status(201).json({message: "Order Placed"});
+             Mycart.deleteMany({}, function (err, docs) {
+                 if(err)
+                 {
+                     console.log(err);
+                     res.status(500).json({error: "Failed to registered"});
+                 }
+                 else
+                 {
+                    res.status(201).json({message: "Order placed successfull"});
+                 }
+            });
+         }
+
+        // console.log("OID: ",orderid)
+
+    }catch(e){
+        console.log(e);
+        res.status(500).send(e);
+   }
+});
+
+
+router.get('/getlastbuy', (req,res)=>{
+    console.log('Hello getlastbuy');
+    try{
+        Buyaccessory.find()
+        .sort({_id: -1})
+        .limit(1)
+        .then(docs1 => {
+            res.send(docs1);
+            console.log("mydatas",docs1);
+        });
+
+        // console.log('Hello');
+        // Mycart.find({}, function (err, docs) {
+        //     if (err){
+        //         console.log(err);
+        //         res.status(404).send();
+        //     }
+        //     else{
+        //         // console.log("successs");
+        //         // console.log(docs);
+        //         // console.log("heelloo");
+        //         res.send(docs);
+        //     }
+       // });
+
+    }catch(e){
+        console.log(e);
+        res.status(500).send(e);
+   }
+});
 
 router.post('/addaccess',async(req,res)=>{
     console.log('Hello');
@@ -286,9 +446,7 @@ router.post('/addaccess',async(req,res)=>{
     try{
 
           //const specifications = {'Model Number': 'VR_CA_WC', 'UV Ray Protection': 'Yes', 'Solid':'Yes'}
-
         // const acce = { 'stageno':stageno, 'description': description , 'updateddate': updateddate } ;
-
          const acc = new Accessory({accid,name,category,price,company,description,specifications});
          const accRegister = await acc.save();
         if(accRegister)

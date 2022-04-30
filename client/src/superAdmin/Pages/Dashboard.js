@@ -284,7 +284,7 @@ const Dashboard = (props) => {
                 <Grid item lg={8} md={8} sm={12}>
                     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                         <Typography variant="h5" component="div">
-                            Some graph
+                            Sentiment Analysis
                         </Typography>
                         <CanvasJSChart options = {options["barChartData"]}/>
                     </Card>

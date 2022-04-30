@@ -270,11 +270,13 @@ function BuyAccessories()
               </Grid>
 
               <Grid item lg={3} md={3} sm={4} xs={8} ml={3} className={classes.mycartbtn} >
+              <Link to="/buycart" style={{ textDecoration: 'none' }} >
                   <Button variant="contained" size="large" 
                     startIcon={<ShoppingCartIcon />} 
                     >
                       My Cart
                   </Button>
+               </Link>
                   
               </Grid>           
             </Grid>

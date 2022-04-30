@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const addToCartSchema= new mongoose.Schema({
     accid:{
         type: String,
+        unique : true,
         required: true
     },
     name:{
@@ -25,6 +26,14 @@ const addToCartSchema= new mongoose.Schema({
         type:String,
         required: true
     },    
+    qty:{
+        type:Number,
+        required: true
+    },
+    totalprice:{
+        type:Number,
+        required: true
+    },
    
 })
 
