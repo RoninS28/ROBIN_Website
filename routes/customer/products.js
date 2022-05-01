@@ -124,6 +124,8 @@ router.get('/:id/checkout', async (req, res) => {
 
             })
 
+            
+
         }
     })
 

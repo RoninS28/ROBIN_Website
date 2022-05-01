@@ -8,6 +8,7 @@ import GenericTable from "./GenericTable";
 import LineChart from "./LineChart";
 import DoughNut from "./DoughNut";
 
+
 const styles = (theme) => ({});
 
 const pieData = {

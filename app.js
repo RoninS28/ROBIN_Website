@@ -6,10 +6,12 @@ const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddlew
 
 const cookieParser = require("cookie-parser");
 
+
 dotenv.config({ path: './config.env' });
 const PORT = process.env.PORT || 5000;
 
 require('./db/conn');
+
 app.use(express.json());
 
 app.use(cookieParser());
@@ -81,4 +83,6 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
 })
+
+require('./trigger/changeStreamData')
 

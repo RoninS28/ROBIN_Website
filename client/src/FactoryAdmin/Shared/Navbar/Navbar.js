@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -34,6 +34,14 @@ import AccessoryPage from "../../Pages/AccessoryPage";
 import Dashboard from "../../Pages/Dashboard";
 import AccessoryReport from '../../Pages/AccessoryReport'
 import GenericStockList from "../../Pages/GenericStockList";
+import NewOrder from "../../Pages/NewOrder";
+import IconButton from '@mui/material/IconButton';
+import Pusher from 'pusher-js';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
+
+const PUSHER_APP_KEY = '241be100f37c47926dda';
+const PUSHER_APP_CLUSTER = 'ap2';
 
 const styles = theme => ({
 });
@@ -49,6 +57,9 @@ const Navbar = (props) => {
           history.push("/");
       }
   })
+
+  const [numberOfNotification,setNumberOfNotification]=useState(0);
+  const [getOrder,setOrder]=useState(null);
 
   // Appbar related states
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -101,6 +112,21 @@ const Navbar = (props) => {
     </Menu>
   );
 
+  const renderNotification = (
+      <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+    >
+      <Badge badgeContent={numberOfNotification} color="error">
+        <NotificationsIcon onClick={()=>history.push({
+          pathname:"/newOrder",
+          state:{'orderID':getOrder.orderID,"modelName":getOrder.modelName}
+        })}/>
+      </Badge>
+    </IconButton>
+  );
+
   // For mobile screen, Appbar will change and the below will be rendered
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -131,6 +157,7 @@ const Navbar = (props) => {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
     </Menu>
   );
 
@@ -228,6 +255,39 @@ const Navbar = (props) => {
     </Box >
   );
 
+  useEffect(()=>{
+
+    const pusher = new Pusher(PUSHER_APP_KEY, {
+      cluster: PUSHER_APP_CLUSTER,
+        encrypted: true,
+      });
+      const channel=pusher.subscribe('orders')
+      // const orderID = pusher.subscribe('orderID');
+      // const modelName=pusher.subscribe('modelName');
+
+
+      // console.log("orderID",orderID);
+      // console.log("modelName",modelName);
+
+      // if(orderID)
+      // {
+      //   setNumberOfNotification(2);
+      // }
+      
+    
+       channel.bind('inserted', (evt)=>{
+         //console.log("Got Notification",evt);
+         setOrder(evt);
+         setNumberOfNotification(1);
+         
+       });
+      // this.channel.bind('deleted', this.removeTask);
+
+      
+
+  })
+    
+
   return (
     <Router>
 
@@ -262,6 +322,9 @@ const Navbar = (props) => {
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {renderNotification}
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton
                 size="large"
                 edge="end"
@@ -286,6 +349,7 @@ const Navbar = (props) => {
                 <MoreIcon />
               </IconButton>
             </Box>
+
           </Toolbar>
         </AppBar>
         {renderMobileMenu}
@@ -330,6 +394,7 @@ const Navbar = (props) => {
             <Route path='/accessoryReport/:id' exact component={AccessoryReportDetail} />
             <Route path='/' exact component={Dashboard} />
             <Route path='/stocks' exact component={GenericStockList} />
+            <Route path="/newOrder" export component={NewOrder} />
           </Switch>
         </div>
       </main>
