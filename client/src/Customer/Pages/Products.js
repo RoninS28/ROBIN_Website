@@ -221,7 +221,7 @@ export default function Products() {
                 <img src={getMyImage(model.image)} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
-                {model["modelID"]}
+                {model["modelName"]}
               </div>
 
             </div>
