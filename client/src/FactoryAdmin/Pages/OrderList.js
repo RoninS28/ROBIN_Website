@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 import Container from "@material-ui/core/Container";
 import { Input, useMediaQuery } from "@material-ui/core";
@@ -15,6 +15,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import { useHistory } from "react-router";
 import GenericTable from "./GenericTable";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -124,6 +125,32 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 function OrderList(props) {
   const history = useHistory();
   const { classes, theme } = props;
+
+  // const [labels,setLabels]=useState(["checkbox", "id", "model", "num", "Stage", "img", "actions"]);
+
+  // const [rows,setRows]=useState([]);
+
+  // const getAllOrders=()=>{
+
+  //   const allOrders=[];
+
+  //   axios.get('/order')
+  //   .then(res => {
+  //       let orderArr = res.data;
+  //       console.log(orderArr);
+  //       orderArr.map(order => {
+  //           allOrders.push(order);
+  //       });
+  //       console.log("all Orders ", allOrders)
+  //       setRows(allOrders);
+  //   })
+  //   .catch((err) => {
+  //       console.log(err);
+  //   });
+
+
+  // }
+
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
@@ -151,6 +178,10 @@ function OrderList(props) {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  useEffect(()=>{
+    //getAllOrders();
+  })
 
   return (
     <div>
