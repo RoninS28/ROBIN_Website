@@ -36,6 +36,10 @@ db.once('open', () => {
   
     const ordersCollection = db.collection('orders');
     const changeStream = ordersCollection.watch();
+
+    const updateBatchCollection=db.collection('updatebatches');
+    const changeStreamBatch=updateBatchCollection.watch('');
+
     
     //console.log("In change Stream outer");
 
@@ -49,8 +53,9 @@ db.once('open', () => {
           channel,
           'inserted', 
           {
-            orderID: order._id,
-            modelName: order.modelName,
+            ID: order._id,
+            detail: order.modelName,
+            activity:"New Order Received"
           }
         ); 
       } 
@@ -62,4 +67,46 @@ db.once('open', () => {
     //     );
     //   }
     });
+
+    changeStreamBatch.on('change',(change)=>{
+
+      if(change.operationType=='insert')
+      {
+        const batchStatus = change.fullDocument;
+        pusher.trigger(
+          "batchUpdate",
+          'inserted', 
+          {
+            ID: batchStatus._id,
+            activity:"New Batch Status Updated"
+          }
+        ); 
+
+      }
+      else if(change.operationType=='update')
+      {
+        const batchStatus = change.fullDocument;
+        pusher.trigger(
+          "batchUpdate",
+          'updated', 
+          {
+            ID: batchStatus._id,
+            activity:"Batch Status Updated"
+          }
+        );
+      }
+      else if(change.operationType=='delete')
+      {
+        const batchStatus = change.fullDocument;
+        pusher.trigger(
+          "batchUpdate",
+          'deleted', 
+          {
+            ID: batchStatus._id,
+            activity:"Batch Status Deleted"
+          }
+        ); 
+      }
+    });
+
   });

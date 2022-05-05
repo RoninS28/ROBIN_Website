@@ -39,6 +39,12 @@ import IconButton from '@mui/material/IconButton';
 import Pusher from 'pusher-js';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
 const PUSHER_APP_KEY = '241be100f37c47926dda';
 const PUSHER_APP_CLUSTER = 'ap2';
@@ -50,16 +56,29 @@ const Navbar = (props) => {
   const { classes, theme, setLoggedIn } = props;
   const history = useHistory();
   const location = useLocation();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    //console.log("Opening Notification");
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setNotification(null);
+    setOpen(false);
+  };
+
   useEffect(() => {
-      console.log();
+     // console.log();
       if(location.pathname == '/factory-admin') {
           console.log("pushing / to URL");
           history.push("/");
       }
   })
 
-  const [numberOfNotification,setNumberOfNotification]=useState(0);
-  const [getOrder,setOrder]=useState(null);
+
+  const [notification,setNotification]=useState(null);
 
   // Appbar related states
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -118,11 +137,8 @@ const Navbar = (props) => {
       aria-label="show 17 new notifications"
       color="inherit"
     >
-      <Badge badgeContent={numberOfNotification} color="error">
-        <NotificationsIcon onClick={()=>history.push({
-          pathname:"/newOrder",
-          state:{'orderID':getOrder.orderID,"modelName":getOrder.modelName}
-        })}/>
+      <Badge badgeContent={notification?`${1}`:`${0}`} color="error" onClick={handleClickOpen}>
+        <NotificationsIcon/>
       </Badge>
     </IconButton>
   );
@@ -262,30 +278,33 @@ const Navbar = (props) => {
         encrypted: true,
       });
       const channel=pusher.subscribe('orders')
-      // const orderID = pusher.subscribe('orderID');
-      // const modelName=pusher.subscribe('modelName');
-
-
-      // console.log("orderID",orderID);
-      // console.log("modelName",modelName);
-
-      // if(orderID)
-      // {
-      //   setNumberOfNotification(2);
-      // }
-      
+      const batchchannel=pusher.subscribe('batchUpdate');
     
        channel.bind('inserted', (evt)=>{
          //console.log("Got Notification",evt);
-         setOrder(evt);
-         setNumberOfNotification(1);
+         //setOrder(evt);
          
+         setNotification(evt);
+       });
+
+       batchchannel.bind('inserted',(evt)=>{
+        // console.log("Here status Update");
+        setNotification(evt);
+       });
+
+       batchchannel.bind('deleted',(evt)=>{
+
+        setNotification(evt);
+       });
+
+       batchchannel.bind('updated',(evt)=>{
+        setNotification(evt);
        });
       // this.channel.bind('deleted', this.removeTask);
 
       
 
-  })
+  },[notification])
     
 
   return (
@@ -375,6 +394,31 @@ const Navbar = (props) => {
 
       {/* The main content that is shown on the screen */}
       <main className={classes.content}>
+
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {notification ? notification.activity : "No Activity"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  {notification? "ID : "+notification.ID : ""}
+                </DialogContentText>
+                <DialogContentText>
+                {notification? (notification.detail? notification.detail: ""):"" }
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>View More</Button>
+                <Button onClick={handleClose} autoFocus>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
 
         <AppBreadCrumb />
         {/* Routes for various components */}
