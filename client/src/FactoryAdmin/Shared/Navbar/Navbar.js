@@ -39,6 +39,7 @@ import IconButton from '@mui/material/IconButton';
 import Pusher from 'pusher-js';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import Badge from '@mui/material/Badge';
+import BatchDetail from "../../Pages/BatchDetail";
 
 const PUSHER_APP_KEY = '241be100f37c47926dda';
 const PUSHER_APP_CLUSTER = 'ap2';
@@ -385,6 +386,7 @@ const Navbar = (props) => {
             <Route path='/workers' exact component={WorkerList} ></Route>
             <Route path='/workers/:id' exact component={WorkerListDetails} />
             <Route path='/orders/:id' exact component={OrderDetail} />
+            <Route path='/batches/:id' exact component={BatchDetail} />
 
             <Route path='/complaints' exact component={Complaints} ></Route>
             <Route path="/complaints/:id" exact component={CustomerComplaint} />

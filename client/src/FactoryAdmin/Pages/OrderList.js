@@ -105,20 +105,24 @@ function createData(id, model, num, Stage, img) {
   return { id, model, num, Stage, img };
 }
 
-function getAllModels() {
-  const allModels = [];
-  orders.map((model) => {
-    console.log(model);
-    allModels.push(
-      createData(model.id, model.model, model.num, model.Stage, model.img)
-    );
-  });
-  return allModels;
+function createBatchData(_id, BatchId) {
+  return { _id, BatchId };
 }
 
-const rows = getAllModels();
+// function getAllModels() {
+//   const allModels = [];
+//   orders.map((model) => {
+//     console.log(model);
+//     allModels.push(
+//       createData(model.id, model.model, model.num, model.Stage, model.img)
+//     );
+//   });
+//   return allModels;
+// }
 
-const labels = ["checkbox", "id", "model", "num", "Stage", "img", "actions"];
+// const rows = getAllModels();
+
+// const labels = ["checkbox", "id", "model", "num", "Stage", "img", "actions"];
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -126,30 +130,8 @@ function OrderList(props) {
   const history = useHistory();
   const { classes, theme } = props;
 
-  // const [labels,setLabels]=useState(["checkbox", "id", "model", "num", "Stage", "img", "actions"]);
-
-  // const [rows,setRows]=useState([]);
-
-  // const getAllOrders=()=>{
-
-  //   const allOrders=[];
-
-  //   axios.get('/order')
-  //   .then(res => {
-  //       let orderArr = res.data;
-  //       console.log(orderArr);
-  //       orderArr.map(order => {
-  //           allOrders.push(order);
-  //       });
-  //       console.log("all Orders ", allOrders)
-  //       setRows(allOrders);
-  //   })
-  //   .catch((err) => {
-  //       console.log(err);
-  //   });
-
-
-  // }
+  const [rows, setRows] = useState([]);
+  const [labels, setLabels] = useState([]);
 
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
@@ -179,9 +161,30 @@ function OrderList(props) {
     setPage(0);
   };
 
+  const getAllBatches = () => {
+    console.log("Getting all batches...");
+    const allBatches = [];
+
+    axios.get('/batches')
+        .then(res => {
+            let batchArr = res.data;
+            console.log(batchArr);
+            batchArr.map(batch => {
+                allBatches.push(createBatchData(batch._id, batch.BatchId));
+            });
+            console.log("all batches ", allBatches)
+            setRows(allBatches);
+            setLabels(["_id", "BatchId", "actions"]);  
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
   useEffect(()=>{
-    //getAllOrders();
-  })
+    getAllBatches();
+
+  }, [])
 
   return (
     <div>
@@ -196,3 +199,6 @@ function OrderList(props) {
 }
 
 export default withStyles(styles, { withTheme: true })(OrderList);
+
+
+
