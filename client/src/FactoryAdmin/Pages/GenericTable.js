@@ -179,7 +179,7 @@ export default function GenericTable(props) {
                   {(() => {
                     switch (label) {
                       case "actions":
-                        return <Button onClick={()=>history.push(props.view+index)} variant="contained" color="primary"> View </Button>;
+                        return <Button onClick={()=>history.push(`/batches/${row["_id"]}`)} variant="contained" color="primary"> View </Button>;
                       case "img":
                         return <img style={{ height: "90px", width: "80px" }} src={row[label]}/>;
 
