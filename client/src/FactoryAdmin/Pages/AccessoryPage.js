@@ -16,6 +16,11 @@ import TableRow from "@material-ui/core/TableRow";
 import { Card } from "@material-ui/core";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Img = styled("img")({
   margin: "auto",
@@ -40,6 +45,17 @@ const rows = [
 
 function AccessoryPage() {
   const [feature, setFeature] = React.useState("");
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+      setOpen(true);
+  };
+
+  const handleClose = () => {
+      setOpen(false);
+  };
+
 
   const handleChange = (event) => {
     setFeature(event.target.value);
@@ -112,12 +128,11 @@ function AccessoryPage() {
                     Quantity
                   </InputLabel>
                   <Select
-                    style={{ width: "100%", align: "center" }}
+                    style={{ width: "100%", align: "center",marginRight:"20px" }}
                     value={feature}
                     label="Amount"
                     onChange={handleChange}
                     name="status"
-                    style={{ marginRight: "20px" }}
                   >
                     <MenuItem value="1">1000</MenuItem>
                     <MenuItem value="2">2000</MenuItem>
@@ -135,6 +150,7 @@ function AccessoryPage() {
                   variant="contained"
                   color="primary"
                   style={{ marginTop: "10px" }}
+                  onClick={handleClickOpen}
                 >
                   REQUEST FOR PARTS
                 </Button>
@@ -145,7 +161,32 @@ function AccessoryPage() {
             </Grid>
           </Grid>
         </Grid>
+
+        <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                Order Confirmation
+                </DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Order Sent To Shop !!
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleClose} autoFocus>
+                    Ok
+                </Button>
+                </DialogActions>
+          </Dialog>
+
       </Paper>
+
+
     </div>
   );
 }

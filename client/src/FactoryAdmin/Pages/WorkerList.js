@@ -167,7 +167,7 @@ function WorkerList(props) {
 
 
   useEffect(()=>{
-    //console.log("In useEffect");
+    console.log("In useEffect of wrokers");
     getAllWorkers();
 
   },[]);

@@ -192,7 +192,7 @@ function OrderList(props) {
         maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
         className={classes.listWrapper}
       >
-        <GenericTable rows={rows} labels={labels} view="/orders/1" />
+        <GenericTable rows={rows} labels={labels} view="/batches/" />
       </Container>
     </div>
   );
