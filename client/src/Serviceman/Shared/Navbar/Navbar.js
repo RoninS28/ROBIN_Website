@@ -19,26 +19,12 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 
 import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter, useHistory, useLocation } from "react-router-dom";
-import BreakdownRequestsList from "../../BreakdownRequestsList";
-import BreakdownDetails from "../../BreakdownDetails";
-import BreakdownStatus from "../../BreakdownStatus";
-import BuyAccessoriesList from "../../BuyAccessoriesList";
-import BreakdownStatusList from "../../BreakdownStatusList";
-import BuyCategory from "../../BuyCategory";
-import Demo from "../../Demo";
-import AccessoriesDetails from "../../AccessoriesDetails";
-import AssignedCustomers from "../../AssignedCustomers";
-import CustomerDetails from "../../CustomerDetails";
-import Servicing from "../../Servicing";
-import Billing from "../../Billing";
-import ServicemanList from "../../ServicemanList";
-import ServicemanDetails from "../../ServicemanDetails";
-import CustomerComplaintList from "../../CustomerComplaintList";
-import CustomerComplaint from "../../CustomerComplaint";
-import ServicemanComplaintList from "../../ServicemanComplaintList";
-import ServicemanComplaint from "../../ServicemanComplaint";
-import AppBreadCrumb from "../../AppBreadCrumb";
-
+import SMBreakdownStatus from "../../SMBreakdownStatus";
+import SMBreakdownDetails from "../../SMBreakdownDetails";
+import SMBilling from "../../SMBilling";
+import SMServices from "../../SMServices";
+import SMHistory from "../../SMHistory";
+import SMComplaint from "../../SMComplaint";
 
 const styles = theme => ({
 });
@@ -49,7 +35,7 @@ const Navbar = (props) => {
     const location = useLocation();
     useEffect(() => {
         console.log();
-        if(location.pathname == '/service-center') {
+        if(location.pathname == '/service-man') {
             console.log("pushing / to URL");
             history.push("/");
         }
@@ -162,165 +148,63 @@ const Navbar = (props) => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-{/* Service Center Module */}
-    
-            {/*  <Link to="/assigned-customers" style={{ textDecoration: 'none' }}>
-              <ListItem button>
-                <ListItemIcon>
-                  <MailIcon />
-                </ListItemIcon>
-                <ListItemText primary="Customers List" />
-              </ListItem>
-            </Link>
-            <Link to="/customer-details" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Customer Details" />
-                </ListItem>
-              </Link> */}
-               <Link to="/breakdown-list" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Breakdown Requests" />
-                </ListItem>
-              </Link>
-             {/*  <Link to="/breakdown-detail" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Request detail" />
-                </ListItem>
-              </Link> */}
-              <Link to="/breakdown-status-list" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Status List" />
-                </ListItem>
-              </Link>
-              {/* <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Request Status" />
-                </ListItem>
-              </Link> */}
-              <Link to="/servicing" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Servicing" />
-                </ListItem>
-              </Link>
-              {/* <Link to="/billing" style={{ textDecoration: 'none' }}>
-              <ListItem button>
-                <ListItemIcon>
-                  <MailIcon />
-                </ListItemIcon>
-                <ListItemText primary="Billing" />
-              </ListItem>
-            </Link> */}
 
-              <Link to="/servicemenlist" style={{ textDecoration: 'none' }}>
+{/* Serviceman module */}
+               <Link to="/breakdown-details" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Servicemen List" />
+                  <ListItemText primary="Breakdown Request" />
                 </ListItem>
-              </Link>
-              
-               {/* <Link to="/servicemandetails" style={{ textDecoration: 'none' }}>
+              </Link>  
+
+              <Link to="/breakdown-status" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Serviceman Details" />
+                  <ListItemText primary="Breakdown Status" />
                 </ListItem>
-              </Link> */}
-              
-             
-              <Link to="/buy-accessories" style={{ textDecoration: 'none' }}>
+              </Link>  
+          
+              <Link to="/services" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Buy" />
-                </ListItem>
-              </Link>
-              {/* <Link to="/buy-category" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Buy Category" />
-                </ListItem>
-              </Link>
-          <Link to="/accessories-details" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon/>
-                  </ListItemIcon>
-                  <ListItemText primary="Item Details" />
-                </ListItem>
-              </Link> */}
-           
-          <Link to="/customer-complaint-list" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Customer Complaints" />
+                  <ListItemText primary="Services" />
                 </ListItem>
               </Link> 
-              {/* <Link to="/customer-complaint" style={{ textDecoration: 'none' }}>
+
+              <Link to="/billing" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="C Complaint Details" />
-                </ListItem>
-              </Link>  */}
-              <Link to="/serviceman-complaint-list" style={{ textDecoration: 'none' }}>
-                <ListItem button>
-                  <ListItemIcon>
-                    <MailIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Serviceman Complaints" />
+                  <ListItemText primary="Billing" />
                 </ListItem>
               </Link> 
-              {/* <Link to="/serviceman-complaint" style={{ textDecoration: 'none' }}>
+
+              <Link to="/history" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="S Complaint Details" />
+                  <ListItemText primary="History" />
                 </ListItem>
-              </Link>   */}
+              </Link> 
 
-         {/*  <Link to="/demo" style={{ textDecoration: 'none' }}>
+              <Link to="/complaints" style={{ textDecoration: 'none' }}>
                 <ListItem button>
                   <ListItemIcon>
                     <MailIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Demo" />
+                  <ListItemText primary="Contact" />
                 </ListItem>
-              </Link> */}
+              </Link>  
 
-
-
-
-
-
-            </List>
+         </List>
         </Box>
     );
 
@@ -411,26 +295,16 @@ const Navbar = (props) => {
                 {/* Routes for various components */}
                 <div className='back'>
             <Switch>
-              <Route path='/' exact component={BreakdownRequestsList} ></Route>
-              {/* <Route path='/assigned-customers' exact component={AssignedCustomers}></Route> */}
-              <Route path='/customer-details' exact component={CustomerDetails}></Route>
-              <Route path='/servicemenlist' exact component={ServicemanList}></Route>
-              <Route path='/servicemandetails' exact component={ServicemanDetails}></Route>
-              <Route path='/servicing' exact component={Servicing}></Route>
-              <Route path='/breakdown-list' exact component={BreakdownRequestsList} ></Route>
-              <Route path='/breakdown-detail' exact component={BreakdownDetails} ></Route>
-              <Route path='/breakdown-status-list' exact component={BreakdownStatusList}></Route>
-              <Route path='/breakdown-status' exact component={BreakdownStatus}></Route>
-              <Route path='/buy-accessories' exact component={BuyAccessoriesList}></Route>
-              <Route path='/buy-category' exact component={BuyCategory}></Route>
-              <Route path='/accessories-details' exact component={AccessoriesDetails}></Route>
-              <Route path='/billing' exact component={Billing}></Route>
-              <Route path='/customer-complaint-list' exact component={CustomerComplaintList}></Route>
-              <Route path='/customer-complaint' exact component={CustomerComplaint}></Route>
-              <Route path='/serviceman-complaint-list' exact component={ServicemanComplaintList}></Route>
-              <Route path='/serviceman-complaint' exact component={ServicemanComplaint}></Route>
 
-              <Route path='/demo' exact component={Demo}></Route>
+{/* Serviceman Module */}
+              <Route path='/' exact component={SMBreakdownDetails} ></Route>
+              <Route path='/breakdown-details' exact component={SMBreakdownDetails}></Route>
+              <Route path='/breakdown-status' exact component={SMBreakdownStatus}></Route>
+              <Route path='/billing' exact component={SMBilling}></Route>
+              <Route path='/services' exact component={SMServices}></Route>
+              <Route path='/history' exact component={SMHistory}></Route>
+              <Route path='/complaints' exact component={SMComplaint}></Route>
+
             </Switch>
                 </div>
             </main>

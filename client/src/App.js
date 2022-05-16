@@ -8,6 +8,7 @@ import { useState } from "react";
 
 import { Routing as CustomerRouting } from "./Customer/Shared/Routing";
 import { Routing as ServiceCentreRouting } from './serviceCenter/Shared/Routing';
+import { Routing as ServiceManRouting } from './Serviceman/Shared/Routing';
 import { Routing as FactoryAdminRouting } from './FactoryAdmin/Shared/Routing';
 import { Routing as SuperAdminRouting } from './superAdmin/Shared/Routing';
 import { Routing as OutletRouting } from './Outlet/Shared/Routing';
@@ -41,6 +42,7 @@ function App() {
                 <li><Link to="/super-admin">Super Admin</Link></li>
                 <li><Link to="/factory-admin">Factory Admin</Link></li>
                 <li><Link to="/service-center">Service Center</Link></li>
+                <li><Link to="/service-man">Service Man</Link></li>
                 <li><Link to="/outlet">Outlet</Link></li>
               </ul>
             </div>
@@ -61,6 +63,10 @@ function App() {
                 case 'service-center':
                   return (
                     <ServiceCentreRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />
+                  )
+                case 'service-man':
+                  return (
+                    <ServiceManRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />
                   )
                 case 'customer':
                   return (
@@ -91,6 +97,7 @@ function App() {
           <Route path='/super-admin' exact component={() => (<SuperAdminRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/factory-admin' exact component={() => (<FactoryAdminRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/service-center' exact component={() => (<ServiceCentreRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
+          <Route path='/service-man' exact component={() => (<ServiceManRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
           <Route path='/outlet' exact component={() => (<OutletRouting loggedIn={loggedIn} setLoggedIn={updateLogin} />)} ></Route>
         </Switch>
       </BrowserRouter>

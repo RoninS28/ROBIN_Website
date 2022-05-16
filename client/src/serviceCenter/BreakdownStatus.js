@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Button from '@material-ui/core/Button'
 import { Typography } from "@material-ui/core";
+import { Link } from 'react-router-dom';
 
 import * as React from 'react';
 
@@ -70,7 +71,27 @@ function BreakdownStatus() {
                 <MenuItem value="In Progress">In Progress</MenuItem>
                 <MenuItem value="Completed">Completed</MenuItem>
             </Select>
-            <Button variant="contained" color="primary" style={{marginLeft:'20px'}}>UPDATE</Button>
+            <div className="buttons" align="center">
+                    <Button 
+                        variant="contained" 
+                        color="primary" 
+                        style={{marginRight:'100px'}}
+
+    //Function: Disable button on click 
+    //Problem: Doesn't work when going back to the same page and when refreshed
+    //Solution: Probably a new instance is created when page is opened
+
+                        // disabled={disable} 
+                        // onClick={() => setDisable(true)}
+                    >
+                        UPDATE
+                    </Button>
+
+                <Link style={{ textDecoration: 'none' }} to="/breakdown-status-list">
+                    <Button variant="contained" style={{marginLeft:'100px'}} >CANCEL</Button>
+                </Link>
+            </div>
+            {/* <Button variant="contained" color="primary" style={{marginLeft:'20px'}}>UPDATE</Button> */}
 
             </div>
         </div>    
