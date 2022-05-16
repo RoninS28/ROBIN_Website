@@ -76,91 +76,141 @@ const Dashboard = (props) => {
 
     const [options, setOptions] = useState(null);
     const [optionsDoughnut,setOptionsDoughnut]=useState(null);
+    const [feedbacks, setFeedbacks] = useState([]);
 
     const getBarChartData = () => {
 
-        axios.post('/reviewAnalysis', {
-            "text": [
-                "Handle is not working properly",
-                "Handle is broken",
-                "charging points not available",
-                "Battery life is poor",
-                "wheel quality is the best"
-            ]
-        })
-        .then((response) => {
-            console.log("res from backend ", response.data);
+        axios.get('/feedback/getall').then((res) => {
+            console.log("feedbacks received: ", res.data);
+            let feedbacksArr = res.data;
 
-            let obj = response.data.freq;
-            let dataPoints = [];
-            
-            let count = 0;
-            Object.keys(obj).forEach(key => {
-                count += obj[key];
+            let feedbacksList = [];
+            feedbacksArr.map(feedback => {
+                feedbacksList.push(feedback.feedbackMsg);
             });
+            console.log(feedbacksList);
 
-            Object.keys(obj).forEach(key => {
-                dataPoints.push(
-                    {label: key, y: (obj[key] / count) * 100}
-                );
-                console.log(key, obj[key]);
-            });
-
-            let posCnt = 0, negCnt = 0;
-
-            console.log(response.data);
-            for(let item of response.data.prediction.sentiment) {
-                console.log("item ", item);
-                if(item == "Negative")
-                    negCnt++;
-                else    
-                    posCnt++;
-            }
-
-            console.log("datapoints", dataPoints);
-
-            let tempObj = {
-                title: {
-                    text: "Negative Reviews according to Labels"
-                },
-                data: [
-                {
-                    // Change type to "doughnut", "line", "splineArea", etc.
-                    type: "column",
-                    dataPoints: dataPoints
-                }
-                ]
-            }
-
-
-            // set options object for pie chart
-            let tempOptionsPie = {
-                exportEnabled: true,
-                animationEnabled: true,
-                title: {
-                    text: "Distribution of reviews"
-                },
-                data: [{
-                    type: "pie",
-                    startAngle: 75,
-                    toolTipContent: "<b>{label}</b>: {y}%",
-                    showInLegend: "true",
-                    legendText: "{label}",
-                    indexLabelFontSize: 16,
-                    indexLabel: "{label} - {y}%",
-                    dataPoints: [
-                        { y: posCnt, label: "Positive" },
-                        { y: negCnt, label: "Negative" }
-                    ]
-                }]
-            }
-           
+            axios.post('/reviewAnalysis', {
+                "text": feedbacksList
+            })
+            .then((response) => {
+                console.log("res from backend ", response.data);
     
+                let obj = response.data.freq;
+                let dataPoints = [];
+                
+                let count = 0;
+                Object.keys(obj).forEach(key => {
+                    count += obj[key];
+                });
+    
+                Object.keys(obj).forEach(key => {
+                    dataPoints.push(
+                        {label: key, y: (obj[key] / count) * 100}
+                    );
+                    console.log(key, obj[key]);
+                });
+    
+                let posCnt = 0, negCnt = 0;
+    
+                console.log(response.data);
+                for(let item of response.data.prediction.sentiment) {
+                    console.log("item ", item);
+                    if(item == "Negative")
+                        negCnt++;
+                    else    
+                        posCnt++;
+                }
+    
+                console.log("datapoints", dataPoints);
 
-            setOptions({"barChartData": tempObj, "pieChartData": tempOptionsPie});
+                // positive frequencies
+                let obj2 = response.data.posfreq;
+                console.log(obj2);
+                let dataPoints2 = [];
+                
+                let count2 = 0;
+                Object.keys(obj2).forEach(key => {
+                    count2 += obj2[key];
+                });
+    
+                Object.keys(obj2).forEach(key => {
+                    dataPoints2.push(
+                        {label: key, y: (obj2[key] / count2) * 100}
+                    );
+                    console.log(key, obj2[key]);
+                });
+    
+                let posCnt2 = 0, negCnt2 = 0;
+    
+                console.log(response.data);
+                for(let item of response.data.prediction.sentiment) {
+                    console.log("item ", item);
+                    if(item == "Negative")
+                        negCnt2++;
+                    else    
+                        posCnt2++;
+                }
+    
+                console.log("datapoints", dataPoints2);
+    
+                let tempObj2 = {
+                    title: {
+                        text: "Positive Reviews according to Labels"
+                    },
+                    data: [
+                    {
+                        // Change type to "doughnut", "line", "splineArea", etc.
+                        type: "column",
+                        dataPoints: dataPoints2
+                    }
+                    ]
+                }
+                    
+                let tempObj = {
+                    title: {
+                        text: "Negative Reviews according to Labels"
+                    },
+                    data: [
+                    {
+                        // Change type to "doughnut", "line", "splineArea", etc.
+                        type: "column",
+                        dataPoints: dataPoints
+                    }
+                    ]
+                }
+    
+    
+                // set options object for pie chart
+                let tempOptionsPie = {
+                    exportEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Distribution of reviews"
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 75,
+                        toolTipContent: "<b>{label}</b>: {y}%",
+                        showInLegend: "true",
+                        legendText: "{label}",
+                        indexLabelFontSize: 16,
+                        indexLabel: "{label} - {y}%",
+                        dataPoints: [
+                            { y: posCnt, label: "Positive" },
+                            { y: negCnt, label: "Negative" }
+                        ]
+                    }]
+                }
+               
         
-          }, (error) => {
-            console.log("error: ", error);
+    
+                setOptions({"barChartData": tempObj, "pieChartData": tempOptionsPie, "barChartData2": tempObj2});
+            
+              }, (error) => {
+                console.log("error: ", error);
+            });
+
         });
 
     }
@@ -330,7 +380,10 @@ const Dashboard = (props) => {
 			        />
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
-                    <GenericTable rows={rows} labels={labels} />
+                    <Typography variant="h5" component="div">
+                        Sentiment Analysis
+                    </Typography>
+                    <CanvasJSChart options = {options["barChartData2"]}/>
                 </Grid>
             </Grid>
         </Box>
