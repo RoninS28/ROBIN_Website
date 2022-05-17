@@ -11,6 +11,8 @@ import LineChart from './LineChart';
 import axios from 'axios';
 
 import {CanvasJSChart} from 'canvasjs-react-charts'
+import './EVChatbot.css';
+import EVChatbot from './EVChatbot';
 
 const styles = theme => ({
 
@@ -77,6 +79,38 @@ const Dashboard = (props) => {
     const [options, setOptions] = useState(null);
     const [optionsDoughnut,setOptionsDoughnut]=useState(null);
     const [feedbacks, setFeedbacks] = useState([]);
+
+    const [chatbotIconClicked, setChatbotIconClicked] = useState(false);
+
+    const chatbotScreenStyle = {
+        color: '#4a4a4a',
+        background: 'rgb(245, 248, 251)',
+        borderRadius: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.15) 0px 12px 24px 0px',
+        fontFamily: 'monospace',
+        overflow: 'hidden',
+        position: 'fixed',
+        bottom: '32px',
+        top: 'initial',
+        right: '32px',
+        left: 'initial',
+        width: '350px',
+        height: '520px',
+        zIndex: '999',
+        transform: 'scale(0)',
+        transformOrigin: 'right bottom',
+        transition: 'transform 0.3s ease 0s',
+    }
+
+    const handleChatBotClick = () => {
+        console.log("icon clicked");
+        if(chatbotIconClicked == false) {
+            setChatbotIconClicked(true);
+        }   
+        else {
+            setChatbotIconClicked(false);
+        }
+    }
 
     const getBarChartData = () => {
 
@@ -386,6 +420,17 @@ const Dashboard = (props) => {
                     <CanvasJSChart options = {options["barChartData2"]}/>
                 </Grid>
             </Grid>
+            <div>
+                <a id="chatbot-container" onClick={() => handleChatBotClick}>
+                    <svg id='chatbot-icon' height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
+                </a>
+                <div style={{position: 'fixed', bottom: '32px', 'right': '32px', display: (chatbotIconClicked ? 'block' : 'none')}}>
+                <EVChatbot />
+                </div>
+            </div>
         </Box>
     ) : <div>Loading</div>
 }
