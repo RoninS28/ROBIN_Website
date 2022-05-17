@@ -40,6 +40,9 @@ db.once('open', () => {
     const updateBatchCollection=db.collection('updatebatches');
     const changeStreamBatch=updateBatchCollection.watch('');
 
+    const complaintsCollection=db.collection('complaints');
+    const changeStreamComplaints=complaintsCollection.watch('');
+
     
     //console.log("In change Stream outer");
 
@@ -107,6 +110,23 @@ db.once('open', () => {
           }
         ); 
       }
+    });
+
+    changeStreamComplaints.on('change',(change)=>{
+
+      if(change.operationType=='insert')
+      {
+        const complaintStatus=change.fullDocument;
+        pusher.trigger(
+          "complaints",
+          'inserted',
+          {
+            ID: complaintStatus._id,
+            activity:"Complaint Added",
+          }
+        );
+      }
+
     });
 
   });

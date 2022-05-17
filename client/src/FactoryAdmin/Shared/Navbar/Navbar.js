@@ -26,6 +26,7 @@ import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import OrderDetail from "../../Pages/OrderDetail";
 import AccessoryReportDetail from "../../Pages/AccessoryReportDetail";
+import NotificationDetail from "../../Pages/NotificationDetail";
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 import Complaints from "../../Pages/Complaints";
 import CustomerComplaint from "../../Pages/Customercomplaints";
@@ -67,9 +68,10 @@ const Navbar = (props) => {
   };
 
   const handleClose = () => {
-    setNotification(null);
+    setNotification([]);
     setOpen(false);
   };
+
 
   useEffect(() => {
      // console.log();
@@ -80,7 +82,8 @@ const Navbar = (props) => {
   })
 
 
-  const [notification,setNotification]=useState(null);
+  const [notification,setNotification]=useState([]);
+  
 
   // Appbar related states
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -139,7 +142,7 @@ const Navbar = (props) => {
       aria-label="show 17 new notifications"
       color="inherit"
     >
-      <Badge badgeContent={notification?`${1}`:`${0}`} color="error" onClick={handleClickOpen}>
+      <Badge badgeContent={notification.length?notification.length:`${0}`} color="error" onClick={handleClickOpen}>
         <NotificationsIcon/>
       </Badge>
     </IconButton>
@@ -281,26 +284,38 @@ const Navbar = (props) => {
       });
       const channel=pusher.subscribe('orders')
       const batchchannel=pusher.subscribe('batchUpdate');
+      const complaintchannel=pusher.subscribe('complaints');
+
+   
+      complaintchannel.bind('inserted',(evt)=>{
+
+
+        setNotification([...notification,evt]);
+      });
     
        channel.bind('inserted', (evt)=>{
          //console.log("Got Notification",evt);
          //setOrder(evt);
-         
-         setNotification(evt);
+       //  console.log("Here");
+   //      arr.push(evt);
+        // console.log(arr);
+        setNotification([...notification,evt]);
        });
 
        batchchannel.bind('inserted',(evt)=>{
         // console.log("Here status Update");
-        setNotification(evt);
+        setNotification([...notification,evt]);
        });
 
        batchchannel.bind('deleted',(evt)=>{
 
-        setNotification(evt);
+        // arr.push(evt);
+        setNotification([...notification,evt]);
        });
 
        batchchannel.bind('updated',(evt)=>{
-        setNotification(evt);
+       // arr.push(evt);
+        setNotification([...notification,evt]);
        });
       // this.channel.bind('deleted', this.removeTask);
 
@@ -403,19 +418,32 @@ const Navbar = (props) => {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
             >
-              <DialogTitle id="alert-dialog-title">
-                {notification ? notification.activity : "No Activity"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  {notification? "ID : "+notification.ID : ""}
-                </DialogContentText>
-                <DialogContentText>
-                {notification? (notification.detail? notification.detail: ""):"" }
-                </DialogContentText>
-              </DialogContent>
+                <DialogTitle id="alert-dialog-title">
+                {notification.length? "Today's Notifications" : "No Unread Notifications "}
+                </DialogTitle>
+              {notification.map(data=>{
+
+              
+                return (
+
+                  <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                 {data.activity?"Activity : "+data.activity : ""}
+               </DialogContentText>
+               <DialogContentText id="alert-dialog-description">
+                 {data.ID? "ID : "+data.ID : ""}
+               </DialogContentText>
+               <DialogContentText>
+               {data.detail? "Data Detail: "+ data.detail:"" }
+               </DialogContentText>
+               </DialogContent>
+
+
+                )
+             
+              })}
+              
               <DialogActions>
-                <Button onClick={handleClose}>View More</Button>
                 <Button onClick={handleClose} autoFocus>
                   OK
                 </Button>
@@ -441,7 +469,8 @@ const Navbar = (props) => {
             <Route path='/accessoryReport/:id' exact component={AccessoryReportDetail} />
             <Route path='/' exact component={Dashboard} />
             <Route path='/stocks' exact component={GenericStockList} />
-            <Route path="/newOrder" export component={NewOrder} />
+            <Route path="/newOrder" exact component={NewOrder} />
+            <Route path="/notificationDetail" exact component={NotificationDetail}/>
           </Switch>
         </div>
       </main>
