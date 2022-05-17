@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,6 +9,8 @@ import { Grid } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import { withStyles } from "@material-ui/core/styles";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   cardOne: {
@@ -30,6 +32,10 @@ function CustomerComplaint(props) {
 
   const classes2 = styles();
 
+  const location=useLocation();
+
+  const [complaint,setComplaint]=useState(null);
+
   const name = props.name;
   const content = props.content;
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
@@ -44,6 +50,32 @@ function CustomerComplaint(props) {
   );
   const xl = useMediaQuery(theme.breakpoints.up("lg"));
 
+  const getComplaint=()=>{
+
+    axios.get('/complaints/'+location.pathname)
+        .then(res => {
+
+           // console.log(res.data);
+
+          setComplaint(res.data);
+           
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+  }
+
+  useEffect(()=>{
+
+    location.pathname=location.pathname.replace('/complaints/','');
+
+ //   console.log(location.pathname);
+
+    getComplaint();
+
+  },[complaint]);
+
   return (
     <div>
       <Grid container spacing={2}>
@@ -57,22 +89,12 @@ function CustomerComplaint(props) {
                     src="/static/images/avatar/1.jpg"
                   />
                   <span style={{ marginLeft: "2vw", fontSize: "20px" }}>
-                    Akshay Jain, Pune
+                  {complaint? (complaint.customerID?"Customer ID: "+complaint.customerId:"Employee ID: "+complaint.employeeId):""}
                   </span>
                 </div>
 
                 <div style={{ marginTop: "2vh" }}>
-                  Dear Sir, The goods supplied as part of this contract are not
-                  of satisfactory quality. One of the radiators leaks and has
-                  ruined my carpet. I enclose copies of photos of the damage to
-                  my carpets from the leaky radiator in support of my claim. I
-                  would like you to replace the leaky radiator, and the other
-                  radiators that have all been painted using paint meant for
-                  walls and provide payment to cover for the cost of the damaged
-                  carpet. Please respond to my complaint in the next 14 days. If
-                  you fail to respond or put the problem right in this time, I
-                  will have no option but to consider taking the matter further.
-                  Yours faithfully
+                {complaint ? complaint.description :"" }
                 </div>
               </CardContent>
               <CardActions>
