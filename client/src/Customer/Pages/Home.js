@@ -84,7 +84,7 @@ export default function Home() {
           <img src={props.image1} />
         </div> */}
         <div style={{ position: 'relative' }}>
-          <div style={{ paddingTop: '40vh', color: "white", textShadow: "2px 2px blue", fontSize: "40px", zIndex: 100000, position: 'absolute', background: 'rgb(0,0,0,0.5)', height: '100vh', width: '100vw' }}>
+          <div style={{ paddingTop: '40vh', color: "white", textShadow: "2px 2px blue", fontSize: "40px", zIndex: 100, position: 'absolute', background: 'rgb(0,0,0,0.5)', height: '100vh', width: '100vw' }}>
             <center>WE BUILD VEHICLES FOR THE FUTURE.</center>
           </div>
           <div style={{ position: 'relative', zIndex: 20, maxWidth: '100vw' }}>
