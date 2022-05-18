@@ -25,7 +25,7 @@ const CustomerFeedbackConfirmed = (props) => {
     return (
         <div className="customerFeedbackConfirmedScreen" >
             <div className="contents" >
-
+                {/* <div>r</div> */}
                 <div className="iconDiv" >
                     <FontAwesomeIcon icon={faCircleCheck} fontSize='180px' color="gold" />
                 </div>

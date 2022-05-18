@@ -44,31 +44,31 @@ export default function Home() {
       ]
     },
     {
-        id: "4",
-        message: "Where are you?",
-        trigger: "5"
+      id: "4",
+      message: "Where are you?",
+      trigger: "5"
     },
     {
-        id: "5",
-        message: "Please share your location, we will use it to put you in touch with nearest provider.",
-        trigger: "6"
+      id: "5",
+      message: "Please share your location, we will use it to put you in touch with nearest provider.",
+      trigger: "6"
     },
     {
-        id: "6",
-        user: true,
-        trigger: "7"
+      id: "6",
+      user: true,
+      trigger: "7"
     },
     {
-        id: "7",
-        message: "We will reach you. :)",
-        trigger: "2"
+      id: "7",
+      message: "We will reach you. :)",
+      trigger: "2"
     }];
 
-    const config ={
-      width: "400px",
-      height: "500px",
-      floating: true,
-    };
+  const config = {
+    width: "400px",
+    height: "500px",
+    floating: true,
+  };
 
   return (
     <div>
@@ -78,47 +78,51 @@ export default function Home() {
         steps={steps}
         {...config}
       /> */}
-      <div style={{ backgroundColor: "black", paddingBottom: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: "white", textShadow: "2px 2px blue", fontSize: "40px" }}>
-          <center>WE BUILD VEHICLES FOR THE FUTURE.</center>
-        </div>
+      <div style={{ backgroundColor: "black", paddingBottom: "0px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+
         {/* <div className="image">
           <img src={props.image1} />
         </div> */}
-
-        <ImageSlider/>
+        <div style={{ position: 'relative' }}>
+          <div style={{ paddingTop: '40vh', color: "white", textShadow: "2px 2px blue", fontSize: "40px", zIndex: 100000, position: 'absolute', background: 'rgb(0,0,0,0.5)', height: '100vh', width: '100vw' }}>
+            <center>WE BUILD VEHICLES FOR THE FUTURE.</center>
+          </div>
+          <div style={{ position: 'relative', zIndex: 20, maxWidth: '100vw' }}>
+            <ImageSlider />
+          </div>
+        </div>
 
       </div>
 
-      <div style={{ backgroundColor: "white", padding: "15px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      {/* <div style={{ backgroundColor: "white", padding: "15px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div className="image">
           <img src={props.image2} />
         </div>
         <div style={{ color: "black", fontSize: "40px", textShadow: "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black", display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => handleProduct()}>
           <center>View All EVs</center> <KeyboardArrowRight style={{ color: "yellow", fontSize: "60px" }} />
         </div>
-      </div>
+      </div> */}
 
-      <div style={{ backgroundColor: "black", padding: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      {/* <div style={{ backgroundColor: "black", padding: "35px", display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Grid container spacing={3} justifyContent="space-evenly">
-        <Grid container xs={12} md={12} lg={12} xl={12} sx={{ border: 1 }} style={{ borderRadius: "0.5rem", borderColor: "black" }}>
-        <Grid spacing={3} xs={4} md={4} lg={4} xl={4} >
-        <div style={{ color: "white", fontSize: "40px", textAlign: "center", textShadow: "-1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px blue", alignSelf: 'start' }}>
-          <center>We're Happy to Help you...</center>
-        </div>
-        </Grid>
-        <Grid spacing={3} xs={8} md={8} lg={8} xl={8} >
-        <div className="image" style={{justifyContent:"right",justifyItems:"right"}}>
-          <img src={props.image3} width="600px" />
-        </div>
-        </Grid>
-        </Grid>
+          <Grid container xs={12} md={12} lg={12} xl={12} sx={{ border: 1 }} style={{ borderRadius: "0.5rem", borderColor: "black" }}>
+            <Grid spacing={3} xs={4} md={4} lg={4} xl={4} >
+              <div style={{ color: "white", fontSize: "40px", textAlign: "center", textShadow: "-1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px blue", alignSelf: 'start' }}>
+                <center>We're Happy to Help you...</center>
+              </div>
+            </Grid>
+            <Grid spacing={3} xs={8} md={8} lg={8} xl={8} >
+              <div className="image" style={{ justifyContent: "right", justifyItems: "right" }}>
+                <img src={props.image3} width="600px" />
+              </div>
+            </Grid>
+          </Grid>
         </Grid>
         <div style={{ marginTop: "30px", color: "white", fontSize: "40px", textAlign: "center", textShadow: "-1px 0 lightgreen, 0 1px lightgreen, 1px 0 lightgreen, 0 -1px lightgreen", display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => handleTestDrive()}>
           <center>Book a free Test Drive Today</center><KeyboardArrowRight style={{ color: "white", fontSize: "60px" }} />
         </div>
 
-      </div>
+      </div> */}
 
     </div>
   );
