@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from "react";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -31,6 +31,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import { Link } from 'react-router-dom';
 import GenericTable from './GenericTable';
+import axios from 'axios';
 
 const styles = theme => ({
 
@@ -58,87 +59,6 @@ const styles = theme => ({
     
 
 })
-
-const labels = ["id", "name", "phone", "email", "position", "address", "salary", "view"];
-
-const workers=[
-    {
-        id:1,
-        name:"Kamlesh Raut",
-        phone:"9999999999",
-        dateOfJoin:"28-09-2021",
-        email:"kamlesh@gmail.com",
-        salary:"Rs.25000",
-        address:"115,shiv Ranjani Appartment Pandey Layout Khamla Nagpur",
-        city:"Pune",
-        dateOfBirth:"04-07-1998",
-        adharCard:"9898-9898-9898",
-        panCard:"DSISG5678D",
-        position:"Junior Mehacnic",
-        factory:"Wadi"
-    },
-    {
-        id:2,
-        name:"Kamlesh Raut",
-        phone:"9999999999",
-        dateOfJoin:"28-09-2021",
-        email:"kamlesh@gmail.com",
-        salary:"Rs.25000",
-        address:"115,shiv Ranjani Appartment Pandey Layout Khamla Nagpur",
-        city:"Pune",
-        dateOfBirth:"04-07-1998",
-        adharCard:"9898-9898-9898",
-        panCard:"DSISG5678D",
-        position:"Junior Mehacnic",
-        factory:"Wadi"
-    },
-    {
-        id:3,
-        name:"Kamlesh Raut",
-        phone:"9999999999",
-        dateOfJoin:"28-09-2021",
-        email:"kamlesh@gmail.com",
-        salary:"Rs.25000",
-        address:"115,shiv Ranjani Appartment Pandey Layout Khamla Nagpur",
-        city:"Pune",
-        dateOfBirth:"04-07-1998",
-        adharCard:"9898-9898-9898",
-        panCard:"DSISG5678D",
-        position:"Junior Mehacnic",
-        factory:"Wadi"
-    },
-    {
-        id:4,
-        name:"Kamlesh Raut",
-        phone:"9999999999",
-        dateOfJoin:"28-09-2021",
-        email:"kamlesh@gmail.com",
-        salary:"Rs.25000",
-        address:"115,shiv Ranjani Appartment Pandey Layout Khamla Nagpur",
-        city:"Pune",
-        dateOfBirth:"04-07-1998",
-        adharCard:"9898-9898-9898",
-        panCard:"DSISG5678D",
-        position:"Junior Mehacnic",
-        factory:"Wadi"
-    }
-]
-
-// const styles = makeStyles((theme) => ({
-//     listWrapper: {
-//         display: "flex",
-//         flexDirection: "column",
-//         marginBottom: "1rem"
-//     },
-//     topRow: {
-//         display: "flex",
-//         justifyContent: "flex-end",
-//     },
-//     rowHeader: {
-//         fontWeight: "bold !important",
-//     }
-
-// }));
 
 function TablePaginationActions(props) {
     
@@ -203,24 +123,100 @@ function TablePaginationActions(props) {
 //     rowsPerPage: PropTypes.number.isRequired,
 // };
 
-function createData(id,name, phone, email,position,address,salary) {
+/* function createData(id,name, phone, email,position,address,salary) {
     return { id, name,phone,email, position,address,salary};
 }
 
 function getAllModels() {
     const allModels = [];
-    workers.map(model => {
+    servicemen.map(model => {
         console.log(model);
         allModels.push(createData(model.id, model.name, model.phone, model.email, model.position,model.address,model.salary))
     })
     return allModels
-}
+} 
+
 
 const rows = getAllModels();
 
-
+const labels = [
+    "id",
+    "name",
+    "phone",
+    "email",
+    "position",
+    "dateOfJoin",
+    "salary",
+    "actions",
+  ];
+*/
 function ServicemanList(props) {
 
+    const { classes, theme } = props;
+
+    const [rows,setRows]=useState([]);
+  
+    const [labels,setLabels]=useState(["name","email","age","phoneno","salary","actions",]);
+  
+  
+    const getAllServicemen = () => {
+  
+        const allServicemen=[];
+  
+      axios.get('/servicemen')
+          .then(res => {
+              let servicemenArr = res.data;
+              console.log(servicemenArr);
+              servicemenArr.map(servicemen => {
+                  allServicemen.push(servicemen);
+              });
+              console.log("all servicemen ", allservicemen)
+              setRows(allServicemen);
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+    }
+  
+  
+  
+    useEffect(()=>{
+      console.log("In useEffect");
+      getAllServicemen();
+  
+    },[]);
+  
+    
+  
+    const xs = useMediaQuery(theme.breakpoints.down("xs"));
+    const sm = useMediaQuery(
+      theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
+    );
+    const md = useMediaQuery(
+      theme.breakpoints.up("sm") && theme.breakpoints.down("md")
+    );
+    const lg = useMediaQuery(
+      theme.breakpoints.up("md") && theme.breakpoints.down("lg")
+    );
+    const xl = useMediaQuery(theme.breakpoints.up("lg"));
+  
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
+  
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows =
+      page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+  
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+  
+    const handleChangeRowsPerPage = (event) => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
+
+    
     // const { classes, theme } = props;
     // const xs=useMediaQuery(theme.breakpoints.down('xs'));
     // const sm=useMediaQuery(theme.breakpoints.up('xs')&&theme.breakpoints.down('sm'));
@@ -328,7 +324,13 @@ function ServicemanList(props) {
                     </TableFooter>
                     </Table>
     </TableContainer>*/}
-               <GenericTable rows={rows} labels={labels}/>
+               {/* <GenericTable rows={rows} labels={labels}/> */}
+               <Container
+        maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
+        className={classes.listWrapper}
+      >
+        <GenericTable rows={rows} labels={labels} view="/servicemen/" />
+      </Container>
 {/* </Container>  */}
         </div>
     )

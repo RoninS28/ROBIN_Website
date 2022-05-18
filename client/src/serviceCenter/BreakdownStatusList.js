@@ -86,8 +86,8 @@ function BreakdownStatusList() {
                     </TableBody>
                 </Table>
             </TableContainer> 
-            <div align="center" className="update" style={{padding:"1rem"}}>
-            <label value="Update"><b>UPDATE STATUS FOR SELECTED:&nbsp; </b></label>
+            <div align="center" className="update" style={{paddingTop:"1rem"}}>
+            <label value="Update" style={{display:'inline'}}><b>UPDATE SELECTION:</b></label>
             <Select 
                 style={{ width: "10%" }}
                 value={status}

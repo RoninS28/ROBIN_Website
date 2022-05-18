@@ -40,8 +40,32 @@ db.once('open', () => {
     const updateBatchCollection=db.collection('updatebatches');
     const changeStreamBatch=updateBatchCollection.watch('');
 
+    const complaintsCollection=db.collection('complaints');
+    const changeStreamComplaints=complaintsCollection.watch('');
+
+    const testDrivesCollection=db.collection('testdrives');
+    const changeStreamTestDrives=testDrivesCollection.watch('');
+
     
     //console.log("In change Stream outer");
+
+    changeStreamTestDrives.on('change',(change)=>{
+
+      if(change.operationType === 'insert') {
+        const testDrive = change.fullDocument;
+        pusher.trigger(
+          "testdrives",
+          'inserted', 
+          {
+            ID: testDrive._id,
+            detail: testDrive.location,
+            activity:"Test Drive Scheduled"
+          }
+        ); 
+      } 
+
+
+    })
 
     changeStream.on('change', (change) => {
     // console.log("In change Stream");
@@ -107,6 +131,23 @@ db.once('open', () => {
           }
         ); 
       }
+    });
+
+    changeStreamComplaints.on('change',(change)=>{
+
+      if(change.operationType=='insert')
+      {
+        const complaintStatus=change.fullDocument;
+        pusher.trigger(
+          "complaints",
+          'inserted',
+          {
+            ID: complaintStatus._id,
+            activity:"Complaint Added",
+          }
+        );
+      }
+
     });
 
   });

@@ -1,0 +1,51 @@
+
+label {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+}
+label:before {
+  content: "";
+  /* height: 51px; */
+  position: absolute;
+  right: 7px;
+  top: 3px;
+  width: 91px;
+  background: #fff;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  pointer-events: none;
+  display: block;
+}
+label:after {
+  content: " ";
+  position: absolute;
+  left: 170px;
+  right: 0px;
+  top: 36%;
+  margin-top: -3px;
+  z-index: 2;
+  pointer-events: none;
+  width: 10px;
+  height: 50px;
+  border-style: solid;
+  border-width: 7.9px 4px 0 4px;
+  border-color: #aaa transparent transparent transparent;
+  pointer-events: none;
+}
+label select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 30px 0 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  line-height: 36px;
+  height: 36px;
+  background: #fff;
+  margin: 0 5px 5px 0;
+}
+
+select::-ms-expand {
+  display: none;
+}
