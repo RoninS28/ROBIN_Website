@@ -6,32 +6,32 @@ export default function Profile() {
 
     const [myProfile, setMyProfile] = useState('');
     const getProfile = () => {
-    axios.get("/myProfile").then((response) => {
-        console.log(`RESPONSE IS ${response.data}`)
+        axios.get("/myProfile").then((response) => {
+            console.log(`RESPONSE IS ${response.data}`)
 
-        if (response.data == "You must be logged in to view this page") {
-            history.push('/login');
-        }
-        else {
-            let tempmyProfile = response.data
+            if (response.data == "You must be logged in to view this page") {
+                history.push({ pathname: '/login', state: { callBackPath: 'profile' } });
+            }
+            else {
+                let tempmyProfile = response.data
 
 
-            console.log(tempmyProfile)
-            setMyProfile(response.data)
-            console.log(response.data.fname+ "    fname")
-             setEmail(response.data.emailID);
-             setPassword(response.data.password);
-             
+                console.log(tempmyProfile)
+                setMyProfile(response.data)
+                console.log(response.data.fname + "    fname")
+                setEmail(response.data.emailID);
+                setPassword(response.data.password);
 
-             setFname(response.data.fname);
-             setMname(response.data.mname);
-             setLname(response.data.lname);
-             setContact(response.data.contact);
-             
-             //setAddress(response.data.address);
-             setDob(response.data.DOB);
-                }
-    })
+
+                setFname(response.data.fname);
+                setMname(response.data.mname);
+                setLname(response.data.lname);
+                setContact(response.data.contact);
+
+                //setAddress(response.data.address);
+                setDob(response.data.DOB);
+            }
+        })
     }
 
     const [email, setEmail] = useState('');
@@ -57,13 +57,13 @@ export default function Profile() {
         // }
         // else {
 
-            const res = axios.put('myProfile/updateProfile', {
-                user : {
-                    email: email, password: password, fname: fname, mname: mname, lname: lname, contact: contact, dob: dob, address: address,
-                }
-            }).then((result) => {
-                
-                const data = result.data;
+        const res = axios.put('myProfile/updateProfile', {
+            user: {
+                email: email, password: password, fname: fname, mname: mname, lname: lname, contact: contact, dob: dob, address: address,
+            }
+        }).then((result) => {
+
+            const data = result.data;
             console.log(data);
 
             if (!data || res.status === 400) {
@@ -77,21 +77,21 @@ export default function Profile() {
                 alert(result.data);
                 window.location.reload();
             }
-            });
-            
-            // history.push('/');
-            
+        });
 
-            
+        // history.push('/');
+
+
+
         // }
 
     }
     useEffect(() => {
-        
+
         getProfile();
     }, []);
 
-    return myProfile?(
+    return myProfile ? (
         <div className='signupScreen'>
 
             <form method="POST" style={{
@@ -131,7 +131,7 @@ export default function Profile() {
                 <div class="contact error" name="contactError" style={{ color: '#ff0099', margin: '10px 2px', fontSize: '0.8em', fontWeight: 'bold' }}>
                     {contactError}
                 </div>
-                
+
                 {/* <label for="dob" style={{ display: 'block', margin: '20px 0 10px' }}>Date of Birth</label>
                 <input type="date" name="dob" value={dob} defaultValue={myProfile.dob} onChange={(e) => setDob(e.target.value)} placeholder="Enter Date of Birth" required style={{ padding: '10px 12px', borderRadius: '4px', border: '1px solid #ddd', fontSize: '1em', width: '100%' }} /> */}
 
@@ -165,5 +165,5 @@ export default function Profile() {
         </div>
 
 
-    ):(<div>Loading</div>);
+    ) : (<div>Loading</div>);
 }

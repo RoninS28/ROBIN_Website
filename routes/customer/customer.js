@@ -12,6 +12,7 @@ const Customer = require('../../models/customer/CustomerSchema')
 const Model = require('../../models/common/ModelSchema')
 const Employee = require('../../models/common/employeeSchema')
 const Factory = require('../../models/factory/factorySchema')
+const FactoryWorker = require('../../models/factory/userSchema')
 const Order = require('../../models/factory/OrderSchema')
 const myvehicleObj = require('../../models/customer/VehicleObj');//d
 // const { ticketID } = require('../../models/customer/VehicleObj');
@@ -450,6 +451,24 @@ router.get('/placeorder', (req, res) => {
         })
     })
 })
+
+router.get("/updateFactories", (req, res) => {
+    Factory.updateMany({}, { '$set': { 'currentLastBatchOngoing': 20, 'currentBookingBatch': 28, 'currentBookingBatchCount': 5 } }, { "multi": true }).then((pp) => {
+        res.send('factories updated')
+        console.log('factories updated')
+    })
+})
+
+
+router.get("/updateFactoryworkers", (req, res) => {
+    FactoryWorker.updateMany({}, { '$set': { 'currentBatch': 16, 'factoryID': '6203de4698c55e52a80e889d' } }, { "multi": true }).then((pp) => {
+        res.send('factoriesworkers updated')
+        console.log('factoriesworkers updated')
+    })
+})
+
+
+
 
 
 

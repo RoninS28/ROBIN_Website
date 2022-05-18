@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const factorySchema=new mongoose.Schema({
+const factorySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -40,7 +40,21 @@ const factorySchema=new mongoose.Schema({
     active: {
         type: Boolean,
         required: true
+    },
+    currentLastBatchOngoing: {//last batch which is being manufactured
+        type: Number,
+        required: true
+    },
+    currentBookingBatch: {// the batch which is being filled into at that factory
+        type: Number,
+        required: true
+    },
+    currentBookingBatchCount: {
+        type: Number,
+        required: true
+
     }
+
 })
 
 const Factory = mongoose.model('Factory', factorySchema);

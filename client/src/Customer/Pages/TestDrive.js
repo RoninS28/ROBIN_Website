@@ -14,7 +14,7 @@ import { useHistory } from "react-router";
 import TestDriveOutlet from "./TestDriveOutlet";
 import '../PagesStyles/TestDrive.css'
 
-export default function TestDrive() {
+export default function TestDrive(props) {
 
   const home = true;
 
@@ -23,6 +23,7 @@ export default function TestDrive() {
     { label: "12pm-8pm", value: "2" },
     { label: "8pm-6am", value: "3" },
   ];
+
 
   const [TimeslotValue, setTimeslotValue] = useState('');
 

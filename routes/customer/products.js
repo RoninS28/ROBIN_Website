@@ -124,14 +124,14 @@ router.get('/:id/checkout', async (req, res) => {
 
             })
 
-            
+
 
         }
     })
 
 })
 const generateChassis = () => {
-    let n = (Math.random() * 0xfffff * 1000000).toString(16);
+    let n = (Math.random() * 0xfffff * 100000000000000).toString(16);
     return n;
 };
 // ! checkout post
@@ -139,6 +139,20 @@ router.post('/confirmOrder', async (req, res) => {
     console.log('into checkout post')
     console.log(req.body.color)
     Factory.findOne({ 'name': "Alpha Industries" }).then((factresult) => {
+        let fillingBatch = factresult.currentBookingBatch
+        let count = factresult.currentBookingBatchCount
+        if (count == 10) {//per batch only 10 orders are accpted
+            count = 0
+            fillingBatch += 1
+        }
+        else {
+            count += 1
+        }
+        Factory.updateOne({ 'name': "Alpha Industries" }, { '$set': { 'currentBookingBatch': fillingBatch, 'currentBookingBatchCount': count } }).then((ff) => {
+
+            console.log(ff)
+
+        })
         Employee.findOne({ 'name': 'Akhilesh Yadav' }).then((empresult) => {
             Customer.findById(req.body.custID).then((custresult) => {
                 console.log('into customer find')
@@ -147,7 +161,8 @@ router.post('/confirmOrder', async (req, res) => {
                     purchaseDate: Date.now(),
                     custID: custresult._id,
                     factoryID: factresult._id,
-                    factoryManagerID: empresult._id,
+                    factoryBatchNumber: fillingBatch,
+                    // factoryManagerID: empresult._id,
                     modelID: req.body.modelID,
                     modelName: req.body.modelName,
                     color: req.body.color,
@@ -155,18 +170,6 @@ router.post('/confirmOrder', async (req, res) => {
                     expectedDeliveryDate: req.body.expectedDeliveryDateISO,// Date.parse('2022-02-10'),
                     variant: req.body.variant,
                     fault: false,
-
-                    stages: [
-                        { stage1: 'Pending' },
-                        { stage2: 'Pending' },
-                        { stage3: 'Pending' },
-                        { stage4: 'Pending' },
-                        { stage5: 'Pending' },
-                        { stage6: 'Pending' },
-                        { stage7: 'Pending' },
-                        { stage8: 'Pending' },
-                        { stage9: 'Pending' },
-                    ]
                 })
                 var nextservDate = new Date()
                 // req.body.expectedDeliveryDateISO
@@ -189,17 +192,7 @@ router.post('/confirmOrder', async (req, res) => {
                         variant: req.body.variant,
                         currentStage: 0,
                         nextServicingDate: nextservDate,
-                        stages: [
-                            { stage1: 'Pending' },
-                            { stage2: 'Pending' },
-                            { stage3: 'Pending' },
-                            { stage4: 'Pending' },
-                            { stage5: 'Pending' },
-                            { stage6: 'Pending' },
-                            { stage7: 'Pending' },
-                            { stage8: 'Pending' },
-                            { stage9: 'Pending' },
-                        ],
+                        factoryBatchNumber: fillingBatch,
                         // vehicleNumber: 'MH12 NV 5606',
                         chassisNumber: generateChassis().toString().toUpperCase(),
 

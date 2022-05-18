@@ -113,31 +113,7 @@ const getMyImage = (source) => {
 
 const Bookings = () => {
     const classes = useStyles()
-    const MyOrdersList = [
-        {
-            id: 1,
-            imagesrc: "v2",
-            model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "MH 12 FP 9602",
-            purchaseDate: "28/05/2021",
-            status: "Delivered",
-            stage: "10",
-            deliveryDate: "28/06/2021"
 
-        },
-        {
-            id: 2,
-            imagesrc: "v2",
-            model: "CITY - 1 ELECTRIC SCOOTER",
-            plateNumber: "????",
-            purchaseDate: "08/09/2021",
-            status: "Pending",
-            stage: "3",
-            deliveryDate: "28/06/2021"
-
-        }
-
-    ]
 
 
     const history = useHistory()
@@ -147,7 +123,7 @@ const Bookings = () => {
         //history.push('/bookingsStage/' + e.ticketID)
         console.log("about e: " + e);
         console.log("about e: " + e.ticketID);
-        history.push({pathname:'/bookingsStage/' + e.ticketID , state:{vehicle: e}})
+        history.push({ pathname: '/bookingsStage/' + e.ticketID, state: { vehicle: e } })
     }
 
 
@@ -162,7 +138,7 @@ const Bookings = () => {
             console.log(`RESPONSE IS ${response.data}`)
 
             if (response.data == "You must be logged in to view this page") {
-                history.push('/login');
+                history.push({ pathname: '/login', state: { callBackPath: 'bookings' } });
             }
             else {
                 let myOrderArr = response.data

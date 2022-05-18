@@ -17,9 +17,13 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    factoryManagerID: {// ID of the person in charge of that unit in which the product is being manufactured
-        type: mongoose.Schema.Types.ObjectId,
+    factoryBatchNumber: {
+        type: Number,
         required: true
+    },
+    factoryWorkerID: {// ID of the person in charge of that unit in which the product is being manufactured
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
     },
     modelID: {
         type: String,
@@ -45,17 +49,6 @@ const orderSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    stages: [//pending || ongoing || complete 
-        { stage1: String },
-        { stage2: String },
-        { stage3: String },
-        { stage4: String },
-        { stage5: String },
-        { stage6: String },
-        { stage7: String },
-        { stage8: String },
-        { stage9: String },
-    ],
     fault: {//if true, it means a fault has been occured
         type: Boolean,
         required: true
