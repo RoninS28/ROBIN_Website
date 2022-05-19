@@ -461,7 +461,7 @@ router.get("/updateFactories", (req, res) => {
 
 
 router.get("/updateFactoryworkers", (req, res) => {
-    FactoryWorker.updateMany({}, { '$set': { 'currentBatch': 16, 'factoryID': '6203de4698c55e52a80e889d' } }, { "multi": true }).then((pp) => {
+    FactoryWorker.updateMany({}, { '$set': { 'currentBatch': [16, 17, 18, 19, 20, 21], 'factoryID': '6203de4698c55e52a80e889d' } }, { "multi": true }).then((pp) => {
         res.send('factoriesworkers updated')
         console.log('factoriesworkers updated')
     })

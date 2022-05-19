@@ -28,10 +28,12 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
-    currentBatch: {
-        type: String,
-        required: true
-    },
+    currentBatch: [
+        {
+            type: Number,
+            required: true
+        }
+    ],
     factoryID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
