@@ -34,7 +34,7 @@
 //     <div style={{textAlign:"center", fontFamily:"sans-serif"}}>
 //       <AwesomeSlider>
 //         {data.map((d) => (
-          
+
 //           <AwesomeSlider>
 //               <img src={d.icon}/>
 //           </AwesomeSlider>
@@ -50,6 +50,7 @@
 import img1 from "../../Assets/hpimg1.png";
 import img2 from "../../Assets/hmimg2.png";
 import img3 from "../../Assets/hmimg3.png";
+import './ImageSlider.css';
 import SimpleImageSlider from "react-simple-image-slider";
 
 const images = [
@@ -58,12 +59,14 @@ const images = [
   { url: img3 },
 ];
 
+
 const ImageSlider = () => {
   return (
     <div>
       <SimpleImageSlider
-        width={896}
-        height={504}
+        width={'100vw'}
+        height={'100vh'}
+
         images={images}
         showBullets={true}
         showNavs={true}

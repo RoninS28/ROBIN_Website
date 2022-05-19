@@ -131,7 +131,7 @@ const Servicing = () => {
             console.log(`RESPONSE IS ${response.data}`)
 
             if (response.data == "You must be logged in to view this page") {
-                history.push('/login');
+                history.push({ pathname: '/login', state: { callBackPath: 'servicing' } });
             }
             else {
                 let myOrderArr = response.data

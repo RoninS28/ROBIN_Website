@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -48,12 +49,16 @@ function AccessoryPage() {
 
   const [open, setOpen] = React.useState(false);
 
+  const history=useHistory();
+
   const handleClickOpen = () => {
       setOpen(true);
   };
 
   const handleClose = () => {
       setOpen(false);
+
+      history.push("/");
   };
 
 

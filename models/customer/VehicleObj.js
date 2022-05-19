@@ -20,9 +20,13 @@ const vehicleObj = {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    factoryManagerID: {
-        type: mongoose.Schema.Types.ObjectId,
+    factoryBatchNumber: {
+        type: Number,
         required: true
+    },
+    factoryWorkerID: {// ID of the person in charge of that unit in which the product is being manufactured
+        type: mongoose.Schema.Types.ObjectId,
+        required: false
     },
     modelID: {
         type: String,
@@ -71,9 +75,6 @@ const vehicleObj = {
         type: Number,
         required: true
     },
-    stages: [
-        stageObj
-    ],
     accessories: [
         accessoryObj
     ],

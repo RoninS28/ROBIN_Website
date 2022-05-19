@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from '@mui/material/AppBar';
@@ -34,6 +34,19 @@ import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import Dashboard from "../../Pages/Dashboard";
 import GenericStockList from "../../Pages/GenericStockList";
+import Pusher from 'pusher-js';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
+
+const PUSHER_APP_KEY = '241be100f37c47926dda';
+const PUSHER_APP_CLUSTER = 'ap2';
 
 const styles = theme => ({
 });
@@ -55,8 +68,17 @@ const Navbar = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
+  const [notification,setNotification]=useState([]);
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    //console.log("Opening Notification");
+    setOpen(true);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -80,6 +102,11 @@ const Navbar = (props) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleClose = () => {
+    setNotification([]);
+    setOpen(false);
+  };
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -101,6 +128,18 @@ const Navbar = (props) => {
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
+
+  const renderNotification = (
+    <IconButton
+    size="large"
+    aria-label="show 17 new notifications"
+    color="inherit"
+  >
+    <Badge badgeContent={notification.length?notification.length:`${0}`} color="error" onClick={handleClickOpen}>
+      <NotificationsIcon/>
+    </Badge>
+  </IconButton>
+);
 
   // For mobile screen, Appbar will change and the below will be rendered
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -235,6 +274,21 @@ const Navbar = (props) => {
     </Box>
   );
 
+  useEffect(()=>{
+    const pusher = new Pusher(PUSHER_APP_KEY, {
+      cluster: PUSHER_APP_CLUSTER,
+        encrypted: true,
+      });
+      const channelTestDrives=pusher.subscribe('testdrives');
+
+      channelTestDrives.bind('inserted',(evt)=>{
+        setNotification([...notification,evt]);
+      })
+
+
+     
+  })
+
   return (
     <Router>
 
@@ -268,6 +322,9 @@ const Navbar = (props) => {
               RobIN
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {renderNotification}
+            </Box>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton
                 size="large"
@@ -318,6 +375,44 @@ const Navbar = (props) => {
 
       {/* The main content that is shown on the screen */}
       <main className={classes.content}>
+
+      <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                {notification.length? "Today's Notifications" : "No Unread Notifications "}
+                </DialogTitle>
+              {notification.map(data=>{
+
+              
+                return (
+
+                  <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                 {data.activity?"Activity : "+data.activity : ""}
+               </DialogContentText>
+               <DialogContentText id="alert-dialog-description">
+                 {data.ID? "ID : "+data.ID : ""}
+               </DialogContentText>
+               <DialogContentText>
+               {data.detail? "Data Detail: "+ data.detail:"" }
+               </DialogContentText>
+               </DialogContent>
+
+
+                )
+             
+              })}
+              
+              <DialogActions>
+                <Button onClick={handleClose} autoFocus>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
 
         <AppBreadCrumb />
         {/* Routes for various components */}

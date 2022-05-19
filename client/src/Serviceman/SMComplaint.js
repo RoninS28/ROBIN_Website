@@ -12,7 +12,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextareaAutosize } from '@material-ui/core';
 import { fontFamily, fontSize } from '@mui/system';
-import GenericTable from '../GenericTable';
+import GenericTable from './GenericTable';
 import { Divider, Grid } from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
