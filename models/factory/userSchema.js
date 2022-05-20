@@ -20,6 +20,7 @@ const userSchema= new mongoose.Schema({
         type:String,
         required: true
     },
+    currentBatch: [Number],
     tokens: [
         {
             token:{

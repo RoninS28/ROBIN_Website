@@ -65,6 +65,35 @@ router.get('/manufacture', authenticate, (req,res)=>{
     res.send(req.rootUser);
 });
 
+router.get('/getbatch',async(req,res)=>{
+    console.log('In Manufacture batch');
+    try{
+        // console.log('Hello');
+        var usersProjection = { 
+            __v: false,
+            _id: false,
+            stages:false
+        };
+        Updatebatch.find({},usersProjection, function (err, docs) {
+            if (err){
+                console.log(err);
+                res.status(404).send();
+            }
+            else{
+                // console.log("successs");
+                // console.log(docs);
+                // console.log("heelloo");
+                res.send(docs);
+            }
+        });
+
+    }catch(e){
+        console.log(e);
+        res.status(500).send(e);
+   }
+    
+});
+
 router.post('/senddata',async(req,res)=>{
     console.log(req.body);
 

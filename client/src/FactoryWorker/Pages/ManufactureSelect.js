@@ -17,6 +17,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+import axios from 'axios';
+
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
@@ -33,7 +35,7 @@ import ebike from '../../images/ebike.jpeg';
 import ev3 from '../../images/ev3.png';
 import ev2 from '../../images/ev2.png';
 
-const toppings = [
+const toppingss1 = [
   {
     name: "Capsicum",
     price: 1.2,
@@ -47,12 +49,12 @@ const toppings = [
   {
     name: "Red Paprika",
     price: 2.5,
-    BatchID: "B103"
+    BatchID: "B104"
   },
   {
     name: "Onions",
     price: 3.0,
-    BatchID: "B104"
+    BatchID: "B103"
   },
   {
     name: "Extra Cheese",
@@ -118,8 +120,13 @@ function ManufactureSelect() {
   var listArray = [];
   const history = useHistory();
   const [userData, setUserData] = useState({});
+  const [toppings, setbatcharray] = useState([]);
 
   const [myArray, updateMyArray] = useState([]);
+
+  const [checkedState, setCheckedState] = useState(
+    new Array(10).fill(false)
+  );
 
   // function func(){
   //   console.log('hi');
@@ -141,6 +148,25 @@ function ManufactureSelect() {
       const data = await res.json();
       console.log(data); //complete data in 'data'
       setUserData(data);
+      // console.log("my current batches",data.currentBatch);
+      let tempp=['Capsicum','Paneer','Red Paprika','Onions','Extra Cheese','Baby Corns','mushrooms'];
+      let batcharr=[];
+      let tempe=[];
+      for(let i=0;i<data.currentBatch.length;i++)
+      {
+        batcharr.push(data.currentBatch[i]);
+      }
+      console.log("Batcheees",batcharr);
+      for(let i=0;i<data.currentBatch.length;i++)
+      {
+         let d={name:tempp[i],price:i,BatchID:batcharr[i]};
+         tempe.push(d);
+       // console.log("iter",olddata[i].BatchId)
+      }
+
+      // // console.log("ba",batcharr);
+         console.log("myy",tempe);
+         setbatcharray(tempe);
 
 
       if (!res.status === 200) {
@@ -155,6 +181,56 @@ function ManufactureSelect() {
   useEffect(() => {
     callAboutPage();
   }, []);
+
+
+
+  const getbatchdata = () => {
+         
+    // console.log("In Cart");
+    axios.get('/factory/getbatch/').then( (response) => {
+          let olddata = response.data;
+          console.log('batchdatadetails-',olddata);
+          // console.log('bcc-',olddata[0].BatchId);  //complete B101 data
+          
+           let tempe=[];
+           let count=0;
+           let tempp=['Capsicum','Paneer','Red Paprika','Onions','Extra Cheese','Baby Corns','mushrooms']
+           let batcharr=[];
+          // {olddata.map((item) => (
+          //       //  console.log("hii",item.BatchId)
+          //       // let x={BatchID: item}
+          //       // let person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
+          //        tempe.push({ name:tempp[count],price:count++,BatchID:`${item.BatchId}`})
+                 
+          //   ))}
+          for(let i=0;i<olddata.length;i++)
+          {
+            batcharr.push(olddata[i].BatchId);
+            // let d={name:"Bike",price:2,BatchID:`${olddata[i].BatchId}`};
+            // tempe.push(d);
+           // console.log("iter",olddata[i].BatchId)
+          }
+          for(let i=0;i<olddata.length;i++)
+          {
+             let d={name:tempp[i],price:i,BatchID:batcharr[i]};
+             tempe.push(d);
+           // console.log("iter",olddata[i].BatchId)
+          }
+
+          // console.log("ba",batcharr);
+           // console.log("myy",tempe);
+           // setbatcharray(tempe);
+            //  console.log("toppingss",toppings);
+            // console.log("toppingss1",toppingss1);
+            // settoppings(tempe) 
+      })
+    }
+
+  useEffect(() => {
+    getbatchdata()
+  console.log('renders');
+  
+},[])
 
 
   const classes = useStyles();
@@ -177,26 +253,38 @@ function ManufactureSelect() {
   var updateddate = dd + '/' + mm + '/' + yyyy;
 
 
-  const [checkedState, setCheckedState] = useState(
-    new Array(toppings.length).fill(false)
-  );
+ 
 
 
   const [total, setTotal] = useState(0);
 
   const handleOnChange = (position) => {
-    const func = () => {
-      console.log("helloe", listArray);
-    }
+    // const func = () => {
+    //   console.log("helloe", listArray);
+    // }
+    console.log("changed ",toppings[position].BatchID)
+    console.log("current",checkedState[position])
+    // if(checkedState[position])
+    // {
+    //   console.log("no",toppings[position].BatchID)
+    // }
+    // else
+    // {
+    //   console.log("yes",toppings[position].BatchID)
+    // }
     const updatedCheckedState = checkedState.map((item, index) => {
-      if (index === position) {
+      // console.log("mypos ",index)
+      if (index === position) 
+      {
         listArray = listArray.filter(e => e !== toppings[index].BatchID);
         updateMyArray(listArray);
+        console.log("checked array",listArray);
         // func(listArray);
         // console.log(toppings[index].BatchID);
         return !item;
       }
-      else {
+      else 
+      {
         return item;
       }
     }
@@ -207,10 +295,11 @@ function ManufactureSelect() {
 
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
-        if (currentState === true) {
+        if (currentState === true) 
+        {
           listArray.push(toppings[index].BatchID);
           updateMyArray(listArray);
-          console.log(listArray);
+          console.log("checked arrays",listArray);
           return sum + toppings[index].price;
         }
         return sum;
@@ -229,7 +318,7 @@ function ManufactureSelect() {
 
   const sendUpdateData = async (e) => {
     e.preventDefault();
-    console.log(myArray);
+    console.log("batch selected",myArray);
     // console.log("arrays",listArray);
     // func();
     // console.log("arrays",f);
@@ -302,7 +391,7 @@ function ManufactureSelect() {
                   <TableBody>
                     {/* {ticketSet.map((item) => ( */}
 
-                    {toppings.map(({ name, price, BatchID }, index) => {
+                    {toppings.map((item , index) => {
 
                       return (
                         <TableRow key={index}>
@@ -310,19 +399,19 @@ function ManufactureSelect() {
                             {/* <Checkbox /> */}
                             <input type="checkbox"
                               id={`custom-checkbox-${index}`}
-                              name={name}
-                              value={name}
+                              name={item.name}
+                              value={item.name}
                               checked={checkedState[index]}
                               onChange={() => handleOnChange(index)}
                             />
 
                           </TableCell>
                           <TableCell align="right">
-                            <Typography style={{ fontWeight: 500, fontSize: 'h6.fontSize', paddingLeft: '40px' }}>{BatchID}</Typography>
+                            <Typography style={{ fontWeight: 500, fontSize: 'h6.fontSize', paddingLeft: '40px' }}>B{item.BatchID}</Typography>
 
                           </TableCell>
                           <TableCell align="right">
-                            <Link to={`/manufacturehistory/${BatchID}`} style={{ textDecoration: 'none' }} >
+                            <Link to={`/manufacturehistory/${item.BatchID}`} style={{ textDecoration: 'none' }} >
                               {/* <Link to='/manufacturehistory' style={{ textDecoration: 'none' }} > */}
                               <Button variant="contained" size="large" >Display History</Button>
                             </Link>
