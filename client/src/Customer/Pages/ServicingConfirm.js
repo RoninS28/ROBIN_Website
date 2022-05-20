@@ -217,18 +217,10 @@ const ServicingConfirm = () => {
                             </Grid>
                             <Grid item spacing={3} key={item.plateNumber} xs={4} md={4} lg={4} xl={4} className={classes.bookingrowInfo}>
                                 <div className="bookingrowInfo" style={{ alignContent: "flex-start" }}>
-                                    <div>
-                                        Owner Name: {item.owner}
+                                    <div style={{marginTop: '80px'}}>
+                                        Book Your Servicing Appointment
                                     </div>
-                                    <div>
-                                        Model: {item.model}
-                                    </div>
-                                    <div>
-                                        Vehicle No: {item.plateNumber}
-                                    </div>
-                                    <div>
-                                        Chasis: {item.chasis}
-                                    </div>
+                                    
 
 
                                 </div>
