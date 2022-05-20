@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
 import '../PagesStyles/Login.css'
 
-export default function Login() {
+export default function Login(props) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -10,6 +10,29 @@ export default function Login() {
     const [passwordError, setPasswordError] = useState('');
 
     const history = useHistory()
+
+    const getPath = () => {
+        const callbackpath = props.location.state.callBackPath
+        switch (callbackpath) {
+            case 'products': {
+                return '/products'
+            }
+            case 'bookings': {
+                return '/bookings'
+            }
+            case 'servicing': {
+                return '/servicing'
+            }
+            case 'feedback': {
+                return '/feedback'
+            }
+            case 'profile': {
+                return '/profile'
+            }
+            default:
+                return '/'
+        }
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -35,7 +58,8 @@ export default function Login() {
         else {
             console.log(data);
             console.log(data.email + " " + data.password);
-            history.push('/')
+            const mypath = getPath()
+            history.push(mypath)
         }
     }
 

@@ -1,9 +1,48 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useHistory } from "react-router";
 import '../PagesStyles/TestDrive.css'
+import axios from 'axios'
 
 export default function TestDriveOutlet() {
+
+  const [name, setName] = useState('');
+    const [DOB, setDOB] = useState('');
+    const [pincode, setPincode] = useState('');
+    const [mobileNo, setMobileNo] = useState('');
+    const [address, setAddress] = useState('');
+    const [prefDate, setPreferredDate] = useState('');
+    const [timeSlot, setTimeSlot] = useState('');
+    const [model, setModel] = useState('');
+  const [models, setModels] = useState([])
+
+  const getProducts = () => {
+
+    const tempprods = []
+
+    axios.get("/products").then((response) => {
+      console.log(`RESPONSE IS ${response.data}`)
+
+      if (response.data == "You must be logged in to view this page") {
+        history.push('/login');
+      }
+      else {
+        let productArr = response.data
+        console.log(productArr[0])
+        console.log(`TYPEOF IS ${productArr}`)
+        productArr.map(item => {
+
+          tempprods.push(item.modelName)
+          // tempprods.push(JSON.stringify(item))
+        })
+
+        console.log(tempprods)
+        setModels(tempprods)
+        console.log(models)
+      }
+    })
+  }
+
   const home = false;
   const Timeslotoptions = [
     { label: "6am-12pm", value: "1" },
@@ -18,10 +57,15 @@ export default function TestDriveOutlet() {
   })} />;
 
   const Modeloptions = [
-    { label: "Shine s1", value: "1" },
-    { label: "Glamour s2", value: "2" },
-    { label: "Hornet s3", value: "3" },
+    // { label: "Shine s1", value: "1" },
+    // { label: "Glamour s2", value: "2" },
+    // { label: "Hornet s3", value: "3" },
   ];
+  for(let i=0;i<models.length;i++)
+  {
+    Modeloptions.push({label:models[i], value:i})
+  }
+  
 
   const [modelValue, setmodelValue] = useState('');
 
@@ -30,11 +74,47 @@ export default function TestDriveOutlet() {
   })} />;
 
 
+  const [outlets, setOutlets] = useState([])
+
+  const getOutlets = () => {
+
+    const tempprods = []
+
+    axios.get("/outlets").then((response) => {
+      console.log(`RESPONSE IS ${response.data}`)
+
+      if (response.data == "You must be logged in to view this page") {
+        history.push('/login');
+      }
+      else {
+        let outletArr = response.data
+        console.log(outletArr[0])
+        console.log(`TYPEOF IS ${outletArr}`)
+        outletArr.map(item => {
+
+          tempprods.push(item.name)
+          // tempprods.push(JSON.stringify(item))
+        })
+
+        console.log(tempprods)
+        setOutlets(tempprods)
+        console.log(outlets)
+      }
+    })
+  }
+
   const Outletoptions = [
-    { label: "Katraj", value: "1" },
-    { label: "Pimpri", value: "2" },
-    { label: "Baner-Pashan", value: "3" },
+    // { label: "Katraj", value: "1" },
+    // { label: "Pimpri", value: "2" },
+    // { label: "Baner-Pashan", value: "3" },
   ];
+
+  for(let i=0;i<outlets.length;i++)
+  {
+    Outletoptions.push({label:outlets[i], value:i})
+  }
+
+  
 
   const [OutletValue, setOutletValue] = useState('');
 
@@ -47,7 +127,21 @@ export default function TestDriveOutlet() {
 
 
   const handleTestDriveBooking = () => {
-    history.push('/TestDriveBooking')
+    console.log(model)
+    const userModel = Modeloptions[modelValue].label;
+    console.log(userModel)
+    const timeSlot = Timeslotoptions[TimeslotValue-1].label;
+
+    console.log(timeSlot)
+
+    const outlet = Outletoptions[OutletValue].label;
+    const object={name: name, dob: DOB, pincode: pincode, contact: mobileNo,  address: address, date: prefDate, time: timeSlot, model: userModel, outlet: outlet}
+    console.log("object is "+object)
+    axios.post("/test-drives",{
+      name: name, dob: DOB, pincode: pincode, contact: mobileNo,  address: address, date: prefDate, time: timeSlot, model: userModel, outlet: outlet
+      }).then((response) => {
+      history.push({pathname:'/TestDriveBooking',state: {object:object}})
+    })
 
   }
 
@@ -59,6 +153,11 @@ export default function TestDriveOutlet() {
     history.push('/TestDriveOutlet')
   }
 
+  useEffect(() => {
+    getProducts()
+    getOutlets()
+    console.log('rerender')
+  }, []);
 
   return (
     <>
@@ -106,7 +205,7 @@ export default function TestDriveOutlet() {
                 <hr className="mt-6 border-b-1 border-blueGray-300 mb-5" />
 
                 <form>
-                  <div className="flex flex-wrap">
+                <div className="flex flex-wrap">
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
@@ -120,22 +219,22 @@ export default function TestDriveOutlet() {
                         type="name"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder=""
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
 
-                    <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                    <div className="relative  lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
-                        htmlFor="grid-password"
                         style={{ width: 'max-content' }}
-
+                        htmlFor="grid-password"
                       >
                         Date of Birth
                       </label>
                       <input
                         type="date"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-
+                        onChange={(e) => setDOB(e.target.value)}
                       />
                     </div>
                   </div>
@@ -154,6 +253,7 @@ export default function TestDriveOutlet() {
                         type="Pincode"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder=""
+                        onChange={(e) => setPincode(e.target.value)}
                       />
                     </div>
 
@@ -169,13 +269,14 @@ export default function TestDriveOutlet() {
                       <input
                         type="mobileno"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-
+                        onChange={(e) => setMobileNo(e.target.value)}
                       />
                     </div>
                   </div>
 
+
                   <div className="flex flex-wrap">
-                    <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                    {/* <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
@@ -188,9 +289,10 @@ export default function TestDriveOutlet() {
                         type="Dlno"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder=""
+                        onChange={(e) => setDLNo(e.target.value)}
                       />
-                    </div>
-
+                    </div> */}
+                  
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
@@ -203,14 +305,14 @@ export default function TestDriveOutlet() {
                       <input
                         type="address"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
-                  </div>
+                  
 
-                  <hr className="mt-6 border-b-1 border-blueGray-300 mb-5" />
+                  {/* <hr className="mt-6 border-b-1 border-blueGray-300 mb-5" /> */}
 
-                  <div className="flex flex-wrap">
+                  
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
@@ -224,9 +326,12 @@ export default function TestDriveOutlet() {
                         type="date"
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder=""
+                        onChange={(e) => setPreferredDate(e.target.value)}
                       />
                     </div>
+                  </div>
 
+                  <div className="flex flex-wrap">
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
@@ -243,14 +348,14 @@ export default function TestDriveOutlet() {
                     /> */}
 
                       <div className="w-full self-center my-2 text-xl">
-                        <TimeslotComponent />
+                        <TimeslotComponent onChange={(e) => setTimeSlot(e.target.value)}/>
                       </div>
 
                     </div>
-                  </div>
+                  
 
-                  <div className="flex flex-wrap">
-                    <div className="relative w-full lg:w-6/12 mb-3 px-2">
+                  
+                    {/* <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
                         className="block uppercase text-blueGray-600 text-xl font-bold mb-2"
                         htmlFor="grid-password"
@@ -264,7 +369,7 @@ export default function TestDriveOutlet() {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder=""
                       />
-                    </div>
+                    </div> */}
 
                     <div className="relative w-full lg:w-6/12 mb-3 px-2">
                       <label
@@ -281,13 +386,13 @@ export default function TestDriveOutlet() {
                       
                     /> */}
                       <div className="w-full self-center">
-                        {/* <ModelComponent /> */}
-                        <input
+                        <ModelComponent onChange={(e) => setModel(e.target.value)}/>
+                        {/* <input
                           type="otp"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           placeholder="CITY-1 Electric Vehicle"
                           readOnly
-                        ></input>
+                        ></input> */}
                       </div>
                     </div>
                   </div>

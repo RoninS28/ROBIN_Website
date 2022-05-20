@@ -11,6 +11,8 @@ import LineChart from './LineChart';
 import axios from 'axios';
 
 import {CanvasJSChart} from 'canvasjs-react-charts'
+import './EVChatbot.css';
+import EVChatbot from './EVChatbot';
 
 const styles = theme => ({
 
@@ -75,93 +77,240 @@ const Dashboard = (props) => {
     console.log(value);
 
     const [options, setOptions] = useState(null);
-    // let options = {
-    //     animationEnabled: true,
-    //     exportEnabled: true,
-    //     theme: "light2", //"light1", "dark1", "dark2"
-    //     title:{
-    //         text: "Simple Column Chart with Index Labels"
-    //     },
-    //     axisY: {
-    //         includeZero: true
-    //     },
-    //     data: [{
-    //         type: "column", //change type to bar, line, area, pie, etc
-    //         //indexLabel: "{y}", //Shows y value on all Data Points
-    //         indexLabelFontColor: "#5A5757",
-    //         indexLabelPlacement: "outside",
-    //         dataPoints: [
-    //             { x: 10, y: 71 },
-    //             { x: 20, y: 55 },
-    //             { x: 30, y: 50 },
-    //             { x: 40, y: 65 },
-    //             { x: 50, y: 71 },
-    //             { x: 60, y: 68 },
-    //             { x: 70, y: 38 },
-    //             { x: 80, y: 92, indexLabel: "Highest" },
-    //             { x: 90, y: 54 },
-    //             { x: 100, y: 60 },
-    //             { x: 110, y: 21 },
-    //             { x: 120, y: 49 },
-    //             { x: 130, y: 36 }
-    //         ]
-    //     }]
-    // }
+    const [optionsDoughnut,setOptionsDoughnut]=useState(null);
+    const [feedbacks, setFeedbacks] = useState([]);
+
+    const [chatbotIconClicked, setChatbotIconClicked] = useState(false);
+
+    const chatbotScreenStyle = {
+        color: '#4a4a4a',
+        background: 'rgb(245, 248, 251)',
+        borderRadius: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.15) 0px 12px 24px 0px',
+        fontFamily: 'monospace',
+        overflow: 'hidden',
+        position: 'fixed',
+        bottom: '32px',
+        top: 'initial',
+        right: '32px',
+        left: 'initial',
+        width: '350px',
+        height: '520px',
+        zIndex: '999',
+        transform: 'scale(0)',
+        transformOrigin: 'right bottom',
+        transition: 'transform 0.3s ease 0s',
+    }
+
+    const handleChatBotClick = () => {
+        console.log("icon clicked");
+        if(chatbotIconClicked == false) {
+            setChatbotIconClicked(true);
+        }   
+        else {
+            setChatbotIconClicked(false);
+        }
+    }
 
     const getBarChartData = () => {
 
-        axios.post('/reviewAnalysis', {
-            "text": [
-                "Handle is not working properly",
-                "Handle is broken",
-                "charging points not available",
-                "Battery life is poor"
-            ]
-        })
-        .then((response) => {
-            console.log("res from backend ", response.data);
+        axios.get('/feedback/getall').then((res) => {
+            console.log("feedbacks received: ", res.data);
+            let feedbacksArr = res.data;
 
-            let obj = response.data.freq;
-            let dataPoints = [];
-            
-            let count = 0;
-            Object.keys(obj).forEach(key => {
-                count += obj[key];
+            let feedbacksList = [];
+            feedbacksArr.map(feedback => {
+                feedbacksList.push(feedback.feedbackMsg);
             });
+            console.log(feedbacksList);
 
-            Object.keys(obj).forEach(key => {
-                dataPoints.push(
-                    {label: key, y: (obj[key] / count) * 100}
-                );
-                console.log(key, obj[key]);
-            });
-
-            console.log("datapoints", dataPoints);
-
-            let tempObj = {
-                title: {
-                    text: "Basic Column Chart"
-                },
-                data: [
-                {
-                    // Change type to "doughnut", "line", "splineArea", etc.
-                    type: "column",
-                    dataPoints: dataPoints
+            axios.post('/reviewAnalysis', {
+                "text": feedbacksList
+            })
+            .then((response) => {
+                console.log("res from backend ", response.data);
+    
+                let obj = response.data.freq;
+                let dataPoints = [];
+                
+                let count = 0;
+                Object.keys(obj).forEach(key => {
+                    count += obj[key];
+                });
+    
+                Object.keys(obj).forEach(key => {
+                    dataPoints.push(
+                        {label: key, y: (obj[key] / count) * 100}
+                    );
+                    console.log(key, obj[key]);
+                });
+    
+                let posCnt = 0, negCnt = 0;
+    
+                console.log(response.data);
+                for(let item of response.data.prediction.sentiment) {
+                    console.log("item ", item);
+                    if(item == "Negative")
+                        negCnt++;
+                    else    
+                        posCnt++;
                 }
-                ]
-            }
-            setOptions(tempObj);
+    
+                console.log("datapoints", dataPoints);
 
-          }, (error) => {
-            console.log("error: ", error);
+                // positive frequencies
+                let obj2 = response.data.posfreq;
+                console.log(obj2);
+                let dataPoints2 = [];
+                
+                let count2 = 0;
+                Object.keys(obj2).forEach(key => {
+                    count2 += obj2[key];
+                });
+    
+                Object.keys(obj2).forEach(key => {
+                    dataPoints2.push(
+                        {label: key, y: (obj2[key] / count2) * 100}
+                    );
+                    console.log(key, obj2[key]);
+                });
+    
+                let posCnt2 = 0, negCnt2 = 0;
+    
+                console.log(response.data);
+                for(let item of response.data.prediction.sentiment) {
+                    console.log("item ", item);
+                    if(item == "Negative")
+                        negCnt2++;
+                    else    
+                        posCnt2++;
+                }
+    
+                console.log("datapoints", dataPoints2);
+    
+                let tempObj2 = {
+                    title: {
+                        text: "Positive Reviews according to Labels"
+                    },
+                    data: [
+                    {
+                        // Change type to "doughnut", "line", "splineArea", etc.
+                        type: "column",
+                        dataPoints: dataPoints2
+                    }
+                    ]
+                }
+                    
+                let tempObj = {
+                    title: {
+                        text: "Negative Reviews according to Labels"
+                    },
+                    data: [
+                    {
+                        // Change type to "doughnut", "line", "splineArea", etc.
+                        type: "column",
+                        dataPoints: dataPoints
+                    }
+                    ]
+                }
+    
+    
+                // set options object for pie chart
+                let tempOptionsPie = {
+                    exportEnabled: true,
+                    animationEnabled: true,
+                    title: {
+                        text: "Distribution of reviews"
+                    },
+                    data: [{
+                        type: "pie",
+                        startAngle: 75,
+                        toolTipContent: "<b>{label}</b>: {y}%",
+                        showInLegend: "true",
+                        legendText: "{label}",
+                        indexLabelFontSize: 16,
+                        indexLabel: "{label} - {y}%",
+                        dataPoints: [
+                            { y: posCnt, label: "Positive" },
+                            { y: negCnt, label: "Negative" }
+                        ]
+                    }]
+                }
+               
+        
+    
+                setOptions({"barChartData": tempObj, "pieChartData": tempOptionsPie, "barChartData2": tempObj2});
+            
+              }, (error) => {
+                console.log("error: ", error);
+            });
+
         });
 
     }
+
+    const getDoughnutData=()=>{
+
+        let vehicles={
+                "City Electric Scooter": 10,
+                "City-1 Electric Scooter": 20,
+                "City-2 Electric Scooter": 30
+        }
+
+        let obj=vehicles;
+        let total_cnt=0;
+        Object.keys(obj).forEach(key => {
+            total_cnt+=obj[key];
+        });
+
+        let datapoints=[];
+
+        Object.keys(obj).forEach(key => {
+            datapoints.push(
+                {name: key, y: (obj[key] / total_cnt) * 100}
+            )
+        });
+
+        let tempOptions = {
+			animationEnabled: true,
+			title: {
+				text: "Average EV Sales"
+			},
+			// subtitles: [{
+			// 	text: "71% Positive",
+			// 	verticalAlign: "center",
+			// 	fontSize: 24,
+			// 	dockInsidePlotArea: true
+			// }],
+			data: [{
+				type: "doughnut",
+				showInLegend: true,
+				indexLabel: "{name}: {y}",
+				yValueFormatString: "#,###'%'",
+				dataPoints: datapoints
+			}]
+		}
+
+        setOptionsDoughnut(tempOptions)
+
+
+    }
+
     useEffect(()=>{
         if(!options) {
+            //console.log("here");
             getBarChartData();
-        }            
-    },[options])
+        } 
+        if(!optionsDoughnut)
+        {
+            getDoughnutData();
+        }           
+    },[options,optionsDoughnut])
+    // useEffect(()=>{
+    //     if(!options) {
+    //         getBarChartData();
+    //     }           
+    // },[options])
 
 
     // Layout of Dashboard can change depending upon the situation
@@ -172,7 +321,7 @@ const Dashboard = (props) => {
     // some table
     // calendar --- some other table
 
-    return (
+    return (options && optionsDoughnut) ? (
         <Box sx={{ flexGrow: 1 }} m={2}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={3}>
@@ -212,15 +361,16 @@ const Dashboard = (props) => {
                         <Typography variant="h5" component="div">
                             Average EV Sales this month
                         </Typography>
-                        <DoughNut state={pieData} />
+                        {/* <DoughNut state={pieData} /> */}
+                        <CanvasJSChart options = {optionsDoughnut}/>
                     </Card>
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
                     <Card style={{ marginTop: "0.8rem", padding: "0.2rem" }}>
                         <Typography variant="h5" component="div">
-                            Some graph
+                            Sentiment Analysis
                         </Typography>
-                        <CanvasJSChart options = {options}/>
+                        <CanvasJSChart options = {options["barChartData"]}/>
                     </Card>
                 </Grid>
                 <Grid item lg={4} md={4} sm={12}>
@@ -255,18 +405,34 @@ const Dashboard = (props) => {
                     <GenericTable rows={rows} labels={labels} />
                 </Grid>
                 <Grid item lg={4} md={4} sm={12} >
-                    <Calendar
+                    {/* <Calendar
                         onChange={onChange}
                         showWeekNumbers
                         value={value}
-                    />
+                    /> */}
+                    <CanvasJSChart options = {options["pieChartData"]}
+			        />
                 </Grid>
                 <Grid item lg={8} md={8} sm={12}>
-                    <GenericTable rows={rows} labels={labels} />
+                    <Typography variant="h5" component="div">
+                        Sentiment Analysis
+                    </Typography>
+                    <CanvasJSChart options = {options["barChartData2"]}/>
                 </Grid>
             </Grid>
+            <div>
+                <a id="chatbot-container" onClick={handleChatBotClick}>
+                    <svg id='chatbot-icon' height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                    </svg>
+                </a>
+                <div style={{position: 'fixed', bottom: '32px', 'right': '32px', display: (chatbotIconClicked ? 'block' : 'none')}}>
+                <EVChatbot />
+                </div>
+            </div>
         </Box>
-    )
+    ) : <div>Loading</div>
 }
 
 export default withStyles(styles, { withTheme: true })(Dashboard);

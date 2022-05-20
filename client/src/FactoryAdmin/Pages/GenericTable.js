@@ -137,6 +137,7 @@ const label1 = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function GenericTable(props) {
   const rows = props.rows;
   const labels = props.labels;
+  const view=props.view?props.view:"/batches/";
   const history =useHistory();
 
   const [page, setPage] = React.useState(0);
@@ -179,7 +180,7 @@ export default function GenericTable(props) {
                   {(() => {
                     switch (label) {
                       case "actions":
-                        return <Button onClick={()=>history.push(props.view+index)} variant="contained" color="primary"> View </Button>;
+                        return <Button onClick={()=>history.push(`${view}${row["_id"]}`)} variant="contained" color="primary"> View </Button>;
                       case "img":
                         return <img style={{ height: "90px", width: "80px" }} src={row[label]}/>;
 

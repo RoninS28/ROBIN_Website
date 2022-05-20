@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 import Container from "@material-ui/core/Container";
 import { Input, useMediaQuery } from "@material-ui/core";
@@ -15,6 +15,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import { useHistory } from "react-router";
 import GenericTable from "./GenericTable";
+import axios from 'axios';
 
 const styles = makeStyles((theme) => ({
   listWrapper: {
@@ -104,26 +105,34 @@ function createData(id, model, num, Stage, img) {
   return { id, model, num, Stage, img };
 }
 
-function getAllModels() {
-  const allModels = [];
-  orders.map((model) => {
-    console.log(model);
-    allModels.push(
-      createData(model.id, model.model, model.num, model.Stage, model.img)
-    );
-  });
-  return allModels;
+function createBatchData(_id, BatchId) {
+  return { _id, BatchId };
 }
 
-const rows = getAllModels();
+// function getAllModels() {
+//   const allModels = [];
+//   orders.map((model) => {
+//     console.log(model);
+//     allModels.push(
+//       createData(model.id, model.model, model.num, model.Stage, model.img)
+//     );
+//   });
+//   return allModels;
+// }
 
-const labels = ["checkbox", "id", "model", "num", "Stage", "img", "actions"];
+// const rows = getAllModels();
+
+// const labels = ["checkbox", "id", "model", "num", "Stage", "img", "actions"];
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function OrderList(props) {
   const history = useHistory();
   const { classes, theme } = props;
+
+  const [rows, setRows] = useState([]);
+  const [labels, setLabels] = useState([]);
+
   const xs = useMediaQuery(theme.breakpoints.down("xs"));
   const sm = useMediaQuery(
     theme.breakpoints.up("xs") && theme.breakpoints.down("sm")
@@ -152,16 +161,44 @@ function OrderList(props) {
     setPage(0);
   };
 
+  const getAllBatches = () => {
+    console.log("Getting all batches...");
+    const allBatches = [];
+
+    axios.get('/batches')
+        .then(res => {
+            let batchArr = res.data;
+            console.log(batchArr);
+            batchArr.map(batch => {
+                allBatches.push(createBatchData(batch._id, batch.BatchId));
+            });
+            console.log("all batches ", allBatches)
+            setRows(allBatches);
+            setLabels(["_id", "BatchId", "actions"]);  
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+  useEffect(()=>{
+    getAllBatches();
+
+  }, [])
+
   return (
     <div>
       <Container
         maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}
         className={classes.listWrapper}
       >
-        <GenericTable rows={rows} labels={labels} view="/orders/1" />
+        <GenericTable rows={rows} labels={labels} view="/batches/" />
       </Container>
     </div>
   );
 }
 
 export default withStyles(styles, { withTheme: true })(OrderList);
+
+
+

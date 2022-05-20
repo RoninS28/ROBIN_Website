@@ -178,7 +178,8 @@ export default function Products() {
       console.log(`RESPONSE IS ${response.data}`)
 
       if (response.data == "You must be logged in to view this page") {
-        history.push('/login');
+        // history.push('/login');
+        history.push({ pathname: '/login', state: { callBackPath: 'products' } });
       }
       else {
         let productArr = response.data
@@ -221,7 +222,7 @@ export default function Products() {
                 <img src={getMyImage(model.image)} alt="image" width="300" height="300" />
               </div>
               <div className="productText">
-                {model["modelID"]}
+                {model["modelName"]}
               </div>
 
             </div>

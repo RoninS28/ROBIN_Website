@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
+
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
@@ -26,6 +26,7 @@ import WorkerList from "../../Pages/WorkerList";
 import WorkerListDetails from "../../Pages/WorkerListDetails";
 import OrderDetail from "../../Pages/OrderDetail";
 import AccessoryReportDetail from "../../Pages/AccessoryReportDetail";
+import NotificationDetail from "../../Pages/NotificationDetail";
 import AppBreadCrumb from "../../Pages/AppBreadCrumb";
 import Complaints from "../../Pages/Complaints";
 import CustomerComplaint from "../../Pages/Customercomplaints";
@@ -34,6 +35,22 @@ import AccessoryPage from "../../Pages/AccessoryPage";
 import Dashboard from "../../Pages/Dashboard";
 import AccessoryReport from '../../Pages/AccessoryReport'
 import GenericStockList from "../../Pages/GenericStockList";
+import NewOrder from "../../Pages/NewOrder";
+import IconButton from '@mui/material/IconButton';
+import Pusher from 'pusher-js';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Badge from '@mui/material/Badge';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import BatchDetail from "../../Pages/BatchDetail";
+
+
+const PUSHER_APP_KEY = '241be100f37c47926dda';
+const PUSHER_APP_CLUSTER = 'ap2';
 
 const styles = theme => ({
 });
@@ -42,13 +59,31 @@ const Navbar = (props) => {
   const { classes, theme, setLoggedIn } = props;
   const history = useHistory();
   const location = useLocation();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    //console.log("Opening Notification");
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setNotification([]);
+    setOpen(false);
+  };
+
+
   useEffect(() => {
-      console.log();
+     // console.log();
       if(location.pathname == '/factory-admin') {
           console.log("pushing / to URL");
           history.push("/");
       }
   })
+
+
+  const [notification,setNotification]=useState([]);
+  
 
   // Appbar related states
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -101,6 +136,18 @@ const Navbar = (props) => {
     </Menu>
   );
 
+  const renderNotification = (
+      <IconButton
+      size="large"
+      aria-label="show 17 new notifications"
+      color="inherit"
+    >
+      <Badge badgeContent={notification.length?notification.length:`${0}`} color="error" onClick={handleClickOpen}>
+        <NotificationsIcon/>
+      </Badge>
+    </IconButton>
+  );
+
   // For mobile screen, Appbar will change and the below will be rendered
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -131,6 +178,7 @@ const Navbar = (props) => {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
     </Menu>
   );
 
@@ -228,6 +276,54 @@ const Navbar = (props) => {
     </Box >
   );
 
+  useEffect(()=>{
+
+    const pusher = new Pusher(PUSHER_APP_KEY, {
+      cluster: PUSHER_APP_CLUSTER,
+        encrypted: true,
+      });
+      const channel=pusher.subscribe('orders')
+      const batchchannel=pusher.subscribe('batchUpdate');
+      const complaintchannel=pusher.subscribe('complaints');
+
+   
+      complaintchannel.bind('inserted',(evt)=>{
+
+
+        setNotification([...notification,evt]);
+      });
+    
+       channel.bind('inserted', (evt)=>{
+         //console.log("Got Notification",evt);
+         //setOrder(evt);
+       //  console.log("Here");
+   //      arr.push(evt);
+        // console.log(arr);
+        setNotification([...notification,evt]);
+       });
+
+       batchchannel.bind('inserted',(evt)=>{
+        // console.log("Here status Update");
+        setNotification([...notification,evt]);
+       });
+
+       batchchannel.bind('deleted',(evt)=>{
+
+        // arr.push(evt);
+        setNotification([...notification,evt]);
+       });
+
+       batchchannel.bind('updated',(evt)=>{
+       // arr.push(evt);
+        setNotification([...notification,evt]);
+       });
+      // this.channel.bind('deleted', this.removeTask);
+
+      
+
+  },[notification])
+    
+
   return (
     <Router>
 
@@ -262,6 +358,9 @@ const Navbar = (props) => {
             </Typography>
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {renderNotification}
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton
                 size="large"
                 edge="end"
@@ -286,6 +385,7 @@ const Navbar = (props) => {
                 <MoreIcon />
               </IconButton>
             </Box>
+
           </Toolbar>
         </AppBar>
         {renderMobileMenu}
@@ -312,6 +412,44 @@ const Navbar = (props) => {
       {/* The main content that is shown on the screen */}
       <main className={classes.content}>
 
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                {notification.length? "Today's Notifications" : "No Unread Notifications "}
+                </DialogTitle>
+              {notification.map(data=>{
+
+              
+                return (
+
+                  <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                 {data.activity?"Activity : "+data.activity : ""}
+               </DialogContentText>
+               <DialogContentText id="alert-dialog-description">
+                 {data.ID? "ID : "+data.ID : ""}
+               </DialogContentText>
+               <DialogContentText>
+               {data.detail? "Data Detail: "+ data.detail:"" }
+               </DialogContentText>
+               </DialogContent>
+
+
+                )
+             
+              })}
+              
+              <DialogActions>
+                <Button onClick={handleClose} autoFocus>
+                  OK
+                </Button>
+              </DialogActions>
+            </Dialog>
+
         <AppBreadCrumb />
         {/* Routes for various components */}
         <div className='back'>
@@ -321,6 +459,7 @@ const Navbar = (props) => {
             <Route path='/workers' exact component={WorkerList} ></Route>
             <Route path='/workers/:id' exact component={WorkerListDetails} />
             <Route path='/orders/:id' exact component={OrderDetail} />
+            <Route path='/batches/:id' exact component={BatchDetail} />
 
             <Route path='/complaints' exact component={Complaints} ></Route>
             <Route path="/complaints/:id" exact component={CustomerComplaint} />
@@ -330,6 +469,8 @@ const Navbar = (props) => {
             <Route path='/accessoryReport/:id' exact component={AccessoryReportDetail} />
             <Route path='/' exact component={Dashboard} />
             <Route path='/stocks' exact component={GenericStockList} />
+            <Route path="/newOrder" exact component={NewOrder} />
+            <Route path="/notificationDetail" exact component={NotificationDetail}/>
           </Switch>
         </div>
       </main>

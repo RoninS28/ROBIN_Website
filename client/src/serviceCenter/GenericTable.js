@@ -2,6 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import { useHistory } from "react-router";
 import Table from '@mui/material/Table';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@mui/material/TableBody';
@@ -104,6 +105,7 @@ export default function GenericTable(props) {
 
   const rows = props.rows;
   const labels = props.labels;
+  const history =useHistory();
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -123,22 +125,12 @@ export default function GenericTable(props) {
 
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      {labels ? (<Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableHead>
           <TableRow style={{ height: "2em" }}>
-
-            {labels.map(label => (
+            {labels.map((label) => (
               <TableCell align="center">
-                {(() => {
-                  switch (label) {
-                    case 'imgUrl':
-                      return <h3>IMAGE</h3>;
-                    case 'srno':
-                      return <h3>Sr No</h3>;
-                    default:
-                      return <h3>{formatCamelCase(label)}</h3>;
-                  }
-                })()}
+                {label!="checkbox"?<h3>{formatCamelCase(label)}</h3>:<Checkbox {...label1} />}
               </TableCell>
             ))}
           </TableRow>
@@ -147,10 +139,11 @@ export default function GenericTable(props) {
           {(rowsPerPage > 0
             ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : rows
-          ).map((row) => (
+          ).map((row,index) => (
             <TableRow key={row.name} style={{ height: "2em" }}>
-              {labels.map(label => (
+              {labels.map((label) => (
                 <TableCell style={{ width: 160 }} align="center">
+
 
                   {(() => {
                     switch (label) {
@@ -158,9 +151,11 @@ export default function GenericTable(props) {
                         return <Button variant="contained" color="primary">VIEW</Button>;
                       case 'view':
                         return <Button variant="contained" color="primary">VIEW</Button>;
-                      case 'imgUrl':
-                        return <img src={row[label]} style={{ height: "120px", width: "100px" }} />;
-                      case 'colors':
+                        case "imgURL":
+                          return <img style={{ height: "90px", width: "80px" }} src={row[label]}/>;
+                          case "actions":
+                            return <Button onClick={()=>history.push(props.view+index)} variant="contained" color="primary"> View </Button>;
+                        /* case 'colors':
                         return (
                           <div style={{ display: "flex", justifyContent: "center" }}>
                             {row[label].map(color => (
@@ -171,22 +166,20 @@ export default function GenericTable(props) {
                                   width: "20px",
                                   borderRadius: "50%",
                                   margin: "auto 3px"
-                                }}>
+                                }}> */
+                      case "checkbox":
+                        return <Checkbox {...label1} />
 
-                              </div>
-                            ))}
-                          </div>
-                        );
                       default:
-                        return row[label];
+                        return <span>{row[label]}</span>;
                     }
                   })()}
 
-                  {/* {label == 'actions' ? <Button variant="contained" color="primary">View Details</Button> : row[label]} */}
-                </TableCell>
+                  </TableCell>
               ))}
             </TableRow>
           ))}
+
 
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
@@ -214,7 +207,7 @@ export default function GenericTable(props) {
             />
           </TableRow>
         </TableFooter>
-      </Table>
+      </Table>) : <p>Loading...</p>}
     </TableContainer>
   );
 }

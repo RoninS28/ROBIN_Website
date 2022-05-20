@@ -151,10 +151,30 @@ const ServicingConfirm = () => {
 
 
 
+    const [personalNotes, setPersonalNotes] = useState()
+    const handlePersonalNotes = (e) => {
+        setPersonalNotes(e.target.value)
+    }
 
 
     const handleBookAppointment = () => {
-        history.push({ pathname: "/servicingConfirmed/" + "8D7320C1AC.004", state: { servicingID: 'S1234', serviceCentreID: "123", aptDate: "16/apr/2022", timeSlot: "12-8", pickupDrop: "drop", personalNotes: "routine servicing" } })
+        const userServiceCentre = centreoptions[centres].label;
+        const userTimeSlot = Timeslotoptions[TimeslotValue - 1].label;
+        const userPickupDrop = PickupDropOptions[PickupDropValue - 1].label;
+
+        axios.post('/servicing/bookMyServicing', {
+            serviceCentre: userServiceCentre,
+            apptdate: selectedDate,
+            timeslot: userTimeSlot,
+            pickupDrop: userPickupDrop,
+            personalNotes: personalNotes
+        }).then((result) => {
+            console.log(result)
+            console.log(result.data.serviceID)
+            history.push({ pathname: "/servicingConfirmed/" + result.data.serviceID, state: { servicingID: result.data.serviceID, serviceCentreName: userServiceCentre, aptDate: selectedDate, timeSlot: userTimeSlot, pickupDrop: userPickupDrop, personalNotes: personalNotes } })
+        })
+
+
 
     }
 
@@ -197,18 +217,10 @@ const ServicingConfirm = () => {
                             </Grid>
                             <Grid item spacing={3} key={item.plateNumber} xs={4} md={4} lg={4} xl={4} className={classes.bookingrowInfo}>
                                 <div className="bookingrowInfo" style={{ alignContent: "flex-start" }}>
-                                    <div>
-                                        Owner Name: {item.owner}
+                                    <div style={{marginTop: '80px'}}>
+                                        Book Your Servicing Appointment
                                     </div>
-                                    <div>
-                                        Model: {item.model}
-                                    </div>
-                                    <div>
-                                        Vehicle No: {item.plateNumber}
-                                    </div>
-                                    <div>
-                                        Chasis: {item.chasis}
-                                    </div>
+                                    
 
 
                                 </div>
@@ -344,7 +356,7 @@ const ServicingConfirm = () => {
                                 </div>
                                 <div className="relative w-full lg:w-6/12 mb-3 px-2">
 
-                                    <textarea rows="5" className="relative w-full" style={{ borderWidth: "0.5px", borderColor: "black", borderRadius: "5px" }}></textarea>
+                                    <textarea rows="5" className="relative w-full" style={{ borderWidth: "0.5px", borderColor: "black", borderRadius: "5px", padding: '5px' }} onChange={handlePersonalNotes} value={personalNotes}></textarea>
                                 </div>
                             </div>
 

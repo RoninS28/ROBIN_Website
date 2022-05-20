@@ -90,7 +90,7 @@ const state2 = {
 
 // fetching Complaints Data
 function createComplaintsData(id, sourceType, from, complaintType, date, status) {
-  return { id, sourceType, from, complaintType, date, status };
+  return { _id:id, sourceType, from, complaintType, date, status };
 }
 
 function TablePaginationActions(props) {
@@ -224,7 +224,7 @@ function Complaints(props) {
     const res = await fetch("/complaints");
     const data = await res.json();
 
-    console.log(data);
+//    console.log(data);
     data.map(complaint => {
         switch (complaint.sourceType) {
             case "Employee":
@@ -242,11 +242,11 @@ function Complaints(props) {
     let result = await Promise.all(promises);
     let idx = 0;
     data.map(complaint => {
-        console.log("entity id: ", complaint._id);
+       // console.log("entity id: ", complaint._id);
         allComplaints.push(createComplaintsData(complaint._id, complaint.sourceType, result[idx++], complaint.complaintType,
                                                             complaint.date, complaint.status));
     })
-    console.log("allComplaints", allComplaints);
+   // console.log("allComplaints", allComplaints);
     setRows(allComplaints);
   }
 

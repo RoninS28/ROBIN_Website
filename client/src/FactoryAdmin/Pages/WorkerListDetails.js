@@ -278,7 +278,7 @@ function WorkerListDetails(props) {
 
         <Grid item xs={12} md={12} lg={12}>
           <Container maxWidth={xs ? "xs" : sm ? "sm" : md ? "md" : lg ? "lg" : xl}>
-            <GenericTable rows={workerComplaints} labels={label2} />
+            <GenericTable rows={workerComplaints} labels={label2} view="/complaints/1"/>
           </Container>
         </Grid>
 

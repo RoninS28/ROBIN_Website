@@ -64,6 +64,12 @@ const customer = new mongoose.Schema({
     chatbotChat: [
         chatbotMsgObj
     ],
+    notifications: [
+        {
+            type: String,
+            required: false
+        }
+    ]
 
 })
 

@@ -67,11 +67,11 @@ function Billing() {
                             <SaveAltIcon></SaveAltIcon>
                         </IconButton>
                     </Grid>
-                    <Grid item>
+                    {/* <Grid item>
                         <IconButton>
                             <PrintIcon></PrintIcon>
                         </IconButton>
-                    </Grid>
+                    </Grid> */}
                 </Grid>
                 <Grid container
                 justifyContent='center'

@@ -1,42 +1,49 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+//const { Schema } = mongoose;
 
 const testDriveSchema=new mongoose.Schema({
     customer: {
-        type: Schema.Types.ObjectId,
-        ref: 'Customer',
+        type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Customer',
         required: true
       },
-    datetime: {   
+    date: {   
         type: Date,
         required: true,
         default: Date.now
     },
+    time: {   
+        type: String,
+        required: true,
+    },
     model: {
-        type: Schema.Types.ObjectId,
-        ref: 'EVModel',
+        type: mongoose.Schema.Types.ObjectId,
+        // ref: 'EVModel',
         required: true
     },
-    location: {  //home or outlet
+    address: {  //home or outlet
         type: String,
         required: true
     },
     outlet: {
-        type: Schema.Types.ObjectId,
-        ref: 'Outlet',
+        type: mongoose.Schema.Types.ObjectId,
+        // ref: 'Outlet',
         required: true 
     },
-    employee: {
-        type: Schema.Types.ObjectId,
-        ref: 'Employee',
+    contact: {
+        type: String,
         required: true 
     },
-    feedback: {
-        type: String, //in the form of description
+    pincode: {
+        type: String, 
         required: true
     },
-    status: {
-        type: String,  //pending or completed or ongoing
+    dob: {
+        type: String,  
+        required: true
+    },
+    name: {
+        type: String,  
         required: true
     }
 })

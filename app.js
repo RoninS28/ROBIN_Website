@@ -6,10 +6,12 @@ const { requireCustAuth, checkCustUser } = require('./middleware/customerMiddlew
 
 const cookieParser = require("cookie-parser");
 
+
 dotenv.config({ path: './config.env' });
 const PORT = process.env.PORT || 5000;
 
 require('./db/conn');
+
 app.use(express.json());
 
 app.use(cookieParser());
@@ -47,6 +49,8 @@ app.use('/complaintType', require('./routes/common/complaintType'));
 app.use('/leaves', require('./routes/common/leaves'));
 app.use('/stock-requests', require('./routes/common/stockRequest'));
 app.use('/model', require('./routes/common/model'));
+app.use('/batches', require('./routes/factory/batches'));
+//app.use('/order',require('./routes/common/order'));
 // app.use('/customers', require('./routes/customer/customer'));
 
 // ! CUSTOMER ROUTER
@@ -81,4 +85,6 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
 })
+
+require('./trigger/changeStreamData')
 

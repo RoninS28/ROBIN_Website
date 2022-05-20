@@ -152,11 +152,11 @@ function WorkerList(props) {
     axios.get('/employees')
         .then(res => {
             let workerArr = res.data;
-            console.log(workerArr);
+           // console.log(workerArr);
             workerArr.map(worker => {
                 allWorkers.push(worker);
             });
-            console.log("all workers ", allWorkers)
+           // console.log("all workers ", allWorkers)
             setRows(allWorkers);
         })
         .catch((err) => {
@@ -167,7 +167,7 @@ function WorkerList(props) {
 
 
   useEffect(()=>{
-    console.log("In useEffect");
+    console.log("In useEffect of wrokers");
     getAllWorkers();
 
   },[]);

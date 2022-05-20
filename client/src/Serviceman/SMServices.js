@@ -161,7 +161,7 @@ function SMServices() {
                 >
                     <DialogTitle>{"Proceed to Generate Receipt?"}</DialogTitle>
                     <DialogActions>
-                        <Link style={{ textDecoration: 'none' }} to="/Serviceman/billing"><Button variant="contained" color="primary">YES</Button></Link>
+                        <Link style={{ textDecoration: 'none' }} to="/billing"><Button variant="contained" color="primary">YES</Button></Link>
                         <Button onClick={handleClose}>NO</Button>
                     </DialogActions>
                 </Dialog>
